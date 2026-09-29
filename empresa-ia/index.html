@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Empresa IA 24h</title>
 <style>
-:root{--bg:#0b0c0e;--panel:#121417;--panel2:#181b1f;--line:#23272d;--txt:#e7e9ec;--mute:#8b929b;--acc:#f59e42;--acc2:#4fd1c5;--ok:#5fd38d}
+:root{color-scheme:dark;--bg:#0b0c0e;--panel:#121417;--panel2:#181b1f;--line:#23272d;--txt:#e7e9ec;--mute:#8b929b;--acc:#f59e42;--acc2:#4fd1c5;--ok:#5fd38d}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:flex;height:100vh;overflow:hidden}
+html,body{height:100%}body{background:var(--bg);color:var(--txt);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:flex;overflow:hidden}
 aside{width:220px;background:var(--panel);border-right:1px solid var(--line);padding:16px 10px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;overflow:auto}
 .logo{font-weight:700;font-size:16px;padding:4px 10px 14px}.logo span{color:var(--acc)}
 .sec{font-size:10px;letter-spacing:.1em;color:var(--mute);padding:14px 10px 4px;text-transform:uppercase}
@@ -92,6 +92,7 @@ canvas{width:100%;height:520px;background:var(--panel);border:1px solid var(--li
 <section id="agents">
   <h1>Agentes</h1><p class="sub">Especialistas prontos por departamento.</p>
   <button class="btn" id="newag">+ Criar meu agente</button>
+  <div class="card" id="newbox" hidden style="margin-top:14px;max-width:560px"><form class="inp" id="newform" style="border:0;padding:0"><input id="newtxt" placeholder="O que esse agente precisa fazer?" autocomplete="off"><button class="btn">Criar</button></form><p class="role" id="newmsg" style="margin-top:8px"></p></div>
   <div id="deps"></div>
 </section>
 
@@ -152,7 +153,9 @@ function agents(){
    <div class="on-dot">✓ No seu time</div><button class="btn ghost" onclick="openChat('${a.id}')">Conhecer →</button></div>`).join("")+`</div>`).join("");
 }
 agents();
-$("#newag").onclick=()=>{const n=prompt("O que esse agente precisa fazer?");if(n)alert("Na versão real, a IA entrevista você, conecta as ferramentas e entrega o agente pronto.\n\nPedido: "+n)};
+$("#newag").onclick=()=>{$("#newbox").hidden=!$("#newbox").hidden;$("#newmsg").textContent=""};
+$("#newform").onsubmit=e=>{e.preventDefault();const v=$("#newtxt").value.trim();if(!v)return;
+  $("#newmsg").textContent="Pedido recebido: "+v+". Na versão real, a IA entrevista você, conecta as ferramentas e entrega o agente pronto.";$("#newtxt").value=""};
 
 // chat simulado
 let cur=ALL[0].id;const hist={};
