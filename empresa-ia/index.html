@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Empresa IA 24h</title>
+<style>
+:root{--bg:#0b0c0e;--panel:#121417;--panel2:#181b1f;--line:#23272d;--txt:#e7e9ec;--mute:#8b929b;--acc:#f59e42;--acc2:#4fd1c5;--ok:#5fd38d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font:14px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:flex;height:100vh;overflow:hidden}
+aside{width:220px;background:var(--panel);border-right:1px solid var(--line);padding:16px 10px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;overflow:auto}
+.logo{font-weight:700;font-size:16px;padding:4px 10px 14px}.logo span{color:var(--acc)}
+.sec{font-size:10px;letter-spacing:.1em;color:var(--mute);padding:14px 10px 4px;text-transform:uppercase}
+nav button{all:unset;display:block;width:100%;padding:8px 10px;border-radius:8px;color:var(--mute);cursor:pointer;box-sizing:border-box}
+nav button:hover{background:var(--panel2);color:var(--txt)}nav button.on{background:var(--panel2);color:var(--txt);box-shadow:inset 2px 0 var(--acc)}
+main{flex:1;overflow:auto;padding:28px 32px;position:relative}
+main::before{content:"";position:fixed;top:-120px;right:-120px;width:420px;height:420px;background:radial-gradient(circle,rgba(245,158,66,.18),transparent 65%);pointer-events:none}
+h1{font-size:22px;margin-bottom:4px}.sub{color:var(--mute);margin-bottom:22px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card:hover{border-color:#3a4049}
+.kpi b{display:block;font-size:26px;margin-top:4px}.kpi span{color:var(--mute);font-size:12px}
+.dep{margin:26px 0 10px;font-weight:600}.dep small{color:var(--mute);font-weight:400;margin-left:8px}
+.ag{display:flex;flex-direction:column;gap:8px}
+.ag .top{display:flex;align-items:center;gap:10px}
+.av{width:38px;height:38px;border-radius:10px;background:var(--panel2);display:grid;place-items:center;font-weight:700;color:var(--acc)}
+.role{color:var(--mute);font-size:12px}.res{font-style:italic;color:#c9ced4;font-size:13px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:11px;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--mute)}
+.on-dot{color:var(--ok);font-size:12px}
+.btn{all:unset;cursor:pointer;background:var(--acc);color:#111;padding:8px 14px;border-radius:8px;font-weight:600;font-size:13px}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+.btn:hover{filter:brightness(1.1)}
+#view>section{display:none}#view>section.on{display:block}
+canvas{width:100%;height:520px;background:var(--panel);border:1px solid var(--line);border-radius:14px;display:block}
+.chat{display:grid;grid-template-columns:230px 1fr;gap:14px;height:calc(100vh - 150px)}
+.list{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px;overflow:auto}
+.list button{all:unset;display:flex;gap:10px;align-items:center;padding:8px;border-radius:8px;cursor:pointer;width:100%;box-sizing:border-box}
+.list button:hover,.list button.on{background:var(--panel2)}
+.win{background:var(--panel);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;min-height:0}
+.msgs{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:75%;padding:10px 13px;border-radius:12px;background:var(--panel2)}.m.u{align-self:flex-end;background:#2a2116;border:1px solid #3d2e1a}
+.inp{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}
+.inp input{flex:1;background:var(--panel2);border:1px solid var(--line);color:var(--txt);padding:10px 12px;border-radius:8px;outline:none}
+.inp input:focus{border-color:var(--acc)}
+.int{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.int small{color:var(--mute);display:block;font-size:11px}
+.org{display:flex;flex-direction:column;align-items:center;gap:26px}.org .row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.org .card{text-align:center;min-width:150px}
+.org .boss{border-color:var(--acc)}
+.done{color:var(--ok)}
+@media(max-width:800px){aside{display:none}main{padding:18px}.chat{grid-template-columns:1fr}.list{display:none}}
+</style>
+</head>
+<body>
+<aside>
+  <div class="logo">Empresa<span>IA</span> · 24h</div>
+  <nav>
+    <button data-v="home" class="on">Command Center</button>
+    <button data-v="chat">Conversas</button>
+    <button data-v="brain">Cérebro</button>
+    <div class="sec">Empresa</div>
+    <button data-v="agents">Agentes</button>
+    <button data-v="routines">Rotinas</button>
+    <button data-v="integ">Integrações</button>
+    <button data-v="org">Organograma</button>
+  </nav>
+</aside>
+<main><div id="view">
+
+<section id="home" class="on">
+  <h1>Command Center</h1><p class="sub">Visão geral da sua empresa rodando com IA (dados de exemplo).</p>
+  <div class="grid" id="kpis"></div>
+  <div class="dep">Atividade recente</div>
+  <div class="card" id="feed"></div>
+</section>
+
+<section id="chat">
+  <h1>Conversas</h1><p class="sub">Converse com qualquer agente a qualquer hora. As respostas aqui são simuladas.</p>
+  <div class="chat">
+    <div class="list" id="chatlist"></div>
+    <div class="win"><div class="msgs" id="msgs"></div>
+      <form class="inp" id="form"><input id="txt" placeholder="Escreva para o agente…" autocomplete="off"><button class="btn">Enviar</button></form>
+    </div>
+  </div>
+</section>
+
+<section id="brain">
+  <h1>Cérebro</h1><p class="sub">Memória da empresa organizada em PARA (Projetos, Áreas, Recursos, Arquivo) e versionada em Git. Passe o mouse nos nós.</p>
+  <canvas id="cv"></canvas>
+</section>
+
+<section id="agents">
+  <h1>Agentes</h1><p class="sub">Especialistas prontos por departamento.</p>
+  <button class="btn" id="newag">+ Criar meu agente</button>
+  <div id="deps"></div>
+</section>
+
+<section id="routines">
+  <h1>Rotinas</h1><p class="sub">Tarefas que os agentes executam sozinhos.</p>
+  <div class="grid" id="rt"></div>
+</section>
+
+<section id="integ">
+  <h1>Integrações</h1><p class="sub">Conecte as ferramentas que sua empresa já usa.</p>
+  <div class="grid" id="ig"></div>
+</section>
+
+<section id="org">
+  <h1>Organograma</h1><p class="sub">Quem responde a quem.</p>
+  <div class="org" id="orgc"></div>
+</section>
+
+</div></main>
+
+<script>
+const DEPS=[
+ {n:"Marketing & Conteúdo",d:"Quem faz sua marca aparecer",a:[
+  {id:"bela",n:"Bela",r:"Redatora de Conteúdo/SEO",res:"Encontrada no Google",t:["artigo-seo","buscar no Cérebro"]},
+  {id:"lia",n:"Lia",r:"Copywriter",res:"Copy que converte",t:["copywriting","landing-page-conversao"]}]},
+ {n:"Vendas & Atendimento",d:"Quem vende e responde enquanto você dorme",a:[
+  {id:"sofia",n:"Sofia",r:"Atendimento ao Cliente",res:"Cliente respondido em minutos",t:["playbook-atendimento","WhatsApp"]},
+  {id:"davi",n:"Davi",r:"Vendedor",res:"Nenhum lead esfria",t:["follow-up-de-vendas","CRM"]}]},
+ {n:"Financeiro & Dados",d:"Quem cuida do caixa e enxerga números",a:[
+  {id:"iago",n:"Iago",r:"Analista de Dados",res:"Números que decidem",t:["relatorio-executivo","planilhas"]},
+  {id:"marta",n:"Marta",r:"Analista Financeira",res:"O caixa sob controle",t:["fluxo-de-caixa","contabilidade"]}]},
+ {n:"Operações, Gente & Jurídico",d:"Quem faz a casa rodar",a:[
+  {id:"otto",n:"Otto",r:"Analista de Processos",res:"Empresa que roda sem você",t:["sop-processos"]},
+  {id:"paulo",n:"Paulo",r:"RH",res:"Contrata certo, cuida do time",t:["contratacao-onboarding"]},
+  {id:"alan",n:"Alan",r:"Jurídico",res:"Contrato revisado antes de assinar",t:["contrato-prestacao-servico"]}]}
+];
+const ALL=DEPS.flatMap(d=>d.a);
+const $=s=>document.querySelector(s);
+
+// navegação
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x===b));
+  document.querySelectorAll("#view>section").forEach(s=>s.classList.toggle("on",s.id===b.dataset.v));
+  if(b.dataset.v==="brain")startBrain();
+});
+
+// home
+$("#kpis").innerHTML=[["Agentes ativos",ALL.length],["Tarefas hoje",128],["Leads respondidos","41"],["Horas economizadas","36h"]]
+ .map(([l,v])=>`<div class="card kpi"><span>${l}</span><b>${v}</b></div>`).join("");
+$("#feed").innerHTML=[["Sofia","respondeu 12 clientes no WhatsApp"],["Davi","enviou follow-up para 5 leads"],["Marta","atualizou o fluxo de caixa da semana"],["Bela","publicou rascunho de artigo SEO"],["Alan","revisou 1 contrato"]]
+ .map(([a,t])=>`<p style="padding:6px 0;border-bottom:1px solid var(--line)"><b>${a}</b> <span style="color:var(--mute)">${t}</span></p>`).join("");
+
+// agentes
+function agents(){
+  $("#deps").innerHTML=DEPS.map(d=>`<div class="dep">${d.n}<small>${d.d}</small></div><div class="grid">`+
+   d.a.map(a=>`<div class="card ag"><div class="top"><div class="av">${a.n[0]}</div><div><b>${a.n}</b><div class="role">${a.r}</div></div></div>
+   <div class="res">${a.res}</div><div class="tags">${a.t.map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+   <div class="on-dot">✓ No seu time</div><button class="btn ghost" onclick="openChat('${a.id}')">Conhecer →</button></div>`).join("")+`</div>`).join("");
+}
+agents();
+$("#newag").onclick=()=>{const n=prompt("O que esse agente precisa fazer?");if(n)alert("Na versão real, a IA entrevista você, conecta as ferramentas e entrega o agente pronto.\n\nPedido: "+n)};
+
+// chat simulado
+let cur=ALL[0].id;const hist={};
+function drawList(){ $("#chatlist").innerHTML=ALL.map(a=>`<button class="${a.id===cur?"on":""}" onclick="openChat('${a.id}')"><div class="av" style="width:30px;height:30px">${a.n[0]}</div><div><b>${a.n}</b><div class="role">${a.r}</div></div></button>`).join("") }
+function drawMsgs(){ const h=hist[cur]||(hist[cur]=[{u:0,t:`Oi! Sou ${ALL.find(a=>a.id===cur).n}, ${ALL.find(a=>a.id===cur).r}. Como posso ajudar?`}]);
+  $("#msgs").innerHTML=h.map(m=>`<div class="m ${m.u?"u":""}">${m.t}</div>`).join("");$("#msgs").scrollTop=1e9 }
+window.openChat=id=>{cur=id;document.querySelector('[data-v=chat]').click();drawList();drawMsgs()};
+$("#form").onsubmit=e=>{e.preventDefault();const v=$("#txt").value.trim();if(!v)return;$("#txt").value="";
+  const a=ALL.find(x=>x.id===cur);drawMsgs();hist[cur].push({u:1,t:v});drawMsgs();
+  setTimeout(()=>{hist[cur].push({u:0,t:`[simulado] Entendi: "${v}". Vou consultar o Cérebro e usar ${a.t[0]} para responder. Na versão real, aqui entra a IA de verdade.`});drawMsgs()},700)};
+drawList();drawMsgs();
+
+// rotinas
+$("#rt").innerHTML=[["Bom dia, resumo do dia","Iago","Todo dia 08:00"],["Follow-up de leads parados","Davi","Todo dia 10:00"],["Fechamento do caixa","Marta","Sexta 17:00"],["Publicar artigo da semana","Bela","Segunda 09:00"],["Triagem de currículos","Paulo","Quando chegar e-mail"]]
+ .map(([n,a,q])=>`<div class="card"><b>${n}</b><div class="role">${a} · ${q}</div><div class="on-dot">● Ativa</div></div>`).join("");
+
+// integrações
+const IG=[["WhatsApp","Telefone & SMS"],["Gmail","E-mail"],["Google Sheets","Planilhas"],["Shopee","Marketplace"],["Mercado Livre","Marketplace"],["Xero","Contabilidade"],["Anthropic","Modelo de IA"],["Instagram","Social"],["Google Calendar","Agendamento"]];
+$("#ig").innerHTML=IG.map(([n,c],i)=>`<div class="card int"><div><b>${n}</b><small>${c}</small></div><button class="btn ghost" data-i="${i}">Conectar</button></div>`).join("");
+$("#ig").onclick=e=>{const b=e.target.closest("button");if(!b)return;b.textContent="✓ Conectado";b.classList.add("done")};
+
+// organograma
+$("#orgc").innerHTML=`<div class="card boss"><div class="av" style="margin:0 auto 6px">N</div><b>Nathan</b><div class="role">Chefe de Gabinete</div></div>`+
+ DEPS.map(d=>`<div><div class="role" style="text-align:center;margin-bottom:8px">${d.n}</div><div class="row">`+d.a.map(a=>`<div class="card"><div class="av" style="margin:0 auto 6px">${a.n[0]}</div><b>${a.n}</b><div class="role">${a.r}</div></div>`).join("")+`</div></div>`).join("");
+
+// cérebro (grafo)
+const NODES=[{n:"Cérebro",g:0,c:1}],EDGES=[];
+["Projetos","Áreas","Recursos","Arquivo"].forEach((p,i)=>{NODES.push({n:p,g:1});EDGES.push([0,NODES.length-1])});
+const kids={1:["lançamento-loja","campanha-natal"],2:["marketing","vendas","financeiro","atendimento"],3:["marca","produtos","fornecedores","preços"],4:["2025","contratos-antigos"]};
+for(let p=1;p<=4;p++)kids[p].forEach(k=>{NODES.push({n:k,g:2});EDGES.push([p,NODES.length-1])});
+let raf,hover=-1,mouse={x:-1,y:-1};
+function startBrain(){
+  const cv=$("#cv"),ctx=cv.getContext("2d"),dpr=devicePixelRatio||1;
+  const W=cv.clientWidth,H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  NODES.forEach((n,i)=>{if(n.x===undefined){n.x=W/2+(Math.random()-.5)*200;n.y=H/2+(Math.random()-.5)*200;n.vx=n.vy=0}});
+  cancelAnimationFrame(raf);
+  cv.onmousemove=e=>{const r=cv.getBoundingClientRect();mouse={x:e.clientX-r.left,y:e.clientY-r.top}};
+  cv.onmouseleave=()=>mouse={x:-1,y:-1};
+  (function tick(){
+    NODES.forEach((a,i)=>{NODES.forEach((b,j)=>{if(i<j){let dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy)||1,f=2600/(d*d);a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f}});
+      a.vx+=(W/2-a.x)*.002;a.vy+=(H/2-a.y)*.002});
+    EDGES.forEach(([i,j])=>{const a=NODES[i],b=NODES[j];let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,f=(d-95)*.02;a.vx+=dx/d*f;a.vy+=dy/d*f;b.vx-=dx/d*f;b.vy-=dy/d*f});
+    NODES.forEach(n=>{n.vx*=.85;n.vy*=.85;n.x+=n.vx;n.y+=n.vy});
+    ctx.clearRect(0,0,W,H);hover=-1;
+    NODES.forEach((n,i)=>{if(Math.hypot(n.x-mouse.x,n.y-mouse.y)<12)hover=i});
+    ctx.lineWidth=1;EDGES.forEach(([i,j])=>{const on=hover===i||hover===j;ctx.strokeStyle=on?"#f59e42":"#2c3138";ctx.beginPath();ctx.moveTo(NODES[i].x,NODES[i].y);ctx.lineTo(NODES[j].x,NODES[j].y);ctx.stroke()});
+    NODES.forEach((n,i)=>{const r=n.c?14:n.g===1?8:5;ctx.fillStyle=n.c?"#4fd1c5":n.g===1?"#f59e42":"#8b929b";
+      if(n.c){ctx.shadowColor="#4fd1c5";ctx.shadowBlur=24}ctx.beginPath();ctx.arc(n.x,n.y,r,0,7);ctx.fill();ctx.shadowBlur=0;
+      if(n.g<2||hover===i){ctx.fillStyle="#e7e9ec";ctx.font="12px system-ui";ctx.fillText(n.n,n.x+r+4,n.y+4)}});
+    raf=requestAnimationFrame(tick);
+  })();
+}
+</script>
+</body>
+</html>
