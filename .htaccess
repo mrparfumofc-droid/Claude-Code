@@ -1,6 +1,11 @@
 DirectoryIndex index.html
 Options -Indexes
 
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^fotos/([A-Za-z0-9_-]+\.(jpg|png|webp))$ api.php?acao=foto&n=$1 [L,QSA]
+</IfModule>
+
 <IfModule mod_headers.c>
   <FilesMatch "\.(html)$">
     Header set Cache-Control "no-cache, must-revalidate"

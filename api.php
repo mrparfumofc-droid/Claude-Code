@@ -213,7 +213,7 @@ switch ($acao) {
     $marcas = [];
     foreach (($d['marcas'] ?? []) as $m) { $marcas[(string)$m['id']] = $m['nome']; }
     $esquema = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-    $baseUrl = $esquema . '://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/api.php?acao=foto&n=';
+    $baseUrl = $esquema . '://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/fotos/';
     $todos = isset($_GET['todos']);
     $lista = [];
     foreach (($d['produtos'] ?? []) as $p) {
@@ -234,6 +234,8 @@ switch ($acao) {
         'precoFinal' => ($promo > 0 && $promo < $venda) ? $promo : $venda,
         'estoque' => $estoque, 'status' => $status, 'publicarWhatsapp' => $publicar,
         'publicadoWhatsappEm' => $p['publicadoWhatsappEm'] ?? null,
+        'canais' => $p['canais'] ?? ['whatsapp' => $publicar, 'instagram' => true, 'site' => true],
+        'local' => $p['localizacao'] ?? '',
         'fotos' => array_map(function($n) use ($baseUrl) { return $baseUrl . rawurlencode($n); }, $p['fotos'] ?? []),
         'dataEntrada' => $p['dataEntrada'] ?? '', 'tags' => $p['tags'] ?? ''
       ];
