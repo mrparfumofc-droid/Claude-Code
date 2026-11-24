@@ -109,10 +109,18 @@ class _BibleStoryPlayerState extends State<BibleStoryPlayer> with WidgetsBinding
     if (existing != null) return existing;
     final p = AudioPlayer();
     _playerSub = p.playerStateStream.listen((s) {
-      if (s.processingState == ProcessingState.completed && !_usingTts) _onNarrationDone(_run);
+      // O player repete o estado "terminou" quando é parado ou recebe outro arquivo: só vale
+      // uma vez, e só para a cena em que este áudio começou a tocar.
+      if (s.processingState == ProcessingState.completed && _audioRun >= 0 && _audioRun == _run) {
+        _audioRun = -1;
+        _onNarrationDone(_run);
+      }
     });
     return _player = p;
   }
+
+  /// Cena (número da rodada) em que o áudio carregado começou a tocar; -1 = nenhum.
+  int _audioRun = -1;
 
   void _onTts() {
     final tts = _tts;
@@ -140,6 +148,7 @@ class _BibleStoryPlayerState extends State<BibleStoryPlayer> with WidgetsBinding
       Duration(milliseconds: (text.split(RegExp(r'\s+')).length / 2.7 * 1000).round().clamp(7000, 70000));
 
   Future<void> _stopNarration() async {
+    _audioRun = -1;
     _timer?.cancel();
     _timer = null;
     if (_usingTts) {
@@ -157,6 +166,7 @@ class _BibleStoryPlayerState extends State<BibleStoryPlayer> with WidgetsBinding
     final run = ++_run;
     await _stopNarration();
     if (!mounted || run != _run) return;
+    if (_loadingAudio) setState(() => _loadingAudio = false);
     if (_textScroll.hasClients) _textScroll.jumpTo(0);
     if (_i + 1 < story.scenes.length) {
       final next = story.scenes[_i + 1];
@@ -187,6 +197,7 @@ class _BibleStoryPlayerState extends State<BibleStoryPlayer> with WidgetsBinding
         }
         if (!mounted || run != _run) return;
         setState(() => _loadingAudio = false);
+        _audioRun = run;
         unawaited(_audio.play());
         return;
       } catch (_) {
@@ -263,7 +274,7 @@ class _BibleStoryPlayerState extends State<BibleStoryPlayer> with WidgetsBinding
     // Retoma o áudio de onde parou; a voz do aparelho recomeça a cena.
     final p = _player;
     if (!_usingTts && _audioOn && scene.audio && p != null && p.processingState == ProcessingState.ready) {
-      _run++;
+      _audioRun = ++_run;
       unawaited(p.play());
     } else {
       _enterScene();
