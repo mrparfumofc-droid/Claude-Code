@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 
 import '../models/reference_parser.dart';
 import '../services/books_service.dart';
+import '../services/ebd_reminder.dart';
+import '../services/notifications.dart';
 import '../state/app_state.dart';
 import 'reader_view.dart';
 
@@ -200,6 +202,7 @@ class PdfReaderScreen extends StatefulWidget {
 class _PdfReaderScreenState extends State<PdfReaderScreen> {
   final _controller = PdfViewerController();
   late final BooksService _books = context.read<BooksService>();
+  late final NotificationService _notifications = context.read<AppState>().notifications;
   String? _path;
   double? _progress;
   String? _error;
@@ -357,7 +360,7 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
     book.lessons = [...book.lessons.where((l) => l.page != _page), Lesson(_page, title)]
       ..sort((a, b) => a.page.compareTo(b.page));
     setState(() {});
-    await _books.saveLessons(book).catchError((_) {});
+    await _books.saveLessons(book).then((_) => scheduleEbdReminders(_notifications, _books.books)).catchError((_) {});
   }
 
   Future<void> _findLessons() async {
@@ -382,7 +385,7 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
     }
     book.lessons = found.values.toList()..sort((a, b) => a.page.compareTo(b.page));
     setState(() {});
-    await _books.saveLessons(book).catchError((_) {});
+    await _books.saveLessons(book).then((_) => scheduleEbdReminders(_notifications, _books.books)).catchError((_) {});
     messenger.showSnackBar(SnackBar(content: Text('${found.length} lições encontradas')));
   }
 
@@ -429,7 +432,7 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
                   onPressed: () {
                     book.lessons = book.lessons.where((x) => x != l).toList();
                     setState(() {});
-                    _books.saveLessons(book).catchError((_) {});
+                    _books.saveLessons(book).then((_) => scheduleEbdReminders(_notifications, _books.books)).catchError((_) {});
                   },
                 ),
               ),

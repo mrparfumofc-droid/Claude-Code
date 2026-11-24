@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 
 import '../services/account_service.dart';
 import '../services/books_service.dart';
+import '../services/ebd_reminder.dart';
+import '../state/app_state.dart';
 import 'account_screen.dart';
 import 'pdf_reader_screen.dart';
 
@@ -24,8 +26,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) context.read<BooksService>().refresh();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!mounted) return;
+      final books = context.read<BooksService>();
+      final notifications = context.read<AppState>().notifications;
+      await books.refresh();
+      await scheduleEbdReminders(notifications, books.books);
     });
   }
 
@@ -182,7 +188,29 @@ class _LibraryScreenState extends State<LibraryScreen> {
     }
     final keys = groups.keys.toList();
     if (kind != 'ebd') keys.sort();
+    // Próxima lição da EBD (domingo de hoje ou o próximo).
+    final today = DateTime.now();
+    final start = DateTime(today.year, today.month, today.day);
+    final next = kind == 'ebd'
+        ? ebdSchedule(items).where((e) => !e.$1.isBefore(start)).firstOrNull
+        : null;
     return ListView(padding: const EdgeInsets.only(bottom: 96), children: [
+      if (next != null)
+        Card(
+          margin: const EdgeInsets.all(12),
+          color: Theme.of(context).colorScheme.secondaryContainer,
+          child: ListTile(
+            leading: const Icon(Icons.event),
+            title: Text(next.$2.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            subtitle: Text(
+                '${next.$1.isAtSameMomentAs(start) ? 'Hoje' : 'Domingo ${next.$1.day.toString().padLeft(2, '0')}/${next.$1.month.toString().padLeft(2, '0')}'} · ${next.$3.title} · pág. ${next.$2.page}'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () {
+              next.$3.lastPage = next.$2.page;
+              _open(next.$3);
+            },
+          ),
+        ),
       for (final k in keys)
         ExpansionTile(
           initiallyExpanded: true,

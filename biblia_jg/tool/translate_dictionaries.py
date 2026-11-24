@@ -25,7 +25,46 @@ DICTS = [  # (código, arquivo, nome)
     ("torrey", "TorreysTopicalTextbook.jsonl", "Índice Temático de Torrey"),
     ("smith", "Smith's Bible Dictionary.jsonl", "Dicionário Bíblico Smith"),
 ]
+ABOUT = {
+    "easton": "Dicionário bíblico geral de M. G. Easton (1897). Domínio público, traduzido.",
+    "hitchcock": "Significado dos nomes bíblicos, de Roswell D. Hitchcock (1869). Domínio público, traduzido.",
+    "torrey": "Temas bíblicos com os versículos de cada um, de R. A. Torrey (1897). Domínio público, traduzido.",
+    "smith": "Dicionário bíblico de William Smith (1863). Domínio público, traduzido.",
+}
 MODELS = ["gemma-4-26b-a4b-it", "gemma-4-31b-it"]
+
+
+def publish_all(base: pathlib.Path) -> None:
+    """Publica no bucket público "dicionarios" o que já está traduzido (o app baixa sozinho)."""
+    index = []
+    for code, _, title in DICTS:
+        path = base / "pt" / f"{code}.jsonl"
+        if not path.exists():
+            continue
+        rows = {}
+        for l in path.read_text(encoding="utf-8").splitlines():
+            if l.strip():
+                r = json.loads(l)
+                rows[r["id"]] = r
+        if not rows:
+            continue
+        items = [{"t": r["termo"], "e": r["en"], "x": r["texto"]} for r in sorted(rows.values(), key=lambda r: r["n"])]
+        _publish(f"{code}.json", json.dumps(items, ensure_ascii=False, separators=(",", ":")))
+        index.append({"code": code, "name": title, "about": ABOUT[code], "count": len(items), "version": str(len(items))})
+    if index:
+        _publish("index.json", json.dumps(index, ensure_ascii=False))
+        print("publicado: " + ", ".join(f"{i['code']} {i['count']}" for i in index), flush=True)
+
+
+def _publish(path: str, content: str) -> None:
+    body = json.dumps({"publish": {"path": path, "content": content}}).encode()
+    for i in range(4):
+        try:
+            urllib.request.urlopen(urllib.request.Request(FN, data=body, headers=HEAD, method="POST"), timeout=120).read()
+            return
+        except Exception as e:  # noqa: BLE001
+            print(f"  publicar {path} falhou ({e})", file=sys.stderr, flush=True)
+            time.sleep(10 * (i + 1))
 MAX_CHARS = 2400
 
 svc = (ROOT / "lib/services/ai_service.dart").read_text(encoding="utf-8")
@@ -136,6 +175,7 @@ def main() -> int:
             return len(rows)
 
         count = len(done)
+        last_pub = count
         with cf.ThreadPoolExecutor(a.workers) as ex:
             for fut in cf.as_completed([ex.submit(work, b) for b in batches]):
                 try:
@@ -144,7 +184,11 @@ def main() -> int:
                     print(f"  lote perdido: {e}", file=sys.stderr, flush=True)
                 if count % 50 < 25:
                     print(f"{title}: {count}/{total}", flush=True)
+                if count - last_pub >= 300:
+                    last_pub = count
+                    publish_all(base)
         print(f"{title}: terminado ({count}/{total})", flush=True)
+        publish_all(base)
     return 0
 
 

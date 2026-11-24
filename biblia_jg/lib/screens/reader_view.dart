@@ -13,6 +13,7 @@ import '../theme.dart';
 import '../widgets/note_editor.dart';
 import '../widgets/xrefs_sheet.dart';
 import 'ai_chat_screen.dart';
+import 'maps_screen.dart';
 import 'verse_image_screen.dart';
 import 'voice_screen.dart';
 
@@ -553,6 +554,11 @@ class _VerseActionBar extends StatelessWidget {
                   final ref = VerseRef(app.book, app.chapter, selected.first);
                   onClear();
                   showCrossReferences(context, app, ref);
+                }),
+                action(Icons.map_outlined, 'Mapa', () {
+                  final ref = _reference, book = app.book, chapter = app.chapter, verse = selected.first;
+                  onClear();
+                  openVersePlaces(context, book, chapter, verse, ref);
                 }),
               ]),
             ),

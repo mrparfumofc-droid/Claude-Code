@@ -7,6 +7,7 @@ import '../services/account_service.dart';
 import '../services/dictionary_service.dart';
 import 'dictionary_screen.dart';
 import 'hymnal_screen.dart';
+import 'maps_screen.dart';
 import '../services/sync.dart';
 import 'account_screen.dart';
 import 'library_screen.dart';
@@ -278,12 +279,6 @@ class _MainDrawer extends StatelessWidget {
           onTap: () => open(page),
         );
 
-    Widget soon(IconData icon, String label) => ListTile(
-          leading: Icon(icon),
-          title: Text(label),
-          enabled: false,
-          trailing: const Chip(label: Text('em breve'), visualDensity: VisualDensity.compact),
-        );
 
     return Drawer(
       width: 340,
@@ -366,11 +361,7 @@ class _MainDrawer extends StatelessWidget {
         item(Icons.school, 'EBD', const LibraryScreen(initialTab: 1)),
         item(Icons.abc, 'Dicionário bíblico', const DictionaryScreen()),
         item(Icons.library_music, 'Hinário', const HymnalScreen()),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-          child: Text('Próximas etapas', style: theme.textTheme.labelLarge),
-        ),
-        soon(Icons.public, 'Mapas'),
+        item(Icons.public, 'Mapas bíblicos', const MapsScreen()),
         const Divider(),
         item(Icons.backup, 'Backup', const BackupScreen()),
         item(Icons.settings, 'Configurações', const SettingsScreen()),

@@ -88,6 +88,24 @@ class NotificationService {
     }
   }
 
+  static const _ebdBase = 3000;
+
+  /// Lembretes da EBD: [(domingo, título, texto)] — substitui os anteriores.
+  Future<void> scheduleEbd(List<(DateTime, String, String)> items) async {
+    if (!_ready) await init();
+    for (var i = 0; i < 14; i++) {
+      await _plugin.cancel(id: _ebdBase + i);
+    }
+    final now = tz.TZDateTime.now(tz.local);
+    var i = 0;
+    for (final (day, title, body) in items) {
+      final when = tz.TZDateTime(tz.local, day.year, day.month, day.day, 7);
+      if (when.isBefore(now) || i >= 14) continue;
+      await _schedule(_ebdBase + i, when, title, body);
+      i++;
+    }
+  }
+
   Future<void> _schedule(int id, tz.TZDateTime when, String title, String body) async {
     try {
       await _plugin.zonedSchedule(

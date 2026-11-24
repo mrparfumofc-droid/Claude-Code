@@ -37,8 +37,11 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 16),
             const Text(
               'Títulos de seção e palavras de Jesus: Berean Standard Bible (domínio público).\n'
-              'Referências cruzadas: OpenBible.info (CC-BY).\n'
-              'IA: Google Gemini.',
+              'Referências cruzadas e lugares bíblicos: OpenBible.info (CC-BY).\n'
+              'Mapas: Sentinel-2 cloudless – s2maps.eu, EOX IT Services (Copernicus 2020).\n'
+              'Fotos dos fundos: Wikimedia Commons (CC0, domínio público e CC BY).\n'
+              'Hinos: Wikisource (domínio público). Dicionários: Easton, Smith, Hitchcock e Torrey (domínio público, traduzidos).\n'
+              'IA: Google Gemini e Gemma.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 12),
             ),
