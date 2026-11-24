@@ -6,6 +6,10 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.49.4";
 
 const MODEL = Deno.env.get("GEMINI_MODEL") ?? "gemini-flash-latest";
+// Reservas com cota grátis maior, usadas quando o principal esgota (erro 429/503).
+const FALLBACK_MODELS = (Deno.env.get("GEMINI_FALLBACK_MODELS") ??
+  "gemini-flash-lite-latest,gemini-2.5-flash-lite,gemini-2.5-flash")
+  .split(",").map((m) => m.trim()).filter(Boolean);
 const MAX_TURNS = 30;
 const MAX_CHARS = 6000;
 
@@ -163,27 +167,40 @@ Deno.serve(async (req: Request) => {
   }));
   const system = `${BASE}\n\nPerfil teológico: ${PROFILES[profile]}\n\nTarefa: ${TASKS[task]}`;
 
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: system }] },
-        contents,
-        generationConfig: {
-          maxOutputTokens: 8192,
-          ...(task === "quiz" ? { responseMimeType: "application/json" } : {}),
-        },
-      }),
+  // Tenta o modelo principal e, se a cota/servidor dele estiver esgotado, os reservas.
+  const payload = JSON.stringify({
+    systemInstruction: { parts: [{ text: system }] },
+    contents,
+    generationConfig: {
+      maxOutputTokens: 8192,
+      ...(task === "quiz" ? { responseMimeType: "application/json" } : {}),
     },
-  );
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    console.error("Gemini", res.status, JSON.stringify(data).slice(0, 500));
-    const busy = res.status === 429 || res.status === 503;
+  });
+  let res: Response | null = null;
+  // deno-lint-ignore no-explicit-any
+  let data: any = {};
+  let quota = false;
+  for (const model of [MODEL, ...FALLBACK_MODELS.filter((m) => m !== MODEL)]) {
+    res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
+        body: payload,
+      },
+    );
+    data = await res.json().catch(() => ({}));
+    if (res.ok) break;
+    console.error("Gemini", model, res.status, JSON.stringify(data).slice(0, 500));
+    if (res.status !== 429 && res.status !== 503 && res.status !== 404) break;
+    if (res.status === 429 && JSON.stringify(data).includes("quota")) quota = true;
+  }
+  if (!res || !res.ok) {
+    const status = res?.status ?? 0;
     return json({
-      error: busy
+      error: quota
+        ?"A cota grátis da IA de hoje acabou (limite do Google). Ela volta amanhã."
+        : status === 429 || status === 503
         ? "A IA está ocupada agora. Tente de novo em alguns instantes."
         : "A IA não respondeu agora. Tente de novo em instantes.",
     }, 502);
