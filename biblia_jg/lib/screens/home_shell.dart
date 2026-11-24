@@ -29,6 +29,7 @@ import 'memorize_screen.dart';
 import 'music_screen.dart';
 import 'needs_screen.dart';
 import 'notes_screen.dart';
+import 'panorama_screen.dart';
 import 'prayer_screen.dart';
 import 'progress_screen.dart';
 import 'quiz_screen.dart';
@@ -412,13 +413,14 @@ class _ReaderPageState extends State<ReaderPage> {
                     child: Text(app.bible!.abbrev, style: const TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 if (book != null)
-                  PopupMenuButton<bool>(
+                  PopupMenuButton<int>(
                     tooltip: 'Entender o que estou lendo',
                     icon: const Icon(Icons.lightbulb_outline),
-                    onSelected: (intro) => _understand(app, intro: intro),
+                    onSelected: (v) => v == 2 ? _push(BookSheetScreen(number: app.book + 1)) : _understand(app, intro: v == 1),
                     itemBuilder: (_) => [
-                      PopupMenuItem(value: false, child: Text('Resumo simples de ${book.name} ${app.chapter}')),
-                      PopupMenuItem(value: true, child: Text('Introdução ao livro de ${book.name}')),
+                      PopupMenuItem(value: 0, child: Text('Resumo simples de ${book.name} ${app.chapter}')),
+                      PopupMenuItem(value: 1, child: Text('Introdução ao livro de ${book.name}')),
+                      PopupMenuItem(value: 2, child: Text('Ficha de ${book.name}: autor, personagens, acontecimentos')),
                     ],
                   ),
                 if (book != null)
@@ -648,6 +650,7 @@ class StudyHub extends StatelessWidget {
           _HubItem(Icons.wb_sunny_outlined, const Color(0xFFEF6C00), 'Devocional diário', 'Uma reflexão para hoje',
               (c) => openDevotional(c, c.read<AppState>())),
           _HubItem(Icons.abc, const Color(0xFF455A64), 'Dicionário bíblico', 'Pessoas, lugares e termos', (c) => _go(c, const DictionaryScreen())),
+          _HubItem(Icons.account_tree, const Color(0xFF1B2A4A), 'Panorama bíblico', 'Árvore de Abraão, reis, profetas e os 66 livros', (c) => _go(c, const PanoramaScreen())),
           _HubItem(Icons.public, const Color(0xFF00838F), 'Mapas bíblicos', 'Atlas, viagens de Paulo e lugares no satélite', (c) => _go(c, const MapsScreen())),
           _HubItem(Icons.auto_stories, const Color(0xFF8D6E63), 'Histórias bíblicas', 'Ilustradas e narradas, com mapa', (c) => _go(c, const StoriesScreen())),
           _HubItem(Icons.quiz_outlined, const Color(0xFFC62828), 'Perguntas bíblicas', 'Teste o que você sabe', (c) => _go(c, const QuizScreen())),

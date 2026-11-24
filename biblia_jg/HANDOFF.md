@@ -66,6 +66,13 @@ App Flutter de Bíblia para tablet Android, de uso pessoal do dono (JG Company).
 - **Mapas** (`lib/screens/maps_screen.dart`, `lib/widgets/story_map.dart`): "Atlas bíblico" (`assets/data/map_stories.json`, gerado por `tool/historias/build_atlas.py`) com 8 mapas: as viagens de Paulo (as quatro rotas coloridas), as cartas de Paulo, Jerusalém nos dias de Jesus, a terra nos dias de Jesus, as doze tribos, o reino dividido, os exílios e os impérios. "Viagens e rotas" abre as histórias com rota já no modo mapa. Limites e rotas são aproximados.
 - Testes novos em `test/stories_test.dart`.
 
+## Fase 4 (build 28): Panorama bíblico (quadros de estudo)
+O dono mostrou vídeos de livros do tipo "panorama bíblico" (árvore genealógica, cronologia dos reis, tabela dos profetas, ficha de cada livro) e pediu esse estilo no app. Feito com texto e desenho próprios (nada copiado dos livros dos vídeos):
+- `lib/screens/panorama_screen.dart` (entrada em Estudo > Panorama bíblico; profetas; grade e ficha dos 66 livros), `panorama_tree.dart` (árvore de Abraão às doze tribos, com descendentes; modo "Apresentar" passo a passo com a voz do aparelho), `panorama_kings.dart` (linha do tempo em escala de Israel e Judá, cor pela avaliação do rei, marcos no eixo). Modelo em `lib/services/panorama.dart`; narrador de passos em `lib/services/step_narrator.dart`.
+- Dados em `assets/data/panorama.json`, gerados por `tool/panorama/build_panorama.py` (árvore, reis e profetas escritos ali; fichas em `livros_a/b/c.json`). `check_livros.py` confere o formato e `check_refs.py` confere cada referência contra o texto de uma Bíblia do app.
+- A ficha do livro também abre pelo botão da lâmpada no leitor. Capítulos e versículos são contados na versão aberta; o versículo-chave é lido da própria Bíblia.
+- Datas dos reis seguem a cronologia mais usada (Thiele), aproximadas. Testes em `test/panorama_test.dart`.
+
 ## Pendências
 1. ~~Músicas de fundo~~ feito (player na nuvem, ver Infraestrutura). Ideias futuras: abaixar a música enquanto o "Ouvir" lê o versículo; tocar com a tela bloqueada (audio_service).
 2. ~~Livros (PDF) + EBD~~ feito (falta: lembrete de domingo da lição da EBD). Leitor de PDF com pastas, anotação à mão (caneta, marca-texto, borracha, cores, desfazer), salvo por página. O módulo EBD: revista em PDF por ano e trimestre, lições marcadas (à mão ou pela IA), Bíblia ao lado, referências clicáveis, lembrete de domingo.
