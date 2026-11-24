@@ -31,6 +31,11 @@ App Flutter de Bíblia para tablet Android, de uso pessoal do dono (JG Company).
   - Originais em `D:\Claude Code\musicas\MP3` (2,3 GB, 31 faixas, 16,7 h); convertidos em `D:\Claude Code\musicas\nuvem`. Para adicionar músicas: converter com `ffmpeg -i X.mp3 -vn -c:a libopus -b:a 48k X.ogg`, subir no bucket e atualizar `musicas.json` (o app não precisa de nova versão).
   - Plano grátis: 1 GB de armazenamento e ~5 GB de tráfego/mês (≈ 230 h de música online/mês; as baixadas não gastam).
 
+- **IA com reserva:** a chave Gemini é do plano grátis (o `gemini-flash-latest` só dá 20 pedidos/dia). A `ai-verse` tenta os modelos de `GEMINI_FALLBACK_MODELS` (padrão: flash-lite) quando recebe 429/503. Para acabar com o limite, ativar faturamento no Google AI Studio.
+- **Fundos do editor de imagem:** bucket **público** `fundos` (68 fotos de 1440 px + miniaturas `t-*.jpg` + `fundos.json` com tema, autor e licença). Fotos do Wikimedia Commons ("Quality images", só CC0, domínio público e CC BY — sem SA), geradas por `tool/fetch_backgrounds.py`; o editor mostra o crédito do autor. Também: foto da galeria, degradês prontos e próprios, cores lisas, escurecer, desfocar, cor e sombra do texto.
+- **Voz da leitura:** `lib/screens/voice_screen.dart` — escolhe o mecanismo (Google é bem mais natural que o da Samsung), a voz (online = mais natural), velocidade e tom; fica salvo.
+- **Login Google (a fazer):** o build imprime o SHA-1 da chave no passo "Chave de assinatura" para criar o cliente OAuth Android.
+
 ## Pendências
 1. ~~Músicas de fundo~~ feito (player na nuvem, ver Infraestrutura). Ideias futuras: abaixar a música enquanto o "Ouvir" lê o versículo; tocar com a tela bloqueada (audio_service).
 2. **Livros (PDF) + EBD.** Leitor de PDF com pastas, anotação à mão (caneta, marca-texto, borracha, cores, desfazer), salvo por página. O módulo EBD: revista em PDF por ano e trimestre, lições marcadas (à mão ou pela IA), Bíblia ao lado, referências clicáveis, lembrete de domingo.

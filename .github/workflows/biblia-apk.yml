@@ -78,6 +78,9 @@ jobs:
             fi
             echo "Impressão digital da chave (esperada 0E:F3:62:0F:...:D3:18):"
             grep -E "SHA256:" keyinfo.txt
+            # SHA-1 (público) usado no cliente OAuth Android do login Google.
+            echo "SHA-1 para o login Google:"
+            grep -E "SHA1:" keyinfo.txt
             rm -f keyinfo.txt
             {
               echo "storeFile=release.jks"

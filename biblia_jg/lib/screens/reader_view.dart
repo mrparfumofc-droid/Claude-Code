@@ -14,6 +14,7 @@ import '../widgets/note_editor.dart';
 import '../widgets/xrefs_sheet.dart';
 import 'ai_chat_screen.dart';
 import 'verse_image_screen.dart';
+import 'voice_screen.dart';
 
 /// Texto do capítulo atual com seleção de versículos e ações.
 class ReaderView extends StatefulWidget {
@@ -196,6 +197,12 @@ class _ReaderViewState extends State<ReaderView> {
                       for (final (r, l) in const [(0.3, '0,6x'), (0.4, '0,8x'), (0.5, '1x'), (0.6, '1,25x'), (0.75, '1,5x'), (0.9, '2x')])
                         CheckedPopupMenuItem(value: r, checked: tts.rate == r, child: Text(l)),
                     ],
+                  ),
+                  IconButton(
+                    tooltip: 'Escolher voz',
+                    icon: const Icon(Icons.record_voice_over, size: 20),
+                    onPressed: () => Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (_) => const VoiceScreen())),
                   ),
                   IconButton(
                     tooltip: 'Parar leitura',
