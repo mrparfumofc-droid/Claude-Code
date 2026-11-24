@@ -8,7 +8,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 import '../models/bible.dart' show normalizeForSearch;
-import 'ai_service.dart' show supabaseUrl;
+import 'ai_service.dart' show AiService, AiTurn, supabaseUrl;
 
 /// Um dicionário disponível na nuvem (bucket público "dicionarios").
 class DictInfo {
@@ -35,8 +35,11 @@ class DictEntry {
   final String term;
   final String english;
   final String text;
+
+  /// O verbete ainda está no original em inglês (pode ser traduzido na hora pela IA).
+  final bool untranslated;
   final String _key;
-  DictEntry(this.dict, this.term, this.english, this.text) : _key = normalizeForSearch(term);
+  DictEntry(this.dict, this.term, this.english, this.text, {this.untranslated = false}) : _key = normalizeForSearch(term);
 
   /// Texto normalizado para a busca "dentro do texto" (calculado uma vez só).
   late final String textKey = normalizeForSearch(text);
@@ -89,10 +92,91 @@ class DictionaryService extends ChangeNotifier {
 
   List<DictEntry>? entriesOf(String code) => _entries[code];
 
+  // ---- Tradução na hora dos verbetes que ainda estão em inglês ----
+  final Map<String, DictEntry> _translated = {}; // id -> verbete traduzido neste aparelho
+  final Set<String> translating = {};
+
+  /// O verbete como deve ser mostrado: a tradução feita neste aparelho, se houver.
+  DictEntry resolved(DictEntry e) => _translated[e.id] ?? e;
+
+  Future<File> _translationsFile() async => File(p.join((await _dir()).path, 'traducoes.json'));
+
+  Future<void> _loadTranslations() async {
+    try {
+      final f = await _translationsFile();
+      if (!await f.exists()) return;
+      final j = jsonDecode(await f.readAsString()) as Map<String, dynamic>;
+      for (final e in j.entries) {
+        final v = e.value as Map;
+        final parts = e.key.split(':');
+        _translated[e.key] =
+            DictEntry(parts.first, '${v['t']}', parts.skip(1).join(':'), '${v['x']}');
+      }
+    } catch (_) {}
+  }
+
+  static List<String> _chunks(String text, int max) {
+    final out = <String>[];
+    var cur = '';
+    for (final para in text.split(RegExp(r'\n\s*\n'))) {
+      if (cur.isNotEmpty && cur.length + para.length > max) {
+        out.add(cur);
+        cur = '';
+      }
+      cur = cur.isEmpty ? para : '$cur\n\n$para';
+    }
+    if (cur.isNotEmpty) out.add(cur);
+    return out;
+  }
+
+  /// Traduz um verbete em inglês com a IA e guarda no aparelho. Lança [AiException] se a IA falhar.
+  Future<DictEntry> translate(DictEntry e) async {
+    if (!e.untranslated) return e;
+    final cached = _translated[e.id];
+    if (cached != null) return cached;
+    translating.add(e.id);
+    notifyListeners();
+    try {
+      var term = e.term;
+      final parts = <String>[];
+      for (final (i, chunk) in _chunks(e.text, 4200).indexed) {
+        final answer = await AiService.ask(task: 'chat', messages: [
+          AiTurn(
+              true,
+              'Traduza para o português do Brasil este trecho do verbete "${e.english}" de um dicionário bíblico antigo '
+              '(Easton, 1897). Tradução fiel e completa, sem resumir, sem comentar e sem Markdown. Use os nomes bíblicos '
+              'como nas Bíblias Almeida e as referências no formato "Gn 1:1". '
+              '${i == 0 ? 'Na primeira linha escreva "TERMO: " seguido do nome do verbete em português; depois uma linha em branco e a tradução.' : 'Escreva só a tradução.'}'
+              '\n\n$chunk'),
+        ]);
+        var text = answer.replaceAll('**', '').trim();
+        final m = RegExp(r'^TERMO:\s*(.+)\n', caseSensitive: false).firstMatch(text);
+        if (m != null) {
+          if (i == 0) term = m.group(1)!.trim();
+          text = text.substring(m.end).trim();
+        }
+        parts.add(text);
+      }
+      final done = DictEntry(e.dict, term, e.english, parts.join('\n\n'));
+      _translated[e.id] = done;
+      try {
+        final f = await _translationsFile();
+        await f.writeAsString(jsonEncode({
+          for (final t in _translated.entries) t.key: {'t': t.value.term, 'x': t.value.text},
+        }));
+      } catch (_) {}
+      return done;
+    } finally {
+      translating.remove(e.id);
+      notifyListeners();
+    }
+  }
+
   /// Carrega a lista de dicionários e os que já estão no aparelho;
   /// baixa da nuvem os que mudaram.
   Future<void> init() async {
     await _loadMarks();
+    if (_translated.isEmpty) await _loadTranslations();
     if (dicts.isNotEmpty && _entries.length == dicts.length) return;
     loading = true;
     error = null;
@@ -135,7 +219,8 @@ class DictionaryService extends ChangeNotifier {
         final raw = jsonDecode(await f.readAsString()) as List;
         _entries[d.code] = [
           for (final e in raw)
-            DictEntry(d.code, (e['t'] ?? '') as String, (e['e'] ?? e['t'] ?? '') as String, (e['x'] ?? '') as String)
+            DictEntry(d.code, (e['t'] ?? '') as String, (e['e'] ?? e['t'] ?? '') as String, (e['x'] ?? '') as String,
+                untranslated: e['en'] == true)
         ]..sort((a, b) => a._key.compareTo(b._key));
       } catch (_) {}
     }

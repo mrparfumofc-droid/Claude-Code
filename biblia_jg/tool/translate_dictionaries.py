@@ -4,7 +4,11 @@ Smith — dataset JWBickel/BibleDictionaries) para o português, usando a Edge
 Function temporária `translate-dict` (modelos Gemma, cota grátis própria).
 
 Retoma de onde parou: cada verbete pronto vai para PASTA/pt/<dic>.jsonl.
-Uso: python tool/translate_dictionaries.py PASTA [--workers 3]
+Uso: python tool/translate_dictionaries.py PASTA [--workers 3] [--publicar]
+
+O dicionário é publicado COMPLETO: os verbetes já traduzidos em português e os que faltam no
+original em inglês (marcados com "en": true). No app, o verbete em inglês pode ser traduzido na
+hora pela IA; conforme a tradução avança aqui, uma nova versão é publicada.
 """
 import argparse
 import concurrent.futures as cf
@@ -19,41 +23,42 @@ import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FN = "https://ayjsoixzroxkrnkpkkip.supabase.co/functions/v1/translate-dict"
-DICTS = [  # (código, arquivo, nome)
-    ("hitchcock", "Hitchcock's Bible Names Dictionary.jsonl", "Nomes Bíblicos (Hitchcock)"),
+DICTS = [  # (código, arquivo, nome). O dono pediu só o Easton, completo (24/11/2026).
     ("easton", "Easton's Bible Dictionary.jsonl", "Dicionário Bíblico Easton"),
-    ("torrey", "TorreysTopicalTextbook.jsonl", "Índice Temático de Torrey"),
-    ("smith", "Smith's Bible Dictionary.jsonl", "Dicionário Bíblico Smith"),
 ]
 ABOUT = {
-    "easton": "Dicionário bíblico geral de M. G. Easton (1897). Domínio público, traduzido.",
-    "hitchcock": "Significado dos nomes bíblicos, de Roswell D. Hitchcock (1869). Domínio público, traduzido.",
-    "torrey": "Temas bíblicos com os versículos de cada um, de R. A. Torrey (1897). Domínio público, traduzido.",
-    "smith": "Dicionário bíblico de William Smith (1863). Domínio público, traduzido.",
+    "easton": "Dicionário bíblico geral de M. G. Easton (1897), domínio público. Os verbetes ainda não traduzidos "
+              "aparecem em inglês e podem ser traduzidos na hora.",
 }
 MODELS = ["gemma-4-26b-a4b-it", "gemma-4-31b-it"]
 
 
 def publish_all(base: pathlib.Path) -> None:
-    """Publica no bucket público "dicionarios" o que já está traduzido (o app baixa sozinho)."""
+    """Publica no bucket público "dicionarios" o dicionário completo (traduzido + o que falta em inglês)."""
     index = []
-    for code, _, title in DICTS:
+    for code, fname, title in DICTS:
+        src = [json.loads(l) for l in (base / "en" / fname).read_text(encoding="utf-8").splitlines() if l.strip()]
+        done = {}
         path = base / "pt" / f"{code}.jsonl"
-        if not path.exists():
-            continue
-        rows = {}
-        for l in path.read_text(encoding="utf-8").splitlines():
-            if l.strip():
-                r = json.loads(l)
-                rows[r["id"]] = r
-        if not rows:
-            continue
-        items = [{"t": r["termo"], "e": r["en"], "x": r["texto"]} for r in sorted(rows.values(), key=lambda r: r["n"])]
+        if path.exists():
+            for l in path.read_text(encoding="utf-8").splitlines():
+                if l.strip():
+                    r = json.loads(l)
+                    done[r["n"]] = r
+        items = []
+        for n, row in enumerate(src):
+            if n in done and done[n].get("texto"):
+                items.append({"t": done[n]["termo"], "e": done[n]["en"], "x": done[n]["texto"]})
+            else:
+                text = "\n\n".join(d.strip() for d in row.get("definitions", []) if d and d.strip())
+                if text:
+                    items.append({"t": row["term"], "e": row["term"], "x": text, "en": True})
         _publish(f"{code}.json", json.dumps(items, ensure_ascii=False, separators=(",", ":")))
-        index.append({"code": code, "name": title, "about": ABOUT[code], "count": len(items), "version": str(len(items))})
+        index.append({"code": code, "name": title, "about": ABOUT[code], "count": len(items),
+                      "version": f"completo-{len(done)}"})
+        print(f"publicado: {code} com {len(items)} verbetes ({len(done)} em português)", flush=True)
     if index:
         _publish("index.json", json.dumps(index, ensure_ascii=False))
-        print("publicado: " + ", ".join(f"{i['code']} {i['count']}" for i in index), flush=True)
 
 
 def _publish(path: str, content: str) -> None:
@@ -124,8 +129,12 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("base")
     ap.add_argument("--workers", type=int, default=3)
+    ap.add_argument("--publicar", action="store_true", help="só publica o que já existe e sai")
     a = ap.parse_args()
     base = pathlib.Path(a.base)
+    if a.publicar:
+        publish_all(base)
+        return 0
     (base / "pt").mkdir(parents=True, exist_ok=True)
     for code, fname, title in DICTS:
         src = [json.loads(l) for l in (base / "en" / fname).read_text(encoding="utf-8").splitlines() if l.strip()]

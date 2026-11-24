@@ -8,6 +8,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../models/reader_settings.dart';
 import '../models/reference_parser.dart';
+import '../services/ai_service.dart' show AiException;
 import '../services/dictionary_service.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
@@ -174,12 +175,12 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
             : ListView.builder(
                 itemCount: results.length,
                 itemBuilder: (context, i) {
-                  final e = results[i];
+                  final e = s.resolved(results[i]);
                   final m = s.marks[e.id];
                   return ListTile(
                     dense: true,
                     selected: wide && _open?.id == e.id,
-                    title: Text(e.term, style: const TextStyle(fontWeight: FontWeight.w600)),
+                    title: Text(e.untranslated ? '${e.term}  (em inglês)' : e.term, style: const TextStyle(fontWeight: FontWeight.w600)),
                     subtitle: Text(
                       _dict == null ? '${names[e.dict] ?? e.dict} · ${e.text}' : e.text,
                       maxLines: 1,
@@ -229,7 +230,19 @@ class EntryView extends StatefulWidget {
 class _EntryViewState extends State<EntryView> {
   int? _selected;
 
-  DictEntry get e => widget.entry;
+  /// O verbete mostrado: a tradução feita neste aparelho, quando existe.
+  DictEntry get e => context.read<DictionaryService>().resolved(widget.entry);
+
+  Future<void> _translate(DictionaryService s) async {
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      await s.translate(widget.entry);
+    } on AiException catch (err) {
+      messenger.showSnackBar(SnackBar(content: Text(err.message)));
+    } catch (_) {
+      messenger.showSnackBar(const SnackBar(content: Text('Não consegui traduzir agora. Tente de novo em instantes.')));
+    }
+  }
 
   Future<void> _editNote(DictionaryService s, DictMark m) async {
     final ctrl = TextEditingController(text: m.note);
@@ -325,6 +338,18 @@ class _EntryViewState extends State<EntryView> {
                   onPressed: () => _editNote(s, m),
                 ),
               ]),
+              if (e.untranslated)
+                Card(
+                  margin: const EdgeInsets.only(top: 12),
+                  child: ListTile(
+                    leading: const Icon(Icons.translate),
+                    title: const Text('Este verbete ainda está em inglês'),
+                    subtitle: const Text('A IA traduz na hora e a tradução fica guardada neste aparelho.'),
+                    trailing: s.translating.contains(e.id)
+                        ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2.5))
+                        : FilledButton(onPressed: () => _translate(s), child: const Text('Traduzir')),
+                  ),
+                ),
               if (m.note.trim().isNotEmpty)
                 Card(
                   margin: const EdgeInsets.only(top: 12),

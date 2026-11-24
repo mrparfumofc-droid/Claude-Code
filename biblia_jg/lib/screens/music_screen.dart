@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../services/music_player.dart';
+import '../widgets/external_music.dart';
 
 String formatDuration(Duration d) {
   final h = d.inHours;
@@ -52,6 +53,11 @@ class _MusicScreenState extends State<MusicScreen> {
       appBar: AppBar(
         title: const Text('Músicas de fundo'),
         actions: [
+          IconButton(
+            tooltip: 'Ouvir pelo meu Spotify ou YouTube',
+            icon: const Icon(Icons.queue_music),
+            onPressed: () => showExternalMusic(context),
+          ),
           if (m.downloaded.isNotEmpty)
             IconButton(
               tooltip: 'Apagar músicas baixadas',
@@ -70,6 +76,14 @@ class _MusicScreenState extends State<MusicScreen> {
           constraints: const BoxConstraints(maxWidth: 760),
           child: Column(children: [
             if (m.loading) const LinearProgressIndicator(),
+            ListTile(
+              leading: const Icon(Icons.queue_music),
+              title: const Text('Ouvir pelo meu Spotify ou YouTube'),
+              subtitle: const Text('Abre o aplicativo com a sua conta; a música continua enquanto você lê'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => showExternalMusic(context),
+            ),
+            const Divider(height: 1),
             const _NowPlaying(),
             if (m.error != null)
               Padding(
