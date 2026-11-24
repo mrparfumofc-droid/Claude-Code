@@ -61,7 +61,9 @@ jobs:
         run: |
           if [ -n "$KEYSTORE_B64" ]; then
             # Remove espaços e quebras de linha que entram ao copiar e colar.
-            B64=$(printf '%s' "$KEYSTORE_B64" | tr -d '[:space:]')
+            # Fica só com o maior trecho em base64 (descarta textos copiados junto,
+            # como a linha "Impressão digital do certificado...").
+            B64=$(printf '%s' "$KEYSTORE_B64" | tr -d '[:space:]' | python3 -c "import re,sys; print(max(re.findall(r'[A-Za-z0-9+/]+=*', sys.stdin.read()) or [''], key=len))")
             STORE_PW=$(printf '%s' "$STORE_PW" | tr -d '[:space:]')
             KEY_PW=$(printf '%s' "$KEY_PW" | tr -d '[:space:]')
             KEY_ALIAS=$(printf '%s' "$KEY_ALIAS" | tr -d '[:space:]')
