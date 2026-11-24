@@ -54,7 +54,7 @@ def main() -> int:
                 raw = cached.read_bytes()
         downloaded = raw is None
         if downloaded:
-            raw = fetch(manifest["source"] + v["file"])
+            raw = fetch(v.get("url") or manifest["source"] + v["file"])
         digest = hashlib.sha256(raw).hexdigest()
         if digest != v["sha256"]:
             print(f"ERRO: {v['file']} mudou na fonte (sha256 {digest}).", file=sys.stderr)

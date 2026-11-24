@@ -3,74 +3,182 @@
   "versions": [
     {
       "id": "kja",
-      "file": "pt_kja.json",
+      "file": "damarals_KJA.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/KJA.json",
       "abbrev": "KJA",
       "name": "King James Atualizada",
       "copyright": "King James Atualizada. Direitos reservados à Sociedade Bíblica Ibero-Americana / Abba Press.",
-      "sha256": "04d3d918860d3cf9c8bc3ad305bf460d92481039c14b3d4386e7e3625981da7f",
+      "sha256": "a987351598988bacb9391a371b079416aa5621ad6dc6eb119347205a629c757a",
       "lang": "pt"
     },
     {
       "id": "acf",
-      "file": "pt_acf.json",
+      "file": "damarals_ACF.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/ACF.json",
       "abbrev": "ACF",
       "name": "Almeida Corrigida Fiel",
       "copyright": "Almeida Corrigida Fiel. Direitos reservados à Sociedade Bíblica Trinitariana do Brasil (SBTB).",
-      "sha256": "fc331dd8fddee4fb97facefadfe600caefca6ebc627f413c4b13147384b00f93",
+      "sha256": "9039031808c3ac55b16a75fd923a8bbe07195444f1f7debb30b295e7fdabc174",
       "lang": "pt"
     },
     {
       "id": "arc",
-      "file": "pt_arc.json",
+      "file": "damarals_ARC.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/ARC.json",
       "abbrev": "ARC",
       "name": "Almeida Revista e Corrigida",
       "copyright": "Almeida Revista e Corrigida. Direitos reservados à Sociedade Bíblica do Brasil (SBB).",
-      "sha256": "d4a7a2a66cb5e84abba0f1a6d70d213a194f03f20e7d3909696e240aa79f19f1",
+      "sha256": "cdb6c945904ea702e5825359cd8de0290b0ff0ba62bb47611ed47529454b5a65",
       "lang": "pt"
     },
     {
       "id": "ara",
-      "file": "pt_ara.json",
+      "file": "damarals_ARA.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/ARA.json",
       "abbrev": "ARA",
       "name": "Almeida Revista e Atualizada",
       "copyright": "Almeida Revista e Atualizada. Direitos reservados à Sociedade Bíblica do Brasil (SBB).",
-      "sha256": "de5e691917f02901a98af30045effcbfcc5ed9e4c2c563ae21d5db06ec6ad31f",
+      "sha256": "7d3fd7246ba80c4b3b4be48c787b788fa3ba3f5a8d7c806722f6f493147defcc",
       "lang": "pt"
     },
     {
       "id": "naa",
-      "file": "pt_naa.json",
+      "file": "damarals_NAA.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/NAA.json",
       "abbrev": "NAA",
       "name": "Nova Almeida Atualizada",
       "copyright": "Nova Almeida Atualizada. Direitos reservados à Sociedade Bíblica do Brasil (SBB).",
-      "sha256": "dcad53cad5fb6cc458022e832e57371cd162f7e5e849782dbd14e9eb3bd63274",
+      "sha256": "a4d45edae4608f2b153ce6d2a886d3176c2b884796a911440abaa568b33265f8",
       "lang": "pt"
     },
     {
       "id": "nvi",
-      "file": "pt_nvi.json",
+      "file": "damarals_NVI.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/NVI.json",
       "abbrev": "NVI",
       "name": "Nova Versão Internacional",
       "copyright": "Nova Versão Internacional. Direitos reservados à Biblica, Inc.",
-      "sha256": "c86acfd1975eebd7b4ac1cd59e46914769d7e85a8e840290e88a1707b8b039e1",
+      "sha256": "cdb6561abaf060002334b4b2ab00bbd8a1f448cfc25ee167490bc0cc3e879628",
       "lang": "pt"
     },
     {
       "id": "nvt",
-      "file": "pt_nvt.json",
+      "file": "damarals_NVT.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/NVT.json",
       "abbrev": "NVT",
       "name": "Nova Versão Transformadora",
       "copyright": "Nova Versão Transformadora. Direitos reservados à Editora Mundo Cristão.",
-      "sha256": "2e1291bcc9489495df2bd298386b80bcc02f3c917f7ec80789bb66978fc01d05",
+      "sha256": "2a433f0a549cec22b0dc98fb4bc42de86707fc3bbc0ae4b199fb920f174bf220",
       "lang": "pt"
     },
     {
       "id": "ntlh",
-      "file": "pt_ntlh.json",
+      "file": "damarals_NTLH.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/NTLH.json",
       "abbrev": "NTLH",
       "name": "Nova Tradução na Linguagem de Hoje",
       "copyright": "Nova Tradução na Linguagem de Hoje. Direitos reservados à Sociedade Bíblica do Brasil (SBB).",
-      "sha256": "105978738f77debc198dae0ace166ebbe1e740c04f0babb70edcc1a2e12414e7",
+      "sha256": "189f042fb52e41a5b92e6428defb1aae0a33a14571c0e9c0cf1085096af18b34",
+      "lang": "pt"
+    },
+    {
+      "id": "kjf",
+      "file": "damarals_KJF.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/KJF.json",
+      "abbrev": "KJF",
+      "name": "King James Fiel 1611",
+      "copyright": "King James Fiel 1611. Direitos reservados à BV Books.",
+      "sha256": "6a8cc4fd8c57b5943f9e5839fad69904e40fd078a2c91830ae84e9439e11fb12",
+      "lang": "pt"
+    },
+    {
+      "id": "as21",
+      "file": "damarals_AS21.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/AS21.json",
+      "abbrev": "A21",
+      "name": "Almeida Século 21",
+      "copyright": "Almeida Século 21. Direitos reservados à Edições Vida Nova.",
+      "sha256": "69efe4fce615c8a601deae8aba622fbd98dcf8d785158fc0b35e85ac4aca5c89",
+      "lang": "pt"
+    },
+    {
+      "id": "jfaa",
+      "file": "damarals_JFAA.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/JFAA.json",
+      "abbrev": "JFAA",
+      "name": "Almeida Atualizada",
+      "copyright": "Almeida Atualizada (João Ferreira de Almeida).",
+      "sha256": "e11f710e36f2de281f58034348ae796f06dd7a5c41a3047eb21ea118be05c700",
+      "lang": "pt"
+    },
+    {
+      "id": "nbv",
+      "file": "damarals_NBV.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/NBV.json",
+      "abbrev": "NBV",
+      "name": "Nova Bíblia Viva",
+      "copyright": "Nova Bíblia Viva. Direitos reservados à Editora Mundo Cristão / Biblica.",
+      "sha256": "c345551656f1e761aa80baec5249fec5bdb43acddd4410b1370ef33f0877e579",
+      "lang": "pt"
+    },
+    {
+      "id": "ol",
+      "file": "damarals_OL.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/OL.json",
+      "abbrev": "OL",
+      "name": "O Livro",
+      "copyright": "O Livro. Direitos reservados à Biblica, Inc.",
+      "sha256": "013289b3760aae4801cee16857e9856148af791cacac329737d6fc684137e685",
+      "lang": "pt"
+    },
+    {
+      "id": "mens",
+      "file": "damarals_MENS.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/MENS.json",
+      "abbrev": "MSG",
+      "name": "A Mensagem",
+      "copyright": "A Mensagem (Eugene H. Peterson). Direitos reservados à Editora Vida.",
+      "sha256": "4a7cb3bf01cef1fc161f61e2ca5a6d10131d40e26d9a72c2fb821fd549e076ce",
+      "lang": "pt"
+    },
+    {
+      "id": "vfl",
+      "file": "damarals_VFL.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/VFL.json",
+      "abbrev": "VFL",
+      "name": "Versão Fácil de Ler",
+      "copyright": "Bíblia Sagrada: Versão Fácil de Ler. Direitos reservados à Bible League International.",
+      "sha256": "86b5432966ccd88e68a17028a275fe9c9dc1d9f506a99e2e551da6011ae705a0",
+      "lang": "pt"
+    },
+    {
+      "id": "tb",
+      "file": "damarals_TB.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/TB.json",
+      "abbrev": "TB",
+      "name": "Tradução Brasileira",
+      "copyright": "Tradução Brasileira (1917) — domínio público.",
+      "sha256": "1237033c12a43a0faeb8140049e74be3f0f47da5b6679103191a46e301885da9",
+      "lang": "pt"
+    },
+    {
+      "id": "blivre",
+      "file": "damarals_BLIVRE.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/BLIVRE.json",
+      "abbrev": "BLIVRE",
+      "name": "Bíblia Livre",
+      "copyright": "Bíblia Livre — texto livre para uso e distribuição.",
+      "sha256": "da55b0ce319524c97f105e1382d54c3bdda762ea4b9bc549b7c54ba23511cbab",
+      "lang": "pt"
+    },
+    {
+      "id": "alm1911",
+      "file": "damarals_ALM1911.json",
+      "url": "https://github.com/damarals/biblias/releases/latest/download/ALM1911.json",
+      "abbrev": "ALM1911",
+      "name": "Almeida 1911",
+      "copyright": "Almeida 1911 — domínio público.",
+      "sha256": "a47705dc5637daaa2e65160c9fe9aadb70edbdda855179045dbaf288f6aff795",
       "lang": "pt"
     },
     {
@@ -109,5 +217,6 @@
       "sha256": "8aecd7e0bb440f494a5013d4ae8f8772629594fa5a3b5fd4f01077353365ed19",
       "lang": "es"
     }
-  ]
+  ],
+  "note": "Versões em português (exceto Ave-Maria) vêm de damarals/biblias; Ave-Maria, KJV, NIV e RVR1960 de thiagobodruk/bible."
 }
