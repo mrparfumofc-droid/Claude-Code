@@ -24,6 +24,7 @@ import urllib.request
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "tool" / "enrichment"
 SRC = "https://raw.githubusercontent.com/LetsChurch/bsb-enriched/main/"
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-flash-lite-latest")
 
 USX_CODES = (
     "GEN EXO LEV NUM DEU JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH EZR NEH EST JOB PSA PRO "
@@ -108,9 +109,9 @@ def translate(titles: list[str], key: str) -> list[dict]:
         "contents": [{"role": "user", "parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json", "maxOutputTokens": 65536},
     }).encode()
-    for i in range(5):
+    for i in range(12):
         req = urllib.request.Request(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+            f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent",
             data=body,
             headers={"Content-Type": "application/json", "x-goog-api-key": key},
         )
@@ -125,6 +126,13 @@ def translate(titles: list[str], key: str) -> list[dict]:
             if len(out) == len(titles) and all("pt" in o and "es" in o for o in out):
                 return out
             print(f"  tradução com {len(out)} itens (esperado {len(titles)}), repetindo", file=sys.stderr)
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                # Limite de uso da chave: espera mais antes de tentar de novo.
+                print("  limite de uso (429), esperando 65s", file=sys.stderr)
+                time.sleep(65)
+                continue
+            print(f"  erro na tradução ({e}), repetindo", file=sys.stderr)
         except Exception as e:  # noqa: BLE001 - qualquer falha: tenta de novo
             print(f"  erro na tradução ({e}), repetindo", file=sys.stderr)
         time.sleep(5 * (i + 1))
