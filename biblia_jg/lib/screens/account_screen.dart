@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../services/account_service.dart';
+import '../services/dictionary_service.dart';
 import '../services/sync.dart';
 import '../state/app_state.dart';
 
@@ -38,11 +39,12 @@ class _AccountScreenState extends State<AccountScreen> {
   Future<void> _signIn() async {
     final account = context.read<AccountService>();
     final app = context.read<AppState>();
+    final dict = context.read<DictionaryService>();
     await _run(() async {
       await account.signIn();
       final cloud = await account.pull();
       if (cloud == null) {
-        await account.push(await localSnapshot(app));
+        await account.push(await localSnapshot(app, dict));
         return;
       }
       if (!mounted) return;
@@ -67,10 +69,10 @@ class _AccountScreenState extends State<AccountScreen> {
         ),
       );
       if (useCloud == true) {
-        await applySnapshot(app, cloud.data);
+        await applySnapshot(app, cloud.data, dict);
         await account.markSynced(cloud.updatedAt);
       } else {
-        await account.push(await localSnapshot(app));
+        await account.push(await localSnapshot(app, dict));
       }
     }, done: 'Conta conectada e dados sincronizados');
   }
@@ -78,6 +80,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Future<void> _bringFromCloud() async {
     final account = context.read<AccountService>();
     final app = context.read<AppState>();
+    final dict = context.read<DictionaryService>();
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -94,7 +97,7 @@ class _AccountScreenState extends State<AccountScreen> {
     await _run(() async {
       final cloud = await account.pull();
       if (cloud == null) throw 'Ainda não há nada salvo na nuvem.';
-      await applySnapshot(app, cloud.data);
+      await applySnapshot(app, cloud.data, dict);
       await account.markSynced(cloud.updatedAt);
     }, done: 'Dados da nuvem aplicados');
   }
@@ -103,6 +106,7 @@ class _AccountScreenState extends State<AccountScreen> {
   Widget build(BuildContext context) {
     final account = context.watch<AccountService>();
     final app = context.read<AppState>();
+    final dict = context.read<DictionaryService>();
     final theme = Theme.of(context);
     final busy = _working || account.busy;
     return Scaffold(
@@ -156,7 +160,7 @@ class _AccountScreenState extends State<AccountScreen> {
                   title: const Text('Sincronizar agora'),
                   subtitle: const Text('Salva na nuvem o que está neste tablet'),
                   enabled: !busy,
-                  onTap: () => _run(() async => account.push(await localSnapshot(app)),
+                  onTap: () => _run(() async => account.push(await localSnapshot(app, dict)),
                       done: 'Salvo na nuvem'),
                 ),
               ),

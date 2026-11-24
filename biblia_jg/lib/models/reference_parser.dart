@@ -75,6 +75,22 @@ final _inTextPattern = RegExp(
   r'(?<![A-Za-zÀ-ÿ])((?:[1-3]\s?)?[A-ZÀ-Ý][a-zà-ÿ]+(?:\s(?:dos|de)\s[A-ZÀ-Ý][a-zà-ÿ]+)?)\.?\s(\d{1,3})[:.](\d{1,3})(?:\s?[-–]\s?(\d{1,3}))?',
 );
 
+/// Referências bíblicas com a posição no texto (início, fim, trecho), para virar link.
+List<(int, int, Passage)> locateReferences(String text) {
+  final out = <(int, int, Passage)>[];
+  for (final m in _inTextPattern.allMatches(text)) {
+    final book = bookFromName(m.group(1)!);
+    if (book == null) continue;
+    out.add((
+      m.start,
+      m.end,
+      Passage(book, int.parse(m.group(2)!), int.parse(m.group(3)!),
+          m.group(4) == null ? null : int.parse(m.group(4)!)),
+    ));
+  }
+  return out;
+}
+
 /// Encontra referências bíblicas dentro de um texto (ex.: resposta da IA).
 List<Passage> findReferences(String text) {
   final out = <Passage>[];

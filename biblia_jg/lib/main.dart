@@ -7,6 +7,8 @@ import 'data/user_db.dart';
 import 'screens/home_shell.dart';
 import 'services/account_service.dart';
 import 'services/books_service.dart';
+import 'services/dictionary_service.dart';
+import 'services/hymn_service.dart';
 import 'services/music_player.dart';
 import 'services/notifications.dart';
 import 'services/tts.dart';
@@ -38,6 +40,8 @@ class BibliaJgApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MusicPlayer()),
         ChangeNotifierProvider(create: (_) => AccountService()..load()),
         ChangeNotifierProvider(create: (ctx) => BooksService(ctx.read<AccountService>())),
+        ChangeNotifierProvider(create: (_) => DictionaryService()),
+        ChangeNotifierProvider(create: (ctx) => HymnService(ctx.read<AccountService>())),
       ],
       child: MaterialApp(
         title: 'Bíblia - JG Company',

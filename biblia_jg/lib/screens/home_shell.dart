@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../models/daily.dart';
 import '../services/account_service.dart';
+import '../services/dictionary_service.dart';
+import 'dictionary_screen.dart';
+import 'hymnal_screen.dart';
 import '../services/sync.dart';
 import 'account_screen.dart';
 import 'library_screen.dart';
@@ -55,7 +58,9 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
       if (mounted) checkForUpdates(context);
     });
     Future.delayed(const Duration(seconds: 5), () {
-      if (mounted) autoSync(context.read<AppState>(), context.read<AccountService>());
+      if (mounted) {
+        autoSync(context.read<AppState>(), context.read<AccountService>(), context.read<DictionaryService>());
+      }
     });
   }
 
@@ -69,7 +74,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // Ao sair do app, salva na nuvem o que mudou.
     if (state == AppLifecycleState.paused && mounted) {
-      pushOnly(context.read<AppState>(), context.read<AccountService>());
+      pushOnly(context.read<AppState>(), context.read<AccountService>(), context.read<DictionaryService>());
     }
   }
 
@@ -359,13 +364,13 @@ class _MainDrawer extends StatelessWidget {
         item(Icons.music_note, 'Músicas de fundo', const MusicScreen()),
         item(Icons.menu_book_outlined, 'Livros (PDF)', const LibraryScreen()),
         item(Icons.school, 'EBD', const LibraryScreen(initialTab: 1)),
+        item(Icons.abc, 'Dicionário bíblico', const DictionaryScreen()),
+        item(Icons.library_music, 'Hinário', const HymnalScreen()),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
           child: Text('Próximas etapas', style: theme.textTheme.labelLarge),
         ),
-        soon(Icons.library_music, 'Hinário'),
         soon(Icons.public, 'Mapas'),
-        soon(Icons.abc, 'Dicionário'),
         const Divider(),
         item(Icons.backup, 'Backup', const BackupScreen()),
         item(Icons.settings, 'Configurações', const SettingsScreen()),
