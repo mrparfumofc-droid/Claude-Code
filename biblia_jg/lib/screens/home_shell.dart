@@ -36,6 +36,7 @@ import 'reader_view.dart';
 import 'reading_plans_screen.dart';
 import 'search_screen.dart';
 import 'settings_screen.dart';
+import 'stories_screen.dart';
 import 'today_screen.dart';
 import 'versions_screen.dart';
 import 'voice_screen.dart';
@@ -647,8 +648,8 @@ class StudyHub extends StatelessWidget {
           _HubItem(Icons.wb_sunny_outlined, const Color(0xFFEF6C00), 'Devocional diário', 'Uma reflexão para hoje',
               (c) => openDevotional(c, c.read<AppState>())),
           _HubItem(Icons.abc, const Color(0xFF455A64), 'Dicionário bíblico', 'Pessoas, lugares e termos', (c) => _go(c, const DictionaryScreen())),
-          _HubItem(Icons.public, const Color(0xFF00838F), 'Mapas bíblicos', 'Histórias animadas no satélite', (c) => _go(c, const MapsScreen())),
-          _HubItem(Icons.auto_stories, const Color(0xFF8D6E63), 'Histórias bíblicas', '56 histórias contadas', (c) => _go(c, const StoriesScreen())),
+          _HubItem(Icons.public, const Color(0xFF00838F), 'Mapas bíblicos', 'Atlas, viagens de Paulo e lugares no satélite', (c) => _go(c, const MapsScreen())),
+          _HubItem(Icons.auto_stories, const Color(0xFF8D6E63), 'Histórias bíblicas', 'Ilustradas e narradas, com mapa', (c) => _go(c, const StoriesScreen())),
           _HubItem(Icons.quiz_outlined, const Color(0xFFC62828), 'Perguntas bíblicas', 'Teste o que você sabe', (c) => _go(c, const QuizScreen())),
         ],
       );

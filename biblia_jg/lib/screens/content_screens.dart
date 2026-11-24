@@ -107,8 +107,9 @@ const _newTestamentStories = [
   _Story('O naufrágio de Paulo', 'Atos 27'),
 ];
 
-class StoriesScreen extends StatelessWidget {
-  const StoriesScreen({super.key});
+/// Lista antiga: histórias contadas na hora pela IA (as ilustradas ficam em stories_screen.dart).
+class AiStoriesScreen extends StatelessWidget {
+  const AiStoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +141,7 @@ class StoriesScreen extends StatelessWidget {
           ],
         );
     return Scaffold(
-      appBar: AppBar(title: const Text('Histórias bíblicas')),
+      appBar: AppBar(title: const Text('Histórias contadas pela IA')),
       body: ListView(children: [
         section('Antigo Testamento', _oldTestamentStories, 0),
         section('Novo Testamento', _newTestamentStories, 100),

@@ -61,6 +61,14 @@ class StoryRegion {
   }
 }
 
+/// Rota fixa desenhada no mapa (ex.: cada viagem de Paulo numa cor).
+class StoryLine {
+  final String name;
+  final Color color;
+  final List<LatLng> points;
+  const StoryLine(this.name, this.color, this.points);
+}
+
 class MapStory {
   final String id;
   final String title;
@@ -69,7 +77,9 @@ class MapStory {
   final bool route;
   final List<StoryStep> steps;
   final List<StoryRegion> regions;
-  const MapStory(this.id, this.title, this.subtitle, this.color, this.route, this.steps, this.regions);
+  final List<StoryLine> lines;
+  const MapStory(this.id, this.title, this.subtitle, this.color, this.route, this.steps, this.regions,
+      [this.lines = const []]);
 }
 
 const _osisBooks = [
@@ -158,6 +168,14 @@ class PlacesData {
                 r['rotulo'] == null
                     ? null
                     : LatLng((r['rotulo'][0] as num).toDouble(), (r['rotulo'][1] as num).toDouble()),
+              ),
+          ],
+          [
+            for (final l in (s['linhas'] as List? ?? const []))
+              StoryLine(
+                l['nome'] as String,
+                Color(int.parse(l['cor'] as String, radix: 16)),
+                [for (final pt in l['pontos'] as List) LatLng((pt[0] as num).toDouble(), (pt[1] as num).toDouble())],
               ),
           ],
         ));

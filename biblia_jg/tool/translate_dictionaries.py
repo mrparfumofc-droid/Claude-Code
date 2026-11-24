@@ -20,8 +20,8 @@ import urllib.request
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FN = "https://ayjsoixzroxkrnkpkkip.supabase.co/functions/v1/translate-dict"
 DICTS = [  # (código, arquivo, nome)
-    ("easton", "Easton's Bible Dictionary.jsonl", "Dicionário Bíblico Easton"),
     ("hitchcock", "Hitchcock's Bible Names Dictionary.jsonl", "Nomes Bíblicos (Hitchcock)"),
+    ("easton", "Easton's Bible Dictionary.jsonl", "Dicionário Bíblico Easton"),
     ("torrey", "TorreysTopicalTextbook.jsonl", "Índice Temático de Torrey"),
     ("smith", "Smith's Bible Dictionary.jsonl", "Dicionário Bíblico Smith"),
 ]

@@ -13,6 +13,6 @@ Future<void> main() async {
     debugShowCheckedModeBanner: false,
     home: Uri.base.queryParameters['explore'] != null
         ? PlacesMapScreen(data: data)
-        : StoryPlayerScreen(story: story),
+        : AtlasMapScreen(story: story),
   ));
 }

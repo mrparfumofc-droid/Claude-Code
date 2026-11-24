@@ -1,129 +1,2136 @@
 [
-  {
-    "id": "abraao",
-    "titulo": "A jornada de Abraão",
-    "subtitulo": "De Ur dos Caldeus à Terra Prometida",
-    "cor": "FFC9A227",
-    "rota": true,
-    "passos": [
-      {"pt": "Ur dos Caldeus", "c": [30.962, 46.103], "z": 6.2, "t": "O chamado começa em Ur", "d": "Terá sai de Ur com Abrão, Sarai e Ló rumo a Canaã.", "r": "Gn 11:31"},
-      {"pt": "Harã", "c": [36.865, 39.031], "z": 6.2, "t": "A parada em Harã", "d": "Terá morre em Harã. Ali Deus chama Abrão: \"Sai-te da tua terra\".", "r": "Gn 12:1"},
-      {"pt": "Siquém", "c": [32.213, 35.282], "z": 7.5, "t": "Chegada a Canaã", "d": "Em Siquém, junto ao carvalho de Moré, Deus promete a terra à sua descendência.", "r": "Gn 12:7"},
-      {"pt": "Betel", "c": [31.923, 35.241], "z": 8.5, "t": "Um altar entre Betel e Ai", "d": "Abrão edifica um altar e invoca o nome do Senhor.", "r": "Gn 12:8"},
-      {"pt": "Egito", "c": [29.85, 31.25], "z": 6.0, "t": "A fome leva ao Egito", "d": "Na fome, Abrão desce ao Egito e depois volta ao Neguebe.", "r": "Gn 12:10"},
-      {"pt": "Hebrom", "c": [31.532, 35.098], "z": 8.5, "t": "Os carvalhais de Manre", "d": "Abrão habita em Hebrom; ali recebe a visita dos três homens.", "r": "Gn 13:18"},
-      {"pt": "Monte Moriá", "c": [31.778, 35.235], "z": 9.0, "t": "A prova no monte Moriá", "d": "Abraão leva Isaque ao monte; Deus provê o cordeiro.", "r": "Gn 22:2"}
+ {
+  "id": "paulo-todas",
+  "titulo": "As viagens de Paulo",
+  "subtitulo": "As quatro rotas num só mapa",
+  "cor": "FFFFD54F",
+  "rota": false,
+  "linhas": [
+   {
+    "nome": "1ª viagem",
+    "cor": "FF4FC3F7",
+    "pontos": [
+     [
+      36.202,
+      36.16
+     ],
+     [
+      36.124,
+      35.922
+     ],
+     [
+      35.185,
+      33.902
+     ],
+     [
+      34.757,
+      32.407
+     ],
+     [
+      36.961,
+      30.854
+     ],
+     [
+      38.306,
+      31.189
+     ],
+     [
+      37.872,
+      32.492
+     ],
+     [
+      37.578,
+      32.453
+     ],
+     [
+      37.349,
+      33.362
+     ],
+     [
+      37.578,
+      32.453
+     ],
+     [
+      37.872,
+      32.492
+     ],
+     [
+      38.306,
+      31.189
+     ],
+     [
+      36.961,
+      30.854
+     ],
+     [
+      36.885,
+      30.703
+     ],
+     [
+      35.9,
+      33.0
+     ],
+     [
+      36.124,
+      35.922
+     ],
+     [
+      36.202,
+      36.16
+     ]
     ]
-  },
-  {
-    "id": "exodo",
-    "titulo": "O Êxodo",
-    "subtitulo": "Do Egito à Terra Prometida",
-    "cor": "FFE57373",
-    "rota": true,
-    "passos": [
-      {"pt": "Ramessés", "c": [30.80, 31.83], "z": 7.0, "t": "A saída do Egito", "d": "Na noite da Páscoa, Israel parte de Ramessés.", "r": "Êx 12:37"},
-      {"pt": "Sucote", "c": [30.55, 32.10], "z": 7.5, "t": "Primeira parada: Sucote", "d": "Deus guia o povo com a coluna de nuvem e de fogo.", "r": "Êx 13:20"},
-      {"pt": "Mar Vermelho", "c": [30.20, 32.55], "z": 7.0, "t": "A travessia do mar", "d": "O mar se abre; Israel passa a pé enxuto.", "r": "Êx 14:21"},
-      {"pt": "Mara", "c": [29.65, 32.90], "z": 7.5, "t": "As águas amargas de Mara", "d": "Moisés lança um lenho nas águas e elas se tornam doces.", "r": "Êx 15:23"},
-      {"pt": "Monte Sinai", "c": [28.539, 33.975], "z": 8.0, "t": "A Lei no monte Sinai", "d": "Deus dá os Dez Mandamentos e faz aliança com o povo.", "r": "Êx 19:20"},
-      {"pt": "Cades-Barneia", "c": [30.65, 34.42], "z": 7.5, "t": "Cades-Barneia", "d": "Os doze espias voltam; o povo murmura e fica 40 anos no deserto.", "r": "Nm 13:26"},
-      {"pt": "Monte Nebo", "c": [31.768, 35.726], "z": 8.5, "t": "Moisés vê a terra", "d": "Do monte Nebo, Moisés contempla Canaã e ali morre.", "r": "Dt 34:1"},
-      {"pt": "Jericó", "c": [31.871, 35.444], "z": 9.0, "t": "A entrada com Josué", "d": "Israel atravessa o Jordão e os muros de Jericó caem.", "r": "Js 6:20"}
-    ]
-  },
-  {
-    "id": "jesus",
-    "titulo": "A vida de Jesus",
-    "subtitulo": "De Belém a Jerusalém",
-    "cor": "FFFFD54F",
-    "rota": true,
-    "passos": [
-      {"pt": "Belém", "c": [31.705, 35.202], "z": 9.0, "t": "O nascimento em Belém", "d": "Jesus nasce na cidade de Davi, como disseram os profetas.", "r": "Lc 2:4"},
-      {"pt": "Egito", "c": [30.05, 31.24], "z": 6.0, "t": "A fuga para o Egito", "d": "José leva Maria e o menino para escapar de Herodes.", "r": "Mt 2:14"},
-      {"pt": "Nazaré", "c": [32.702, 35.297], "z": 9.0, "t": "Criado em Nazaré", "d": "Jesus cresce em sabedoria e estatura na Galileia.", "r": "Lc 2:51"},
-      {"pt": "Rio Jordão", "c": [31.838, 35.551], "z": 9.0, "t": "O batismo no Jordão", "d": "João batiza Jesus; o Espírito desce como pomba.", "r": "Mt 3:16"},
-      {"pt": "Caná", "c": [32.747, 35.339], "z": 9.5, "t": "O primeiro sinal em Caná", "d": "Nas bodas, a água se torna vinho.", "r": "Jo 2:11"},
-      {"pt": "Cafarnaum", "c": [32.881, 35.575], "z": 9.5, "t": "Cafarnaum, a base na Galileia", "d": "Jesus ensina na sinagoga e cura muitos enfermos.", "r": "Mc 1:21"},
-      {"pt": "Mar da Galileia", "c": [32.83, 35.59], "z": 9.0, "t": "O mar da Galileia", "d": "Jesus acalma a tempestade e anda sobre as águas.", "r": "Mt 14:25"},
-      {"pt": "Betânia", "c": [31.771, 35.261], "z": 10.0, "t": "Lázaro ressuscitado", "d": "Em Betânia, Jesus chama Lázaro para fora do túmulo.", "r": "Jo 11:43"},
-      {"pt": "Jerusalém", "c": [31.778, 35.235], "z": 10.5, "t": "Cruz e ressurreição", "d": "Jesus é crucificado no Gólgota e ressuscita ao terceiro dia.", "r": "Lc 24:6"}
-    ]
-  },
-  {
-    "id": "paulo1",
-    "titulo": "1ª viagem de Paulo",
-    "subtitulo": "Chipre e a Galácia (c. 46–48 d.C.)",
-    "cor": "FF64B5F6",
-    "rota": true,
-    "passos": [
-      {"pt": "Antioquia da Síria", "c": [36.202, 36.160], "z": 6.5, "t": "Enviados por Antioquia", "d": "O Espírito separa Barnabé e Saulo para a obra.", "r": "At 13:2"},
-      {"pt": "Salamina", "c": [35.18, 33.90], "z": 7.0, "t": "Chipre: Salamina", "d": "Anunciam a Palavra nas sinagogas dos judeus.", "r": "At 13:5"},
-      {"pt": "Pafos", "c": [34.757, 32.406], "z": 7.5, "t": "Pafos", "d": "O procônsul Sérgio Paulo crê; Saulo passa a ser chamado Paulo.", "r": "At 13:12"},
-      {"pt": "Perge", "c": [36.961, 30.854], "z": 7.0, "t": "Perge da Panfília", "d": "João Marcos volta para Jerusalém.", "r": "At 13:13"},
-      {"pt": "Antioquia da Pisídia", "c": [38.306, 31.189], "z": 7.0, "t": "Antioquia da Pisídia", "d": "Paulo prega na sinagoga; os gentios se alegram.", "r": "At 13:48"},
-      {"pt": "Icônio", "c": [37.871, 32.485], "z": 7.5, "t": "Icônio", "d": "Grande multidão crê; há divisão na cidade.", "r": "At 14:1"},
-      {"pt": "Listra", "c": [37.578, 32.454], "z": 8.0, "t": "Listra", "d": "Um coxo é curado; depois Paulo é apedrejado.", "r": "At 14:19"},
-      {"pt": "Derbe", "c": [37.35, 33.37], "z": 8.0, "t": "Derbe", "d": "Fazem muitos discípulos e voltam fortalecendo as igrejas.", "r": "At 14:21"},
-      {"pt": "Antioquia da Síria", "c": [36.202, 36.160], "z": 6.0, "t": "De volta a Antioquia", "d": "Contam tudo o que Deus fez e como abriu a porta da fé aos gentios.", "r": "At 14:27"}
-    ]
-  },
-  {
-    "id": "paulo2",
-    "titulo": "2ª viagem de Paulo",
-    "subtitulo": "O evangelho chega à Europa (c. 49–52 d.C.)",
-    "cor": "FF81C784",
-    "rota": true,
-    "passos": [
-      {"pt": "Antioquia da Síria", "c": [36.202, 36.160], "z": 5.5, "t": "Paulo e Silas partem", "d": "Visitam as igrejas da Síria e da Cilícia.", "r": "At 15:40"},
-      {"pt": "Listra", "c": [37.578, 32.454], "z": 6.5, "t": "Timóteo se une a eles", "d": "Em Listra, Paulo encontra o jovem Timóteo.", "r": "At 16:1"},
-      {"pt": "Trôade", "c": [39.757, 26.159], "z": 6.5, "t": "A visão em Trôade", "d": "Um varão macedônio: \"Passa à Macedônia e ajuda-nos\".", "r": "At 16:9"},
-      {"pt": "Filipos", "c": [41.012, 24.286], "z": 7.0, "t": "Filipos", "d": "Lídia crê; Paulo e Silas cantam na prisão e o carcereiro se converte.", "r": "At 16:31"},
-      {"pt": "Tessalônica", "c": [40.640, 22.944], "z": 7.0, "t": "Tessalônica", "d": "Por três sábados Paulo discute as Escrituras.", "r": "At 17:2"},
-      {"pt": "Bereia", "c": [40.523, 22.203], "z": 7.5, "t": "Bereia", "d": "Os bereanos examinam cada dia as Escrituras.", "r": "At 17:11"},
-      {"pt": "Atenas", "c": [37.972, 23.726], "z": 7.0, "t": "Atenas e o Areópago", "d": "Paulo anuncia o \"Deus desconhecido\".", "r": "At 17:23"},
-      {"pt": "Corinto", "c": [37.906, 22.879], "z": 7.5, "t": "Corinto", "d": "Um ano e meio ensinando a Palavra.", "r": "At 18:11"},
-      {"pt": "Éfeso", "c": [37.941, 27.342], "z": 6.5, "t": "Breve parada em Éfeso", "d": "Paulo promete voltar, se Deus quiser.", "r": "At 18:21"},
-      {"pt": "Jerusalém", "c": [31.778, 35.235], "z": 6.0, "t": "Volta por Cesareia e Jerusalém", "d": "Saúda a igreja e desce a Antioquia.", "r": "At 18:22"}
-    ]
-  },
-  {
-    "id": "roma",
-    "titulo": "A viagem de Paulo a Roma",
-    "subtitulo": "Prisioneiro, tempestade e naufrágio",
+   },
+   {
+    "nome": "2ª viagem",
     "cor": "FFBA68C8",
-    "rota": true,
-    "passos": [
-      {"pt": "Cesareia", "c": [32.500, 34.892], "z": 7.0, "t": "Partida de Cesareia", "d": "Paulo apela para César e embarca preso.", "r": "At 27:1"},
-      {"pt": "Sidom", "c": [33.563, 35.371], "z": 7.0, "t": "Sidom", "d": "Júlio permite que Paulo visite os amigos.", "r": "At 27:3"},
-      {"pt": "Mirra", "c": [36.259, 29.985], "z": 6.5, "t": "Mirra da Lícia", "d": "Trocam para um navio de Alexandria rumo à Itália.", "r": "At 27:6"},
-      {"pt": "Bons Portos", "c": [34.93, 24.80], "z": 6.5, "t": "Bons Portos, Creta", "d": "Paulo adverte do perigo, mas não o ouvem.", "r": "At 27:10"},
-      {"pt": "Malta", "c": [35.95, 14.40], "z": 7.0, "t": "O naufrágio em Malta", "d": "Depois de 14 dias de tempestade, todos se salvam em terra.", "r": "At 27:44"},
-      {"pt": "Siracusa", "c": [37.075, 15.287], "z": 7.0, "t": "Siracusa", "d": "Três dias na Sicília.", "r": "At 28:12"},
-      {"pt": "Putéoli", "c": [40.823, 14.122], "z": 7.0, "t": "Putéoli", "d": "Irmãos recebem Paulo por sete dias.", "r": "At 28:14"},
-      {"pt": "Roma", "c": [41.893, 12.483], "z": 7.5, "t": "Roma", "d": "Dois anos em casa alugada, pregando o Reino de Deus sem impedimento.", "r": "At 28:31"}
+    "pontos": [
+     [
+      36.202,
+      36.16
+     ],
+     [
+      36.917,
+      34.892
+     ],
+     [
+      37.349,
+      33.362
+     ],
+     [
+      37.578,
+      32.453
+     ],
+     [
+      37.872,
+      32.492
+     ],
+     [
+      38.75,
+      30.55
+     ],
+     [
+      39.55,
+      28.2
+     ],
+     [
+      39.752,
+      26.158
+     ],
+     [
+      40.45,
+      25.58
+     ],
+     [
+      40.939,
+      24.412
+     ],
+     [
+      41.013,
+      24.286
+     ],
+     [
+      40.82,
+      23.85
+     ],
+     [
+      40.64,
+      22.944
+     ],
+     [
+      40.524,
+      22.203
+     ],
+     [
+      40.27,
+      22.62
+     ],
+     [
+      39.2,
+      23.55
+     ],
+     [
+      38.05,
+      24.25
+     ],
+     [
+      37.972,
+      23.726
+     ],
+     [
+      37.906,
+      22.879
+     ],
+     [
+      37.885,
+      22.993
+     ],
+     [
+      37.55,
+      25.4
+     ],
+     [
+      37.939,
+      27.341
+     ],
+     [
+      36.44,
+      28.22
+     ],
+     [
+      34.55,
+      32.0
+     ],
+     [
+      32.5,
+      34.892
+     ],
+     [
+      31.778,
+      35.235
+     ],
+     [
+      36.202,
+      36.16
+     ]
     ]
-  },
-  {
-    "id": "imperios",
-    "titulo": "Reinos e impérios",
-    "subtitulo": "Canaã entre as potências do mundo antigo",
+   },
+   {
+    "nome": "3ª viagem",
+    "cor": "FF81C784",
+    "pontos": [
+     [
+      36.202,
+      36.16
+     ],
+     [
+      36.917,
+      34.892
+     ],
+     [
+      37.872,
+      32.492
+     ],
+     [
+      38.306,
+      31.189
+     ],
+     [
+      37.836,
+      29.108
+     ],
+     [
+      37.939,
+      27.341
+     ],
+     [
+      38.9,
+      26.9
+     ],
+     [
+      39.752,
+      26.158
+     ],
+     [
+      40.939,
+      24.412
+     ],
+     [
+      41.013,
+      24.286
+     ],
+     [
+      40.64,
+      22.944
+     ],
+     [
+      40.524,
+      22.203
+     ],
+     [
+      39.36,
+      22.4
+     ],
+     [
+      38.25,
+      22.6
+     ],
+     [
+      37.906,
+      22.879
+     ],
+     [
+      38.25,
+      22.6
+     ],
+     [
+      39.36,
+      22.4
+     ],
+     [
+      40.524,
+      22.203
+     ],
+     [
+      40.64,
+      22.944
+     ],
+     [
+      41.013,
+      24.286
+     ],
+     [
+      40.939,
+      24.412
+     ],
+     [
+      39.752,
+      26.158
+     ],
+     [
+      39.49,
+      26.337
+     ],
+     [
+      39.105,
+      26.555
+     ],
+     [
+      37.75,
+      26.98
+     ],
+     [
+      37.53,
+      27.278
+     ],
+     [
+      36.89,
+      27.29
+     ],
+     [
+      36.44,
+      28.22
+     ],
+     [
+      36.26,
+      29.314
+     ],
+     [
+      34.3,
+      32.4
+     ],
+     [
+      33.27,
+      35.196
+     ],
+     [
+      32.927,
+      35.082
+     ],
+     [
+      32.5,
+      34.892
+     ],
+     [
+      31.778,
+      35.235
+     ]
+    ]
+   },
+   {
+    "nome": "Viagem a Roma",
     "cor": "FFFF8A65",
-    "rota": false,
-    "regioes": [
-      {"nome": "EGITO", "cor": "FFFFB74D", "pontos": [[31.3, 29.5], [31.5, 32.3], [30.0, 32.6], [27.0, 33.8], [24.0, 32.9], [24.0, 31.6], [27.5, 30.6], [30.3, 29.9]]},
-      {"nome": "ASSÍRIA", "cor": "FFCE93D8", "pontos": [[37.3, 41.5], [37.6, 43.8], [36.8, 45.3], [35.0, 45.2], [34.6, 43.5], [35.6, 41.8]]},
-      {"nome": "BABILÔNIA", "cor": "FF90CAF9", "pontos": [[34.3, 43.0], [33.8, 45.5], [31.5, 47.8], [30.0, 47.9], [31.0, 45.6], [32.8, 43.6]]},
-      {"nome": "PÉRSIA", "cor": "FFA5D6A7", "pontos": [[34.5, 47.0], [35.0, 51.0], [32.0, 53.5], [29.0, 52.8], [30.2, 49.0], [32.6, 47.6]]}
-    ],
-    "passos": [
-      {"pt": "Canaã", "c": [31.8, 35.0], "z": 4.2, "t": "Canaã, a ponte entre os continentes", "d": "Entre o Egito (África) e a Mesopotâmia (Ásia), a terra prometida fica no caminho de todos os impérios.", "r": "Dt 11:24"},
-      {"pt": "Samaria", "c": [32.276, 35.197], "z": 7.5, "t": "O reino dividido", "d": "Após Salomão, dez tribos formam Israel (Samaria); Judá fica com Jerusalém.", "r": "1Rs 12:19"},
-      {"pt": "Jerusalém", "c": [31.778, 35.235], "z": 7.0, "t": "Sisaque invade Judá", "d": "No 5º ano de Roboão, o faraó Sisaque sobe contra Jerusalém.", "r": "1Rs 14:25"},
-      {"pt": "Nínive", "c": [36.359, 43.153], "z": 5.5, "t": "A Assíria toma Samaria", "d": "Em 722 a.C. o reino do norte cai e o povo é levado cativo.", "r": "2Rs 17:6"},
-      {"pt": "Babilônia", "c": [32.542, 44.421], "z": 5.5, "t": "Babilônia destrói Jerusalém", "d": "Em 586 a.C. Nabucodonosor queima o templo e leva Judá ao exílio.", "r": "2Rs 25:9"},
-      {"pt": "Susã", "c": [32.19, 48.26], "z": 5.5, "t": "A Pérsia e a volta do exílio", "d": "Ciro permite que os judeus voltem e reconstruam o templo.", "r": "Ed 1:3"},
-      {"pt": "Jerusalém", "c": [31.778, 35.235], "z": 6.5, "t": "O templo reconstruído", "d": "O povo volta e a casa de Deus é reedificada.", "r": "Ed 6:15"}
+    "pontos": [
+     [
+      32.5,
+      34.892
+     ],
+     [
+      33.56,
+      35.371
+     ],
+     [
+      35.85,
+      34.6
+     ],
+     [
+      36.05,
+      32.4
+     ],
+     [
+      36.259,
+      29.985
+     ],
+     [
+      36.686,
+      27.374
+     ],
+     [
+      35.3,
+      26.32
+     ],
+     [
+      34.928,
+      24.8
+     ],
+     [
+      34.84,
+      24.08
+     ],
+     [
+      35.1,
+      20.0
+     ],
+     [
+      35.95,
+      14.4
+     ],
+     [
+      37.075,
+      15.287
+     ],
+     [
+      38.111,
+      15.647
+     ],
+     [
+      40.823,
+      14.122
+     ],
+     [
+      41.892,
+      12.485
+     ]
     ]
-  }
+   }
+  ],
+  "passos": [
+   {
+    "pt": "Antioquia da Síria",
+    "c": [
+     36.202,
+     36.16
+    ],
+    "z": 5.0,
+    "t": "O ponto de partida",
+    "d": "As três viagens missionárias saíram da igreja de Antioquia. Em cerca de dez anos, Paulo percorreu perto de quinze mil quilômetros a pé e de navio.",
+    "r": "At 13:1-3"
+   },
+   {
+    "pt": "Chipre e Galácia",
+    "c": [
+     37.0,
+     32.6
+    ],
+    "z": 6.3,
+    "t": "1ª viagem (azul)",
+    "d": "Com Barnabé: Chipre, Perge, Antioquia da Pisídia, Icônio, Listra e Derbe. Na volta, visitaram cada igreja e escolheram presbíteros.",
+    "r": "At 14:21-23"
+   },
+   {
+    "pt": "Macedônia e Grécia",
+    "c": [
+     39.3,
+     24.2
+    ],
+    "z": 6.0,
+    "t": "2ª viagem (roxo)",
+    "d": "Com Silas e Timóteo: da Ásia Menor à Europa. Filipos, Tessalônica, Bereia, Atenas e um ano e meio em Corinto.",
+    "r": "At 16:9-10"
+   },
+   {
+    "pt": "Éfeso",
+    "c": [
+     37.939,
+     27.341
+    ],
+    "z": 6.5,
+    "t": "3ª viagem (verde)",
+    "d": "Quase três anos em Éfeso, de onde a palavra se espalhou por toda a Ásia. Depois Macedônia, Grécia e a despedida em Mileto.",
+    "r": "At 19:10"
+   },
+   {
+    "pt": "Malta",
+    "c": [
+     35.95,
+     14.4
+    ],
+    "z": 5.5,
+    "t": "Viagem a Roma (laranja)",
+    "d": "Preso, Paulo embarcou em Cesareia. Depois da tempestade e do naufrágio em Malta, chegou a Roma e pregou ali por dois anos.",
+    "r": "At 28:30-31"
+   },
+   {
+    "pt": "Roma",
+    "c": [
+     41.892,
+     12.485
+    ],
+    "z": 4.6,
+    "t": "Do Oriente à capital do império",
+    "d": "De Jerusalém até o Ilírico, e depois em Roma: o evangelho chegou ao centro do mundo da época.",
+    "r": "Rm 15:19"
+   }
+  ]
+ },
+ {
+  "id": "cartas-paulo",
+  "titulo": "As cartas de Paulo",
+  "subtitulo": "Para quem cada carta foi escrita",
+  "cor": "FFD4A017",
+  "rota": false,
+  "passos": [
+   {
+    "pt": "Roma",
+    "c": [
+     41.892,
+     12.485
+    ],
+    "z": 5.5,
+    "t": "Romanos",
+    "d": "Escrita provavelmente de Corinto, antes de Paulo conhecer a igreja de Roma. O evangelho é o poder de Deus para a salvação de todo aquele que crê.",
+    "r": "Rm 1:16-17"
+   },
+   {
+    "pt": "Corinto",
+    "c": [
+     37.906,
+     22.879
+    ],
+    "z": 7.0,
+    "t": "1 e 2 Coríntios",
+    "d": "Uma igreja cheia de dons e de problemas. Paulo trata de divisões, do culto, da ceia, do amor e da ressurreição.",
+    "r": "1Co 13:13"
+   },
+   {
+    "pt": "Galácia",
+    "c": [
+     38.0,
+     32.4
+    ],
+    "z": 6.5,
+    "t": "Gálatas",
+    "d": "Às igrejas da Galácia, como Icônio, Listra e Derbe: o homem é justificado pela fé em Cristo, e não pelas obras da lei.",
+    "r": "Gl 2:16"
+   },
+   {
+    "pt": "Éfeso",
+    "c": [
+     37.939,
+     27.341
+    ],
+    "z": 7.5,
+    "t": "Efésios; 1 e 2 Timóteo",
+    "d": "Efésios fala da igreja como corpo de Cristo. Timóteo cuidava da igreja de Éfeso quando recebeu as duas cartas de seu pai na fé.",
+    "r": "Ef 2:8-9"
+   },
+   {
+    "pt": "Filipos",
+    "c": [
+     41.013,
+     24.286
+    ],
+    "z": 7.5,
+    "t": "Filipenses",
+    "d": "A carta da alegria, escrita na prisão para a primeira igreja da Europa, nascida na casa de Lídia.",
+    "r": "Fp 4:4"
+   },
+   {
+    "pt": "Colossos",
+    "c": [
+     37.787,
+     29.262
+    ],
+    "z": 7.5,
+    "t": "Colossenses e Filemom",
+    "d": "Cristo é a cabeça de todas as coisas. Filemom, morador de Colossos, é chamado a receber Onésimo como irmão amado.",
+    "r": "Cl 1:18"
+   },
+   {
+    "pt": "Tessalônica",
+    "c": [
+     40.64,
+     22.944
+    ],
+    "z": 7.5,
+    "t": "1 e 2 Tessalonicenses",
+    "d": "Entre as primeiras cartas de Paulo: consolo na perseguição e esperança na vinda do Senhor.",
+    "r": "1Ts 4:16-17"
+   },
+   {
+    "pt": "Creta",
+    "c": [
+     35.24,
+     24.9
+    ],
+    "z": 7.0,
+    "t": "Tito",
+    "d": "Tito ficou em Creta para pôr em ordem o que faltava e estabelecer presbíteros em cada cidade.",
+    "r": "Tt 1:5"
+   }
+  ]
+ },
+ {
+  "id": "jerusalem-jesus",
+  "titulo": "Jerusalém nos dias de Jesus",
+  "subtitulo": "Os lugares da última semana",
+  "cor": "FFFFB300",
+  "rota": false,
+  "passos": [
+   {
+    "pt": "Templo",
+    "c": [
+     31.778,
+     35.2354
+    ],
+    "z": 15.0,
+    "t": "O templo",
+    "d": "O centro da vida de Israel, ampliado por Herodes. Jesus ensinou em seus pátios e expulsou os cambistas. Os locais deste mapa seguem a tradição e a arqueologia; alguns são aproximados.",
+    "r": "Mt 21:12-14"
+   },
+   {
+    "pt": "Tanque de Betesda",
+    "c": [
+     31.7814,
+     35.2365
+    ],
+    "z": 15.5,
+    "t": "O tanque de Betesda",
+    "d": "Junto à Porta das Ovelhas, Jesus curou um homem enfermo havia trinta e oito anos.",
+    "r": "Jo 5:2-9"
+   },
+   {
+    "pt": "Tanque de Siloé",
+    "c": [
+     31.7707,
+     35.235
+    ],
+    "z": 15.5,
+    "t": "O tanque de Siloé",
+    "d": "O cego de nascença lavou-se aqui, como Jesus mandou, e voltou vendo.",
+    "r": "Jo 9:7"
+   },
+   {
+    "pt": "Cenáculo",
+    "c": [
+     31.7717,
+     35.229
+    ],
+    "z": 15.5,
+    "t": "O cenáculo",
+    "d": "Num grande cenáculo mobiliado, Jesus comeu a Páscoa com os discípulos e instituiu a ceia.",
+    "r": "Lc 22:12-20"
+   },
+   {
+    "pt": "Getsêmani",
+    "c": [
+     31.7794,
+     35.2397
+    ],
+    "z": 15.5,
+    "t": "O Getsêmani",
+    "d": "Do outro lado do ribeiro de Cedrom, no monte das Oliveiras, Jesus orou em agonia e foi preso.",
+    "r": "Mt 26:36"
+   },
+   {
+    "pt": "Casa de Caifás",
+    "c": [
+     31.7713,
+     35.2312
+    ],
+    "z": 15.5,
+    "t": "A casa do sumo sacerdote",
+    "d": "Jesus foi interrogado de noite, e Pedro o negou três vezes no pátio.",
+    "r": "Mt 26:57-58"
+   },
+   {
+    "pt": "Pretório",
+    "c": [
+     31.7802,
+     35.234
+    ],
+    "z": 15.5,
+    "t": "O pretório de Pilatos",
+    "d": "Diante do governador romano, Jesus foi açoitado e entregue para ser crucificado.",
+    "r": "Jo 19:13-16"
+   },
+   {
+    "pt": "Gólgota",
+    "c": [
+     31.7785,
+     35.2296
+    ],
+    "z": 15.5,
+    "t": "O Gólgota e o sepulcro",
+    "d": "Fora dos muros da cidade naquele tempo, o lugar da Caveira. Ali perto havia um jardim com um sepulcro novo.",
+    "r": "Jo 19:17-18"
+   },
+   {
+    "pt": "Monte das Oliveiras",
+    "c": [
+     31.778,
+     35.245
+    ],
+    "z": 14.5,
+    "t": "O monte das Oliveiras",
+    "d": "Quarenta dias depois da ressurreição, Jesus subiu aos céus à vista dos discípulos.",
+    "r": "At 1:9-12"
+   }
+  ]
+ },
+ {
+  "id": "terra-jesus",
+  "titulo": "A terra nos dias de Jesus",
+  "subtitulo": "Galileia, Samaria, Judeia e as regiões vizinhas",
+  "cor": "FF4DD0E1",
+  "rota": false,
+  "regioes": [
+   {
+    "nome": "GALILEIA",
+    "cor": "FF81C784",
+    "pontos": [
+     [
+      33.1,
+      35.2
+     ],
+     [
+      33.1,
+      35.62
+     ],
+     [
+      32.7,
+      35.58
+     ],
+     [
+      32.55,
+      35.4
+     ],
+     [
+      32.62,
+      35.12
+     ],
+     [
+      32.85,
+      35.1
+     ]
+    ]
+   },
+   {
+    "nome": "SAMARIA",
+    "cor": "FFFFB74D",
+    "pontos": [
+     [
+      32.62,
+      35.12
+     ],
+     [
+      32.55,
+      35.4
+     ],
+     [
+      32.45,
+      35.55
+     ],
+     [
+      32.0,
+      35.5
+     ],
+     [
+      32.0,
+      34.95
+     ],
+     [
+      32.45,
+      34.9
+     ]
+    ]
+   },
+   {
+    "nome": "JUDEIA",
+    "cor": "FF7986CB",
+    "pontos": [
+     [
+      32.0,
+      34.95
+     ],
+     [
+      32.0,
+      35.5
+     ],
+     [
+      31.3,
+      35.42
+     ],
+     [
+      31.2,
+      34.85
+     ],
+     [
+      31.6,
+      34.55
+     ],
+     [
+      31.95,
+      34.72
+     ]
+    ]
+   },
+   {
+    "nome": "PEREIA",
+    "cor": "FFF48FB1",
+    "pontos": [
+     [
+      32.35,
+      35.58
+     ],
+     [
+      32.35,
+      35.85
+     ],
+     [
+      31.45,
+      35.8
+     ],
+     [
+      31.45,
+      35.58
+     ]
+    ]
+   },
+   {
+    "nome": "DECÁPOLIS",
+    "cor": "FFCE93D8",
+    "pontos": [
+     [
+      32.85,
+      35.66
+     ],
+     [
+      32.85,
+      36.2
+     ],
+     [
+      32.35,
+      36.1
+     ],
+     [
+      32.35,
+      35.58
+     ],
+     [
+      32.6,
+      35.6
+     ]
+    ]
+   },
+   {
+    "nome": "FENÍCIA",
+    "cor": "FF4FC3F7",
+    "pontos": [
+     [
+      33.1,
+      35.08
+     ],
+     [
+      33.1,
+      35.22
+     ],
+     [
+      33.7,
+      35.5
+     ],
+     [
+      33.7,
+      35.33
+     ]
+    ]
+   },
+   {
+    "nome": "ITUREIA",
+    "cor": "FFA1887F",
+    "pontos": [
+     [
+      33.35,
+      35.64
+     ],
+     [
+      33.35,
+      36.3
+     ],
+     [
+      32.87,
+      36.22
+     ],
+     [
+      32.87,
+      35.68
+     ]
+    ]
+   },
+   {
+    "nome": "IDUMEIA",
+    "cor": "FFEF9A9A",
+    "pontos": [
+     [
+      31.2,
+      34.85
+     ],
+     [
+      31.3,
+      35.42
+     ],
+     [
+      30.9,
+      35.3
+     ],
+     [
+      30.9,
+      34.7
+     ]
+    ]
+   }
+  ],
+  "passos": [
+   {
+    "pt": "Galileia",
+    "c": [
+     32.85,
+     35.4
+    ],
+    "z": 8.3,
+    "t": "Galileia",
+    "d": "Nazaré, Caná e Cafarnaum. Aqui Jesus cresceu, chamou os discípulos e fez a maior parte dos seus milagres.",
+    "r": "Mt 4:23"
+   },
+   {
+    "pt": "Sicar",
+    "c": [
+     32.209,
+     35.285
+    ],
+    "z": 8.8,
+    "t": "Samaria",
+    "d": "Judeus e samaritanos não se davam. Mesmo assim, Jesus passou por Samaria e conversou com uma mulher junto ao poço de Jacó.",
+    "r": "Jo 4:4-9"
+   },
+   {
+    "pt": "Jerusalém",
+    "c": [
+     31.778,
+     35.235
+    ],
+    "z": 8.5,
+    "t": "Judeia",
+    "d": "Belém, Betânia, Jericó e Jerusalém, com o templo. Aqui Jesus nasceu, foi crucificado e ressuscitou.",
+    "r": "Mt 2:1"
+   },
+   {
+    "pt": "Além do Jordão",
+    "c": [
+     31.95,
+     35.7
+    ],
+    "z": 8.5,
+    "t": "Pereia",
+    "d": "A região além do Jordão, onde João batizava e por onde Jesus passou ensinando no caminho para Jerusalém.",
+    "r": "Mt 19:1-2"
+   },
+   {
+    "pt": "Decápolis",
+    "c": [
+     32.6,
+     35.9
+    ],
+    "z": 8.5,
+    "t": "Decápolis",
+    "d": "Dez cidades de cultura grega. Ali o homem liberto dos demônios anunciou o que Jesus lhe tinha feito.",
+    "r": "Mc 5:20"
+   },
+   {
+    "pt": "Tiro",
+    "c": [
+     33.27,
+     35.196
+    ],
+    "z": 8.3,
+    "t": "Tiro e Sidom",
+    "d": "Na Fenícia, terra de gentios, Jesus atendeu ao pedido de uma mãe siro-fenícia de grande fé.",
+    "r": "Mc 7:24-30"
+   },
+   {
+    "pt": "Cesareia de Filipe",
+    "c": [
+     33.248,
+     35.694
+    ],
+    "z": 8.8,
+    "t": "Cesareia de Filipe",
+    "d": "Ao pé do monte Hermom, Pedro declarou: Tu és o Cristo, o Filho do Deus vivo.",
+    "r": "Mt 16:13-16"
+   }
+  ]
+ },
+ {
+  "id": "doze-tribos",
+  "titulo": "As doze tribos de Israel",
+  "subtitulo": "A divisão da terra nos dias de Josué",
+  "cor": "FFAED581",
+  "rota": false,
+  "regioes": [
+   {
+    "nome": "ASER",
+    "cor": "FF4DB6AC",
+    "pontos": [
+     [
+      33.3,
+      35.15
+     ],
+     [
+      33.3,
+      35.4
+     ],
+     [
+      33.0,
+      35.38
+     ],
+     [
+      32.82,
+      35.25
+     ],
+     [
+      32.7,
+      35.1
+     ],
+     [
+      32.72,
+      34.95
+     ],
+     [
+      32.9,
+      35.05
+     ],
+     [
+      33.1,
+      35.1
+     ]
+    ]
+   },
+   {
+    "nome": "NAFTALI",
+    "cor": "FFFFB74D",
+    "pontos": [
+     [
+      33.3,
+      35.4
+     ],
+     [
+      33.3,
+      35.63
+     ],
+     [
+      32.88,
+      35.62
+     ],
+     [
+      32.72,
+      35.56
+     ],
+     [
+      32.74,
+      35.42
+     ],
+     [
+      32.86,
+      35.4
+     ],
+     [
+      33.0,
+      35.38
+     ]
+    ]
+   },
+   {
+    "nome": "ZEBULOM",
+    "cor": "FFBA68C8",
+    "pontos": [
+     [
+      32.86,
+      35.4
+     ],
+     [
+      32.74,
+      35.42
+     ],
+     [
+      32.66,
+      35.36
+     ],
+     [
+      32.64,
+      35.16
+     ],
+     [
+      32.7,
+      35.1
+     ],
+     [
+      32.82,
+      35.25
+     ]
+    ]
+   },
+   {
+    "nome": "ISSACAR",
+    "cor": "FF90CAF9",
+    "pontos": [
+     [
+      32.74,
+      35.42
+     ],
+     [
+      32.72,
+      35.56
+     ],
+     [
+      32.5,
+      35.57
+     ],
+     [
+      32.45,
+      35.4
+     ],
+     [
+      32.52,
+      35.22
+     ],
+     [
+      32.64,
+      35.16
+     ],
+     [
+      32.66,
+      35.36
+     ]
+    ]
+   },
+   {
+    "nome": "MANASSÉS",
+    "cor": "FFE57373",
+    "pontos": [
+     [
+      32.7,
+      35.1
+     ],
+     [
+      32.64,
+      35.16
+     ],
+     [
+      32.52,
+      35.22
+     ],
+     [
+      32.45,
+      35.4
+     ],
+     [
+      32.5,
+      35.57
+     ],
+     [
+      32.2,
+      35.55
+     ],
+     [
+      32.18,
+      35.2
+     ],
+     [
+      32.2,
+      34.85
+     ],
+     [
+      32.55,
+      34.9
+     ],
+     [
+      32.72,
+      34.95
+     ]
+    ]
+   },
+   {
+    "nome": "EFRAIM",
+    "cor": "FFFFF176",
+    "pontos": [
+     [
+      32.2,
+      34.85
+     ],
+     [
+      32.18,
+      35.2
+     ],
+     [
+      32.2,
+      35.55
+     ],
+     [
+      31.95,
+      35.52
+     ],
+     [
+      31.93,
+      35.25
+     ],
+     [
+      31.95,
+      34.95
+     ],
+     [
+      32.1,
+      34.8
+     ]
+    ]
+   },
+   {
+    "nome": "DÃ",
+    "cor": "FFA1887F",
+    "pontos": [
+     [
+      32.1,
+      34.8
+     ],
+     [
+      31.95,
+      34.95
+     ],
+     [
+      31.85,
+      35.0
+     ],
+     [
+      31.78,
+      34.65
+     ]
+    ]
+   },
+   {
+    "nome": "BENJAMIM",
+    "cor": "FFF48FB1",
+    "pontos": [
+     [
+      31.95,
+      34.98
+     ],
+     [
+      31.93,
+      35.25
+     ],
+     [
+      31.95,
+      35.52
+     ],
+     [
+      31.78,
+      35.5
+     ],
+     [
+      31.76,
+      35.22
+     ],
+     [
+      31.8,
+      35.03
+     ]
+    ]
+   },
+   {
+    "nome": "JUDÁ",
+    "cor": "FF7986CB",
+    "pontos": [
+     [
+      31.85,
+      35.0
+     ],
+     [
+      31.8,
+      35.03
+     ],
+     [
+      31.76,
+      35.22
+     ],
+     [
+      31.78,
+      35.5
+     ],
+     [
+      31.3,
+      35.4
+     ],
+     [
+      31.05,
+      35.35
+     ],
+     [
+      30.9,
+      34.95
+     ],
+     [
+      31.25,
+      34.35
+     ],
+     [
+      31.6,
+      34.5
+     ],
+     [
+      31.78,
+      34.65
+     ]
+    ],
+    "rotulo": [
+     31.55,
+     35.1
+    ]
+   },
+   {
+    "nome": "SIMEÃO",
+    "cor": "FF80CBC4",
+    "pontos": [
+     [
+      31.38,
+      34.55
+     ],
+     [
+      31.42,
+      34.98
+     ],
+     [
+      31.1,
+      35.0
+     ],
+     [
+      31.05,
+      34.6
+     ]
+    ]
+   },
+   {
+    "nome": "RÚBEN",
+    "cor": "FFFFAB91",
+    "pontos": [
+     [
+      31.8,
+      35.57
+     ],
+     [
+      31.8,
+      35.95
+     ],
+     [
+      31.45,
+      35.95
+     ],
+     [
+      31.45,
+      35.58
+     ]
+    ]
+   },
+   {
+    "nome": "GADE",
+    "cor": "FFC5E1A5",
+    "pontos": [
+     [
+      32.55,
+      35.6
+     ],
+     [
+      32.55,
+      36.0
+     ],
+     [
+      31.8,
+      35.95
+     ],
+     [
+      31.8,
+      35.57
+     ]
+    ]
+   },
+   {
+    "nome": "MANASSÉS (LESTE)",
+    "cor": "FFEF9A9A",
+    "pontos": [
+     [
+      33.2,
+      35.66
+     ],
+     [
+      33.2,
+      36.3
+     ],
+     [
+      32.55,
+      36.3
+     ],
+     [
+      32.55,
+      35.6
+     ],
+     [
+      32.85,
+      35.66
+     ]
+    ]
+   }
+  ],
+  "passos": [
+   {
+    "pt": "Canaã",
+    "c": [
+     32.2,
+     35.5
+    ],
+    "z": 7.2,
+    "t": "A herança das tribos",
+    "d": "Depois da conquista, Josué repartiu a terra por sortes entre as tribos, em Siló. Os limites deste mapa são aproximados.",
+    "r": "Js 18:10"
+   },
+   {
+    "pt": "Galileia",
+    "c": [
+     32.95,
+     35.4
+    ],
+    "z": 8.6,
+    "t": "As tribos do norte",
+    "d": "Aser junto ao mar, Naftali e Zebulom na Galileia e Issacar no vale de Jezreel. Séculos depois, Jesus cresceria em terras de Zebulom e Naftali.",
+    "r": "Mt 4:13-16"
+   },
+   {
+    "pt": "Siquém",
+    "c": [
+     32.213,
+     35.282
+    ],
+    "z": 8.6,
+    "t": "Os filhos de José",
+    "d": "Efraim e Manassés, filhos de José, receberam a região montanhosa do centro, com Siquém e Siló.",
+    "r": "Js 16:4"
+   },
+   {
+    "pt": "Jerusalém",
+    "c": [
+     31.8,
+     35.15
+    ],
+    "z": 8.8,
+    "t": "Benjamim e Dã",
+    "d": "Benjamim ficou com uma faixa pequena entre Efraim e Judá, onde estão Jericó e Gibeá. Dã recebeu a planície perto de Jope e depois migrou para o extremo norte.",
+    "r": "Js 18:11"
+   },
+   {
+    "pt": "Hebrom",
+    "c": [
+     31.532,
+     35.098
+    ],
+    "z": 8.3,
+    "t": "Judá e Simeão",
+    "d": "Judá recebeu o sul, com Hebrom e Belém; a herança de Simeão ficou no meio da herança de Judá, ao redor de Berseba.",
+    "r": "Js 19:1"
+   },
+   {
+    "pt": "Além do Jordão",
+    "c": [
+     32.2,
+     35.85
+    ],
+    "z": 8.0,
+    "t": "As tribos do outro lado do rio",
+    "d": "Rúben, Gade e metade de Manassés pediram as terras de pasto a leste do Jordão, e mesmo assim ajudaram os irmãos na conquista.",
+    "r": "Js 22:1-4"
+   },
+   {
+    "pt": "Siló",
+    "c": [
+     32.056,
+     35.29
+    ],
+    "z": 9.5,
+    "t": "Levi: o Senhor é a sua herança",
+    "d": "A tribo de Levi não recebeu território. Os levitas ganharam quarenta e oito cidades espalhadas por todas as tribos.",
+    "r": "Js 13:33"
+   }
+  ]
+ },
+ {
+  "id": "reino-dividido",
+  "titulo": "O reino dividido",
+  "subtitulo": "Israel ao norte, Judá ao sul",
+  "cor": "FF9575CD",
+  "rota": false,
+  "regioes": [
+   {
+    "nome": "ISRAEL",
+    "cor": "FF4FC3F7",
+    "pontos": [
+     [
+      33.3,
+      35.15
+     ],
+     [
+      33.3,
+      35.65
+     ],
+     [
+      32.6,
+      35.62
+     ],
+     [
+      32.55,
+      36.0
+     ],
+     [
+      31.95,
+      35.95
+     ],
+     [
+      31.95,
+      35.52
+     ],
+     [
+      31.95,
+      34.98
+     ],
+     [
+      32.1,
+      34.78
+     ],
+     [
+      32.7,
+      34.93
+     ],
+     [
+      33.1,
+      35.08
+     ]
+    ],
+    "rotulo": [
+     32.45,
+     35.3
+    ]
+   },
+   {
+    "nome": "JUDÁ",
+    "cor": "FFFFD54F",
+    "pontos": [
+     [
+      31.95,
+      34.98
+     ],
+     [
+      31.95,
+      35.52
+     ],
+     [
+      31.3,
+      35.42
+     ],
+     [
+      31.0,
+      35.35
+     ],
+     [
+      30.9,
+      34.95
+     ],
+     [
+      31.25,
+      34.45
+     ],
+     [
+      31.75,
+      34.75
+     ]
+    ],
+    "rotulo": [
+     31.45,
+     35.05
+    ]
+   },
+   {
+    "nome": "FILÍSTIA",
+    "cor": "FFA1887F",
+    "pontos": [
+     [
+      31.95,
+      34.62
+     ],
+     [
+      31.95,
+      34.8
+     ],
+     [
+      31.6,
+      34.68
+     ],
+     [
+      31.25,
+      34.45
+     ],
+     [
+      31.28,
+      34.22
+     ]
+    ]
+   },
+   {
+    "nome": "FENÍCIA",
+    "cor": "FFBA68C8",
+    "pontos": [
+     [
+      33.3,
+      35.12
+     ],
+     [
+      33.3,
+      35.38
+     ],
+     [
+      33.95,
+      35.65
+     ],
+     [
+      33.95,
+      35.45
+     ]
+    ]
+   },
+   {
+    "nome": "SÍRIA",
+    "cor": "FFE57373",
+    "pontos": [
+     [
+      33.3,
+      35.85
+     ],
+     [
+      33.85,
+      36.0
+     ],
+     [
+      33.85,
+      36.7
+     ],
+     [
+      33.2,
+      36.7
+     ]
+    ]
+   },
+   {
+    "nome": "AMOM",
+    "cor": "FF81C784",
+    "pontos": [
+     [
+      32.15,
+      36.02
+     ],
+     [
+      32.15,
+      36.35
+     ],
+     [
+      31.8,
+      36.35
+     ],
+     [
+      31.8,
+      35.98
+     ]
+    ]
+   },
+   {
+    "nome": "MOABE",
+    "cor": "FFFFB74D",
+    "pontos": [
+     [
+      31.45,
+      35.58
+     ],
+     [
+      31.45,
+      35.98
+     ],
+     [
+      31.0,
+      35.92
+     ],
+     [
+      31.0,
+      35.5
+     ]
+    ]
+   },
+   {
+    "nome": "EDOM",
+    "cor": "FFEF9A9A",
+    "pontos": [
+     [
+      30.98,
+      35.42
+     ],
+     [
+      30.98,
+      35.9
+     ],
+     [
+      30.2,
+      35.75
+     ],
+     [
+      30.2,
+      35.2
+     ]
+    ]
+   }
+  ],
+  "passos": [
+   {
+    "pt": "Siquém",
+    "c": [
+     32.213,
+     35.282
+    ],
+    "z": 7.5,
+    "t": "O reino se divide",
+    "d": "Depois de Salomão, Roboão recusou aliviar o jugo do povo. Dez tribos seguiram Jeroboão; só Judá e Benjamim ficaram com a casa de Davi.",
+    "r": "1Rs 12:16-20"
+   },
+   {
+    "pt": "Betel",
+    "c": [
+     31.923,
+     35.241
+    ],
+    "z": 9.0,
+    "t": "Os bezerros de ouro",
+    "d": "Para que o povo não subisse a Jerusalém, Jeroboão pôs um bezerro de ouro em Betel e outro em Dã.",
+    "r": "1Rs 12:28-30"
+   },
+   {
+    "pt": "Samaria",
+    "c": [
+     32.276,
+     35.19
+    ],
+    "z": 9.0,
+    "t": "Samaria, capital do norte",
+    "d": "O rei Onri comprou o monte de Samaria e ali edificou a capital de Israel. Elias e Eliseu profetizaram neste reino.",
+    "r": "1Rs 16:24"
+   },
+   {
+    "pt": "Jerusalém",
+    "c": [
+     31.778,
+     35.235
+    ],
+    "z": 9.0,
+    "t": "Jerusalém, capital de Judá",
+    "d": "No sul, os descendentes de Davi continuaram reinando em Jerusalém, onde estava o templo. Isaías e Jeremias profetizaram aqui.",
+    "r": "1Rs 14:21"
+   },
+   {
+    "pt": "Samaria",
+    "c": [
+     32.276,
+     35.19
+    ],
+    "z": 7.0,
+    "t": "A queda de Israel",
+    "d": "No ano 722 antes de Cristo, a Assíria tomou Samaria e levou o povo do norte para o cativeiro.",
+    "r": "2Rs 17:6"
+   },
+   {
+    "pt": "Jerusalém",
+    "c": [
+     31.778,
+     35.235
+    ],
+    "z": 7.0,
+    "t": "A queda de Judá",
+    "d": "Em 586 antes de Cristo, Nabucodonosor queimou o templo e levou Judá para a Babilônia.",
+    "r": "2Rs 25:8-11"
+   }
+  ]
+ },
+ {
+  "id": "exilios",
+  "titulo": "Os exílios e a volta",
+  "subtitulo": "Da Terra Prometida à Assíria e à Babilônia",
+  "cor": "FF8D6E63",
+  "rota": false,
+  "linhas": [
+   {
+    "nome": "Israel para a Assíria (722 a.C.)",
+    "cor": "FFCE93D8",
+    "pontos": [
+     [
+      32.276,
+      35.19
+     ],
+     [
+      33.513,
+      36.292
+     ],
+     [
+      34.46,
+      36.55
+     ],
+     [
+      35.13,
+      36.75
+     ],
+     [
+      36.2,
+      37.16
+     ],
+     [
+      36.84,
+      40.07
+     ],
+     [
+      36.359,
+      43.153
+     ]
+    ]
+   },
+   {
+    "nome": "Judá para a Babilônia (586 a.C.) e a volta",
+    "cor": "FF90CAF9",
+    "pontos": [
+     [
+      31.778,
+      35.235
+     ],
+     [
+      33.2,
+      35.9
+     ],
+     [
+      34.4,
+      36.45
+     ],
+     [
+      35.05,
+      36.85
+     ],
+     [
+      35.95,
+      38.9
+     ],
+     [
+      34.75,
+      40.73
+     ],
+     [
+      33.6,
+      42.8
+     ],
+     [
+      32.542,
+      44.421
+     ]
+    ]
+   }
+  ],
+  "passos": [
+   {
+    "pt": "Samaria",
+    "c": [
+     32.276,
+     35.19
+    ],
+    "z": 6.0,
+    "t": "O norte é levado",
+    "d": "O rei da Assíria tomou Samaria e transportou Israel para Hala, Habor e as cidades dos medos.",
+    "r": "2Rs 17:6"
+   },
+   {
+    "pt": "Nínive",
+    "c": [
+     36.359,
+     43.153
+    ],
+    "z": 5.8,
+    "t": "A Assíria",
+    "d": "Um império temido pela crueldade. Para a sua capital, Nínive, Deus havia enviado Jonas com um chamado ao arrependimento.",
+    "r": "Jn 3:1-5"
+   },
+   {
+    "pt": "Jerusalém",
+    "c": [
+     31.778,
+     35.235
+    ],
+    "z": 6.0,
+    "t": "Jerusalém cai",
+    "d": "Nabucodonosor queimou o templo, derrubou os muros e levou o povo. Jeremias havia avisado por anos.",
+    "r": "2Rs 25:8-11"
+   },
+   {
+    "pt": "Babilônia",
+    "c": [
+     32.542,
+     44.421
+    ],
+    "z": 5.8,
+    "t": "Junto aos rios da Babilônia",
+    "d": "Setenta anos longe de casa. Ali viveram Daniel e Ezequiel, e o povo aprendeu a cantar e orar em terra estranha.",
+    "r": "Sl 137:1"
+   },
+   {
+    "pt": "Susã",
+    "c": [
+     32.19,
+     48.258
+    ],
+    "z": 5.8,
+    "t": "Sob os persas",
+    "d": "A Pérsia venceu a Babilônia. Em Susã viveram Ester e Mardoqueu, e Neemias serviu como copeiro do rei.",
+    "r": "Ne 1:1"
+   },
+   {
+    "pt": "Jerusalém",
+    "c": [
+     31.778,
+     35.235
+    ],
+    "z": 5.2,
+    "t": "A volta",
+    "d": "Ciro deixou os judeus voltarem. Eles reconstruíram o altar, o templo e, com Neemias, os muros.",
+    "r": "Ed 1:1-3"
+   }
+  ]
+ },
+ {
+  "id": "imperios",
+  "titulo": "Reinos e impérios",
+  "subtitulo": "Canaã entre as potências do mundo antigo",
+  "cor": "FFFF8A65",
+  "rota": false,
+  "regioes": [
+   {
+    "nome": "EGITO",
+    "cor": "FFFFB74D",
+    "pontos": [
+     [
+      31.3,
+      29.5
+     ],
+     [
+      31.5,
+      32.3
+     ],
+     [
+      30.0,
+      32.6
+     ],
+     [
+      27.0,
+      33.8
+     ],
+     [
+      24.0,
+      32.9
+     ],
+     [
+      24.0,
+      31.6
+     ],
+     [
+      27.5,
+      30.6
+     ],
+     [
+      30.3,
+      29.9
+     ]
+    ]
+   },
+   {
+    "nome": "ASSÍRIA",
+    "cor": "FFCE93D8",
+    "pontos": [
+     [
+      37.3,
+      41.5
+     ],
+     [
+      37.6,
+      43.8
+     ],
+     [
+      36.8,
+      45.3
+     ],
+     [
+      35.0,
+      45.2
+     ],
+     [
+      34.6,
+      43.5
+     ],
+     [
+      35.6,
+      41.8
+     ]
+    ]
+   },
+   {
+    "nome": "BABILÔNIA",
+    "cor": "FF90CAF9",
+    "pontos": [
+     [
+      34.3,
+      43.0
+     ],
+     [
+      33.8,
+      45.5
+     ],
+     [
+      31.5,
+      47.8
+     ],
+     [
+      30.0,
+      47.9
+     ],
+     [
+      31.0,
+      45.6
+     ],
+     [
+      32.8,
+      43.6
+     ]
+    ]
+   },
+   {
+    "nome": "PÉRSIA",
+    "cor": "FFA5D6A7",
+    "pontos": [
+     [
+      34.5,
+      47.0
+     ],
+     [
+      35.0,
+      51.0
+     ],
+     [
+      32.0,
+      53.5
+     ],
+     [
+      29.0,
+      52.8
+     ],
+     [
+      30.2,
+      49.0
+     ],
+     [
+      32.6,
+      47.6
+     ]
+    ]
+   }
+  ],
+  "passos": [
+   {
+    "pt": "Canaã",
+    "c": [
+     31.8,
+     35.0
+    ],
+    "z": 4.2,
+    "t": "Canaã, a ponte entre os continentes",
+    "d": "Entre o Egito (África) e a Mesopotâmia (Ásia), a terra prometida fica no caminho de todos os impérios.",
+    "r": "Dt 11:24"
+   },
+   {
+    "pt": "Samaria",
+    "c": [
+     32.276,
+     35.197
+    ],
+    "z": 7.5,
+    "t": "O reino dividido",
+    "d": "Após Salomão, dez tribos formam Israel (Samaria); Judá fica com Jerusalém.",
+    "r": "1Rs 12:19"
+   },
+   {
+    "pt": "Jerusalém",
+    "c": [
+     31.778,
+     35.235
+    ],
+    "z": 7.0,
+    "t": "Sisaque invade Judá",
+    "d": "No 5º ano de Roboão, o faraó Sisaque sobe contra Jerusalém.",
+    "r": "1Rs 14:25"
+   },
+   {
+    "pt": "Nínive",
+    "c": [
+     36.359,
+     43.153
+    ],
+    "z": 5.5,
+    "t": "A Assíria toma Samaria",
+    "d": "Em 722 a.C. o reino do norte cai e o povo é levado cativo.",
+    "r": "2Rs 17:6"
+   },
+   {
+    "pt": "Babilônia",
+    "c": [
+     32.542,
+     44.421
+    ],
+    "z": 5.5,
+    "t": "Babilônia destrói Jerusalém",
+    "d": "Em 586 a.C. Nabucodonosor queima o templo e leva Judá ao exílio.",
+    "r": "2Rs 25:9"
+   },
+   {
+    "pt": "Susã",
+    "c": [
+     32.19,
+     48.26
+    ],
+    "z": 5.5,
+    "t": "A Pérsia e a volta do exílio",
+    "d": "Ciro permite que os judeus voltem e reconstruam o templo.",
+    "r": "Ed 1:3"
+   },
+   {
+    "pt": "Jerusalém",
+    "c": [
+     31.778,
+     35.235
+    ],
+    "z": 6.5,
+    "t": "O templo reconstruído",
+    "d": "O povo volta e a casa de Deus é reedificada.",
+    "r": "Ed 6:15"
+   }
+  ]
+ }
 ]

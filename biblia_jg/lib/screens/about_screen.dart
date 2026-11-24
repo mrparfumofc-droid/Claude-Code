@@ -44,6 +44,9 @@ class AboutScreen extends StatelessWidget {
               'Mapas: Sentinel-2 cloudless – s2maps.eu, EOX IT Services (Copernicus 2020).\n'
               'Fotos dos fundos: Wikimedia Commons (CC0, domínio público e CC BY).\n'
               'Hinos: Wikisource (domínio público). Dicionários: Easton, Smith, Hitchcock e Torrey (domínio público, traduzidos).\n'
+              'Histórias bíblicas: texto próprio do app; ilustrações (Google Gemini) e narração (Gemini TTS) '
+              'criadas com inteligência artificial, como reconstituição artística. '
+              'Efeito 3D: Depth Anything V2 (Apache 2.0).\n'
               'IA: Google Gemini e Gemma.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 12),

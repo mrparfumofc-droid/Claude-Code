@@ -49,3 +49,8 @@ app.*.map.json
 
 # Textos bíblicos: gerados por tool/fetch_bibles.py (não versionar)
 /assets/bibles/*.json
+
+# Mídias das histórias: só os fontes ficam no repositório
+/tool/historias/.upload_key
+/tool/historias/raw/
+/tool/historias/out/

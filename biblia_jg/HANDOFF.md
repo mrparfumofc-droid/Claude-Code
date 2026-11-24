@@ -55,6 +55,17 @@ App Flutter de Bíblia para tablet Android, de uso pessoal do dono (JG Company).
 - **Prévia no navegador (para revisar layout no PC):** cópia em `D:\Claude Code\mapas-biblia\preview-src` com `tool/app_preview.dart` (banco via `sqflite_common_ffi_web`), servida pelo launch `mapas-biblia-preview` (porta 4975). O `flutter test` local não roda no Windows (pdfrx precisa de compilador C); os testes rodam no GitHub.
 - **Pendente da revisão:** chave do app no código público (trocar quando o repositório ficar privado), "Ler junto", alvos de toque de 30–32 dp nas paletas de cor, capítulo longo em `Column` não preguiçosa.
 
+## Fase 3 (build 26): histórias ilustradas e narradas, atlas e viagens de Paulo
+- **Histórias bíblicas** (`lib/screens/stories_screen.dart`, `story_player_screen.dart`, `lib/services/stories.dart`): 31 histórias completas (199 cenas) em três coleções (Paulo e a igreja, vida de Jesus, Antigo Testamento). Cada cena tem texto próprio (80–115 palavras, fiel à passagem), referência que abre a Bíblia, ilustração, narração e, quando há lugar, o ponto no mapa. O player passa sozinho de cena em cena; a janela pequena troca entre cena e mapa; no fim mostra uma reflexão e a próxima história. A lista antiga (contada pela IA na hora) virou "Outras histórias, contadas pela IA" (`AiStoriesScreen`).
+- **Efeito 3D** (`lib/widgets/parallax_image.dart` + `shaders/parallax.frag`): cada ilustração tem um mapa de profundidade (Depth Anything V2 small, gerado no PC); o shader desloca o que está perto mais do que o fundo enquanto a câmera se move. Há um teste automático de orientação da textura (OpenGL ES) e, se o shader não carregar, cai num zoom suave. Dá para desligar no menu do player.
+- **Mídia na nuvem** (bucket público `historias`): `img/<chave>.jpg` (1600 px), `thumb/`, `dep/` (profundidade), `audio/<história>-<n>.mp3` e `historias.json` (índice). O app traz um índice embutido (`assets/data/historias.json`) e confere o da nuvem ao abrir: **ilustrações e narrações novas chegam sem atualizar o app**. As cenas dizem se já têm ilustração (`"i"`) e narração (`"a"`); sem narração gravada, usa a voz do aparelho; sem ilustração, mostra o mapa ou um quadro com o título.
+- **Como as mídias são feitas** (pasta de trabalho no PC do dono: `D:\Claude Code\mapas-biblia\historias`; cópia dos fontes em `tool/historias/`):
+  - `outline.py` = roteiro (cenas, lugares, referências); `images.py` = descrição de cada ilustração; `texto/<id>.json` = narração; `check_texto.py` confere.
+  - Ilustrações: geradas no Gemini pelo navegador (conta Pro do dono). O plano dá cerca de 40 imagens a cada janela de ~2 h; `grab.py` organiza os downloads em `raw/`.
+  - `python midia.py imagens` prepara (1600 px, miniatura, profundidade) e envia; `python midia.py audio` narra com o Gemini TTS (cota grátis: ~10 por modelo por dia, ~40 por dia) e envia; ambos refazem o índice. O envio usa a Edge Function `historias-admin`, que só aceita a chave guardada em `.upload_key` nessa pasta (na função fica só o SHA-256).
+- **Mapas** (`lib/screens/maps_screen.dart`, `lib/widgets/story_map.dart`): "Atlas bíblico" (`assets/data/map_stories.json`, gerado por `tool/historias/build_atlas.py`) com 8 mapas: as viagens de Paulo (as quatro rotas coloridas), as cartas de Paulo, Jerusalém nos dias de Jesus, a terra nos dias de Jesus, as doze tribos, o reino dividido, os exílios e os impérios. "Viagens e rotas" abre as histórias com rota já no modo mapa. Limites e rotas são aproximados.
+- Testes novos em `test/stories_test.dart`.
+
 ## Pendências
 1. ~~Músicas de fundo~~ feito (player na nuvem, ver Infraestrutura). Ideias futuras: abaixar a música enquanto o "Ouvir" lê o versículo; tocar com a tela bloqueada (audio_service).
 2. ~~Livros (PDF) + EBD~~ feito (falta: lembrete de domingo da lição da EBD). Leitor de PDF com pastas, anotação à mão (caneta, marca-texto, borracha, cores, desfazer), salvo por página. O módulo EBD: revista em PDF por ano e trimestre, lições marcadas (à mão ou pela IA), Bíblia ao lado, referências clicáveis, lembrete de domingo.
@@ -71,6 +82,6 @@ Não usar dados com direito autoral de terceiros sem licença: os módulos do re
 ```bash
 cd biblia_jg
 python3 tool/fetch_bibles.py          # baixa e monta as 22 versões em assets/bibles/
-flutter pub get && flutter analyze && flutter test   # 21 testes
+flutter pub get && flutter analyze && flutter test
 ```
 O Flutter usado é o 3.47.9. O APK só é gerado no GitHub Actions (o ambiente da nuvem não tem o Android SDK).
