@@ -4842,5 +4842,427 @@
 "pt": "Joaquim é libertado da prisão",
 "es": "Joaquín es liberado de la prisión"
 }
+},
+"1CH": {
+"1:1": {
+"en": "From Adam to Abraham",
+"pt": "De Adão a Abraão",
+"es": "De Adán a Abraham"
+},
+"1:28": {
+"en": "The Descendants of Abraham",
+"pt": "Os descendentes de Abraão",
+"es": "Los descendientes de Abraham"
+},
+"1:35": {
+"en": "The Descendants of Esau",
+"pt": "Os descendentes de Esaú",
+"es": "Los descendientes de Esaú"
+},
+"1:38": {
+"en": "The Descendants of Seir",
+"pt": "Os descendentes de Seir",
+"es": "Los descendientes de Seir"
+},
+"1:43": {
+"en": "The Kings of Edom",
+"pt": "Os reis de Edom",
+"es": "Los reyes de Edom"
+},
+"2:1": {
+"en": "The Sons of Israel",
+"pt": "Os filhos de Israel",
+"es": "Los hijos de Israel"
+},
+"3:1": {
+"en": "The Descendants of David",
+"pt": "Os descendentes de Davi",
+"es": "Los descendientes de David"
+},
+"3:10": {
+"en": "The Descendants of Solomon",
+"pt": "Os descendentes de Salomão",
+"es": "Los descendientes de Salomón"
+},
+"3:17": {
+"en": "The Royal Line After the Exile",
+"pt": "A linhagem real após o exílio",
+"es": "La línea real después del exilio"
+},
+"4:1": {
+"en": "The Descendants of Judah",
+"pt": "Os descendentes de Judá",
+"es": "Los descendientes de Judá"
+},
+"4:9": {
+"en": "The Prayer of Jabez",
+"pt": "A oração de Jabez",
+"es": "La oración de Jabes"
+},
+"4:11": {
+"en": "More Descendants of Judah",
+"pt": "Outros descendentes de Judá",
+"es": "Otros descendientes de Judá"
+},
+"4:24": {
+"en": "The Descendants of Simeon",
+"pt": "Os descendentes de Simeão",
+"es": "Los descendientes de Simeón"
+},
+"5:1": {
+"en": "The Descendants of Reuben",
+"pt": "Os descendentes de Rúben",
+"es": "Los descendientes de Rubén"
+},
+"5:11": {
+"en": "The Descendants of Gad",
+"pt": "Os descendentes de Gade",
+"es": "Los descendientes de Gad"
+},
+"5:23": {
+"en": "The Half-Tribe of Manasseh",
+"pt": "A meia tribo de Manassés",
+"es": "La media tribu de Manasés"
+},
+"6:1": {
+"en": "The Descendants of Levi",
+"pt": "Os descendentes de Levi",
+"es": "Los descendientes de Leví"
+},
+"6:31": {
+"en": "The Temple Musicians",
+"pt": "Os músicos do templo",
+"es": "Los músicos del templo"
+},
+"6:48": {
+"en": "The Descendants of Aaron",
+"pt": "Os descendentes de Arão",
+"es": "Los descendientes de Aarón"
+},
+"6:54": {
+"en": "Territories for the Levites",
+"pt": "As cidades dos levitas",
+"es": "Las ciudades de los levitas"
+},
+"7:1": {
+"en": "The Descendants of Issachar",
+"pt": "Os descendentes de Issacar",
+"es": "Los descendientes de Isacar"
+},
+"7:6": {
+"en": "The Descendants of Benjamin",
+"pt": "Os descendentes de Benjamim",
+"es": "Los descendientes de Benjamín"
+},
+"7:13": {
+"en": "The Descendants of Naphtali",
+"pt": "Os descendentes de Naftali",
+"es": "Los descendientes de Neftalí"
+},
+"7:14": {
+"en": "The Descendants of Manasseh",
+"pt": "Os descendentes de Manassés",
+"es": "Los descendientes de Manasés"
+},
+"7:20": {
+"en": "The Descendants of Ephraim",
+"pt": "Os descendentes de Efraim",
+"es": "Los descendientes de Efraín"
+},
+"7:30": {
+"en": "The Descendants of Asher",
+"pt": "Os descendentes de Aser",
+"es": "Los descendientes de Aser"
+},
+"8:1": {
+"en": "Genealogy from Benjamin to Saul",
+"pt": "Genealogia de Benjamim até Saul",
+"es": "Genealogía desde Benjamín hasta Saúl"
+},
+"8:33": {
+"en": "The Family of Saul",
+"pt": "A família de Saul",
+"es": "La familia de Saúl"
+},
+"9:1": {
+"en": "The People of Jerusalem",
+"pt": "Os habitantes de Jerusalém",
+"es": "Los habitantes de Jerusalén"
+},
+"9:35": {
+"en": "The Descendants of Saul",
+"pt": "Os descendentes de Saul",
+"es": "Los descendientes de Saúl"
+},
+"10:1": {
+"en": "Saul’s Overthrow and Death",
+"pt": "A derrota e morte de Saul",
+"es": "La derrota y muerte de Saúl"
+},
+"10:7": {
+"en": "The Philistines Possess the Towns",
+"pt": "Os filisteus ocupam as cidades",
+"es": "Los filisteos ocupan las ciudades"
+},
+"10:11": {
+"en": "Jabesh-gilead’s Tribute to Saul",
+"pt": "A homenagem de Jabes-Gileade a Saul",
+"es": "El tributo de Jabes de Galaad a Saúl"
+},
+"11:1": {
+"en": "David Anointed King of All Israel",
+"pt": "Davi é ungido rei de todo o Israel",
+"es": "David es ungido rey de todo Israel"
+},
+"11:4": {
+"en": "David Conquers Jerusalem",
+"pt": "Davi conquista Jerusalém",
+"es": "David conquista Jerusalén"
+},
+"11:10": {
+"en": "David’s Mighty Men",
+"pt": "Os valentes de Davi",
+"es": "Los valientes de David"
+},
+"12:1": {
+"en": "The Mighty Men Join David at Ziklag",
+"pt": "Os valentes juntam-se a Davi em Ziquelague",
+"es": "Los valientes se unen a David en Siclag"
+},
+"12:23": {
+"en": "David’s Army Grows at Hebron",
+"pt": "O exército de Davi cresce em Hebrom",
+"es": "El ejército de David crece en Hebrón"
+},
+"13:1": {
+"en": "David Fetches the Ark",
+"pt": "Davi busca a arca",
+"es": "David traslada el arca"
+},
+"13:8": {
+"en": "Uzzah Touches the Ark",
+"pt": "Uzá toca na arca",
+"es": "Uza toca el arca"
+},
+"14:1": {
+"en": "David’s Family Grows",
+"pt": "A família de Davi aumenta",
+"es": "La familia de David crece"
+},
+"14:8": {
+"en": "Two Victories over the Philistines",
+"pt": "Duas vitórias sobre os filisteus",
+"es": "Dos victorias sobre los filisteos"
+},
+"15:1": {
+"en": "Preparing to Move the Ark",
+"pt": "Preparativos para transportar a arca",
+"es": "Preparativos para trasladar el arca"
+},
+"15:14": {
+"en": "The Priests and Levites Carry the Ark",
+"pt": "Os sacerdotes e levitas transportam a arca",
+"es": "Los sacerdotes y levitas llevan el arca"
+},
+"15:25": {
+"en": "Moving the Ark to Jerusalem",
+"pt": "A arca é levada para Jerusalém",
+"es": "El arca es llevada a Jerusalén"
+},
+"15:29": {
+"en": "Michal’s Contempt for David",
+"pt": "Mical despreza Davi",
+"es": "Mical desprecia a David"
+},
+"16:1": {
+"en": "A Tent for the Ark",
+"pt": "Uma tenda para a arca",
+"es": "Una tienda para el arca"
+},
+"16:7": {
+"en": "David’s Psalm of Thanksgiving",
+"pt": "O salmo de gratidão de Davi",
+"es": "El salmo de acción de gracias de David"
+},
+"16:23": {
+"en": "Sing to the LORD, All the Earth",
+"pt": "Cantai ao SENHOR, toda a terra",
+"es": "Cantad al SEÑOR, toda la tierra"
+},
+"16:37": {
+"en": "Worship before the Ark",
+"pt": "O culto diante da arca",
+"es": "El culto delante del arca"
+},
+"17:1": {
+"en": "God’s Covenant with David",
+"pt": "A aliança de Deus com Davi",
+"es": "El pacto de Dios con David"
+},
+"17:16": {
+"en": "David’s Prayer of Thanksgiving",
+"pt": "A oração de gratidão de Davi",
+"es": "La oración de acción de gracias de David"
+},
+"18:1": {
+"en": "David’s Triumphs",
+"pt": "As vitórias de Davi",
+"es": "Las victorias de David"
+},
+"18:14": {
+"en": "David’s Officers",
+"pt": "Os oficiais de Davi",
+"es": "Los oficiales de David"
+},
+"19:1": {
+"en": "David’s Messengers Disgraced",
+"pt": "Os mensageiros de Davi são humilhados",
+"es": "Los mensajeros de David son humillados"
+},
+"19:10": {
+"en": "David Defeats Ammon and Aram",
+"pt": "Davi derrota os amonitas e os arameus",
+"es": "David derrota a los amonitas y a los sirios"
+},
+"20:1": {
+"en": "The Capture of Rabbah",
+"pt": "A conquista de Rabá",
+"es": "La conquista de Rabá"
+},
+"20:4": {
+"en": "Battles against the Philistines",
+"pt": "Guerra contra os gigantes filisteus",
+"es": "Batallas contra los filisteos"
+},
+"21:1": {
+"en": "David’s Military Census",
+"pt": "O censo militar de Davi",
+"es": "El censo militar de David"
+},
+"21:7": {
+"en": "Judgment for David’s Sin",
+"pt": "O juízo pelo pecado de Davi",
+"es": "El juicio por el pecado de David"
+},
+"21:14": {
+"en": "A Plague on Israel",
+"pt": "A peste sobre Israel",
+"es": "La peste sobre Israel"
+},
+"21:18": {
+"en": "David Builds an Altar",
+"pt": "Davi edifica um altar",
+"es": "David edifica un altar"
+},
+"22:1": {
+"en": "Preparations for the Temple",
+"pt": "Preparativos para o templo",
+"es": "Preparativos para el templo"
+},
+"22:6": {
+"en": "Solomon Anointed to Build the Temple",
+"pt": "Salomão é encarregado de edificar o templo",
+"es": "Salomón es designado para edificar el templo"
+},
+"23:1": {
+"en": "The Divisions of the Levites",
+"pt": "As divisões dos levitas",
+"es": "Las divisiones de los levitas"
+},
+"23:7": {
+"en": "The Gershonites",
+"pt": "Os gersonitas",
+"es": "Los gersonitas"
+},
+"23:12": {
+"en": "The Kohathites",
+"pt": "Os coatitas",
+"es": "Los coatitas"
+},
+"23:21": {
+"en": "The Merarites",
+"pt": "Os meraritas",
+"es": "Los meraritas"
+},
+"23:24": {
+"en": "Levite Duties Revised",
+"pt": "Os deveres dos levitas",
+"es": "Los deberes de los levitas"
+},
+"24:1": {
+"en": "Twenty-Four Divisions of Priests",
+"pt": "As vinte e quatro ordens sacerdotais",
+"es": "Las veinticuatro divisiones de los sacerdotes"
+},
+"24:20": {
+"en": "The Rest of the Levites",
+"pt": "Os outros levitas",
+"es": "El resto de los levitas"
+},
+"25:1": {
+"en": "Twenty-Four Divisions of Musicians",
+"pt": "Os vinte e quatro turnos de músicos",
+"es": "Las veinticuatro divisiones de los músicos"
+},
+"26:1": {
+"en": "The Divisions of the Gatekeepers",
+"pt": "As divisões dos porteiros",
+"es": "Las divisiones de los porteros"
+},
+"26:20": {
+"en": "The Treasurers, Officers, and Judges",
+"pt": "Os tesoureiros, oficiais e juízes",
+"es": "Los tesoreros, oficiales y jueces"
+},
+"27:1": {
+"en": "Twelve Captains for Twelve Months",
+"pt": "Doze chefes para os doze meses",
+"es": "Doce jefes para los doce meses"
+},
+"27:16": {
+"en": "The Leaders of the Twelve Tribes",
+"pt": "Os líderes das doze tribos",
+"es": "Los jefes de las doce tribus"
+},
+"27:25": {
+"en": "David’s Various Overseers",
+"pt": "Os administradores dos bens de Davi",
+"es": "Los administradores de David"
+},
+"27:32": {
+"en": "The Counselors",
+"pt": "Os conselheiros de Davi",
+"es": "Los consejeros de David"
+},
+"28:1": {
+"en": "David Commissions Solomon",
+"pt": "Davi instrui Salomão",
+"es": "David instruye a Salomón"
+},
+"28:11": {
+"en": "The Plans for the Temple",
+"pt": "A planta do templo",
+"es": "Los planos del templo"
+},
+"29:1": {
+"en": "Offerings for the Temple",
+"pt": "Ofertas para o templo",
+"es": "Ofrendas para el templo"
+},
+"29:10": {
+"en": "David’s Prayer of Blessing",
+"pt": "A oração de louvor de Davi",
+"es": "La oración de alabanza de David"
+},
+"29:21": {
+"en": "Solomon Anointed King",
+"pt": "Salomão é aclamado rei",
+"es": "Salomón es ungido rey"
+},
+"29:26": {
+"en": "David’s Reign and Death",
+"pt": "O reinado e a morte de Davi",
+"es": "El reinado y la muerte de David"
+}
 }
 }
