@@ -104,3 +104,4 @@ python3 tool/fetch_bibles.py          # baixa e monta as 22 versões em assets/b
 flutter pub get && flutter analyze && flutter test
 ```
 O Flutter usado é o 3.47.9. O APK só é gerado no GitHub Actions (o ambiente da nuvem não tem o Android SDK).
+
