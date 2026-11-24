@@ -34,7 +34,7 @@ App Flutter de Bíblia para tablet Android, de uso pessoal do dono (JG Company).
 - **IA com reserva:** a chave Gemini é do plano grátis (o `gemini-flash-latest` só dá 20 pedidos/dia). A `ai-verse` tenta os modelos de `GEMINI_FALLBACK_MODELS` (padrão: flash-lite) quando recebe 429/503. Para acabar com o limite, ativar faturamento no Google AI Studio.
 - **Fundos do editor de imagem:** bucket **público** `fundos` (68 fotos de 1440 px + miniaturas `t-*.jpg` + `fundos.json` com tema, autor e licença). Fotos do Wikimedia Commons ("Quality images", só CC0, domínio público e CC BY — sem SA), geradas por `tool/fetch_backgrounds.py`; o editor mostra o crédito do autor. Também: foto da galeria, degradês prontos e próprios, cores lisas, escurecer, desfocar, cor e sombra do texto.
 - **Voz da leitura:** `lib/screens/voice_screen.dart` — escolhe o mecanismo (Google é bem mais natural que o da Samsung), a voz (online = mais natural), velocidade e tom; fica salvo.
-- **Login Google (a fazer):** o build imprime o SHA-1 da chave no passo "Chave de assinatura" para criar o cliente OAuth Android.
+- **Login Google + sincronização (feito):** Google Cloud do projeto do Gemini (`gen-lang-client-0231835938`, nº 703427545959, conta mrparfum.ofc), Google Auth Platform em modo **Teste** (usuários de teste: mrparfum.ofc e joabegoncalvess — outra conta precisa ser adicionada em Público-alvo ou o app publicado). Clientes OAuth: Web `703427545959-3dmu…hhg1` (vai em `serverClientId` e nos Client IDs do Supabase) e Android (pacote `com.jgcompany.biblia_jg`, SHA-1 `4D:D5:E2:72:48:27:67:2D:FA:6F:93:65:C9:A8:A1:65:D7:3E:E5:C3`). Supabase: provedor Google ligado sem secret, "Skip nonce checks" ligado. App: `google_sign_in` 7 → id_token → `/auth/v1/token?grant_type=id_token`; sessão em SharedPreferences (`lib/services/account_service.dart`). Tabela `user_sync` (1 linha por usuário, jsonb com o backup + ajustes, RLS só do dono). `lib/services/sync.dart`: ao abrir, traz da nuvem se ela for mais nova que a última sync; ao sair do app, envia.
 
 ## Pendências
 1. ~~Músicas de fundo~~ feito (player na nuvem, ver Infraestrutura). Ideias futuras: abaixar a música enquanto o "Ouvir" lê o versículo; tocar com a tela bloqueada (audio_service).
@@ -42,7 +42,7 @@ App Flutter de Bíblia para tablet Android, de uso pessoal do dono (JG Company).
 3. **Hinário.** Só hinos de domínio público, mais importação de hinário próprio. A Harpa Cristã é da CPAD.
 4. **Mapas.** Usar o OpenBible geodata (CC-BY, 1.293 lugares) com flutter_map/OSM, mais os lugares do versículo e jornadas (Êxodo, viagens de Paulo). "Vídeos 3D" só se o dono fornecer os vídeos.
 5. **Dicionário.** Domínio público: Strong, Easton, Smith, ISBE 1915, traduzidos com o Gemini. Mais um importador de módulos MyBible/MySword e conversão de PDFs de dicionário que o dono tenha legitimamente, entregues de forma privada e não pelo repositório.
-6. **Login Google + sincronização** (Supabase Auth). Exige criar um cliente OAuth no Google Cloud (projeto 703427545959).
+6. ~~Login Google + sincronização~~ feito (ver Infraestrutura).
 7. **Repositório privado.** O dono quer o repositório privado. **Antes de mudar**, levar a atualização automática para o Supabase Storage (secret `SUPABASE_SERVICE_ROLE_KEY` no GitHub para o upload) e apontar `updater.dart` para lá. Senão o app para de achar as atualizações.
 
 ## Regras de conteúdo

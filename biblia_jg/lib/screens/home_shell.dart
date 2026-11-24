@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../models/daily.dart';
+import '../services/account_service.dart';
+import '../services/sync.dart';
+import 'account_screen.dart';
 import '../state/app_state.dart';
 import '../widgets/book_chapter_panel.dart';
 import '../widgets/quick_settings_sheet.dart';
@@ -36,7 +39,7 @@ class HomeShell extends StatefulWidget {
   State<HomeShell> createState() => _HomeShellState();
 }
 
-class _HomeShellState extends State<HomeShell> {
+class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   bool _barsVisible = true;
   bool _panelOpen = true;
   bool? _lastFullScreen;
@@ -44,11 +47,29 @@ class _HomeShellState extends State<HomeShell> {
   @override
   void initState() {
     super.initState();
-    // Procura atualização alguns segundos depois de abrir o app.
+    // Procura atualização e sincroniza a conta alguns segundos depois de abrir o app.
     if (!HomeShell.autoCheckUpdates) return;
+    WidgetsBinding.instance.addObserver(this);
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) checkForUpdates(context);
     });
+    Future.delayed(const Duration(seconds: 5), () {
+      if (mounted) autoSync(context.read<AppState>(), context.read<AccountService>());
+    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Ao sair do app, salva na nuvem o que mudou.
+    if (state == AppLifecycleState.paused && mounted) {
+      pushOnly(context.read<AppState>(), context.read<AccountService>());
+    }
   }
 
   void _applyFullScreen(bool full) {
@@ -288,6 +309,17 @@ class _MainDrawer extends StatelessWidget {
             ]),
           ),
         ),
+        Builder(builder: (context) {
+          final account = context.watch<AccountService>();
+          return ListTile(
+            leading: account.signedIn && account.photoUrl != null
+                ? CircleAvatar(radius: 14, backgroundImage: NetworkImage(account.photoUrl!))
+                : const Icon(Icons.account_circle),
+            title: Text(account.signedIn ? (account.name ?? account.email ?? 'Conta Google') : 'Entrar com Google'),
+            subtitle: Text(account.signedIn ? 'Dados sincronizados na sua conta' : 'Salve tudo na sua conta'),
+            onTap: () => open(const AccountScreen()),
+          );
+        }),
         ListTile(
           leading: const Icon(Icons.menu_book),
           title: const Text('Bíblia'),

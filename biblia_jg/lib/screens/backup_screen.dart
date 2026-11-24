@@ -94,7 +94,7 @@ class _BackupScreenState extends State<BackupScreen> {
               padding: EdgeInsets.all(8),
               child: Text(
                   'O backup guarda suas marcações, favoritos, anotações, histórico e progresso de leitura. '
-                  'Na próxima etapa, com o login Google, isso também será salvo automaticamente na sua conta.'),
+                  'Entrando com a conta Google (no menu), isso também é salvo sozinho na sua conta.'),
             ),
             Card(
               child: ListTile(

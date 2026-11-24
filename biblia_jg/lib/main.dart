@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'data/bible_repository.dart';
 import 'data/user_db.dart';
 import 'screens/home_shell.dart';
+import 'services/account_service.dart';
 import 'services/music_player.dart';
 import 'services/notifications.dart';
 import 'services/tts.dart';
@@ -34,6 +35,7 @@ class BibliaJgApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ReadAloud()),
         ChangeNotifierProvider(create: (_) => MusicPlayer()),
+        ChangeNotifierProvider(create: (_) => AccountService()..load()),
       ],
       child: MaterialApp(
         title: 'Bíblia - JG Company',
