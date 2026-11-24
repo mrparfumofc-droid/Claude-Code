@@ -36,6 +36,32 @@ class NotificationService {
     _ready = true;
   }
 
+  /// Aviso imediato com som e vibração (fim do tempo do modo foco).
+  Future<void> alarm(String title, String body) async {
+    try {
+      await init();
+      await _plugin.show(
+        id: 4001,
+        title: title,
+        body: body,
+        notificationDetails: const NotificationDetails(
+          android: AndroidNotificationDetails(
+            'alarme_leitura',
+            'Alarme do tempo de leitura',
+            channelDescription: 'Toca quando o tempo escolhido no modo foco termina',
+            importance: Importance.max,
+            priority: Priority.high,
+            playSound: true,
+            enableVibration: true,
+            category: AndroidNotificationCategory.alarm,
+          ),
+        ),
+      );
+    } catch (e) {
+      debugPrint('Falha no alarme: $e');
+    }
+  }
+
   Future<bool> requestPermission() async {
     final android = _plugin.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>();

@@ -60,6 +60,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   int _tab = 0;
   final _built = <int>{0};
   bool _chrome = true; // barra de abas visível (a leitura esconde no modo foco)
+  bool? _railHidden; // barra lateral recolhida pelo usuário (tablet)
   bool? _lastFullScreen;
   bool _resumed = true;
   Timer? _clock;
@@ -126,6 +127,11 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
     SystemChrome.setEnabledSystemUIMode(full ? SystemUiMode.immersiveSticky : SystemUiMode.edgeToEdge);
   }
 
+  void _setRailHidden(bool hidden) {
+    setState(() => _railHidden = hidden);
+    context.read<AppState>().prefs.setBool('ui.rail_hidden', hidden);
+  }
+
   void _select(int i) => setState(() {
         _tab = i;
         _built.add(i);
@@ -150,6 +156,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
       }
     }
     final wide = MediaQuery.sizeOf(context).width >= tabletBreakpoint;
+    final railHidden = _railHidden ??= app.prefs.getBool('ui.rail_hidden') ?? false;
     Widget page(int i) => switch (i) {
           0 => const TodayScreen(),
           1 => ReaderPage(onChrome: (v) {
@@ -171,8 +178,9 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
       },
       child: wide
           ? Scaffold(
-              body: Row(children: [
-                if (_chrome)
+              body: Stack(children: [
+               Row(children: [
+                if (_chrome && !railHidden)
                   NavigationRail(
                     selectedIndex: _tab,
                     onDestinationSelected: _select,
@@ -189,9 +197,43 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
                       for (final (icon, selected, label) in _destinations)
                         NavigationRailDestination(icon: Icon(icon), selectedIcon: Icon(selected), label: Text(label)),
                     ],
+                    // Embaixo: a música e o botão de recolher a barra.
+                    trailingAtBottom: true,
+                    scrollable: true,
+                    trailing: Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Column(mainAxisSize: MainAxisSize.min, children: [
+                        const RailMusic(),
+                        IconButton(
+                          tooltip: 'Ocultar a barra lateral',
+                          icon: const Icon(Icons.keyboard_double_arrow_left),
+                          onPressed: () => _setRailHidden(true),
+                        ),
+                      ]),
+                    ),
                   ),
-                if (_chrome) const VerticalDivider(width: 1),
+                if (_chrome && !railHidden) const VerticalDivider(width: 1),
                 Expanded(child: stack),
+               ]),
+               // Barra recolhida: uma alça discreta na borda traz de volta.
+               if (_chrome && railHidden)
+                 Positioned(
+                   left: 0,
+                   bottom: 72,
+                   child: Material(
+                     elevation: 3,
+                     color: Theme.of(context).colorScheme.surfaceContainerHigh.withValues(alpha: 0.92),
+                     borderRadius: const BorderRadius.horizontal(right: Radius.circular(14)),
+                     child: InkWell(
+                       borderRadius: const BorderRadius.horizontal(right: Radius.circular(14)),
+                       onTap: () => _setRailHidden(false),
+                       child: const Tooltip(
+                         message: 'Mostrar a barra lateral',
+                         child: SizedBox(width: 26, height: 60, child: Icon(Icons.keyboard_double_arrow_right, size: 20)),
+                       ),
+                     ),
+                   ),
+                 ),
               ]),
             )
           : Scaffold(
@@ -230,6 +272,9 @@ class _ReaderPageState extends State<ReaderPage> {
   bool _focus = false;
   int _focusSeconds = 0;
   Timer? _focusTimer;
+  int? _focusGoal; // minutos escolhidos para a sessão (0 = sem limite)
+  bool _alarmed = false;
+  Offset? _pill; // onde o relógio do modo foco fica (o leitor arrasta)
 
   @override
   void dispose() {
@@ -250,11 +295,220 @@ class _ReaderPageState extends State<ReaderPage> {
     setState(() {
       _focus = true;
       _focusSeconds = 0;
+      _alarmed = false;
+      _focusGoal = null; // volta ao tempo guardado
     });
     widget.onChrome(false);
-    _focusTimer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (mounted) setState(() => _focusSeconds++);
+    _focusTimer = Timer.periodic(const Duration(seconds: 1), (_) => _tick());
+  }
+
+  int _goal(AppState app) => _focusGoal ??= app.prefs.getInt('focus.goal') ?? 10;
+
+  void _tick() {
+    if (!mounted) return;
+    setState(() => _focusSeconds++);
+    final app = context.read<AppState>();
+    final goal = _goal(app);
+    if (goal > 0 && !_alarmed && _focusSeconds >= goal * 60) {
+      _alarmed = true;
+      _ringAlarm(app, goal);
+    }
+  }
+
+  /// O tempo escolhido acabou: toca o alarme e pergunta o que fazer.
+  Future<void> _ringAlarm(AppState app, int goal) async {
+    final name = '${app.currentBook?.name ?? ''} ${app.chapter}'.trim();
+    app.notifications.alarm('Tempo de leitura concluído', '$goal minutos · $name');
+    SystemSound.play(SystemSoundType.alert);
+    for (var i = 0; i < 3; i++) {
+      HapticFeedback.heavyImpact();
+      await Future.delayed(const Duration(milliseconds: 350));
+    }
+    if (!mounted || !_focus) return;
+    final choice = await showDialog<int>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        icon: const Icon(Icons.alarm_on, size: 40),
+        title: const Text('Tempo concluído'),
+        content: Text('Você leu por $goal minutos. Quer continuar?'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, 5), child: const Text('Mais 5 minutos')),
+          TextButton(onPressed: () => Navigator.pop(ctx, 0), child: const Text('Continuar sem alarme')),
+          FilledButton(onPressed: () => Navigator.pop(ctx, -1), child: const Text('Concluir leitura')),
+        ],
+      ),
+    );
+    if (!mounted) return;
+    if (choice == 5) {
+      setState(() {
+        _focusGoal = _focusSeconds ~/ 60 + 5;
+        _alarmed = false;
+      });
+    } else if (choice == -1) {
+      _finishFocus(app);
+    }
+  }
+
+  /// Escolhe por quanto tempo ler (o alarme toca no fim).
+  Future<void> _chooseGoal(AppState app) async {
+    final current = _goal(app);
+    final picked = await showModalBottomSheet<int>(
+      context: context,
+      showDragHandle: true,
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text('Por quanto tempo quer ler?', style: Theme.of(ctx).textTheme.titleLarge),
+            const SizedBox(height: 4),
+            const Text('Quando o tempo acabar, o aparelho toca um alarme. Dá para arrastar o relógio para onde quiser.'),
+            const SizedBox(height: 14),
+            Wrap(spacing: 8, runSpacing: 8, children: [
+              for (final m in const [0, 5, 10, 15, 20, 30, 45, 60, 90])
+                ChoiceChip(
+                  label: Text(m == 0 ? 'Sem limite' : '$m min'),
+                  selected: m == current,
+                  onSelected: (_) => Navigator.pop(ctx, m),
+                ),
+            ]),
+          ]),
+        ),
+      ),
+    );
+    if (picked == null || !mounted) return;
+    app.prefs.setInt('focus.goal', picked);
+    setState(() {
+      _focusGoal = picked;
+      _alarmed = picked > 0 && _focusSeconds >= picked * 60;
     });
+  }
+
+  /// Faixa de cima do modo foco: a hora à esquerda e o livro com o capítulo no centro.
+  Widget _focusStrip(String title) {
+    final scheme = Theme.of(context).colorScheme;
+    final now = DateTime.now();
+    final clock = '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
+    return SafeArea(
+      bottom: false,
+      child: SizedBox(
+        height: 40,
+        child: Stack(children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Text(clock,
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: scheme.onSurfaceVariant,
+                      fontFeatures: const [FontFeature.tabularFigures()])),
+            ),
+          ),
+          Center(
+            child: InkWell(
+              borderRadius: BorderRadius.circular(18),
+              onTap: () => _push(const BookChapterPage()),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  Flexible(
+                    child: Text(title,
+                        overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  ),
+                  const Icon(Icons.arrow_drop_down),
+                ]),
+              ),
+            ),
+          ),
+        ]),
+      ),
+    );
+  }
+
+  /// Relógio do modo foco: mostra o tempo, abre a escolha da duração e pode ser arrastado.
+  Widget _focusPill(AppState app, BoxConstraints box) {
+    final scheme = Theme.of(context).colorScheme;
+    final goal = _goal(app);
+    final total = goal * 60;
+    final remaining = goal > 0 ? total - _focusSeconds : _focusSeconds;
+    final shown = remaining.abs();
+    final label =
+        '${goal > 0 && remaining < 0 ? '+' : ''}${(shown ~/ 60).toString().padLeft(2, '0')}:${(shown % 60).toString().padLeft(2, '0')}';
+    final done = goal > 0 ? _focusSeconds >= total : _focusSeconds >= 300;
+    _pill ??= app.prefs.containsKey('focus.px')
+        ? Offset(app.prefs.getDouble('focus.px') ?? 0, app.prefs.getDouble('focus.py') ?? 0)
+        : Offset(box.maxWidth - 372, box.maxHeight - 76);
+    final top = MediaQuery.paddingOf(context).top + 44;
+    final pos = Offset(
+      _pill!.dx.clamp(4.0, (box.maxWidth - 160).clamp(4.0, double.infinity)),
+      _pill!.dy.clamp(top, (box.maxHeight - 60).clamp(top, double.infinity)),
+    );
+    return Positioned(
+      left: pos.dx,
+      top: pos.dy,
+      child: GestureDetector(
+        onPanUpdate: (d) => setState(() => _pill = pos + d.delta),
+        onPanEnd: (_) {
+          app.prefs.setDouble('focus.px', pos.dx);
+          app.prefs.setDouble('focus.py', pos.dy);
+        },
+        child: Material(
+          elevation: 6,
+          borderRadius: BorderRadius.circular(28),
+          color: scheme.inverseSurface,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(6, 6, 6, 6),
+            child: Row(mainAxisSize: MainAxisSize.min, children: [
+              Tooltip(
+                message: 'Arraste para mudar de lugar',
+                child: Icon(Icons.drag_indicator, size: 20, color: scheme.onInverseSurface.withValues(alpha: 0.6)),
+              ),
+              InkWell(
+                borderRadius: BorderRadius.circular(18),
+                onTap: () => _chooseGoal(app),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  child: Row(mainAxisSize: MainAxisSize.min, children: [
+                    if (done)
+                      const Icon(Icons.check_circle, size: 18, color: Colors.greenAccent)
+                    else if (goal > 0)
+                      SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          value: (_focusSeconds / total).clamp(0.0, 1.0),
+                          strokeWidth: 2.5,
+                          color: Colors.greenAccent,
+                          backgroundColor: scheme.onInverseSurface.withValues(alpha: 0.25),
+                        ),
+                      )
+                    else
+                      Icon(Icons.timer_outlined, size: 18, color: scheme.onInverseSurface),
+                    const SizedBox(width: 8),
+                    Text(label,
+                        style: TextStyle(
+                            color: scheme.onInverseSurface,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            fontFeatures: const [FontFeature.tabularFigures()])),
+                    Icon(Icons.arrow_drop_down, size: 18, color: scheme.onInverseSurface),
+                  ]),
+                ),
+              ),
+              const SizedBox(width: 4),
+              FilledButton(onPressed: () => _finishFocus(app), child: const Text('Concluir leitura')),
+              IconButton(
+                tooltip: 'Sair do modo foco',
+                color: scheme.onInverseSurface,
+                icon: const Icon(Icons.close),
+                onPressed: _stopFocus,
+              ),
+            ]),
+          ),
+        ),
+      ),
+    );
   }
 
   void _stopFocus() {
@@ -305,7 +559,12 @@ class _ReaderPageState extends State<ReaderPage> {
     if (!mounted) return;
     if (next == true) {
       await app.nextChapter();
-      if (mounted) setState(() => _focusSeconds = 0);
+      if (mounted) {
+        setState(() {
+          _focusSeconds = 0;
+          _alarmed = false;
+        });
+      }
     } else {
       _stopFocus();
     }
@@ -393,6 +652,7 @@ class _ReaderPageState extends State<ReaderPage> {
       child: _barsVisible && !_focus
           ? AppBar(
               automaticallyImplyLeading: false,
+              centerTitle: true,
               title: InkWell(
                 onTap: book == null
                     ? null
@@ -447,7 +707,7 @@ class _ReaderPageState extends State<ReaderPage> {
                   ),
               ],
             )
-          : SizedBox(height: MediaQuery.paddingOf(context).top),
+          : (_focus ? _focusStrip(title) : SizedBox(height: MediaQuery.paddingOf(context).top)),
     );
 
     Widget body;
@@ -466,7 +726,10 @@ class _ReaderPageState extends State<ReaderPage> {
               AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 width: showPanel ? 320 : 0,
-                child: showPanel ? const Material(elevation: 1, child: BookChapterPanel()) : null,
+                // Escolhido o versículo, o painel se fecha sozinho.
+                child: showPanel
+                    ? Material(elevation: 1, child: BookChapterPanel(onSelected: () => setState(() => _panelChoice = false)))
+                    : null,
               ),
               if (showPanel) const VerticalDivider(width: 1),
               Expanded(child: reader),
@@ -474,47 +737,17 @@ class _ReaderPageState extends State<ReaderPage> {
           : reader;
     }
 
-    final mm = (_focusSeconds ~/ 60).toString().padLeft(2, '0');
-    final ss = (_focusSeconds % 60).toString().padLeft(2, '0');
     return Scaffold(
-      body: Stack(children: [
-        Column(children: [
-          topBar,
-          Expanded(child: body),
-          if (!_focus) MiniMusicBar(onOpen: () => _push(const MusicScreen())),
+      body: LayoutBuilder(
+        builder: (context, box) => Stack(children: [
+          Column(children: [
+            topBar,
+            Expanded(child: body),
+            if (!_focus) MiniMusicBar(onOpen: () => _push(const MusicScreen())),
+          ]),
+          if (_focus) _focusPill(app, box),
         ]),
-        if (_focus)
-          Positioned(
-            right: 16,
-            bottom: 16,
-            child: SafeArea(
-              child: Material(
-                elevation: 6,
-                borderRadius: BorderRadius.circular(28),
-                color: Theme.of(context).colorScheme.inverseSurface,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 6, 6, 6),
-                  child: Row(mainAxisSize: MainAxisSize.min, children: [
-                    Icon(_focusSeconds >= 300 ? Icons.check_circle : Icons.timer_outlined,
-                        size: 18, color: _focusSeconds >= 300 ? Colors.greenAccent : Theme.of(context).colorScheme.onInverseSurface),
-                    const SizedBox(width: 6),
-                    Text('$mm:$ss',
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.onInverseSurface, fontFeatures: const [FontFeature.tabularFigures()])),
-                    const SizedBox(width: 10),
-                    FilledButton(onPressed: () => _finishFocus(app), child: const Text('Concluir leitura')),
-                    IconButton(
-                      tooltip: 'Sair do modo foco',
-                      color: Theme.of(context).colorScheme.onInverseSurface,
-                      icon: const Icon(Icons.close),
-                      onPressed: _stopFocus,
-                    ),
-                  ]),
-                ),
-              ),
-            ),
-          ),
-      ]),
+      ),
     );
   }
 }

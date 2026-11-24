@@ -252,6 +252,32 @@ class _NowPlaying extends StatelessWidget {
 }
 
 /// Barrinha embaixo da leitura enquanto uma música está escolhida.
+/// Controles de música para a barra lateral do tablet: abrir as músicas, tocar/pausar e próxima.
+class RailMusic extends StatelessWidget {
+  const RailMusic({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final m = context.watch<MusicPlayer>();
+    final t = m.currentTrack;
+    return Column(mainAxisSize: MainAxisSize.min, children: [
+      IconButton(
+        tooltip: t == null ? 'Músicas de fundo' : 'Tocando: ${t.title}',
+        icon: Icon(t == null ? Icons.library_music_outlined : Icons.library_music),
+        onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MusicScreen())),
+      ),
+      if (t != null) ...[
+        IconButton(
+          tooltip: m.playing ? 'Pausar música' : 'Tocar música',
+          icon: Icon(m.playing ? Icons.pause_circle_filled : Icons.play_circle_fill),
+          onPressed: m.toggle,
+        ),
+        IconButton(tooltip: 'Próxima música', icon: const Icon(Icons.skip_next), onPressed: () => m.next()),
+      ],
+    ]);
+  }
+}
+
 class MiniMusicBar extends StatelessWidget {
   final VoidCallback onOpen;
   const MiniMusicBar({super.key, required this.onOpen});

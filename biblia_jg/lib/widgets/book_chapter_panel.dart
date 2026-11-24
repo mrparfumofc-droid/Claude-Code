@@ -3,9 +3,11 @@ import 'package:provider/provider.dart';
 
 import '../state/app_state.dart';
 
-/// Lista de livros (AT / NT) com a grade de capítulos do livro aberto.
-/// No tablet fica fixa à esquerda; no celular abre como página.
+/// Lista de livros (AT / NT) com a grade de capítulos do livro aberto e, depois de escolher o
+/// capítulo, a grade de versículos. Tocar no versículo abre a Bíblia no lugar exato e fecha o painel.
+/// No tablet fica à esquerda; no celular abre como página.
 class BookChapterPanel extends StatefulWidget {
+  /// Chamado depois que o leitor escolhe o destino (para fechar o painel/página).
   final VoidCallback? onSelected;
   const BookChapterPanel({super.key, this.onSelected});
 
@@ -15,8 +17,15 @@ class BookChapterPanel extends StatefulWidget {
 
 class _BookChapterPanelState extends State<BookChapterPanel> {
   int? _expanded;
+  int? _chapter; // capítulo escolhido no livro aberto (mostra os versículos)
   bool _newTestament = false;
   bool _initialized = false;
+
+  void _open(AppState app, int book, int chapter, [int? verse]) {
+    app.goTo(book, chapter, verse: verse);
+    setState(() => _chapter = null);
+    widget.onSelected?.call();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +50,10 @@ class _BookChapterPanelState extends State<BookChapterPanel> {
           ],
           selected: {_newTestament},
           showSelectedIcon: false,
-          onSelectionChanged: (s) => setState(() => _newTestament = s.first),
+          onSelectionChanged: (s) => setState(() {
+            _newTestament = s.first;
+            _chapter = null;
+          }),
         ),
       ),
       Expanded(
@@ -54,19 +66,20 @@ class _BookChapterPanelState extends State<BookChapterPanel> {
             final readCount = List.generate(b.chapters.length, (c) => c + 1)
                 .where((c) => app.readChapters.contains('${b.index}:$c'))
                 .length;
+            final picking = open && _chapter != null && _chapter! <= b.chapters.length;
             return Column(children: [
               ListTile(
                 dense: true,
                 selected: current,
-                title: Text(b.name,
-                    style: TextStyle(fontWeight: current ? FontWeight.bold : null)),
-                subtitle: readCount > 0
-                    ? LinearProgressIndicator(value: readCount / b.chapters.length)
-                    : null,
+                title: Text(b.name, style: TextStyle(fontWeight: current ? FontWeight.bold : null)),
+                subtitle: readCount > 0 ? LinearProgressIndicator(value: readCount / b.chapters.length) : null,
                 trailing: Icon(open ? Icons.expand_less : Icons.expand_more),
-                onTap: () => setState(() => _expanded = open ? null : b.index),
+                onTap: () => setState(() {
+                  _expanded = open ? null : b.index;
+                  _chapter = null;
+                }),
               ),
-              if (open)
+              if (open && !picking)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
                   child: Wrap(
@@ -74,18 +87,54 @@ class _BookChapterPanelState extends State<BookChapterPanel> {
                     runSpacing: 6,
                     children: [
                       for (var c = 1; c <= b.chapters.length; c++)
-                        _ChapterChip(
+                        _NumberChip(
                           number: c,
                           selected: current && app.chapter == c,
                           read: app.readChapters.contains('${b.index}:$c'),
                           scheme: scheme,
-                          onTap: () {
-                            app.goTo(b.index, c);
-                            widget.onSelected?.call();
-                          },
+                          onTap: () => setState(() => _chapter = c),
                         ),
                     ],
                   ),
+                ),
+              if (picking)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 12, 12),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Row(children: [
+                      IconButton(
+                        tooltip: 'Voltar aos capítulos',
+                        visualDensity: VisualDensity.compact,
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: () => setState(() => _chapter = null),
+                      ),
+                      Expanded(
+                        child: Text('${b.name} $_chapter · versículo',
+                            overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                      TextButton(
+                        onPressed: () => _open(app, b.index, _chapter!),
+                        child: const Text('Capítulo inteiro'),
+                      ),
+                    ]),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4),
+                      child: Wrap(
+                        spacing: 6,
+                        runSpacing: 6,
+                        children: [
+                          for (var v = 1; v <= b.chapters[_chapter! - 1].length; v++)
+                            _NumberChip(
+                              number: v,
+                              selected: false,
+                              read: false,
+                              scheme: scheme,
+                              onTap: () => _open(app, b.index, _chapter!, v),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ]),
                 ),
             ]);
           },
@@ -95,18 +144,14 @@ class _BookChapterPanelState extends State<BookChapterPanel> {
   }
 }
 
-class _ChapterChip extends StatelessWidget {
+class _NumberChip extends StatelessWidget {
   final int number;
   final bool selected;
   final bool read;
   final ColorScheme scheme;
   final VoidCallback onTap;
-  const _ChapterChip(
-      {required this.number,
-      required this.selected,
-      required this.read,
-      required this.scheme,
-      required this.onTap});
+  const _NumberChip(
+      {required this.number, required this.selected, required this.read, required this.scheme, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +182,7 @@ class BookChapterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('Livros e capítulos')),
+        appBar: AppBar(title: const Text('Livro, capítulo e versículo')),
         body: BookChapterPanel(onSelected: () => Navigator.pop(context)),
       );
 }

@@ -11,7 +11,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/reference_parser.dart';
-import 'ai_service.dart' show supabaseUrl;
+import 'ai_service.dart' show appKey, supabaseAnonKey, supabaseUrl;
 
 /// Uma cena da história: ilustração, texto narrado e (se houver) o lugar no mapa.
 class StoryScene {
@@ -22,10 +22,13 @@ class StoryScene {
   final String title;
   final String reference;
   final String text;
-  final bool audio; // tem narração gravada (audio/<história>-<n>.mp3)
+  /// Versão da narração gravada: 0 = não tem; 1 = arquivo original; maior = arquivo refeito (sufixo -vN).
+  final int audioVersion;
   final bool hasImage; // a ilustração já está na nuvem
-  const StoryScene(this.image, this.place, this.point, this.zoom, this.title, this.reference, this.text, this.audio,
+  const StoryScene(this.image, this.place, this.point, this.zoom, this.title, this.reference, this.text, this.audioVersion,
       [this.hasImage = true]);
+
+  bool get audio => audioVersion > 0;
 
   /// Trecho que abre na Bíblia: a primeira referência, sem o "até outro capítulo".
   Passage? get passage => parseStoryReference(reference);
@@ -105,7 +108,7 @@ class StoriesData {
           c['t'] as String,
           c['r'] as String? ?? '',
           c['d'] as String? ?? '',
-          c['a'] == true,
+          switch (c['a']) { true => 1, final num n => n.toInt(), _ => 0 },
           c['i'] == true,
         ));
       }
@@ -179,6 +182,51 @@ class StoriesData {
   }
 }
 
+/// Voz do narrador: o dono ouve as amostras e escolhe; as narrações passam a ser gravadas com ela.
+class NarratorVoices {
+  static const _prefKey = 'stories.voz';
+
+  /// Vozes com amostra na nuvem e a voz em uso (null se ainda não há amostras).
+  static Future<(List<String>, String)?> load() async {
+    try {
+      final res = await http
+          .get(Uri.parse('${StoryMedia.url('amostras/vozes.json')}?t=${DateTime.now().millisecondsSinceEpoch ~/ 60000}'))
+          .timeout(const Duration(seconds: 15));
+      if (res.statusCode != 200) return null;
+      final j = jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
+      final voices = [for (final v in j['vozes'] as List? ?? const []) '$v'];
+      if (voices.isEmpty) return null;
+      final chosen = (await SharedPreferences.getInstance()).getString(_prefKey);
+      return (voices, chosen ?? '${j['padrao'] ?? voices.first}');
+    } catch (_) {
+      return null;
+    }
+  }
+
+  static String sampleUrl(String voice) => StoryMedia.url('amostras/voz-${voice.toLowerCase()}.mp3');
+
+  /// Registra a escolha (vale para as próximas gravações).
+  static Future<bool> choose(String voice) async {
+    try {
+      final res = await http
+          .post(Uri.parse('$supabaseUrl/functions/v1/historias-admin'),
+              headers: {
+                'Authorization': 'Bearer $supabaseAnonKey',
+                'apikey': supabaseAnonKey,
+                'x-app-key': appKey,
+                'Content-Type': 'application/json',
+              },
+              body: jsonEncode({'voz': voice}))
+          .timeout(const Duration(seconds: 20));
+      if (res.statusCode != 200) return false;
+      await (await SharedPreferences.getInstance()).setString(_prefKey, voice);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+}
+
 /// Arquivos das histórias (ilustrações, mapas de profundidade e narração) no bucket público
 /// "historias", com cópia no aparelho para abrir rápido e funcionar sem internet depois.
 class StoryMedia {
@@ -187,7 +235,8 @@ class StoryMedia {
   static String image(String key) => 'img/$key.jpg';
   static String depth(String key) => 'dep/$key.jpg';
   static String thumb(String key) => 'thumb/$key.jpg';
-  static String narration(String storyId, int scene) => 'audio/$storyId-${scene + 1}.mp3';
+  static String narration(String storyId, int scene, [int version = 1]) =>
+      version <= 1 ? 'audio/$storyId-${scene + 1}.mp3' : 'audio/$storyId-${scene + 1}-v$version.mp3';
 
   static Directory? _dir;
   static Future<Directory> dir() async {

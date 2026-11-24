@@ -171,7 +171,9 @@ class _BibleStoryPlayerState extends State<BibleStoryPlayer> with WidgetsBinding
     if (_i + 1 < story.scenes.length) {
       final next = story.scenes[_i + 1];
       StoryMedia.warm([StoryMedia.image(next.image), StoryMedia.depth(next.image)]);
-      if (next.audio && _audioOn) unawaited(StoryMedia.file(StoryMedia.narration(story.id, _i + 1)));
+      if (next.audio && _audioOn) {
+        unawaited(StoryMedia.file(StoryMedia.narration(story.id, _i + 1, next.audioVersion)));
+      }
     }
     if (!_playing) return;
     await _narrate(run);
@@ -187,7 +189,7 @@ class _BibleStoryPlayerState extends State<BibleStoryPlayer> with WidgetsBinding
     if (s.audio) {
       setState(() => _loadingAudio = true);
       try {
-        final path = StoryMedia.narration(story.id, _i);
+        final path = StoryMedia.narration(story.id, _i, s.audioVersion);
         final file = await StoryMedia.file(path);
         if (!mounted || run != _run) return;
         if (file != null) {
