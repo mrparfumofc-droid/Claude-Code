@@ -7,6 +7,7 @@ import '../services/stories.dart' show parseStoryReference;
 import '../state/app_state.dart';
 import '../theme.dart';
 import 'ai_chat_screen.dart';
+import 'panorama_diagrams.dart';
 import 'panorama_kings.dart';
 import 'panorama_tree.dart';
 
@@ -17,12 +18,16 @@ class PanoramaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = <(IconData, Color, String, String, Widget)>[
+      (Icons.route, const Color(0xFFEF6C00), 'Linha do tempo da Bíblia',
+          'Da criação à igreja primitiva em onze épocas', const BibleTimelineScreen()),
       (Icons.account_tree, const Color(0xFF1B2A4A), 'A família de Abraão',
           'De Abraão às doze tribos, com apresentação passo a passo', const FamilyTreeScreen()),
       (Icons.timeline, const Color(0xFF2E7D32), 'Reis de Israel e Judá',
           'Linha do tempo dos dois reinos, do rei Saul ao exílio', const KingsScreen()),
       (Icons.campaign, const Color(0xFFC0392B), 'Os profetas e suas missões',
           'Quando falaram, para quem e qual foi a mensagem', const ProphetsScreen()),
+      (Icons.holiday_village, const Color(0xFF8D6E63), 'O tabernáculo',
+          'A tenda de Deus vista de cima: cada peça e o que ela anuncia', const TabernacleScreen()),
       (Icons.grid_view_rounded, const Color(0xFF1E88E5), 'Os 66 livros',
           'A ficha de cada livro: autor, data, personagens e acontecimentos', const BooksPanoramaScreen()),
     ];
@@ -35,7 +40,7 @@ class PanoramaScreen extends StatelessWidget {
           crossAxisCount: cols,
           crossAxisSpacing: 14,
           mainAxisSpacing: 14,
-          childAspectRatio: cols == 2 ? 2.4 : 2.6,
+          childAspectRatio: cols == 2 ? 2.9 : 2.6,
           children: [
             for (final (icon, color, title, subtitle, page) in items)
               ClipRRect(
