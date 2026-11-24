@@ -37,6 +37,16 @@ type Turn = { role: "user" | "model"; text: string };
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
+  if (req.method === "GET") {
+    // Diagnóstico: a IA está configurada? (não expõe a chave)
+    const key = Deno.env.get("GEMINI_API_KEY");
+    if (!key) return json({ configured: false });
+    const r = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}`,
+      { headers: { "x-goog-api-key": key } },
+    );
+    return json({ configured: true, geminiOk: r.ok, model: MODEL });
+  }
   if (req.method !== "POST") return json({ error: "Método não permitido" }, 405);
 
   // Usuário logado (Google). Anônimo não pode usar a IA.
