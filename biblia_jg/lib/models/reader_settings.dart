@@ -79,18 +79,16 @@ class ReaderSettings {
         FontKind.serif => 'serif',
       };
 
-  Color get background => nightMode
-      ? const Color(0xFF121212)
-      : switch (pageColor) {
-          PageColor.white => Colors.white,
-          PageColor.sepia => const Color(0xFFF4ECD8),
-          PageColor.green => const Color(0xFFE3F0E0),
-          PageColor.dark => const Color(0xFF2B2B2B),
-          PageColor.black => Colors.black,
-        };
+  /// Cor da página da Bíblia. Independe do modo noturno (que vale só para o app).
+  Color get background => switch (pageColor) {
+        PageColor.white => Colors.white,
+        PageColor.sepia => const Color(0xFFF4ECD8),
+        PageColor.green => const Color(0xFFE3F0E0),
+        PageColor.dark => const Color(0xFF2B2B2B),
+        PageColor.black => Colors.black,
+      };
 
   Color get foreground {
-    if (nightMode) return const Color(0xFFE0E0E0);
     return switch (pageColor) {
       PageColor.dark || PageColor.black => const Color(0xFFE6E6E6),
       PageColor.sepia => const Color(0xFF3E2F1C),
@@ -98,8 +96,7 @@ class ReaderSettings {
     };
   }
 
-  bool get isDarkPage =>
-      nightMode || pageColor == PageColor.dark || pageColor == PageColor.black;
+  bool get isDarkPage => pageColor == PageColor.dark || pageColor == PageColor.black;
 
   ReaderSettings copyWith({
     double? fontSize,

@@ -165,6 +165,10 @@ class _ReaderViewState extends State<ReaderView> {
     );
   }
 
+  /// Fundo opaco do versículo selecionado.
+  Color _selectionBg(ReaderSettings s) =>
+      (s.isDarkPage ? jgGold : s.themeColor).withValues(alpha: s.isDarkPage ? 0.22 : 0.12);
+
   Color? _highlightBg(AppState app, int verse) {
     final c = app.highlights[verse];
     if (c == null) return null;
@@ -215,11 +219,12 @@ class _ReaderViewState extends State<ReaderView> {
     final selected = _selected.contains(verse);
     final flash = _flashVerse == verse;
     final style = base.copyWith(
-      backgroundColor: background ??
-          (flash ? s.themeColor.withValues(alpha: 0.18) : null),
+      backgroundColor: selected
+          ? _selectionBg(s)
+          : background ?? (flash ? s.themeColor.withValues(alpha: 0.18) : null),
       decoration: selected ? TextDecoration.underline : null,
-      decorationStyle: TextDecorationStyle.dotted,
-      decorationColor: s.foreground,
+      decorationThickness: 1.6,
+      decorationColor: s.isDarkPage ? jgGold : s.themeColor,
     );
     final spans = <InlineSpan>[];
     for (final seg in splitJesusWords(text)) {
@@ -268,7 +273,9 @@ class _ReaderViewState extends State<ReaderView> {
           margin: EdgeInsets.only(bottom: 2 + s.verseSpacing),
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
           decoration: BoxDecoration(
-            color: bg ?? (_flashVerse == v ? s.themeColor.withValues(alpha: 0.15) : null),
+            color: _selected.contains(v)
+                ? _selectionBg(s)
+                : bg ?? (_flashVerse == v ? s.themeColor.withValues(alpha: 0.15) : null),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Text.rich(

@@ -105,12 +105,12 @@ class ReadingControls extends StatelessWidget {
           Column(mainAxisSize: MainAxisSize.min, children: [
             InkWell(
               customBorder: const CircleBorder(),
-              onTap: () => set(s.copyWith(pageColor: c, nightMode: false)),
+              onTap: () => set(s.copyWith(pageColor: c)),
               child: CircleAvatar(
                 radius: 20,
                 backgroundColor: Colors.grey,
                 child: CircleAvatar(
-                  radius: s.pageColor == c && !s.nightMode ? 16 : 19,
+                  radius: s.pageColor == c ? 16 : 19,
                   backgroundColor: bg,
                 ),
               ),
@@ -121,8 +121,8 @@ class ReadingControls extends StatelessWidget {
       ]),
       SwitchListTile(
         contentPadding: EdgeInsets.zero,
-        title: const Text('Modo noturno'),
-        subtitle: const Text('Texto claro sobre um fundo escuro'),
+        title: const Text('Modo noturno do app'),
+        subtitle: const Text('Deixa menus e telas escuros. A cor da página da Bíblia é escolhida acima.'),
         value: s.nightMode,
         onChanged: (v) => set(s.copyWith(nightMode: v)),
       ),
