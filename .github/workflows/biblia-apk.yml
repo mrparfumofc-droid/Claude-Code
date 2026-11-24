@@ -33,6 +33,9 @@ jobs:
       - name: Dependências
         run: flutter pub get
 
+      - name: Baixar versões da Bíblia
+        run: python3 tool/fetch_bibles.py
+
       - name: Verificar código
         run: flutter analyze
 

@@ -1,0 +1,17 @@
+{
+  "source": "https://raw.githubusercontent.com/thiagobodruk/bible/master/json/",
+  "versions": [
+    {"id": "kja", "file": "pt_kja.json", "abbrev": "KJA", "name": "King James Atualizada", "copyright": "King James Atualizada. Direitos reservados à Sociedade Bíblica Ibero-Americana / Abba Press.", "sha256": "04d3d918860d3cf9c8bc3ad305bf460d92481039c14b3d4386e7e3625981da7f"},
+    {"id": "acf", "file": "pt_acf.json", "abbrev": "ACF", "name": "Almeida Corrigida Fiel", "copyright": "Almeida Corrigida Fiel. Direitos reservados à Sociedade Bíblica Trinitariana do Brasil (SBTB).", "sha256": "fc331dd8fddee4fb97facefadfe600caefca6ebc627f413c4b13147384b00f93"},
+    {"id": "arc", "file": "pt_arc.json", "abbrev": "ARC", "name": "Almeida Revista e Corrigida", "copyright": "Almeida Revista e Corrigida. Direitos reservados à Sociedade Bíblica do Brasil (SBB).", "sha256": "d4a7a2a66cb5e84abba0f1a6d70d213a194f03f20e7d3909696e240aa79f19f1"},
+    {"id": "ara", "file": "pt_ara.json", "abbrev": "ARA", "name": "Almeida Revista e Atualizada", "copyright": "Almeida Revista e Atualizada. Direitos reservados à Sociedade Bíblica do Brasil (SBB).", "sha256": "de5e691917f02901a98af30045effcbfcc5ed9e4c2c563ae21d5db06ec6ad31f"},
+    {"id": "naa", "file": "pt_naa.json", "abbrev": "NAA", "name": "Nova Almeida Atualizada", "copyright": "Nova Almeida Atualizada. Direitos reservados à Sociedade Bíblica do Brasil (SBB).", "sha256": "dcad53cad5fb6cc458022e832e57371cd162f7e5e849782dbd14e9eb3bd63274"},
+    {"id": "nvi", "file": "pt_nvi.json", "abbrev": "NVI", "name": "Nova Versão Internacional", "copyright": "Nova Versão Internacional. Direitos reservados à Biblica, Inc.", "sha256": "c86acfd1975eebd7b4ac1cd59e46914769d7e85a8e840290e88a1707b8b039e1"},
+    {"id": "nvt", "file": "pt_nvt.json", "abbrev": "NVT", "name": "Nova Versão Transformadora", "copyright": "Nova Versão Transformadora. Direitos reservados à Editora Mundo Cristão.", "sha256": "2e1291bcc9489495df2bd298386b80bcc02f3c917f7ec80789bb66978fc01d05"},
+    {"id": "ntlh", "file": "pt_ntlh.json", "abbrev": "NTLH", "name": "Nova Tradução na Linguagem de Hoje", "copyright": "Nova Tradução na Linguagem de Hoje. Direitos reservados à Sociedade Bíblica do Brasil (SBB).", "sha256": "105978738f77debc198dae0ace166ebbe1e740c04f0babb70edcc1a2e12414e7"},
+    {"id": "avm", "file": "pt_avm.json", "abbrev": "AM", "name": "Bíblia Ave-Maria", "copyright": "Bíblia Sagrada Ave-Maria. Direitos reservados à Editora Ave-Maria.", "sha256": "2cf6a9018ba7f26030995babee8dd01dd73d9e904f2b97d8ba1088a4e04ce589"},
+    {"id": "kjv", "file": "en_kjv.json", "abbrev": "KJV", "name": "King James Version (English)", "copyright": "King James Version — domínio público.", "sha256": "f627b3c24a617013a4514ab24b6dd1bb305b09af237994c018f74cb9c7e71f41"},
+    {"id": "niv", "file": "en_niv.json", "abbrev": "NIV", "name": "New International Version (English)", "copyright": "New International Version. Copyright © Biblica, Inc.", "sha256": "67899d361785d8b341c05d82e07f39c4d3e0d3b9fb3c5609b73cdefb74a589ab"},
+    {"id": "rvr1960", "file": "es_rvr1960.json", "abbrev": "RVR1960", "name": "Reina-Valera 1960 (Español)", "copyright": "Reina-Valera 1960. Derechos reservados a las Sociedades Bíblicas Unidas.", "sha256": "8aecd7e0bb440f494a5013d4ae8f8772629594fa5a3b5fd4f01077353365ed19"}
+  ]
+}

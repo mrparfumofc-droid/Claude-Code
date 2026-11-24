@@ -46,3 +46,6 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Textos bíblicos: gerados por tool/fetch_bibles.py (não versionar)
+/assets/bibles/*.json
