@@ -50,6 +50,7 @@ class MusicPlayer extends ChangeNotifier {
 
   AudioPlayer? _player;
   StreamSubscription<PlayerState>? _stateSub;
+  StreamSubscription<PlaybackEvent>? _errorSub;
   SharedPreferences? _prefs;
   Directory? _dir;
   final _rand = Random();
@@ -99,6 +100,13 @@ class MusicPlayer extends ChangeNotifier {
         notifyListeners();
       }
       if (done) _onCompleted();
+    });
+    // Erros de reprodução (internet caiu, link vencido): avisa em vez de ficar mudo.
+    _errorSub = player.playbackEventStream.listen((_) {}, onError: (Object e, StackTrace st) {
+      error = 'A música parou. Confira a internet e toque de novo.';
+      playing = false;
+      buffering = false;
+      notifyListeners();
     });
     return player;
   }
@@ -219,6 +227,11 @@ class MusicPlayer extends ChangeNotifier {
       await playAt(current ?? (shuffle ? _rand.nextInt(tracks.length) : 0));
     } else if (playing) {
       await _p.pause();
+    } else if (!downloaded.contains(tracks[current!].file) && _linksOld) {
+      // O link da música vale 12 horas: se venceu (pausou ontem), pega um novo antes de tocar.
+      final at = position;
+      await playAt(current!);
+      if (at > const Duration(seconds: 2)) unawaited(_p.seek(at));
     } else {
       unawaited(_p.play());
     }
@@ -358,6 +371,7 @@ class MusicPlayer extends ChangeNotifier {
   @override
   void dispose() {
     _stateSub?.cancel();
+    _errorSub?.cancel();
     _player?.dispose();
     super.dispose();
   }

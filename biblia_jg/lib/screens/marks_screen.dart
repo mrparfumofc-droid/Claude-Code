@@ -30,7 +30,7 @@ class MarksScreen extends StatelessWidget {
 }
 
 void _open(BuildContext context, AppState app, VerseRef r) {
-  app.goTo(r.book, r.chapter, verse: r.verse);
+  app.openAt(r.book, r.chapter, verse: r.verse);
   Navigator.popUntil(context, (route) => route.isFirst);
 }
 

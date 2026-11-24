@@ -48,7 +48,7 @@ class NotesScreen extends StatelessWidget {
                     tooltip: 'Ir para o versículo',
                     icon: const Icon(Icons.menu_book),
                     onPressed: () {
-                      app.goTo(n.ref.book, n.ref.chapter, verse: n.ref.verse);
+                      app.openAt(n.ref.book, n.ref.chapter, verse: n.ref.verse);
                       Navigator.pop(context);
                     },
                   ),

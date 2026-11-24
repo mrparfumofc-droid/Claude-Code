@@ -34,6 +34,11 @@ class AppState extends ChangeNotifier {
   int chapter = 1;
   int? scrollToVerse;
 
+  /// Muda a cada pedido de rolagem; cada leitor guarda o último que atendeu.
+  int scrollSerial = 0;
+
+  void rescheduleNotifications() => _rescheduleNotifications();
+
   // Dados do capítulo atual.
   Map<int, int> highlights = {};
   Set<int> favorites = {};
@@ -42,6 +47,60 @@ class AppState extends ChangeNotifier {
 
   /// Incrementa sempre que marcações/anotações mudam (para as listas recarregarem).
   int userDataRevision = 0;
+
+  /// Aba que a tela principal deve mostrar (1 = Bíblia); -1 = nenhuma pedida.
+  int tabRequest = -1;
+
+  /// Modo foco (leitura sem distrações) pedido por outra tela.
+  bool focusRequest = false;
+
+  // ---------- Constância ----------
+  /// dia (aaaa-mm-dd) -> (capítulos lidos, segundos de leitura).
+  Map<String, (int, int)> activity = {};
+
+  int get goalMinutes => prefs.getInt('goal_minutes') ?? 10;
+
+  Future<void> setGoalMinutes(int m) async {
+    await prefs.setInt('goal_minutes', m);
+    notifyListeners();
+  }
+
+  (int, int) get todayActivity => activity[UserDb.dayKey(DateTime.now())] ?? (0, 0);
+
+  bool activeOn(DateTime d) {
+    final a = activity[UserDb.dayKey(d)];
+    return a != null && (a.$1 > 0 || a.$2 >= 60);
+  }
+
+  /// Dias seguidos com leitura (hoje ainda sem leitura não quebra a sequência).
+  int get streak {
+    var d = DateTime.now();
+    if (!activeOn(d)) d = d.subtract(const Duration(days: 1));
+    var s = 0;
+    while (activeOn(d) && s < 5000) {
+      s++;
+      d = d.subtract(const Duration(days: 1));
+    }
+    return s;
+  }
+
+  /// Registra leitura de hoje (capítulos concluídos e/ou tempo lendo).
+  Future<void> logReading({int chapters = 0, int seconds = 0}) async {
+    final key = UserDb.dayKey(DateTime.now());
+    final before = activity[key] ?? (0, 0);
+    await db.addActivity(chapters: chapters, seconds: seconds);
+    final c = before.$1 + chapters;
+    final after = (c < 0 ? 0 : c, before.$2 + seconds);
+    activity = {...activity, key: after};
+    // Só redesenha quando muda algo visível (capítulo ou minuto).
+    if (chapters != 0 || before.$2 ~/ 60 != after.$2 ~/ 60) notifyListeners();
+  }
+
+  void requestTab(int tab, {bool focus = false}) {
+    tabRequest = tab;
+    if (focus) focusRequest = true;
+    notifyListeners();
+  }
 
   Future<void> init() async {
     final raw = prefs.getString('settings');
@@ -60,10 +119,20 @@ class AppState extends ChangeNotifier {
     }
     _clampPosition();
     readChapters = await db.readChapters();
+    try {
+      activity = await db.activity();
+    } catch (_) {}
     await _loadChapterData();
     _applyWakelock();
     loading = false;
     notifyListeners();
+    // No Android 13+ as notificações só aparecem depois de pedir a permissão (uma vez).
+    if ((settings.verseOfDayEnabled || settings.sundayPassage) && !(prefs.getBool('notif_asked') ?? false)) {
+      await prefs.setBool('notif_asked', true);
+      try {
+        await notifications.requestPermission();
+      } catch (_) {}
+    }
     _rescheduleNotifications();
   }
 
@@ -90,11 +159,17 @@ class AppState extends ChangeNotifier {
     notes = await db.notesForChapter(book, chapter);
   }
 
-  Future<void> goTo(int newBook, int newChapter, {int? verse}) async {
+  /// Vai para o capítulo. Com [show], a tela principal muda para a aba Bíblia.
+  Future<void> openAt(int newBook, int newChapter, {int? verse}) =>
+      goTo(newBook, newChapter, verse: verse, show: true);
+
+  Future<void> goTo(int newBook, int newChapter, {int? verse, bool show = false}) async {
     book = newBook;
     chapter = newChapter;
     _clampPosition();
     scrollToVerse = verse;
+    if (verse != null) scrollSerial++;
+    if (show) tabRequest = 1;
     await prefs.setInt('book', book);
     await prefs.setInt('chapter', chapter);
     await db.addHistory(book, chapter);
@@ -219,7 +294,13 @@ class AppState extends ChangeNotifier {
     final read = !chapterRead;
     await db.setChapterRead(book, chapter, read);
     readChapters = await db.readChapters();
+    await logReading(chapters: read ? 1 : -1);
     notifyListeners();
+  }
+
+  /// Marca o capítulo atual como lido (sem desmarcar se já estava).
+  Future<void> markChapterRead() async {
+    if (!chapterRead) await toggleChapterRead();
   }
 
   Future<void> resetProgress() async {
@@ -231,9 +312,11 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> restoreBackup(Map<String, dynamic> data) async {
-    await db.importAll(data);
+  /// Restaura um backup. Com [merge], junta com o que já existe em vez de substituir.
+  Future<void> restoreBackup(Map<String, dynamic> data, {bool merge = false}) async {
+    await db.importAll(data, replace: !merge);
     readChapters = await db.readChapters();
+    activity = await db.activity();
     await _changed();
   }
 

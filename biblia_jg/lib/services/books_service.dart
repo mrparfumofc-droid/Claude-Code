@@ -129,6 +129,12 @@ class BooksService extends ChangeNotifier {
 
   Uri _rest(String path) => Uri.parse('$supabaseUrl/rest/v1/$path');
 
+  static List<Book> _parseList(String body) =>
+      [for (final j in jsonDecode(body) as List) Book.fromJson((j as Map).cast())];
+
+  Future<File> _listFile() async =>
+      File(p.join((await getApplicationSupportDirectory()).path, 'livros-${account.userId}.json'));
+
   Future<void> refresh() async {
     if (!account.signedIn) {
       books = const [];
@@ -144,16 +150,26 @@ class BooksService extends ChangeNotifier {
               headers: await _headers())
           .timeout(const Duration(seconds: 30));
       if (res.statusCode != 200) throw 'erro ${res.statusCode}';
-      books = [
-        for (final j in jsonDecode(utf8.decode(res.bodyBytes)) as List)
-          Book.fromJson((j as Map).cast())
-      ];
-    } on SocketException {
-      error = 'Sem internet para carregar seus livros.';
-    } on TimeoutException {
-      error = 'Sem internet para carregar seus livros.';
+      final body = utf8.decode(res.bodyBytes);
+      books = _parseList(body);
+      try {
+        await (await _listFile()).writeAsString(body);
+      } catch (_) {}
     } catch (e) {
-      error = 'Não consegui carregar seus livros: $e';
+      // Sem internet: usa a lista guardada (os PDFs já baixados abrem normalmente).
+      List<Book>? cached;
+      try {
+        final f = await _listFile();
+        if (await f.exists()) cached = _parseList(await f.readAsString());
+      } catch (_) {}
+      if (cached != null) {
+        books = cached;
+        error = 'Sem internet: mostrando os livros já carregados neste tablet.';
+      } else {
+        error = e is SocketException || e is TimeoutException
+            ? 'Sem internet para carregar seus livros.'
+            : 'Não consegui carregar seus livros: $e';
+      }
     } finally {
       loading = false;
       notifyListeners();
@@ -259,37 +275,67 @@ class BooksService extends ChangeNotifier {
 
   // ---------- Anotações à mão ----------
 
-  Future<File> _inkFile(String bookId) async {
+  Future<Directory> _inkDir() async {
     final dir = Directory(p.join((await getApplicationSupportDirectory()).path, 'ink'));
     if (!await dir.exists()) await dir.create(recursive: true);
-    return File(p.join(dir.path, '$bookId.json'));
+    return dir;
   }
 
-  /// Traços de todas as páginas (nuvem; se estiver sem internet, a cópia local).
+  Future<File> _inkFile(String bookId) async => File(p.join((await _inkDir()).path, '$bookId.json'));
+
+  Future<File> _pendingFile(String bookId) async =>
+      File(p.join((await _inkDir()).path, '$bookId.pendente.json'));
+
+  /// Páginas riscadas neste aparelho que ainda não chegaram à nuvem.
+  Future<Set<int>> _pending(String bookId) async {
+    try {
+      final f = await _pendingFile(bookId);
+      if (await f.exists()) return {for (final n in jsonDecode(await f.readAsString()) as List) (n as num).toInt()};
+    } catch (_) {}
+    return {};
+  }
+
+  Future<void> _setPending(String bookId, Set<int> pages) async {
+    try {
+      await (await _pendingFile(bookId)).writeAsString(jsonEncode(pages.toList()));
+    } catch (_) {}
+  }
+
+  static Map<int, List<Stroke>> _parseInk(Iterable<MapEntry<int, dynamic>> e) => {
+        for (final x in e) x.key: [for (final s in (x.value as List)) Stroke.fromJson((s as Map).cast())]
+      };
+
+  /// Traços de todas as páginas. A nuvem vale, menos nas páginas riscadas aqui
+  /// que ainda não foram enviadas (essas são mantidas e reenviadas).
   Future<Map<int, List<Stroke>>> loadInk(String bookId) async {
-    Map<int, List<Stroke>> parse(Iterable<MapEntry<int, dynamic>> e) => {
-          for (final x in e)
-            x.key: [for (final s in (x.value as List)) Stroke.fromJson((s as Map).cast())]
-        };
+    var local = <int, List<Stroke>>{};
+    try {
+      final f = await _inkFile(bookId);
+      if (await f.exists()) {
+        final j = jsonDecode(await f.readAsString()) as Map<String, dynamic>;
+        local = _parseInk(j.entries.map((e) => MapEntry(int.parse(e.key), e.value)));
+      }
+    } catch (_) {}
+    final pending = await _pending(bookId);
     try {
       final res = await http
           .get(_rest('book_ink?book_id=eq.$bookId&select=page,strokes'), headers: await _headers())
           .timeout(const Duration(seconds: 20));
       if (res.statusCode == 200) {
         final rows = jsonDecode(utf8.decode(res.bodyBytes)) as List;
-        final map = parse(rows.map((r) => MapEntry((r['page'] as num).toInt(), r['strokes'])));
-        await _saveInkLocal(bookId, map);
-        return map;
+        final merged = _parseInk(rows.map((r) => MapEntry((r['page'] as num).toInt(), r['strokes'])));
+        for (final page in pending) {
+          merged[page] = local[page] ?? [];
+        }
+        await _saveInkLocal(bookId, merged);
+        for (final page in pending.toList()) {
+          if (await _pushInkPage(bookId, page, merged[page] ?? const [])) pending.remove(page);
+        }
+        await _setPending(bookId, pending);
+        return merged;
       }
     } catch (_) {}
-    try {
-      final f = await _inkFile(bookId);
-      if (await f.exists()) {
-        final j = jsonDecode(await f.readAsString()) as Map<String, dynamic>;
-        return parse(j.entries.map((e) => MapEntry(int.parse(e.key), e.value)));
-      }
-    } catch (_) {}
-    return {};
+    return local;
   }
 
   Future<void> _saveInkLocal(String bookId, Map<int, List<Stroke>> ink) async {
@@ -299,20 +345,30 @@ class BooksService extends ChangeNotifier {
     }));
   }
 
-  /// Salva os traços de uma página (local na hora; nuvem em seguida).
+  Future<bool> _pushInkPage(String bookId, int page, List<Stroke> strokes) async {
+    try {
+      final res = await http
+          .post(_rest('book_ink?on_conflict=book_id,page'),
+              headers: {...await _headers(), 'Prefer': 'resolution=merge-duplicates,return=minimal'},
+              body: jsonEncode({
+                'book_id': bookId,
+                'page': page,
+                'strokes': strokes.map((s) => s.toJson()).toList(),
+                'updated_at': DateTime.now().toUtc().toIso8601String(),
+              }))
+          .timeout(const Duration(seconds: 20));
+      return res.statusCode < 300;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Salva os traços de uma página: no aparelho na hora e na nuvem em seguida.
+  /// Se a nuvem falhar (sem internet), a página fica pendente e vai depois.
   Future<void> saveInkPage(String bookId, int page, Map<int, List<Stroke>> all) async {
     await _saveInkLocal(bookId, all);
-    try {
-      await http.post(_rest('book_ink?on_conflict=book_id,page'),
-          headers: {...await _headers(), 'Prefer': 'resolution=merge-duplicates,return=minimal'},
-          body: jsonEncode({
-            'book_id': bookId,
-            'page': page,
-            'strokes': (all[page] ?? const []).map((s) => s.toJson()).toList(),
-            'updated_at': DateTime.now().toUtc().toIso8601String(),
-          }));
-    } catch (_) {
-      // Sem internet: fica na cópia local e vai na próxima vez que salvar.
-    }
+    final ok = await _pushInkPage(bookId, page, all[page] ?? const []);
+    final pending = await _pending(bookId);
+    if (ok ? pending.remove(page) : pending.add(page)) await _setPending(bookId, pending);
   }
 }

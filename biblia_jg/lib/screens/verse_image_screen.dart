@@ -329,17 +329,27 @@ class _VerseImageScreenState extends State<VerseImageScreen> {
                   },
                   children: [
                     const Spacer(),
-                    Text(
-                      text,
-                      textAlign: _align,
-                      style: TextStyle(
-                        color: color,
-                        fontFamily: _fonts[_font],
-                        fontSize: base * _fontScale * s,
-                        height: 1.35,
-                        fontWeight: _bold ? FontWeight.bold : FontWeight.normal,
-                        fontStyle: _italic ? FontStyle.italic : FontStyle.normal,
-                        shadows: shadows,
+                    // Se o texto não couber na altura (ex.: formato paisagem), ele encolhe em vez de cortar.
+                    Flexible(
+                      flex: 12,
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: SizedBox(
+                          width: c.maxWidth - 56 * s - (_frame ? 28 * s : 0),
+                          child: Text(
+                            text,
+                            textAlign: _align,
+                            style: TextStyle(
+                              color: color,
+                              fontFamily: _fonts[_font],
+                              fontSize: base * _fontScale * s,
+                              height: 1.35,
+                              fontWeight: _bold ? FontWeight.bold : FontWeight.normal,
+                              fontStyle: _italic ? FontStyle.italic : FontStyle.normal,
+                              shadows: shadows,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     if (_showRef) ...[

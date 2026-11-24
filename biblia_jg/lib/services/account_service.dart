@@ -15,7 +15,10 @@ const googleWebClientId =
 
 class AccountException implements Exception {
   final String message;
-  const AccountException(this.message);
+
+  /// O servidor recusou a sessão (precisa entrar de novo).
+  final bool expired;
+  const AccountException(this.message, {this.expired = false});
   @override
   String toString() => message;
 }
@@ -44,6 +47,12 @@ class AccountService extends ChangeNotifier {
   DateTime? _expiresAt;
   DateTime? lastSync;
 
+  /// Impressão digital dos dados na última sincronização (ver sync.dart).
+  int? lastHash;
+
+  /// A sessão venceu ou foi revogada: é preciso entrar de novo.
+  bool sessionExpired = false;
+
   bool get signedIn => _userId != null && _refresh != null;
 
   Future<SharedPreferences> get _p async => _prefs ??= await SharedPreferences.getInstance();
@@ -59,6 +68,7 @@ class AccountService extends ChangeNotifier {
     }
     final ls = p.getString('account.lastSync');
     lastSync = ls == null ? null : DateTime.tryParse(ls);
+    lastHash = p.getInt('account.hash');
     notifyListeners();
   }
 
@@ -109,7 +119,8 @@ class AccountService extends ChangeNotifier {
     final data = jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
     if (res.statusCode != 200) {
       final msg = (data['msg'] ?? data['error_description'] ?? data['error'] ?? res.statusCode).toString();
-      throw AccountException('O servidor recusou o login ($msg).');
+      throw AccountException('O servidor recusou o login ($msg).',
+          expired: res.statusCode == 400 || res.statusCode == 401 || res.statusCode == 403);
     }
     return data;
   }
@@ -138,6 +149,7 @@ class AccountService extends ChangeNotifier {
       final s = await _auth('id_token', {'provider': 'google', 'id_token': idToken});
       await _p;
       _apply(s);
+      sessionExpired = false;
       name ??= account.displayName;
       photoUrl ??= account.photoUrl;
     } finally {
@@ -153,9 +165,12 @@ class AccountService extends ChangeNotifier {
     final p = await _p;
     await p.remove('account.session');
     await p.remove('account.lastSync');
+    await p.remove('account.hash');
     _userId = _access = _refresh = email = name = photoUrl = null;
     _expiresAt = null;
     lastSync = null;
+    lastHash = null;
+    sessionExpired = false;
     notifyListeners();
   }
 
@@ -168,9 +183,21 @@ class AccountService extends ChangeNotifier {
     if (!signedIn) throw const AccountException('Entre com a conta Google primeiro.');
     if (_access == null || _expiresAt == null ||
         DateTime.now().isAfter(_expiresAt!.subtract(const Duration(minutes: 1)))) {
-      final s = await _auth('refresh_token', {'refresh_token': _refresh!});
-      await _p;
-      _apply(s);
+      try {
+        final s = await _auth('refresh_token', {'refresh_token': _refresh!});
+        await _p;
+        _apply(s);
+        if (sessionExpired) {
+          sessionExpired = false;
+          notifyListeners();
+        }
+      } on AccountException catch (e) {
+        if (e.expired && !sessionExpired) {
+          sessionExpired = true;
+          notifyListeners();
+        }
+        rethrow;
+      }
     }
     return _access!;
   }
@@ -194,7 +221,7 @@ class AccountService extends ChangeNotifier {
   }
 
   /// Envia a cópia deste aparelho para a nuvem (substitui a anterior).
-  Future<void> push(Map<String, dynamic> data, {String device = 'Tablet'}) async {
+  Future<void> push(Map<String, dynamic> data, {String device = 'Tablet', int? hash}) async {
     final token = await _token();
     final now = DateTime.now().toUtc();
     final res = await http
@@ -214,12 +241,17 @@ class AccountService extends ChangeNotifier {
         )
         .timeout(const Duration(seconds: 60));
     if (res.statusCode >= 300) throw AccountException('Erro ao salvar na nuvem (${res.statusCode}).');
-    await markSynced(now);
+    await markSynced(now, hash: hash);
   }
 
-  Future<void> markSynced(DateTime when) async {
+  Future<void> markSynced(DateTime when, {int? hash}) async {
     lastSync = when;
-    await (await _p).setString('account.lastSync', when.toIso8601String());
+    final p = await _p;
+    await p.setString('account.lastSync', when.toIso8601String());
+    if (hash != null) {
+      lastHash = hash;
+      await p.setInt('account.hash', hash);
+    }
     notifyListeners();
   }
 }

@@ -38,6 +38,9 @@ class DictEntry {
   final String _key;
   DictEntry(this.dict, this.term, this.english, this.text) : _key = normalizeForSearch(term);
 
+  /// Texto normalizado para a busca "dentro do texto" (calculado uma vez só).
+  late final String textKey = normalizeForSearch(text);
+
   /// Identificador estável (para marcações e anotações).
   String get id => '$dict:$english';
   List<String> get paragraphs =>
@@ -77,7 +80,6 @@ class DictionaryService extends ChangeNotifier {
   Map<String, DictMark> marks = {};
   bool loading = false;
   String? error;
-  bool _marksLoaded = false;
 
   Future<Directory> _dir() async {
     final d = Directory(p.join((await getApplicationSupportDirectory()).path, 'dicionarios'));
@@ -153,7 +155,7 @@ class DictionaryService extends ChangeNotifier {
         starts.add(e);
       } else if (e._key.contains(q)) {
         contains.add(e);
-      } else if (inText && normalizeForSearch(e.text).contains(q)) {
+      } else if (inText && e.textKey.contains(q)) {
         text.add(e);
       }
     }
@@ -164,42 +166,70 @@ class DictionaryService extends ChangeNotifier {
 
   Future<File> _marksFile() async => File(p.join((await _dir()).path, 'marcacoes.json'));
 
-  Future<void> _loadMarks() async {
-    if (_marksLoaded) return;
-    _marksLoaded = true;
+  Future<void>? _marksFuture;
+  bool _marksOk = false;
+  Future<void> _writeChain = Future.value();
+
+  /// Lê as marcações uma única vez (quem chamar junto espera a mesma leitura).
+  Future<void> _loadMarks() => _marksFuture ??= _readMarks();
+
+  static Map<String, DictMark> _parseMarks(Map<String, dynamic> data) =>
+      {for (final e in data.entries) e.key: DictMark.fromJson((e.value as Map).cast())};
+
+  Future<void> _readMarks() async {
     try {
       final f = await _marksFile();
-      if (await f.exists()) importMarks(jsonDecode(await f.readAsString()) as Map<String, dynamic>, notify: false);
-    } catch (_) {}
+      if (await f.exists()) {
+        final raw = await f.readAsString();
+        if (raw.trim().isNotEmpty) marks = _parseMarks(jsonDecode(raw) as Map<String, dynamic>);
+      }
+      _marksOk = true;
+    } catch (_) {
+      _marksOk = false; // arquivo ilegível: não envia "vazio" por cima da nuvem
+    }
+  }
+
+  /// Grava em fila (uma gravação por vez) e de forma atômica (temporário + renomear).
+  void _persistMarks() {
+    final data = jsonEncode(exportMarks());
+    _writeChain = _writeChain.then((_) async {
+      try {
+        final f = await _marksFile();
+        final tmp = File('${f.path}.tmp');
+        await tmp.writeAsString(data, flush: true);
+        await tmp.rename(f.path);
+        _marksOk = true;
+      } catch (_) {}
+    });
   }
 
   DictMark markOf(DictEntry e) => marks[e.id] ?? DictMark();
 
   Future<void> saveMark(DictEntry e, DictMark m) async {
+    await _loadMarks();
     if (m.isEmpty) {
       marks.remove(e.id);
     } else {
       marks[e.id] = m;
     }
     notifyListeners();
-    final f = await _marksFile();
-    await f.writeAsString(jsonEncode(exportMarks()));
+    _persistMarks();
   }
 
-  /// Marcações já carregadas do aparelho (para a sincronização não enviar vazio).
-  Future<Map<String, dynamic>> loadedMarks() async {
+  /// Marcações do aparelho para a sincronização; null se o arquivo não pôde ser lido.
+  Future<Map<String, dynamic>?> loadedMarks() async {
     await _loadMarks();
-    return exportMarks();
+    return _marksOk ? exportMarks() : null;
   }
 
   Map<String, dynamic> exportMarks() => {for (final e in marks.entries) e.key: e.value.toJson()};
 
-  void importMarks(Map<String, dynamic> data, {bool notify = true}) {
-    marks = {for (final e in data.entries) e.key: DictMark.fromJson((e.value as Map).cast())};
-    if (notify) {
-      notifyListeners();
-      _marksFile().then((f) => f.writeAsString(jsonEncode(exportMarks())));
-    }
+  /// Recebe marcações da nuvem. Com [merge], mantém as daqui e acrescenta as de lá.
+  void importMarks(Map<String, dynamic> data, {bool merge = false}) {
+    final incoming = _parseMarks(data);
+    marks = merge ? {...incoming, ...marks} : incoming;
+    notifyListeners();
+    _persistMarks();
   }
 
   /// Verbete a partir do id salvo (dicionário:termo em inglês).

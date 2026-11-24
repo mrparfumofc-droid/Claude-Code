@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,6 +46,8 @@ class DictionaryScreen extends StatefulWidget {
 
 class _DictionaryScreenState extends State<DictionaryScreen> {
   late final _search = TextEditingController(text: widget.initialQuery ?? '');
+  late String _query = widget.initialQuery ?? '';
+  Timer? _debounce;
   String? _dict; // null = todos
   bool _inText = false;
   bool _onlyMarked = false;
@@ -59,6 +63,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
 
   @override
   void dispose() {
+    _debounce?.cancel();
     _search.dispose();
     super.dispose();
   }
@@ -81,7 +86,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
     final s = context.watch<DictionaryService>();
     final theme = Theme.of(context);
     final wide = MediaQuery.sizeOf(context).width >= 900;
-    var results = s.search(_dict, _search.text, inText: _inText);
+    var results = s.search(_dict, _query, inText: _inText);
     if (_onlyMarked) results = results.where((e) => s.marks.containsKey(e.id)).toList();
     final names = {for (final d in s.dicts) d.code: d.name};
 
@@ -90,7 +95,13 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
         padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
         child: TextField(
           controller: _search,
-          onChanged: (_) => setState(() {}),
+          onChanged: (_) {
+            // Espera a pessoa parar de digitar (a busca no texto é pesada).
+            _debounce?.cancel();
+            _debounce = Timer(const Duration(milliseconds: 250), () {
+              if (mounted) setState(() => _query = _search.text);
+            });
+          },
           decoration: InputDecoration(
             prefixIcon: const Icon(Icons.search),
             hintText: 'Buscar palavra (ex.: graça, Arão)',
@@ -100,7 +111,10 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                 ? null
                 : IconButton(
                     icon: const Icon(Icons.clear),
-                    onPressed: () => setState(() => _search.clear()),
+                    onPressed: () => setState(() {
+                      _search.clear();
+                      _query = '';
+                    }),
                   ),
           ),
         ),

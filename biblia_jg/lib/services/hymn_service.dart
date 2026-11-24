@@ -63,8 +63,12 @@ class HymnService extends ChangeNotifier {
     return File(p.join(d.path, name));
   }
 
+  bool _loadedSignedIn = false;
+
   Future<void> init({bool force = false}) async {
-    if (_loaded && !force) return;
+    // Recarrega se a pessoa entrou ou saiu da conta desde a última vez.
+    if (_loaded && !force && _loadedSignedIn == account.signedIn) return;
+    _loadedSignedIn = account.signedIn;
     loading = true;
     error = null;
     notifyListeners();
@@ -81,7 +85,9 @@ class HymnService extends ChangeNotifier {
         pd = jsonDecode(utf8.decode(r.bodyBytes)) as List;
       }
     } catch (_) {}
-    if (pd == null && await pdFile.exists()) pd = jsonDecode(await pdFile.readAsString()) as List;
+    try {
+      if (pd == null && await pdFile.exists()) pd = jsonDecode(await pdFile.readAsString()) as List;
+    } catch (_) {}
     if (pd != null) {
       final bySource = <String, List<Hymn>>{};
       for (final j in pd) {
@@ -106,8 +112,26 @@ class HymnService extends ChangeNotifier {
   Future<List<Hymnal>> _loadOwn() async {
     final local = await _cache('meus-hinarios.json');
     List? rows;
+    List localRows = const [];
+    try {
+      if (await local.exists()) localRows = jsonDecode(await local.readAsString()) as List;
+    } catch (_) {}
     if (account.signedIn) {
       try {
+        // Hinários importados antes do login ("local-…") sobem para a conta, em vez de sumirem.
+        for (final r in localRows.where((r) => '${r['id']}'.startsWith('local-')).toList()) {
+          final up = await http.post(
+            Uri.parse('$supabaseUrl/rest/v1/user_hymnals'),
+            headers: {
+              'apikey': supabaseAnonKey,
+              'Authorization': 'Bearer ${await account.accessToken()}',
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal',
+            },
+            body: jsonEncode({'name': r['name'], 'hymns': r['hymns']}),
+          ).timeout(const Duration(seconds: 30));
+          if (up.statusCode >= 300) throw 'falha ao subir hinário';
+        }
         final r = await http.get(
           Uri.parse('$supabaseUrl/rest/v1/user_hymnals?select=id,name,hymns&order=created_at'),
           headers: {'apikey': supabaseAnonKey, 'Authorization': 'Bearer ${await account.accessToken()}'},
@@ -118,13 +142,9 @@ class HymnService extends ChangeNotifier {
         }
       } catch (_) {}
     }
-    if (rows == null && await local.exists()) {
-      try {
-        rows = jsonDecode(await local.readAsString()) as List;
-      } catch (_) {}
-    }
+    rows ??= localRows;
     return [
-      for (final r in rows ?? const [])
+      for (final r in rows)
         Hymnal(
           r['id'] as String,
           r['name'] as String,

@@ -739,15 +739,17 @@ class _PlacesMapScreenState extends State<PlacesMapScreen> {
 }
 
 /// Abre o mapa com os lugares citados num versículo (ou avisa se não houver).
-Future<void> openVersePlaces(BuildContext context, int book, int chapter, int verse, String label) async {
+/// Recebe o Navigator e o ScaffoldMessenger (e não o contexto), porque a barra
+/// de ações do versículo some logo depois do toque.
+Future<void> openVersePlaces(NavigatorState navigator, ScaffoldMessengerState messenger, int book, int chapter,
+    int verse, String label) async {
   final data = await PlacesData.load();
-  if (!context.mounted) return;
   final places = data.forVerse(book, chapter, verse);
   if (places.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Nenhum lugar do mapa citado em $label.')));
+    messenger.showSnackBar(SnackBar(content: Text('Nenhum lugar do mapa citado em $label.')));
     return;
   }
-  await Navigator.of(context).push(MaterialPageRoute(
+  await navigator.push(MaterialPageRoute(
     builder: (_) => PlacesMapScreen(data: data, only: places, title: 'Lugares em $label'),
   ));
 }

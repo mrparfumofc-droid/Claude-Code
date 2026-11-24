@@ -19,6 +19,22 @@ class HistoryEntry {
   HistoryEntry(this.book, this.chapter, this.at);
 }
 
+class Prayer {
+  final int? id;
+  final String text;
+  final DateTime created;
+  final DateTime? answered;
+  final String? answer;
+  Prayer({this.id, required this.text, required this.created, this.answered, this.answer});
+}
+
+class MemoryVerse {
+  final VerseRef ref;
+  final int level; // 0..5 (quanto maior, mais espaçada a revisão)
+  final DateTime due;
+  MemoryVerse(this.ref, this.level, this.due);
+}
+
 class Highlight {
   final VerseRef ref;
   final int color;
@@ -36,7 +52,7 @@ class UserDb {
     final f = factory ?? databaseFactory;
     final dbPath = path ?? p.join(await f.getDatabasesPath(), 'biblia_jg.db');
     final db = await f.openDatabase(dbPath,
-        options: OpenDatabaseOptions(version: 1, onCreate: _create));
+        options: OpenDatabaseOptions(version: 2, onCreate: _create, onUpgrade: _upgrade));
     return UserDb._(db);
   }
 
@@ -52,7 +68,95 @@ class UserDb {
         'CREATE TABLE history (id INTEGER PRIMARY KEY AUTOINCREMENT, book INTEGER NOT NULL, chapter INTEGER NOT NULL, at INTEGER NOT NULL)');
     await db.execute(
         'CREATE TABLE read_chapters (book INTEGER NOT NULL, chapter INTEGER NOT NULL, at INTEGER NOT NULL, PRIMARY KEY(book, chapter))');
+    await _createV2(db);
   }
+
+  static Future<void> _upgrade(Database db, int from, int to) async {
+    if (from < 2) await _createV2(db);
+  }
+
+  /// Versão 2: constância (dias de leitura), diário de oração e memorização.
+  static Future<void> _createV2(Database db) async {
+    await db.execute(
+        'CREATE TABLE IF NOT EXISTS activity (day TEXT PRIMARY KEY, chapters INTEGER NOT NULL DEFAULT 0, seconds INTEGER NOT NULL DEFAULT 0)');
+    await db.execute(
+        'CREATE TABLE IF NOT EXISTS prayers (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT NOT NULL, created INTEGER NOT NULL, answered INTEGER, answer TEXT)');
+    await db.execute(
+        'CREATE TABLE IF NOT EXISTS memory (vkey TEXT PRIMARY KEY, level INTEGER NOT NULL DEFAULT 0, due INTEGER NOT NULL, created INTEGER NOT NULL)');
+  }
+
+  // ---------- Constância (dias de leitura) ----------
+  static String dayKey(DateTime d) =>
+      '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+
+  Future<void> addActivity({int chapters = 0, int seconds = 0}) async {
+    final day = dayKey(DateTime.now());
+    await db.execute('INSERT OR IGNORE INTO activity (day, chapters, seconds) VALUES (?, 0, 0)', [day]);
+    await db.execute(
+        'UPDATE activity SET chapters = MAX(0, chapters + ?), seconds = seconds + ? WHERE day = ?',
+        [chapters, seconds, day]);
+  }
+
+  /// dia (aaaa-mm-dd) -> (capítulos lidos, segundos de leitura).
+  Future<Map<String, (int, int)>> activity() async => {
+        for (final r in await db.query('activity'))
+          r['day'] as String: (r['chapters'] as int, r['seconds'] as int),
+      };
+
+  // ---------- Diário de oração ----------
+  Future<List<Prayer>> prayers() async => [
+        for (final r in await db.query('prayers', orderBy: 'created DESC'))
+          Prayer(
+            id: r['id'] as int,
+            text: r['text'] as String,
+            created: DateTime.fromMillisecondsSinceEpoch(r['created'] as int),
+            answered: r['answered'] == null ? null : DateTime.fromMillisecondsSinceEpoch(r['answered'] as int),
+            answer: r['answer'] as String?,
+          ),
+      ];
+
+  Future<void> savePrayer(Prayer p) async {
+    final data = {
+      'text': p.text,
+      'created': p.created.millisecondsSinceEpoch,
+      'answered': p.answered?.millisecondsSinceEpoch,
+      'answer': p.answer,
+    };
+    if (p.id == null) {
+      await db.insert('prayers', data);
+    } else {
+      await db.update('prayers', data, where: 'id = ?', whereArgs: [p.id]);
+    }
+  }
+
+  Future<void> deletePrayer(int id) => db.delete('prayers', where: 'id = ?', whereArgs: [id]);
+
+  // ---------- Memorização ----------
+  Future<List<MemoryVerse>> memoryVerses() async => [
+        for (final r in await db.query('memory', orderBy: 'due'))
+          MemoryVerse(VerseRef.fromKey(r['vkey'] as String), r['level'] as int,
+              DateTime.fromMillisecondsSinceEpoch(r['due'] as int)),
+      ];
+
+  Future<void> setMemory(VerseRef r, int level, DateTime due) async {
+    final old = await db.query('memory', where: 'vkey = ?', whereArgs: [r.key]);
+    await db.insert(
+        'memory',
+        {
+          'vkey': r.key,
+          'level': level,
+          'due': due.millisecondsSinceEpoch,
+          'created': old.isEmpty ? _now() : old.first['created'],
+        },
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  /// Adiciona à memorização sem zerar o progresso de quem já está na lista.
+  Future<void> addMemory(VerseRef r) => db.insert(
+      'memory', {'vkey': r.key, 'level': 0, 'due': _now(), 'created': _now()},
+      conflictAlgorithm: ConflictAlgorithm.ignore);
+
+  Future<void> removeMemory(VerseRef r) => db.delete('memory', where: 'vkey = ?', whereArgs: [r.key]);
 
   static int _now() => DateTime.now().millisecondsSinceEpoch;
 
@@ -185,7 +289,7 @@ class UserDb {
   }
 
   // ---------- Backup ----------
-  static const _tables = ['highlights', 'favorites', 'notes', 'history', 'read_chapters'];
+  static const _tables = ['highlights', 'favorites', 'notes', 'history', 'read_chapters', 'activity', 'prayers', 'memory'];
 
   Future<Map<String, dynamic>> exportAll() async => {
         'format': 'biblia-jg-backup',
@@ -194,6 +298,57 @@ class UserDb {
         for (final t in _tables) t: await db.query(t),
       };
 
+  /// Junta uma linha vinda de outro aparelho com a que já existe aqui.
+  /// Retorna true se a linha já foi tratada (não precisa inserir).
+  static Future<bool> _mergeExisting(Transaction tx, String t, Map<String, Object?> row) async {
+    int n(Object? v) => v is int ? v : 0;
+    switch (t) {
+      case 'notes':
+        final ex = await tx.query(t,
+            where: 'vkey = ? AND created = ?', whereArgs: [row['vkey'], row['created']], limit: 1);
+        if (ex.isEmpty) return false;
+        if (n(row['updated']) > n(ex.first['updated'])) {
+          await tx.update(t, row, where: 'id = ?', whereArgs: [ex.first['id']]);
+        }
+        return true;
+      case 'history':
+        final ex = await tx.query(t,
+            where: 'book = ? AND chapter = ? AND at = ?',
+            whereArgs: [row['book'], row['chapter'], row['at']],
+            limit: 1);
+        return ex.isNotEmpty;
+      case 'prayers':
+        final ex = await tx.query(t, where: 'created = ?', whereArgs: [row['created']], limit: 1);
+        if (ex.isEmpty) return false;
+        if (ex.first['answered'] == null && row['answered'] != null) {
+          await tx.update(t, row, where: 'id = ?', whereArgs: [ex.first['id']]);
+        }
+        return true;
+      case 'activity':
+        final ex = await tx.query(t, where: 'day = ?', whereArgs: [row['day']], limit: 1);
+        if (ex.isEmpty) return false;
+        final c = n(row['chapters']), s = n(row['seconds']);
+        await tx.update(
+            t,
+            {
+              'chapters': c > n(ex.first['chapters']) ? c : n(ex.first['chapters']),
+              'seconds': s > n(ex.first['seconds']) ? s : n(ex.first['seconds']),
+            },
+            where: 'day = ?',
+            whereArgs: [row['day']]);
+        return true;
+      case 'memory':
+        final ex = await tx.query(t, where: 'vkey = ?', whereArgs: [row['vkey']], limit: 1);
+        return ex.isNotEmpty && n(ex.first['level']) >= n(row['level']);
+      case 'highlights':
+      case 'favorites':
+        final ex = await tx.query(t, where: 'vkey = ?', whereArgs: [row['vkey']], limit: 1);
+        return ex.isNotEmpty && n(ex.first['created']) >= n(row['created']);
+      default:
+        return false;
+    }
+  }
+
   /// Restaura um backup. Se [replace] for verdadeiro, apaga os dados atuais antes.
   Future<void> importAll(Map<String, dynamic> data, {bool replace = true}) async {
     if (data['format'] != 'biblia-jg-backup') {
@@ -201,12 +356,15 @@ class UserDb {
     }
     await db.transaction((tx) async {
       for (final t in _tables) {
-        if (replace) await tx.delete(t);
         final rows = data[t];
+        // Backups antigos não têm as tabelas novas: não apaga o que já existe.
         if (rows is! List) continue;
+        if (replace) await tx.delete(t);
         for (final r in rows) {
           final row = Map<String, Object?>.from(r as Map);
-          if (t == 'notes' || t == 'history') row.remove('id');
+          if (t == 'notes' || t == 'history' || t == 'prayers') row.remove('id');
+          // Ao juntar (sem substituir), não duplica o que já existe e fica com o mais completo.
+          if (!replace && await _mergeExisting(tx, t, row)) continue;
           await tx.insert(t, row, conflictAlgorithm: ConflictAlgorithm.replace);
         }
       }

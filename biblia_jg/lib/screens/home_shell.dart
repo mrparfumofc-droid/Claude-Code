@@ -1,43 +1,53 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../models/daily.dart';
+import '../data/user_db.dart';
+import '../models/bible.dart';
+import '../models/reference_parser.dart';
 import '../services/account_service.dart';
 import '../services/dictionary_service.dart';
-import 'dictionary_screen.dart';
-import 'hymnal_screen.dart';
-import 'maps_screen.dart';
 import '../services/sync.dart';
-import 'account_screen.dart';
-import 'library_screen.dart';
 import '../state/app_state.dart';
 import '../widgets/book_chapter_panel.dart';
 import '../widgets/quick_settings_sheet.dart';
 import '../widgets/update_dialog.dart';
-import '../models/reference_parser.dart';
 import 'about_screen.dart';
+import 'account_screen.dart';
+import 'ai_chat_screen.dart';
 import 'backup_screen.dart';
 import 'content_screens.dart';
-import 'quiz_screen.dart';
-import 'reading_plans_screen.dart';
+import 'dictionary_screen.dart';
 import 'history_screen.dart';
+import 'hymnal_screen.dart';
+import 'library_screen.dart';
+import 'maps_screen.dart';
 import 'marks_screen.dart';
+import 'memorize_screen.dart';
 import 'music_screen.dart';
+import 'needs_screen.dart';
 import 'notes_screen.dart';
+import 'prayer_screen.dart';
 import 'progress_screen.dart';
+import 'quiz_screen.dart';
 import 'reader_view.dart';
+import 'reading_plans_screen.dart';
 import 'search_screen.dart';
 import 'settings_screen.dart';
+import 'today_screen.dart';
 import 'versions_screen.dart';
+import 'voice_screen.dart';
 
 /// Largura a partir da qual usamos o layout de tablet (duas colunas).
-const tabletBreakpoint = 840.0;
+const tabletBreakpoint = 720.0;
 
+/// Casca do app: abas Hoje, Bíblia, Estudo, Biblioteca e Mais.
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 
-  /// Desligado nos testes (evita acesso à rede).
+  /// Desligado nos testes (evita acesso à rede e relógios).
   static bool autoCheckUpdates = true;
 
   @override
@@ -45,16 +55,27 @@ class HomeShell extends StatefulWidget {
 }
 
 class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
-  bool _barsVisible = true;
-  bool _panelOpen = true;
+  int _tab = 0;
+  final _built = <int>{0};
+  bool _chrome = true; // barra de abas visível (a leitura esconde no modo foco)
   bool? _lastFullScreen;
+  bool _resumed = true;
+  Timer? _clock;
+
+  static const _destinations = <(IconData, IconData, String)>[
+    (Icons.today_outlined, Icons.today, 'Hoje'),
+    (Icons.menu_book_outlined, Icons.menu_book, 'Bíblia'),
+    (Icons.school_outlined, Icons.school, 'Estudo'),
+    (Icons.local_library_outlined, Icons.local_library, 'Biblioteca'),
+    (Icons.more_horiz, Icons.more_horiz, 'Mais'),
+  ];
 
   @override
   void initState() {
     super.initState();
-    // Procura atualização e sincroniza a conta alguns segundos depois de abrir o app.
     if (!HomeShell.autoCheckUpdates) return;
     WidgetsBinding.instance.addObserver(this);
+    // Procura atualização e sincroniza a conta alguns segundos depois de abrir o app.
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) checkForUpdates(context);
     });
@@ -63,31 +84,252 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
         autoSync(context.read<AppState>(), context.read<AccountService>(), context.read<DictionaryService>());
       }
     });
+    // Conta o tempo de leitura (para a meta diária) enquanto a aba Bíblia está na tela.
+    _clock = Timer.periodic(const Duration(seconds: 20), (_) {
+      if (!mounted || !_resumed || _tab != 1) return;
+      if (ModalRoute.of(context)?.isCurrent != true) return;
+      context.read<AppState>().logReading(seconds: 20);
+    });
   }
 
   @override
   void dispose() {
+    _clock?.cancel();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // Ao sair do app, salva na nuvem o que mudou.
-    if (state == AppLifecycleState.paused && mounted) {
-      pushOnly(context.read<AppState>(), context.read<AccountService>(), context.read<DictionaryService>());
+    _resumed = state == AppLifecycleState.resumed;
+    if (!mounted) return;
+    final app = context.read<AppState>();
+    // Ao sair e ao voltar: sincroniza (junta com a nuvem se outro aparelho mudou algo).
+    if (state == AppLifecycleState.paused) {
+      autoSync(app, context.read<AccountService>(), context.read<DictionaryService>());
+    } else if (state == AppLifecycleState.resumed) {
+      if (DateTime.now().difference(_lastResumeSync) > const Duration(seconds: 45)) {
+        _lastResumeSync = DateTime.now();
+        autoSync(app, context.read<AccountService>(), context.read<DictionaryService>());
+      }
+      app.rescheduleNotifications(); // mantém os lembretes dos próximos dias agendados
     }
   }
+
+  DateTime _lastResumeSync = DateTime(2000);
 
   void _applyFullScreen(bool full) {
     if (_lastFullScreen == full) return;
     _lastFullScreen = full;
-    SystemChrome.setEnabledSystemUIMode(
-        full ? SystemUiMode.immersiveSticky : SystemUiMode.edgeToEdge);
+    SystemChrome.setEnabledSystemUIMode(full ? SystemUiMode.immersiveSticky : SystemUiMode.edgeToEdge);
   }
 
-  void _push(Widget page) =>
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => page));
+  void _select(int i) => setState(() {
+        _tab = i;
+        _built.add(i);
+        if (i != 1) _chrome = true;
+      });
+
+  @override
+  Widget build(BuildContext context) {
+    final app = context.watch<AppState>();
+    _applyFullScreen(app.settings.fullScreen);
+    if (app.loading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+    // Outra tela pediu para abrir uma aba (ex.: tocar numa referência abre a Bíblia).
+    if (app.tabRequest >= 0) {
+      final t = app.tabRequest;
+      app.tabRequest = -1;
+      if (t != _tab) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) _select(t);
+        });
+      }
+    }
+    final wide = MediaQuery.sizeOf(context).width >= tabletBreakpoint;
+    Widget page(int i) => switch (i) {
+          0 => const TodayScreen(),
+          1 => ReaderPage(onChrome: (v) {
+              if (_chrome != v) setState(() => _chrome = v);
+            }),
+          2 => const StudyHub(),
+          3 => const LibraryHub(),
+          _ => const MoreScreen(),
+        };
+    final stack = IndexedStack(
+      index: _tab,
+      children: [for (var i = 0; i < 5; i++) _built.contains(i) ? page(i) : const SizedBox.shrink()],
+    );
+
+    return PopScope(
+      canPop: _tab == 0,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) _select(0);
+      },
+      child: wide
+          ? Scaffold(
+              body: Row(children: [
+                if (_chrome)
+                  NavigationRail(
+                    selectedIndex: _tab,
+                    onDestinationSelected: _select,
+                    labelType: NavigationRailLabelType.all,
+                    leading: Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 12),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset('assets/branding/logo.png', width: 44, height: 44,
+                            errorBuilder: (_, _, _) => const Icon(Icons.menu_book, size: 36)),
+                      ),
+                    ),
+                    destinations: [
+                      for (final (icon, selected, label) in _destinations)
+                        NavigationRailDestination(icon: Icon(icon), selectedIcon: Icon(selected), label: Text(label)),
+                    ],
+                  ),
+                if (_chrome) const VerticalDivider(width: 1),
+                Expanded(child: stack),
+              ]),
+            )
+          : Scaffold(
+              body: stack,
+              bottomNavigationBar: _chrome
+                  ? NavigationBar(
+                      selectedIndex: _tab,
+                      onDestinationSelected: _select,
+                      destinations: [
+                        for (final (icon, selected, label) in _destinations)
+                          NavigationDestination(icon: Icon(icon), selectedIcon: Icon(selected), label: label),
+                      ],
+                    )
+                  : null,
+            ),
+    );
+  }
+}
+
+// ======================================================================
+// Aba Bíblia
+// ======================================================================
+
+class ReaderPage extends StatefulWidget {
+  /// Avisa a casca para mostrar/esconder a barra de abas.
+  final ValueChanged<bool> onChrome;
+  const ReaderPage({super.key, required this.onChrome});
+
+  @override
+  State<ReaderPage> createState() => _ReaderPageState();
+}
+
+class _ReaderPageState extends State<ReaderPage> {
+  bool _barsVisible = true;
+  bool? _panelChoice; // null = automático (aberto só em telas largas)
+  bool _focus = false;
+  int _focusSeconds = 0;
+  Timer? _focusTimer;
+
+  @override
+  void dispose() {
+    _focusTimer?.cancel();
+    super.dispose();
+  }
+
+  void _push(Widget page) => Navigator.of(context).push(MaterialPageRoute(builder: (_) => page));
+
+  void _setBars(bool visible) {
+    if (_barsVisible == visible) return;
+    setState(() => _barsVisible = visible);
+    widget.onChrome(visible && !_focus);
+  }
+
+  void _startFocus() {
+    _focusTimer?.cancel();
+    setState(() {
+      _focus = true;
+      _focusSeconds = 0;
+    });
+    widget.onChrome(false);
+    _focusTimer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (mounted) setState(() => _focusSeconds++);
+    });
+  }
+
+  void _stopFocus() {
+    _focusTimer?.cancel();
+    setState(() {
+      _focus = false;
+      _barsVisible = true;
+    });
+    widget.onChrome(true);
+  }
+
+  /// Fim da leitura em modo foco: marca como lido e convida a anotar o que ficou.
+  Future<void> _finishFocus(AppState app) async {
+    final book = app.book, chapter = app.chapter, name = app.currentBook?.name ?? '';
+    await app.markChapterRead();
+    if (!mounted) return;
+    final ctrl = TextEditingController();
+    final next = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('$name $chapter lido 🎉'),
+        content: SizedBox(
+          width: 480,
+          child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const Text('O que ficou desta leitura? Escrever em uma frase ajuda a guardar.'),
+            const SizedBox(height: 12),
+            TextField(
+              controller: ctrl,
+              minLines: 2,
+              maxLines: 5,
+              textCapitalization: TextCapitalization.sentences,
+              decoration: const InputDecoration(hintText: 'Opcional', border: OutlineInputBorder()),
+            ),
+          ]),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Encerrar')),
+          FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Próximo capítulo')),
+        ],
+      ),
+    );
+    final text = ctrl.text.trim();
+    ctrl.dispose();
+    if (text.isNotEmpty) {
+      final now = DateTime.now();
+      await app.saveNote(Note(ref: VerseRef(book, chapter, 1), text: text, created: now, updated: now));
+    }
+    if (!mounted) return;
+    if (next == true) {
+      await app.nextChapter();
+      if (mounted) setState(() => _focusSeconds = 0);
+    } else {
+      _stopFocus();
+    }
+  }
+
+  /// Resumo simples do capítulo ou introdução do livro (IA, guardado no aparelho).
+  void _understand(AppState app, {required bool intro}) {
+    final b = app.currentBook;
+    final bible = app.bible;
+    if (b == null || bible == null) return;
+    _push(AiChatScreen(
+      title: intro ? 'Introdução a ${b.name}' : 'Entenda ${b.name} ${app.chapter}',
+      task: 'chat',
+      reference: intro ? 'Livro de ${b.name}' : '${b.name} ${app.chapter}',
+      version: bible.abbrev,
+      verseText: intro ? null : app.currentVerses.map(plainVerse).join(' '),
+      initialPrompt: intro
+          ? 'Faça uma introdução simples ao livro de ${b.name}, em linguagem fácil: quem escreveu, quando e para quem; '
+              'o tema central; os assuntos principais em tópicos; onde ele se encaixa na história da Bíblia; '
+              'e uma dica de como ler. No máximo 250 palavras.'
+          : 'Resuma este capítulo em linguagem simples, para quem está começando: 1) o que acontece, em até 5 linhas; '
+              '2) palavras ou costumes difíceis explicados; 3) a ideia principal em 1 frase; '
+              '4) uma aplicação prática para hoje. No máximo 220 palavras.',
+      cacheKey: intro ? 'intro_${app.book}' : 'chap_${bible.id}_${app.book}_${app.chapter}',
+    ));
+  }
 
   /// Caixa "Ir para": aceita "Jo 3:16", "Salmos 23", "1 Co 13.4".
   Future<void> _goToReference(AppState app) async {
@@ -113,11 +355,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
               autofocus: true,
               textInputAction: TextInputAction.go,
               onSubmitted: (_) => submit(),
-              decoration: InputDecoration(
-                hintText: 'Ex.: Jo 3:16',
-                errorText: error,
-                border: const OutlineInputBorder(),
-              ),
+              decoration: InputDecoration(hintText: 'Ex.: Jo 3:16', errorText: error, border: const OutlineInputBorder()),
             ),
             actions: [
               TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar')),
@@ -134,26 +372,29 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final app = context.watch<AppState>();
-    _applyFullScreen(app.settings.fullScreen);
-    final wide = MediaQuery.sizeOf(context).width >= tabletBreakpoint;
-
-    if (app.loading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    if (app.focusRequest) {
+      app.focusRequest = false;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && !_focus) _startFocus();
+      });
     }
-
+    final width = MediaQuery.sizeOf(context).width;
+    final wide = width >= tabletBreakpoint;
+    // Em tablet em pé (estreito) o painel de livros começa fechado para sobrar texto.
+    final panelOpen = _panelChoice ?? width >= 1000;
     final book = app.currentBook;
     final title = book == null ? 'Bíblia JG' : '${book.name} ${app.chapter}';
+    final fg = Theme.of(context).appBarTheme.foregroundColor;
 
     final topBar = AnimatedSize(
       duration: const Duration(milliseconds: 200),
-      child: _barsVisible
+      child: _barsVisible && !_focus
           ? AppBar(
+              automaticallyImplyLeading: false,
               title: InkWell(
                 onTap: book == null
                     ? null
-                    : () => wide
-                        ? setState(() => _panelOpen = !_panelOpen)
-                        : _push(const BookChapterPage()),
+                    : () => wide ? setState(() => _panelChoice = !panelOpen) : _push(const BookChapterPage()),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Row(mainAxisSize: MainAxisSize.min, children: [
@@ -166,10 +407,24 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
                 if (app.bible != null)
                   TextButton(
                     onPressed: () => _push(const VersionsScreen()),
-                    style: TextButton.styleFrom(
-                        foregroundColor: Theme.of(context).appBarTheme.foregroundColor),
-                    child: Text(app.bible!.abbrev,
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                    style: TextButton.styleFrom(foregroundColor: fg),
+                    child: Text(app.bible!.abbrev, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  ),
+                if (book != null)
+                  PopupMenuButton<bool>(
+                    tooltip: 'Entender o que estou lendo',
+                    icon: const Icon(Icons.lightbulb_outline),
+                    onSelected: (intro) => _understand(app, intro: intro),
+                    itemBuilder: (_) => [
+                      PopupMenuItem(value: false, child: Text('Resumo simples de ${book.name} ${app.chapter}')),
+                      PopupMenuItem(value: true, child: Text('Introdução ao livro de ${book.name}')),
+                    ],
+                  ),
+                if (book != null)
+                  IconButton(
+                    tooltip: 'Modo foco (ler sem distrações)',
+                    icon: const Icon(Icons.center_focus_strong_outlined),
+                    onPressed: _startFocus,
                   ),
                 IconButton(
                   tooltip: 'Ir para referência',
@@ -181,11 +436,12 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
                   icon: const Icon(Icons.text_fields),
                   onPressed: () => showQuickSettings(context),
                 ),
-                IconButton(
-                  tooltip: 'Pesquisar',
-                  icon: const Icon(Icons.search),
-                  onPressed: () => _push(const SearchScreen()),
-                ),
+                if (wide)
+                  IconButton(
+                    tooltip: 'Pesquisar',
+                    icon: const Icon(Icons.search),
+                    onPressed: () => _push(const SearchScreen()),
+                  ),
               ],
             )
           : SizedBox(height: MediaQuery.paddingOf(context).top),
@@ -197,31 +453,64 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
     } else {
       final reader = ReaderView(
         onScrollDirection: (down) {
-          if (!app.settings.hideMenusOnScroll) return;
-          if (_barsVisible == down) setState(() => _barsVisible = !down);
+          if (_focus || !app.settings.hideMenusOnScroll) return;
+          _setBars(!down);
         },
       );
+      final showPanel = wide && panelOpen && !_focus;
       body = wide
           ? Row(children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                width: _panelOpen ? 320 : 0,
-                child: _panelOpen
-                    ? const Material(elevation: 1, child: BookChapterPanel())
-                    : null,
+                width: showPanel ? 320 : 0,
+                child: showPanel ? const Material(elevation: 1, child: BookChapterPanel()) : null,
               ),
-              if (_panelOpen) const VerticalDivider(width: 1),
+              if (showPanel) const VerticalDivider(width: 1),
               Expanded(child: reader),
             ])
           : reader;
     }
 
+    final mm = (_focusSeconds ~/ 60).toString().padLeft(2, '0');
+    final ss = (_focusSeconds % 60).toString().padLeft(2, '0');
     return Scaffold(
-      drawer: _MainDrawer(onOpen: _push),
-      body: Column(children: [
-        topBar,
-        Expanded(child: body),
-        MiniMusicBar(onOpen: () => _push(const MusicScreen())),
+      body: Stack(children: [
+        Column(children: [
+          topBar,
+          Expanded(child: body),
+          if (!_focus) MiniMusicBar(onOpen: () => _push(const MusicScreen())),
+        ]),
+        if (_focus)
+          Positioned(
+            right: 16,
+            bottom: 16,
+            child: SafeArea(
+              child: Material(
+                elevation: 6,
+                borderRadius: BorderRadius.circular(28),
+                color: Theme.of(context).colorScheme.inverseSurface,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 6, 6, 6),
+                  child: Row(mainAxisSize: MainAxisSize.min, children: [
+                    Icon(_focusSeconds >= 300 ? Icons.check_circle : Icons.timer_outlined,
+                        size: 18, color: _focusSeconds >= 300 ? Colors.greenAccent : Theme.of(context).colorScheme.onInverseSurface),
+                    const SizedBox(width: 6),
+                    Text('$mm:$ss',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onInverseSurface, fontFeatures: const [FontFeature.tabularFigures()])),
+                    const SizedBox(width: 10),
+                    FilledButton(onPressed: () => _finishFocus(app), child: const Text('Concluir leitura')),
+                    IconButton(
+                      tooltip: 'Sair do modo foco',
+                      color: Theme.of(context).colorScheme.onInverseSurface,
+                      icon: const Icon(Icons.close),
+                      onPressed: _stopFocus,
+                    ),
+                  ]),
+                ),
+              ),
+            ),
+          ),
       ]),
     );
   }
@@ -239,134 +528,212 @@ class _NoBible extends StatelessWidget {
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             const Icon(Icons.menu_book, size: 72),
             const SizedBox(height: 16),
-            const Text('Nenhuma versão da Bíblia instalada.',
-                style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+            const Text('Nenhuma versão da Bíblia instalada.', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
             if (error != null) ...[
               const SizedBox(height: 8),
               Text(error!, textAlign: TextAlign.center),
             ],
             const SizedBox(height: 16),
-            FilledButton.icon(
-              onPressed: onImport,
-              icon: const Icon(Icons.download),
-              label: const Text('Importar versão'),
-            ),
+            FilledButton.icon(onPressed: onImport, icon: const Icon(Icons.download), label: const Text('Importar versão')),
           ]),
         ),
       );
 }
 
-class _MainDrawer extends StatelessWidget {
-  final void Function(Widget) onOpen;
-  const _MainDrawer({required this.onOpen});
+// ======================================================================
+// Abas Estudo, Biblioteca e Mais
+// ======================================================================
+
+class _HubItem {
+  final IconData icon;
+  final Color color;
+  final String title;
+  final String subtitle;
+  final void Function(BuildContext) open;
+  const _HubItem(this.icon, this.color, this.title, this.subtitle, this.open);
+}
+
+void _go(BuildContext context, Widget page) => Navigator.of(context).push(MaterialPageRoute(builder: (_) => page));
+
+class _HubPage extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final List<_HubItem> items;
+  const _HubPage({required this.title, required this.subtitle, required this.items});
 
   @override
   Widget build(BuildContext context) {
-    final app = context.watch<AppState>();
     final theme = Theme.of(context);
-    final bible = app.bible;
-    final vod = verseOfDay(DateTime.now());
-    final vodText = bible == null ? null : verseText(bible, vod);
-
-    void open(Widget w) {
-      Navigator.pop(context);
-      onOpen(w);
-    }
-
-    Widget item(IconData icon, String label, Widget page) => ListTile(
-          leading: Icon(icon),
-          title: Text(label),
-          onTap: () => open(page),
-        );
-
-
-    return Drawer(
-      width: 340,
-      child: ListView(padding: EdgeInsets.zero, children: [
-        DrawerHeader(
-          decoration: BoxDecoration(color: app.settings.themeColor),
-          margin: EdgeInsets.zero,
-          child: InkWell(
-            onTap: bible == null
-                ? null
-                : () {
-                    Navigator.pop(context);
-                    app.goTo(vod.book, vod.chapter, verse: vod.verse);
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1080),
+            child: CustomScrollView(slivers: [
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(18, 18, 18, 6),
+                sliver: SliverToBoxAdapter(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(title, style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
+                    Text(subtitle, style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+                  ]),
+                ),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(18, 12, 18, 28),
+                sliver: SliverGrid.builder(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 340, mainAxisExtent: 96, crossAxisSpacing: 14, mainAxisSpacing: 14),
+                  itemCount: items.length,
+                  itemBuilder: (context, i) {
+                    final it = items[i];
+                    return Card(
+                      margin: EdgeInsets.zero,
+                      clipBehavior: Clip.antiAlias,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                      child: InkWell(
+                        onTap: () => it.open(context),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(children: [
+                            CircleAvatar(
+                              radius: 24,
+                              backgroundColor: it.color.withValues(alpha: 0.14),
+                              child: Icon(it.icon, color: it.color),
+                            ),
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(it.title,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+                                  Text(it.subtitle, maxLines: 2, overflow: TextOverflow.ellipsis, style: theme.textTheme.bodySmall),
+                                ],
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ),
+                    );
                   },
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Text('Bíblia · JG Company',
-                  style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
-              const Text('Versículo do dia',
-                  style: TextStyle(color: Color(0xFFC9A227), fontWeight: FontWeight.w600)),
-              const SizedBox(height: 4),
-              Expanded(
-                child: Text(
-                  vodText == null ? '' : '“$vodText” — ${vod.label(bible)}',
-                  style: const TextStyle(color: Colors.white),
-                  overflow: TextOverflow.fade,
                 ),
               ),
             ]),
           ),
         ),
-        Builder(builder: (context) {
-          final account = context.watch<AccountService>();
-          return ListTile(
-            leading: account.signedIn && account.photoUrl != null
-                ? CircleAvatar(radius: 14, backgroundImage: NetworkImage(account.photoUrl!))
-                : const Icon(Icons.account_circle),
-            title: Text(account.signedIn ? (account.name ?? account.email ?? 'Conta Google') : 'Entrar com Google'),
-            subtitle: Text(account.signedIn ? 'Dados sincronizados na sua conta' : 'Salve tudo na sua conta'),
-            onTap: () => open(const AccountScreen()),
-          );
-        }),
-        ListTile(
-          leading: const Icon(Icons.menu_book),
-          title: const Text('Bíblia'),
-          onTap: () => Navigator.pop(context),
+      ),
+    );
+  }
+}
+
+class StudyHub extends StatelessWidget {
+  const StudyHub({super.key});
+
+  @override
+  Widget build(BuildContext context) => _HubPage(
+        title: 'Estudo',
+        subtitle: 'Ferramentas para entender e guardar a Palavra',
+        items: [
+          _HubItem(Icons.auto_awesome, const Color(0xFF5E35B1), 'Assistente bíblico (IA)', 'Tire dúvidas com referências', openAssistant),
+          _HubItem(Icons.search, const Color(0xFF1565C0), 'Pesquisar na Bíblia', 'Palavras, frases e temas', (c) => _go(c, const SearchScreen())),
+          _HubItem(Icons.event_note, const Color(0xFF2E7D32), 'Planos de leitura', 'No seu ritmo, sem atraso', (c) => _go(c, const ReadingPlansScreen())),
+          _HubItem(Icons.volunteer_activism_outlined, const Color(0xFFD81B60), 'Palavra para o momento', 'Versículos para ansiedade, medo, luto…', (c) => _go(c, const NeedsScreen())),
+          _HubItem(Icons.psychology_alt_outlined, const Color(0xFF00897B), 'Memorização', 'Guarde versículos no coração', (c) => _go(c, const MemorizeScreen())),
+          _HubItem(Icons.self_improvement, const Color(0xFF6A1B9A), 'Diário de oração', 'Pedidos e orações respondidas', (c) => _go(c, const PrayerScreen())),
+          _HubItem(Icons.wb_sunny_outlined, const Color(0xFFEF6C00), 'Devocional diário', 'Uma reflexão para hoje',
+              (c) => openDevotional(c, c.read<AppState>())),
+          _HubItem(Icons.abc, const Color(0xFF455A64), 'Dicionário bíblico', 'Pessoas, lugares e termos', (c) => _go(c, const DictionaryScreen())),
+          _HubItem(Icons.public, const Color(0xFF00838F), 'Mapas bíblicos', 'Histórias animadas no satélite', (c) => _go(c, const MapsScreen())),
+          _HubItem(Icons.auto_stories, const Color(0xFF8D6E63), 'Histórias bíblicas', '56 histórias contadas', (c) => _go(c, const StoriesScreen())),
+          _HubItem(Icons.quiz_outlined, const Color(0xFFC62828), 'Perguntas bíblicas', 'Teste o que você sabe', (c) => _go(c, const QuizScreen())),
+        ],
+      );
+}
+
+class LibraryHub extends StatelessWidget {
+  const LibraryHub({super.key});
+
+  @override
+  Widget build(BuildContext context) => _HubPage(
+        title: 'Biblioteca',
+        subtitle: 'Seus livros, revistas, hinos e anotações',
+        items: [
+          _HubItem(Icons.school, const Color(0xFF1565C0), 'EBD', 'Revista, lições e preparo da aula', (c) => _go(c, const LibraryScreen(initialTab: 1))),
+          _HubItem(Icons.picture_as_pdf_outlined, const Color(0xFFC62828), 'Livros (PDF)', 'Leia e anote à mão', (c) => _go(c, const LibraryScreen())),
+          _HubItem(Icons.library_music, const Color(0xFF6A1B9A), 'Hinário', 'Hinos e o seu hinário', (c) => _go(c, const HymnalScreen())),
+          _HubItem(Icons.music_note, const Color(0xFF00897B), 'Músicas de fundo', 'Instrumentais para ler e orar', (c) => _go(c, const MusicScreen())),
+          _HubItem(Icons.edit_note, const Color(0xFFEF6C00), 'Anotações', 'Tudo o que você escreveu', (c) => _go(c, const NotesScreen())),
+          _HubItem(Icons.bookmark, const Color(0xFFB8860B), 'Favoritos e marcações', 'Versículos marcados com cores', (c) => _go(c, const MarksScreen())),
+          _HubItem(Icons.history, const Color(0xFF455A64), 'Histórico', 'Capítulos abertos recentemente', (c) => _go(c, const HistoryScreen())),
+        ],
+      );
+}
+
+class MoreScreen extends StatelessWidget {
+  const MoreScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final account = context.watch<AccountService>();
+    final theme = Theme.of(context);
+    Widget tile(IconData icon, String title, String subtitle, Widget page) => ListTile(
+          leading: Icon(icon),
+          title: Text(title),
+          subtitle: Text(subtitle),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => _go(context, page),
+        );
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 760),
+            child: ListView(padding: const EdgeInsets.fromLTRB(12, 18, 12, 28), children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 8, 12),
+                child: Text('Mais', style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
+              ),
+              Card(
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  leading: account.signedIn && account.photoUrl != null
+                      ? CircleAvatar(backgroundImage: NetworkImage(account.photoUrl!))
+                      : const CircleAvatar(child: Icon(Icons.person)),
+                  title: Text(account.signedIn ? (account.name ?? account.email ?? 'Conta Google') : 'Entrar com Google',
+                      style: const TextStyle(fontWeight: FontWeight.w700)),
+                  subtitle: Text(!account.signedIn
+                      ? 'Salve marcações, anotações e progresso na sua conta'
+                      : account.sessionExpired
+                          ? 'Sessão vencida: toque para entrar de novo'
+                          : 'Seus dados estão sincronizados na sua conta'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => _go(context, const AccountScreen()),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Card(
+                child: Column(children: [
+                  tile(Icons.insights, 'Progresso de leitura', 'Quanto da Bíblia você já leu', const ProgressScreen()),
+                  tile(Icons.translate, 'Versões da Bíblia', 'Escolher ou importar versões', const VersionsScreen()),
+                  tile(Icons.record_voice_over, 'Voz da leitura', 'Voz, velocidade e tom', const VoiceScreen()),
+                  tile(Icons.settings, 'Configurações', 'Leitura, tema e notificações', const SettingsScreen()),
+                  tile(Icons.backup, 'Backup', 'Salvar ou restaurar seus dados', const BackupScreen()),
+                  tile(Icons.info_outline, 'Sobre', 'Versão, atualização e créditos', const AboutScreen()),
+                ]),
+              ),
+              const SizedBox(height: 24),
+              Center(
+                child: Text('Bíblia JG · Produzido por Joabe Gonçalves',
+                    style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+              ),
+            ]),
+          ),
         ),
-        item(Icons.edit_note, 'Anotações', const NotesScreen()),
-        item(Icons.bookmark, 'Favoritos & Marcações', const MarksScreen()),
-        item(Icons.insights, 'Progresso de Leitura', const ProgressScreen()),
-        item(Icons.search, 'Pesquisa', const SearchScreen()),
-        item(Icons.translate, 'Versões', const VersionsScreen()),
-        item(Icons.history, 'Histórico', const HistoryScreen()),
-        const Divider(),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-          child: Text('Estudo e devoção', style: theme.textTheme.labelLarge),
-        ),
-        ListTile(
-          leading: const Icon(Icons.auto_awesome),
-          title: const Text('Assistente bíblico (IA)'),
-          onTap: () {
-            Navigator.pop(context);
-            openAssistant(context);
-          },
-        ),
-        item(Icons.event_note, 'Planos de Leitura', const ReadingPlansScreen()),
-        ListTile(
-          leading: const Icon(Icons.wb_sunny_outlined),
-          title: const Text('Devocional Diário'),
-          onTap: () {
-            Navigator.pop(context);
-            openDevotional(context, app);
-          },
-        ),
-        item(Icons.auto_stories, 'Histórias Bíblicas', const StoriesScreen()),
-        item(Icons.quiz, 'Perguntas Bíblicas', const QuizScreen()),
-        item(Icons.music_note, 'Músicas de fundo', const MusicScreen()),
-        item(Icons.menu_book_outlined, 'Livros (PDF)', const LibraryScreen()),
-        item(Icons.school, 'EBD', const LibraryScreen(initialTab: 1)),
-        item(Icons.abc, 'Dicionário bíblico', const DictionaryScreen()),
-        item(Icons.library_music, 'Hinário', const HymnalScreen()),
-        item(Icons.public, 'Mapas bíblicos', const MapsScreen()),
-        const Divider(),
-        item(Icons.backup, 'Backup', const BackupScreen()),
-        item(Icons.settings, 'Configurações', const SettingsScreen()),
-        item(Icons.info_outline, 'Sobre', const AboutScreen()),
-      ]),
+      ),
     );
   }
 }

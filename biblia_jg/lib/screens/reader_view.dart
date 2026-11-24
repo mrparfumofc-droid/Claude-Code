@@ -11,6 +11,7 @@ import '../services/tts.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/note_editor.dart';
+import '../widgets/compare_sheet.dart';
 import '../widgets/xrefs_sheet.dart';
 import 'ai_chat_screen.dart';
 import 'maps_screen.dart';
@@ -50,6 +51,8 @@ class _ReaderViewState extends State<ReaderView> {
     _recognizers.clear();
   }
 
+  int _seenScroll = -1;
+
   GlobalKey _keyFor(int verse) => _keys.putIfAbsent(verse, GlobalKey.new);
 
   void _toggle(int verse) => setState(() {
@@ -60,17 +63,21 @@ class _ReaderViewState extends State<ReaderView> {
     final key = '${app.bible?.id}:${app.book}:${app.chapter}';
     if (key != _lastChapterKey) {
       if (_lastChapterKey.isNotEmpty) {
+        // Para a leitura em voz alta ao trocar de capítulo (fora do build, pois notifica).
         final tts = context.read<ReadAloud>();
-        if (tts.speaking) tts.stop();
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (tts.speaking) tts.stop();
+        });
       }
       _lastChapterKey = key;
       _selected.clear();
       _keys.clear();
       if (_scroll.hasClients) _scroll.jumpTo(0);
     }
+    // Cada leitor (tela principal, Bíblia ao lado do PDF, painéis) rola por conta própria.
     final target = app.scrollToVerse;
-    if (target != null) {
-      app.consumeScrollTarget();
+    if (target != null && _seenScroll != app.scrollSerial) {
+      _seenScroll = app.scrollSerial;
       _flashVerse = target;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final ctx = _keys[target]?.currentContext ?? _blockContextFor(target);
@@ -533,6 +540,38 @@ class _VerseActionBar extends StatelessWidget {
                     ),
                   );
                 }),
+                action(Icons.child_care_outlined, 'Explicar simples', () {
+                  final ref = _reference, text = _plainText;
+                  onClear();
+                  _push(
+                    context,
+                    AiChatScreen(
+                      title: 'Em palavras simples',
+                      task: 'chat',
+                      reference: ref,
+                      version: app.bible!.abbrev,
+                      verseText: text,
+                      initialPrompt: 'Explique este trecho em palavras bem simples, como para alguém que nunca leu a Bíblia, '
+                          'em no máximo 6 linhas. Explique as palavras difíceis. Depois diga, em 1 frase, como aplicar hoje.',
+                    ),
+                  );
+                }),
+                action(Icons.compare_arrows, 'Comparar', () {
+                  final verses = selected.toList()..sort();
+                  final book = app.book, chapter = app.chapter;
+                  onClear();
+                  showCompareVersions(context, app, book, chapter, verses);
+                }),
+                action(Icons.psychology_alt_outlined, 'Memorizar', () async {
+                  final messenger = ScaffoldMessenger.of(context);
+                  final verses = selected.toList();
+                  final book = app.book, chapter = app.chapter;
+                  onClear();
+                  for (final v in verses) {
+                    await app.db.addMemory(VerseRef(book, chapter, v));
+                  }
+                  messenger.showSnackBar(const SnackBar(content: Text('Adicionado à memorização (aba Estudo)')));
+                }),
                 action(Icons.image_outlined, 'Imagem', () {
                   final ref = '$_reference (${app.bible!.abbrev})', text = _plainText;
                   onClear();
@@ -557,8 +596,9 @@ class _VerseActionBar extends StatelessWidget {
                 }),
                 action(Icons.map_outlined, 'Mapa', () {
                   final ref = _reference, book = app.book, chapter = app.chapter, verse = selected.first;
+                  final navigator = Navigator.of(context), messenger = ScaffoldMessenger.of(context);
                   onClear();
-                  openVersePlaces(context, book, chapter, verse, ref);
+                  openVersePlaces(navigator, messenger, book, chapter, verse, ref);
                 }),
               ]),
             ),

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../models/reference_parser.dart';
 import '../services/ai_service.dart';
 import '../state/app_state.dart';
+import 'dictionary_screen.dart' show showBiblePassage;
 
 class QuizQuestion {
   final String question;
@@ -183,10 +184,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 return TextButton.icon(
                   onPressed: p == null
                       ? null
-                      : () {
-                          app.goTo(p.book, p.chapter, verse: p.verse);
-                          Navigator.of(context).popUntil((r) => r.isFirst);
-                        },
+                      : () => showBiblePassage(context, p), // painel: não perde o quiz respondido
                   icon: const Icon(Icons.menu_book, size: 18),
                   label: Text(q.reference),
                 );

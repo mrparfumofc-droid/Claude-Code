@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/reference_parser.dart';
 import '../services/ai_service.dart';
 import '../state/app_state.dart';
+import 'dictionary_screen.dart' show showBiblePassage;
 
 /// Conversa com a IA (Gemini). Usada no Estudo bíblico, devocional, histórias etc.
 class AiChatScreen extends StatefulWidget {
@@ -48,6 +49,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
   final _scroll = ScrollController();
   bool _busy = false;
   String? _error;
+  String? _lastText;
+  String? _lastTask;
   String _profile = 'assembleiano';
 
   @override
@@ -81,6 +84,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
 
   Future<void> _send(String text, String task) async {
     if (text.trim().isEmpty || _busy) return;
+    _lastText = text.trim();
+    _lastTask = task;
     setState(() {
       _turns.add(AiTurn(true, text.trim()));
       _busy = true;
@@ -125,9 +130,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
   String get _lastAnswer => _turns.lastWhere((t) => !t.fromUser, orElse: () => const AiTurn(false, '')).text;
 
   void _openPassage(Passage p) {
-    final app = context.read<AppState>();
-    app.goTo(p.book, p.chapter, verse: p.verse);
-    Navigator.of(context).popUntil((r) => r.isFirst);
+    // Abre num painel por cima, para não perder o estudo gerado pela IA.
+    showBiblePassage(context, p);
   }
 
   @override
@@ -204,9 +208,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
                     title: Text(_error!),
                     trailing: TextButton(
                       onPressed: () {
-                        if (_turns.isEmpty && widget.initialPrompt != null) {
-                          _send(widget.initialPrompt!, widget.task);
-                        }
+                        // Repete a última pergunta que falhou (a primeira ou uma seguinte).
+                        if (_lastText != null) _send(_lastText!, _lastTask ?? widget.task);
                       },
                       child: const Text('Tentar de novo'),
                     ),
@@ -217,6 +220,14 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   for (final (label, task, prompt) in widget.quickActions)
                     ActionChip(label: Text(label), onPressed: () => _send(prompt, task)),
                 ]),
+              if (!_busy && _turns.any((t) => !t.fromUser))
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Text(
+                    'Resposta gerada por IA: pode conter erros. Confira sempre no texto bíblico (toque nas referências).',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                ),
             ],
           ),
         ),
@@ -232,6 +243,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   maxLines: 4,
                   textInputAction: TextInputAction.send,
                   onSubmitted: (v) {
+                    if (_busy) return; // não apaga o que foi digitado enquanto a IA responde
                     _send(v, widget.task == 'explain' ? 'explain' : 'chat');
                     _input.clear();
                   },

@@ -36,6 +36,10 @@ class ReadingPlan {
 List<int> _range(int a, int b) => [for (var i = a; i <= b; i++) i];
 
 final readingPlans = <ReadingPlan>[
+  ReadingPlan('marcos16', 'Comece por Marcos', 'Para quem está começando: o Evangelho mais curto, 1 capítulo por dia (16 dias).', 16, [40]),
+  ReadingPlan('joao21', 'Evangelho de João em 21 dias', 'Conheça Jesus de perto: 1 capítulo por dia.', 21, [42]),
+  ReadingPlan('proverbios31', 'Provérbios em 31 dias', 'Um capítulo de sabedoria por dia.', 31, [19]),
+  ReadingPlan('atos28', 'Atos em 28 dias', 'O começo da igreja: 1 capítulo por dia.', 28, [43]),
   ReadingPlan('biblia365', 'Bíblia em 1 ano', 'Toda a Bíblia, de Gênesis a Apocalipse, em 365 dias.', 365, _range(0, 65)),
   ReadingPlan('biblia180', 'Bíblia em 6 meses', 'Toda a Bíblia em 180 dias (cerca de 7 capítulos por dia).', 180, _range(0, 65)),
   ReadingPlan('nt90', 'Novo Testamento em 90 dias', 'De Mateus a Apocalipse em 3 meses.', 90, _range(39, 65)),
@@ -55,6 +59,16 @@ class PlanProgress {
   PlanProgress(this.planId, this.start, this.done);
 
   int get todayIndex => DateTime.now().difference(DateTime(start.year, start.month, start.day)).inDays;
+
+  /// Próximo dia ainda não lido (plano flexível: sem atraso, continua de onde parou).
+  int nextDay(int days) {
+    for (var d = 0; d < days; d++) {
+      if (!done.contains(d)) return d;
+    }
+    return days - 1;
+  }
+
+  bool finished(int days) => done.length >= days;
 
   int get streak {
     var s = 0;
@@ -142,8 +156,20 @@ class _ReadingPlansScreenState extends State<ReadingPlansScreen> {
           TextButton(
             style: TextButton.styleFrom(foregroundColor: Theme.of(context).appBarTheme.foregroundColor),
             onPressed: () async {
+              final ok = await showDialog<bool>(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Trocar de plano?'),
+                  content: const Text('O progresso do plano atual será apagado.'),
+                  actions: [
+                    TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancelar')),
+                    FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Trocar')),
+                  ],
+                ),
+              );
+              if (ok != true) return;
               await PlanProgress.clear();
-              setState(() => _progress = null);
+              if (mounted) setState(() => _progress = null);
             },
             child: const Text('Trocar plano'),
           ),
@@ -155,7 +181,7 @@ class _ReadingPlansScreenState extends State<ReadingPlansScreen> {
   Widget _choose() => ListView(padding: const EdgeInsets.all(12), children: [
         const Padding(
           padding: EdgeInsets.all(8),
-          child: Text('Escolha um plano. Ele começa hoje e você marca cada dia lido.'),
+          child: Text('Escolha um plano. Não tem data marcada: você lê no seu ritmo e continua de onde parou, sem atraso.'),
         ),
         for (final p in readingPlans)
           Card(
@@ -170,7 +196,7 @@ class _ReadingPlansScreenState extends State<ReadingPlansScreen> {
 
   Widget _active(AppState app, Bible bible, ReadingPlan plan, PlanProgress progress) {
     final schedule = plan.schedule(bible);
-    final today = progress.todayIndex.clamp(0, plan.days - 1);
+    final today = progress.nextDay(plan.days);
     final pct = progress.done.length / plan.days;
     String label(DayReading r) {
       if (r.isEmpty) return '—';
@@ -202,9 +228,11 @@ class _ReadingPlansScreenState extends State<ReadingPlansScreen> {
                 LinearProgressIndicator(value: pct, minHeight: 8),
                 const SizedBox(height: 8),
                 Text('${progress.done.length} de ${plan.days} dias · ${(pct * 100).toStringAsFixed(0)}%'),
-                Text('🔥 Sequência: ${progress.streak} dia(s)'),
+                Text(progress.finished(plan.days)
+                    ? 'Plano concluído. Glória a Deus!'
+                    : 'No seu ritmo: sem atraso, continue de onde parou.'),
                 const SizedBox(height: 12),
-                Text('Hoje (dia ${today + 1}): ${label(schedule[today])}',
+                Text('Próxima leitura (dia ${today + 1}): ${label(schedule[today])}',
                     style: const TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8),
                 Wrap(spacing: 8, runSpacing: 8, children: [
@@ -215,7 +243,7 @@ class _ReadingPlansScreenState extends State<ReadingPlansScreen> {
                           size: 18),
                       label: Text('${bible.books[b].name} $c'),
                       onPressed: () {
-                        app.goTo(b, c);
+                        app.openAt(b, c);
                         Navigator.of(context).popUntil((r) => r.isFirst);
                       },
                     ),
@@ -224,7 +252,7 @@ class _ReadingPlansScreenState extends State<ReadingPlansScreen> {
                 FilledButton.icon(
                   onPressed: () => _toggleDay(today),
                   icon: Icon(progress.done.contains(today) ? Icons.undo : Icons.check),
-                  label: Text(progress.done.contains(today) ? 'Desmarcar hoje' : 'Concluir leitura de hoje'),
+                  label: Text(progress.done.contains(today) ? 'Desmarcar' : 'Concluir esta leitura'),
                 ),
               ]),
             ),
@@ -234,7 +262,7 @@ class _ReadingPlansScreenState extends State<ReadingPlansScreen> {
         return CheckboxListTile(
           value: progress.done.contains(d),
           onChanged: (_) => _toggleDay(d),
-          title: Text('Dia ${d + 1}${d == today ? ' · hoje' : ''}'),
+          title: Text('Dia ${d + 1}${d == today && !progress.done.contains(d) ? ' · próxima' : ''}'),
           subtitle: Text(label(schedule[d])),
           selected: d == today,
         );

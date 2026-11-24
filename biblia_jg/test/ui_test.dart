@@ -5,6 +5,7 @@ import 'package:biblia_jg/models/bible.dart';
 import 'package:biblia_jg/models/reader_settings.dart';
 import 'package:biblia_jg/screens/home_shell.dart';
 import 'package:biblia_jg/screens/settings_screen.dart';
+import 'package:biblia_jg/screens/today_screen.dart';
 import 'package:biblia_jg/services/notifications.dart';
 import 'package:biblia_jg/state/app_state.dart';
 import 'package:flutter/material.dart';
@@ -66,10 +67,17 @@ Future<void> _pump(WidgetTester tester, AppState app, Size size) async {
 
 void main() {
   HomeShell.autoCheckUpdates = false;
+  TodayScreen.loadData = false;
   for (final (name, size) in [('tablet', Size(1280, 800)), ('celular', Size(400, 860))]) {
     testWidgets('tela de leitura no $name', (tester) async {
       final app = await tester.runAsync(_state);
       await _pump(tester, app!, size);
+
+      // O app abre na aba Hoje; a leitura fica na aba Bíblia.
+      expect(find.text('VERSÍCULO DO DIA'), findsOneWidget);
+      await tester.tap(find.text('Bíblia').first);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
 
       expect(find.text('Gênesis 1'), findsOneWidget);
       expect(find.text('Título de seção'), findsOneWidget);
@@ -94,13 +102,25 @@ void main() {
     });
   }
 
-  testWidgets('configurações e menu', (tester) async {
+  testWidgets('abas e configurações', (tester) async {
     final app = await tester.runAsync(_state);
     await _pump(tester, app!, const Size(1280, 800));
-    await tester.tap(find.byTooltip('Open navigation menu'));
-    await tester.pumpAndSettle();
-    expect(find.text('Favoritos & Marcações'), findsOneWidget);
-    expect(find.text('Versículo do dia'), findsOneWidget);
+    expect(find.text('VERSÍCULO DO DIA'), findsOneWidget);
+    Future<void> openTab(String label) async {
+      await tester.tap(find.text(label).first);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+    }
+
+    await openTab('Estudo');
+    expect(find.text('Memorização'), findsOneWidget);
+    expect(find.text('Diário de oração'), findsOneWidget);
+    await openTab('Biblioteca');
+    expect(find.text('Favoritos e marcações'), findsOneWidget);
+    await openTab('Mais');
+    expect(find.text('Entrar com Google'), findsOneWidget);
+    expect(find.textContaining('Produzido por Joabe Gonçalves'), findsOneWidget);
+    expect(tester.takeException(), isNull);
 
     await tester.pumpWidget(ChangeNotifierProvider.value(
         value: app, child: const MaterialApp(home: SettingsScreen())));

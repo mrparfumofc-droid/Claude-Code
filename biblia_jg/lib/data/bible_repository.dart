@@ -77,7 +77,7 @@ class BibleRepository {
     final cached = _cache[source];
     if (cached != null) return cached;
     final text = builtIn
-        ? await rootBundle.loadString(source)
+        ? await rootBundle.loadString(source, cache: false) // não segura vários MB na memória
         : await File(source).readAsString();
     final id = p.basenameWithoutExtension(source);
     final bible = await compute(_parseIsolate, [text, id]);

@@ -51,7 +51,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 title: Text('$name ${h.chapter}'),
                 trailing: Text(when),
                 onTap: () {
-                  app.goTo(h.book, h.chapter);
+                  app.openAt(h.book, h.chapter);
                   Navigator.pop(context);
                 },
               );

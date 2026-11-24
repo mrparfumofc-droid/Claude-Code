@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui' show PointerDeviceKind;
 
 import 'package:flutter/material.dart';
 import 'package:pdfrx/pdfrx.dart';
@@ -10,6 +11,7 @@ import '../services/books_service.dart';
 import '../services/ebd_reminder.dart';
 import '../services/notifications.dart';
 import '../state/app_state.dart';
+import 'ai_chat_screen.dart';
 import 'reader_view.dart';
 
 const _inkColors = <Color>[
@@ -43,6 +45,12 @@ class _Ink extends ChangeNotifier {
   double penWidth = 0.004; // relativo à largura da página
   Stroke? active;
   int? activePage;
+
+  /// Ponteiro (dedo/caneta) que está desenhando agora.
+  int? pointer;
+
+  /// Já apareceu uma caneta nesta sessão: o toque do dedo deixa de riscar.
+  bool stylusSeen = false;
 
   List<Stroke> of(int page) => pages[page] ?? const [];
 
@@ -178,12 +186,26 @@ class _InkLayer extends StatelessWidget {
       if (!drawing) return IgnorePointer(child: paint);
       return Listener(
         behavior: HitTestBehavior.opaque,
-        onPointerDown: (e) => ink.start(page, norm(e.localPosition)),
-        onPointerMove: (e) => ink.move(page, norm(e.localPosition)),
-        onPointerUp: (_) {
+        onPointerDown: (e) {
+          if (e.kind == PointerDeviceKind.stylus) ink.stylusSeen = true;
+          // Só um ponteiro desenha por vez; com caneta em uso, ignora a palma da mão.
+          if (ink.pointer != null || (ink.stylusSeen && e.kind == PointerDeviceKind.touch)) return;
+          ink.pointer = e.pointer;
+          ink.start(page, norm(e.localPosition));
+        },
+        onPointerMove: (e) {
+          if (e.pointer == ink.pointer) ink.move(page, norm(e.localPosition));
+        },
+        onPointerUp: (e) {
+          if (e.pointer != ink.pointer) return;
+          ink.pointer = null;
           if (ink.end(page)) onChanged(page);
         },
-        onPointerCancel: (_) => ink.end(page),
+        onPointerCancel: (e) {
+          if (e.pointer != ink.pointer) return;
+          ink.pointer = null;
+          ink.end(page);
+        },
         child: paint,
       );
     });
@@ -262,7 +284,12 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
     super.dispose();
   }
 
+  /// Página em que se desenhou por último (com duas páginas na tela, pode não ser a "atual").
+  int? _inkPage;
+  int get _inkTarget => _inkPage ?? _page;
+
   void _inkChanged(int page) {
+    _inkPage = page;
     _saveTimers[page]?.cancel();
     _saveTimers[page] = Timer(const Duration(milliseconds: 1500), () {
       _saveTimers.remove(page);
@@ -274,7 +301,10 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
 
   void _onPageChanged(int? n) {
     if (n == null || n == _page) return;
-    setState(() => _page = n);
+    setState(() {
+      _page = n;
+      _inkPage = null;
+    });
     _refsTimer?.cancel();
     _refsTimer = Timer(const Duration(milliseconds: 400), _loadRefs);
   }
@@ -370,6 +400,9 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
     final found = <int, Lesson>{};
     for (var n = 1; n <= total; n++) {
       final text = await _pageText(n);
+      if (!mounted) return;
+      // Página com várias "Lição N" é o sumário, não o começo de uma lição.
+      if (re.allMatches(text).map((x) => x.group(1)).toSet().length >= 3) continue;
       final head = text.length > 400 ? text.substring(0, 400) : text;
       final m = re.firstMatch(head);
       if (m == null) continue;
@@ -387,6 +420,53 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
     setState(() {});
     await _books.saveLessons(book).then((_) => scheduleEbdReminders(_notifications, _books.books)).catchError((_) {});
     messenger.showSnackBar(SnackBar(content: Text('${found.length} lições encontradas')));
+  }
+
+  /// Monta um plano de aula (IA) com o texto da lição aberta.
+  Future<void> _prepareLesson() async {
+    final messenger = ScaffoldMessenger.of(context);
+    final navigator = Navigator.of(context);
+    final version = context.read<AppState>().bible?.abbrev;
+    // Da página da lição atual até a véspera da próxima lição (no máximo 8 páginas).
+    final current = book.lessons.where((l) => l.page <= _page).lastOrNull;
+    final next = book.lessons.where((l) => l.page > _page).firstOrNull;
+    final start = current?.page ?? _page;
+    final total = _controller.document.pages.length;
+    final end = [(next?.page ?? start + 8) - 1, start + 7, total].reduce((a, b) => a < b ? a : b);
+    final buf = StringBuffer();
+    for (var n = start; n <= end && buf.length < 11500; n++) {
+      buf.writeln(await _pageText(n));
+    }
+    final text = buf.toString().replaceAll(RegExp(r'[ \t]+'), ' ').trim();
+    if (text.length < 200) {
+      messenger.showSnackBar(const SnackBar(
+          content: Text('Não consegui ler o texto desta revista (o PDF é escaneado como imagem).')));
+      return;
+    }
+    final head = text.length > 6000 ? text.substring(0, 6000) : text;
+    final rest = text.length > 6000 ? text.substring(6000, text.length > 10800 ? 10800 : text.length) : '';
+    navigator.push(MaterialPageRoute(
+      builder: (_) => AiChatScreen(
+        title: 'Preparar aula',
+        task: 'chat',
+        reference: '${book.title}${current == null ? '' : ' — ${current.title}'}',
+        version: version,
+        verseText: head,
+        initialPrompt: 'Sou professor da Escola Bíblica Dominical. O texto acima é a lição da revista'
+            '${rest.isEmpty ? '' : ' (continuação: $rest)'}. '
+            'Monte um plano de aula de 1 página para 45 minutos, fiel à lição: objetivo da aula em 1 frase; '
+            'versículo-chave; quebra-gelo de 2 minutos; desenvolvimento em 3 blocos com o tempo de cada um; '
+            '5 perguntas para a classe (3 fáceis e 2 para aprofundar); e uma aplicação prática para a semana.',
+        quickActions: const [
+          ('Quiz para o WhatsApp', 'chat',
+              'Crie 6 perguntas de múltipla escolha sobre esta lição, com o gabarito no final, em formato pronto para colar no WhatsApp da classe.'),
+          ('Dinâmica para a classe', 'chat',
+              'Sugira uma dinâmica simples de 5 minutos para fixar o tema desta lição, com poucos materiais.'),
+          ('Para novos na fé', 'chat',
+              'Explique o ponto central desta lição em linguagem bem simples, para alunos novos na fé.'),
+        ],
+      ),
+    ));
   }
 
   Widget _lessonsDrawer() => Drawer(
@@ -412,6 +492,16 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
                 onTap: () {
                   Navigator.pop(context);
                   _findLessons();
+                },
+              ),
+            if (book.isEbd)
+              ListTile(
+                leading: const Icon(Icons.auto_awesome),
+                title: const Text('Preparar a aula com IA'),
+                subtitle: const Text('Plano de aula de 1 página a partir desta lição'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _prepareLesson();
                 },
               ),
             const Divider(),
@@ -502,20 +592,21 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
           IconButton(
             tooltip: 'Desfazer',
             icon: const Icon(Icons.undo),
-            onPressed: ink.canUndo(_page)
+            onPressed: ink.canUndo(_inkTarget)
                 ? () {
-                    if (ink.undo(_page)) _inkChanged(_page);
+                    if (ink.undo(_inkTarget)) _inkChanged(_inkTarget);
                   }
                 : null,
           ),
           IconButton(
             tooltip: 'Limpar a página',
             icon: const Icon(Icons.layers_clear),
-            onPressed: ink.of(_page).isEmpty
+            onPressed: ink.of(_inkTarget).isEmpty
                 ? null
                 : () {
-                    ink.clear(_page);
-                    _inkChanged(_page);
+                    final target = _inkTarget;
+                    ink.clear(target);
+                    _inkChanged(target);
                   },
           ),
         ]),

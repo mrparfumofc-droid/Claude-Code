@@ -24,6 +24,9 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 16),
             Text('Bíblia · JG Company', style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 4),
+            Text('Produzido por Joabe Gonçalves',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+            const SizedBox(height: 4),
             FutureBuilder<String>(
               future: Updater().currentVersionLabel().catchError((_) => ''),
               builder: (_, snap) => Text('Versão ${snap.data ?? ''}'),

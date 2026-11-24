@@ -152,7 +152,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               style: const TextStyle(fontWeight: FontWeight.bold)),
                           subtitle: Text(h.text),
                           onTap: () {
-                            app.goTo(h.ref.book, h.ref.chapter, verse: h.ref.verse);
+                            app.openAt(h.ref.book, h.ref.chapter, verse: h.ref.verse);
                             Navigator.pop(context);
                           },
                         );

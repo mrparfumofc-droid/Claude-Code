@@ -49,7 +49,7 @@ Future<void> showCrossReferences(BuildContext context, AppState app, VerseRef re
                   subtitle: Text(passageText(bible, p), maxLines: 3, overflow: TextOverflow.ellipsis),
                   onTap: () {
                     Navigator.pop(ctx);
-                    app.goTo(p.book, p.chapter, verse: p.verse);
+                    app.openAt(p.book, p.chapter, verse: p.verse);
                   },
                 ),
           ]);
