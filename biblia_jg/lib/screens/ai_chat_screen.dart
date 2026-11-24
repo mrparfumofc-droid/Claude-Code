@@ -27,6 +27,10 @@ class AiChatScreen extends StatefulWidget {
   /// Atalhos de perguntas mostrados abaixo da resposta.
   final List<(String, String, String)> quickActions; // (rótulo, tarefa, pergunta)
 
+  /// Se informado, aparece um botão para levar a última resposta de volta (ex.: para o esboço da pregação).
+  final void Function(String answer)? onUse;
+  final String useLabel;
+
   const AiChatScreen({
     super.key,
     required this.title,
@@ -37,6 +41,8 @@ class AiChatScreen extends StatefulWidget {
     this.initialPrompt,
     this.cacheKey,
     this.quickActions = const [],
+    this.onUse,
+    this.useLabel = 'Usar esta resposta',
   });
 
   @override
@@ -155,6 +161,17 @@ class _AiChatScreenState extends State<AiChatScreen> {
                 CheckedPopupMenuItem(value: e.key, checked: e.key == _profile, child: Text(e.value)),
             ],
           ),
+          if (widget.onUse != null)
+            IconButton(
+              tooltip: widget.useLabel,
+              icon: const Icon(Icons.playlist_add_check),
+              onPressed: _lastAnswer.isEmpty
+                  ? null
+                  : () {
+                      widget.onUse!(_lastAnswer);
+                      Navigator.pop(context);
+                    },
+            ),
           IconButton(
             tooltip: 'Copiar',
             icon: const Icon(Icons.copy),

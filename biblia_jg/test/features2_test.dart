@@ -78,6 +78,7 @@ void main() {
       await db.saveNote(Note(ref: const VerseRef(0, 1, 1), text: 'minha nota', created: now, updated: now));
       await db.setFavorite(const VerseRef(0, 1, 2), true);
       await db.savePrayer(Prayer(text: 'Pedido', created: now));
+      await db.saveSermon(Sermon(title: 'A graça', passage: 'Ef 2:8', body: 'Esboço', created: now, updated: now));
       final snap = await db.exportAll();
 
       // Aparelho novo: junta duas vezes a mesma cópia e acrescenta algo local.
@@ -85,6 +86,7 @@ void main() {
       await db.importAll(snap, replace: false);
       expect((await db.allNotes()).length, 1);
       expect((await db.prayers()).length, 1);
+      expect((await db.sermons()).single.passage, 'Ef 2:8');
       expect((await db.allFavorites()).length, 1);
 
       // Backup antigo (sem as tabelas novas) não apaga orações.

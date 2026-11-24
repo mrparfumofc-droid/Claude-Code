@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui' show PointerDeviceKind;
-
 import 'package:flutter/material.dart';
 import 'package:pdfrx/pdfrx.dart';
 import 'package:provider/provider.dart';
@@ -11,46 +9,22 @@ import '../services/books_service.dart';
 import '../services/ebd_reminder.dart';
 import '../services/notifications.dart';
 import '../state/app_state.dart';
+import '../widgets/ink_tools.dart';
 import 'ai_chat_screen.dart';
 import 'reader_view.dart';
-
-const _inkColors = <Color>[
-  Color(0xFF1A1A1A),
-  Color(0xFFD32F2F),
-  Color(0xFF1565C0),
-  Color(0xFF2E7D32),
-  Color(0xFF7B1FA2),
-  Color(0xFFF9A825),
-];
-const _markerColors = <Color>[
-  Color(0xFFFFEB3B),
-  Color(0xFF8BC34A),
-  Color(0xFF4FC3F7),
-  Color(0xFFFF8A80),
-  Color(0xFFCE93D8),
-  Color(0xFFFFB74D),
-];
-
-enum _Tool { pen, marker, eraser }
 
 /// Estado das anotações à mão de um livro (todas as páginas).
 class _Ink extends ChangeNotifier {
   final Map<int, List<Stroke>> pages;
+  final InkToolbox box;
   final Map<int, List<List<Stroke>>> _history = {};
-  _Ink(this.pages);
+  _Ink(this.pages, this.box);
 
-  _Tool tool = _Tool.pen;
-  Color penColor = _inkColors[1];
-  Color markerColor = _markerColors[0];
-  double penWidth = 0.004; // relativo à largura da página
   Stroke? active;
   int? activePage;
 
-  /// Ponteiro (dedo/caneta) que está desenhando agora.
+  /// Ponteiro (caneta/dedo) que está desenhando agora.
   int? pointer;
-
-  /// Já apareceu uma caneta nesta sessão: o toque do dedo deixa de riscar.
-  bool stylusSeen = false;
 
   List<Stroke> of(int page) => pages[page] ?? const [];
 
@@ -63,24 +37,20 @@ class _Ink extends ChangeNotifier {
   bool canUndo(int page) => (_history[page]?.isNotEmpty ?? false);
 
   void start(int page, Offset p) {
-    if (tool == _Tool.eraser) {
+    if (box.eraser) {
       _snapshot(page);
       erase(page, p);
       return;
     }
-    final marker = tool == _Tool.marker;
-    active = Stroke(
-      marker ? InkTool.marker : InkTool.pen,
-      marker ? markerColor : penColor,
-      marker ? penWidth * 5 : penWidth,
-      [p],
-    );
+    final preset = box.current;
+    if (preset == null) return;
+    active = Stroke(preset.tool, preset.strokeColor, preset.width, [p]);
     activePage = page;
     notifyListeners();
   }
 
   void move(int page, Offset p) {
-    if (tool == _Tool.eraser) {
+    if (box.eraser) {
       erase(page, p);
       return;
     }
@@ -93,7 +63,7 @@ class _Ink extends ChangeNotifier {
 
   /// Termina o traço. Retorna true se algo mudou.
   bool end(int page) {
-    if (tool == _Tool.eraser) return true;
+    if (box.eraser) return true;
     final s = active;
     active = null;
     activePage = null;
@@ -142,7 +112,7 @@ class _InkPainter extends CustomPainter {
     if (s.points.length < 2) return;
     final marker = s.tool == InkTool.marker;
     final paint = Paint()
-      ..color = marker ? s.color.withValues(alpha: 0.35) : s.color
+      ..color = marker ? s.color.withValues(alpha: 0.35 * s.color.a) : s.color
       ..strokeWidth = max(1.0, s.width * size.width)
       ..style = PaintingStyle.stroke
       ..strokeCap = marker ? StrokeCap.square : StrokeCap.round
@@ -167,46 +137,65 @@ class _InkPainter extends CustomPainter {
   bool shouldRepaint(_InkPainter old) => true;
 }
 
-/// Camada de desenho sobre uma página do PDF.
+/// Camada de desenho sobre uma página do PDF. Sem ferramenta escolhida não pega nenhum toque
+/// (caneta e dedo movem a página); com ferramenta, a caneta risca e o dedo continua movendo.
 class _InkLayer extends StatelessWidget {
   final _Ink ink;
   final int page;
-  final bool drawing;
   final void Function(int page) onChanged;
-  const _InkLayer({required this.ink, required this.page, required this.drawing, required this.onChanged});
+  const _InkLayer({required this.ink, required this.page, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
+    final box = ink.box;
     return LayoutBuilder(builder: (context, c) {
       Offset norm(Offset local) => Offset(
             (local.dx / c.maxWidth).clamp(0.0, 1.0),
             (local.dy / c.maxHeight).clamp(0.0, 1.0),
           );
       final paint = CustomPaint(painter: _InkPainter(ink, page), size: Size(c.maxWidth, c.maxHeight));
-      if (!drawing) return IgnorePointer(child: paint);
-      return Listener(
-        behavior: HitTestBehavior.opaque,
-        onPointerDown: (e) {
-          if (e.kind == PointerDeviceKind.stylus) ink.stylusSeen = true;
-          // Só um ponteiro desenha por vez; com caneta em uso, ignora a palma da mão.
-          if (ink.pointer != null || (ink.stylusSeen && e.kind == PointerDeviceKind.touch)) return;
-          ink.pointer = e.pointer;
-          ink.start(page, norm(e.localPosition));
+      return ListenableBuilder(
+        listenable: box,
+        builder: (context, _) {
+          if (!box.drawing) return IgnorePointer(child: paint);
+          return RawGestureDetector(
+            behavior: HitTestBehavior.opaque,
+            gestures: {
+              DrawClaimRecognizer: GestureRecognizerFactoryWithHandlers<DrawClaimRecognizer>(
+                () => DrawClaimRecognizer(box.claims),
+                (_) {},
+              ),
+            },
+            child: Listener(
+              behavior: HitTestBehavior.opaque,
+              onPointerHover: (e) {
+                if (InkToolbox.isStylus(e)) box.lastStylus = DateTime.now();
+              },
+              onPointerDown: (e) {
+                if (InkToolbox.isStylus(e)) box.sawStylus();
+                // Só um ponteiro desenha por vez; a palma da mão é ignorada com a caneta por perto.
+                if (ink.pointer != null || !box.draws(e)) return;
+                ink.pointer = e.pointer;
+                ink.start(page, norm(e.localPosition));
+              },
+              onPointerMove: (e) {
+                if (InkToolbox.isStylus(e)) box.lastStylus = DateTime.now();
+                if (e.pointer == ink.pointer) ink.move(page, norm(e.localPosition));
+              },
+              onPointerUp: (e) {
+                if (e.pointer != ink.pointer) return;
+                ink.pointer = null;
+                if (ink.end(page)) onChanged(page);
+              },
+              onPointerCancel: (e) {
+                if (e.pointer != ink.pointer) return;
+                ink.pointer = null;
+                ink.end(page);
+              },
+              child: paint,
+            ),
+          );
         },
-        onPointerMove: (e) {
-          if (e.pointer == ink.pointer) ink.move(page, norm(e.localPosition));
-        },
-        onPointerUp: (e) {
-          if (e.pointer != ink.pointer) return;
-          ink.pointer = null;
-          if (ink.end(page)) onChanged(page);
-        },
-        onPointerCancel: (e) {
-          if (e.pointer != ink.pointer) return;
-          ink.pointer = null;
-          ink.end(page);
-        },
-        child: paint,
       );
     });
   }
@@ -229,7 +218,9 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
   double? _progress;
   String? _error;
   _Ink? _ink;
-  bool _drawing = false;
+  InkToolbox? _box;
+  bool _textMode = false; // texto do PDF em letra de leitura, como a Bíblia
+  Set<int> _marks = {}; // marcadores de página (guardados no aparelho)
   bool _bibleOpen = false;
   int _page = 1;
   int _savedPage = 1;
@@ -254,19 +245,40 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
           if (mounted) setState(() => _progress = v);
         }),
         _books.loadInk(book.id),
+        InkToolbox.load(),
       ]);
       if (!mounted) return;
+      final box = results[2] as InkToolbox..addListener(_onBox);
+      final prefs = context.read<AppState>().prefs;
       setState(() {
         _path = results[0] as String;
-        _ink = _Ink(results[1] as Map<int, List<Stroke>>);
+        _box = box;
+        _ink = _Ink(results[1] as Map<int, List<Stroke>>, box);
+        _marks = {for (final m in prefs.getStringList('book.marks.${book.id}') ?? const <String>[]) int.tryParse(m) ?? 0}..remove(0);
       });
     } catch (e) {
       if (mounted) setState(() => _error = '$e');
     }
   }
 
+  void _onBox() {
+    if (mounted) setState(() {});
+  }
+
+  void _toggleMark() {
+    setState(() => _marks.contains(_page) ? _marks.remove(_page) : _marks.add(_page));
+    context.read<AppState>().prefs.setStringList('book.marks.${book.id}', [for (final m in _marks) '$m']);
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        duration: const Duration(seconds: 2),
+        content: Text(_marks.contains(_page) ? 'Página $_page marcada.' : 'Marcador da página $_page removido.'),
+      ));
+  }
+
   @override
   void dispose() {
+    _box?.removeListener(_onBox);
     for (final t in _saveTimers.values) {
       t.cancel();
     }
@@ -504,6 +516,22 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
                   _prepareLesson();
                 },
               ),
+            if (_marks.isNotEmpty) ...[
+              const Divider(),
+              const ListTile(dense: true, title: Text('Marcadores de página', style: TextStyle(fontWeight: FontWeight.bold))),
+              for (final m in _marks.toList()..sort())
+                ListTile(
+                  dense: true,
+                  leading: const Icon(Icons.bookmark),
+                  title: Text('Página $m'),
+                  selected: _page == m,
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() => _textMode = false);
+                    _controller.goToPage(pageNumber: m);
+                  },
+                ),
+            ],
             const Divider(),
             if (book.lessons.isEmpty)
               const Padding(padding: EdgeInsets.all(16), child: Text('Nenhuma marcada ainda.')),
@@ -530,87 +558,32 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
         ),
       );
 
-  Widget _inkToolbar(_Ink ink) {
-    final theme = Theme.of(context);
-    final colors = ink.tool == _Tool.marker ? _markerColors : _inkColors;
-    final current = ink.tool == _Tool.marker ? ink.markerColor : ink.penColor;
-    return Material(
-      elevation: 3,
-      color: theme.colorScheme.surfaceContainerHigh,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        child: Row(children: [
-          SegmentedButton<_Tool>(
-            showSelectedIcon: false,
-            segments: const [
-              ButtonSegment(value: _Tool.pen, icon: Icon(Icons.edit), tooltip: 'Caneta'),
-              ButtonSegment(value: _Tool.marker, icon: Icon(Icons.border_color), tooltip: 'Marca-texto'),
-              ButtonSegment(value: _Tool.eraser, icon: Icon(Icons.auto_fix_normal), tooltip: 'Borracha'),
-            ],
-            selected: {ink.tool},
-            onSelectionChanged: (v) => setState(() => ink.tool = v.first),
-          ),
-          const SizedBox(width: 12),
-          if (ink.tool != _Tool.eraser)
-            for (final c in colors)
-              GestureDetector(
-                onTap: () => setState(() {
-                  if (ink.tool == _Tool.marker) {
-                    ink.markerColor = c;
-                  } else {
-                    ink.penColor = c;
-                  }
-                }),
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 3),
-                  width: 30,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: c,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      width: current == c ? 3 : 1,
-                      color: current == c ? theme.colorScheme.primary : Colors.grey,
-                    ),
-                  ),
-                ),
-              ),
-          if (ink.tool != _Tool.eraser) ...[
-            const SizedBox(width: 8),
-            const Icon(Icons.line_weight, size: 18),
-            SizedBox(
-              width: 120,
-              child: Slider(
-                min: 0.002,
-                max: 0.012,
-                value: ink.penWidth,
-                onChanged: (v) => setState(() => ink.penWidth = v),
-              ),
-            ),
-          ],
-          IconButton(
-            tooltip: 'Desfazer',
-            icon: const Icon(Icons.undo),
-            onPressed: ink.canUndo(_inkTarget)
-                ? () {
-                    if (ink.undo(_inkTarget)) _inkChanged(_inkTarget);
-                  }
-                : null,
-          ),
-          IconButton(
-            tooltip: 'Limpar a página',
-            icon: const Icon(Icons.layers_clear),
-            onPressed: ink.of(_inkTarget).isEmpty
-                ? null
-                : () {
-                    final target = _inkTarget;
-                    ink.clear(target);
-                    _inkChanged(target);
-                  },
-          ),
-        ]),
-      ),
+  Widget _dock(_Ink ink, InkToolbox box) {
+    final target = _inkTarget;
+    return InkDock(
+      box: box,
+      vertical: box.side != DockSide.top,
+      onUndo: ink.canUndo(target)
+          ? () {
+              if (ink.undo(target)) _inkChanged(target);
+            }
+          : null,
+      onClear: ink.of(target).isEmpty
+          ? null
+          : () {
+              ink.clear(target);
+              _inkChanged(target);
+            },
+      bookmarked: _marks.contains(_page),
+      onBookmark: _toggleMark,
+      onEdit: (i) => showPenEditor(context, box, i),
+      onAdd: () {
+        box.presets.add(PenPreset(PenKind.pen, const Color(0xFF1565C0), 0.0035));
+        box.select(box.presets.length - 1);
+        box.save();
+        showPenEditor(context, box, box.presets.length - 1);
+      },
+      onSettings: () => showDockSettings(context, box),
     );
   }
 
@@ -618,10 +591,11 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
   Widget build(BuildContext context) {
     final wide = MediaQuery.sizeOf(context).width >= 900;
     final ink = _ink;
+    final box = _box;
     Widget body;
     if (_error != null) {
       body = Center(child: Padding(padding: const EdgeInsets.all(24), child: Text(_error!, textAlign: TextAlign.center)));
-    } else if (_path == null || ink == null) {
+    } else if (_path == null || ink == null || box == null) {
       body = Center(
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           SizedBox(width: 240, child: LinearProgressIndicator(value: _progress)),
@@ -635,8 +609,6 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
         controller: _controller,
         initialPageNumber: book.lastPage,
         params: PdfViewerParams(
-          panEnabled: !_drawing,
-          scaleEnabled: !_drawing,
           backgroundColor: Colors.grey.shade300,
           onPageChanged: _onPageChanged,
           onViewerReady: (doc, controller) {
@@ -647,14 +619,44 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
             _loadRefs();
           },
           pageOverlaysBuilder: (context, rect, page) => [
-            _InkLayer(ink: ink, page: page.pageNumber, drawing: _drawing, onChanged: _inkChanged),
+            _InkLayer(ink: ink, page: page.pageNumber, onChanged: _inkChanged),
+            if (_marks.contains(page.pageNumber))
+              const Align(
+                alignment: Alignment.topRight,
+                child: IgnorePointer(
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Icon(Icons.bookmark, color: Color(0xFFD32F2F), size: 34),
+                  ),
+                ),
+              ),
           ],
         ),
       );
-      final pdfColumn = Column(children: [
-        if (_drawing) _inkToolbar(ink),
-        Expanded(child: viewer),
-        if (_pageRefs.isNotEmpty && !_drawing)
+      final settings = context.watch<AppState>().settings;
+      final content = Column(children: [
+        Expanded(
+          // No modo texto o visualizador continua montado (escondido): ele guarda o documento e a página.
+          child: Stack(children: [
+            Offstage(offstage: _textMode, child: viewer),
+            if (_textMode)
+              Positioned.fill(
+                child: _PdfTextView(
+                  controller: _controller,
+                  initialPage: _page,
+                  background: settings.background,
+                  style: TextStyle(
+                    color: settings.foreground,
+                    fontSize: settings.fontSize,
+                    height: settings.lineHeight.clamp(1.2, 2.4),
+                    fontFamily: settings.fontFamily,
+                  ),
+                  onPage: _onPageChanged,
+                ),
+              ),
+          ]),
+        ),
+        if (_pageRefs.isNotEmpty)
           Material(
             elevation: 2,
             child: SizedBox(
@@ -681,6 +683,14 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
             ),
           ),
       ]);
+      final dock = _dock(ink, box);
+      final Widget pdfColumn = _textMode
+          ? content
+          : switch (box.side) {
+              DockSide.top => Column(children: [dock, Expanded(child: content)]),
+              DockSide.left => Row(children: [dock, Expanded(child: content)]),
+              DockSide.right => Row(children: [Expanded(child: content), dock]),
+            };
       body = wide && _bibleOpen
           ? Row(children: [
               Expanded(child: pdfColumn),
@@ -702,10 +712,10 @@ class _PdfReaderScreenState extends State<PdfReaderScreen> {
               child: Text('Pág. $_page${book.pages == null ? '' : '/${book.pages}'}'),
             ),
             IconButton(
-              tooltip: _drawing ? 'Parar de anotar' : 'Anotar à mão',
-              isSelected: _drawing,
-              icon: Icon(_drawing ? Icons.edit_off : Icons.draw),
-              onPressed: () => setState(() => _drawing = !_drawing),
+              tooltip: _textMode ? 'Ver as páginas do PDF (para anotar à mão)' : 'Modo leitura: texto com a letra da Bíblia',
+              isSelected: _textMode,
+              icon: Icon(_textMode ? Icons.picture_as_pdf_outlined : Icons.article_outlined),
+              onPressed: () => setState(() => _textMode = !_textMode),
             ),
             IconButton(
               tooltip: 'Bíblia ao lado',
@@ -816,5 +826,185 @@ class _BiblePanelState extends State<_BiblePanel> {
       const Divider(height: 8),
       Expanded(child: ReaderView(onScrollDirection: (_) {})),
     ]);
+  }
+}
+
+
+/// Junta as linhas do PDF em parágrafos (o PDF quebra a linha no fim de cada linha impressa).
+List<String> reflowPdfText(String raw) {
+  final lines = raw.replaceAll('\r', '').split('\n').map((l) => l.trimRight()).toList();
+  final lengths = [for (final l in lines) if (l.trim().length > 20) l.trim().length]..sort();
+  final typical = lengths.isEmpty ? 60 : lengths[(lengths.length * 0.8).floor().clamp(0, lengths.length - 1)];
+  final out = <String>[];
+  final buf = StringBuffer();
+  void flush() {
+    final t = buf.toString().trim();
+    if (t.isNotEmpty) out.add(t);
+    buf.clear();
+  }
+
+  var shortBefore = false; // a linha anterior terminou antes da margem
+  for (final line in lines) {
+    final t = line.trim();
+    if (t.isEmpty) {
+      flush();
+      shortBefore = false;
+      continue;
+    }
+    // Linha curta seguida de outra que começa com maiúscula ou número: era título ou fim de parágrafo.
+    if (shortBefore && RegExp(r'^[A-ZÀ-Ý0-9“"]').hasMatch(t)) flush();
+    shortBefore = t.length < typical * 0.72;
+    if (buf.isNotEmpty) {
+      final prev = buf.toString();
+      if (prev.endsWith('-') && RegExp(r'^[a-zà-ÿ]').hasMatch(t)) {
+        // Palavra partida no fim da linha.
+        buf
+          ..clear()
+          ..write(prev.substring(0, prev.length - 1));
+      } else {
+        buf.write(' ');
+      }
+    }
+    buf.write(t);
+    // Linha curta terminando em ponto final = fim de parágrafo.
+    if (t.length < typical * 0.72 && RegExp(r'[.!?:”"»]$').hasMatch(t)) flush();
+  }
+  flush();
+  return out;
+}
+
+/// Modo leitura: o texto de cada página do PDF, corrido, com a letra e as cores da leitura da Bíblia.
+class _PdfTextView extends StatefulWidget {
+  final PdfViewerController controller;
+  final int initialPage;
+  final Color background;
+  final TextStyle style;
+  final ValueChanged<int?> onPage;
+  const _PdfTextView({
+    required this.controller,
+    required this.initialPage,
+    required this.background,
+    required this.style,
+    required this.onPage,
+  });
+
+  @override
+  State<_PdfTextView> createState() => _PdfTextViewState();
+}
+
+class _PdfTextViewState extends State<_PdfTextView> {
+  late int _page = widget.initialPage;
+  final Map<int, Future<List<String>>> _cache = {};
+  final _scroll = ScrollController();
+
+  int get _total => widget.controller.document.pages.length;
+
+  Future<List<String>> _load(int n) => _cache[n] ??= () async {
+        try {
+          final text = (await widget.controller.document.pages[n - 1].loadStructuredText()).fullText;
+          return reflowPdfText(text);
+        } catch (_) {
+          return const <String>[];
+        }
+      }();
+
+  void _go(int n) {
+    if (n < 1 || n > _total) return;
+    setState(() => _page = n);
+    if (_scroll.hasClients) _scroll.jumpTo(0);
+    widget.onPage(n);
+    // Mantém o PDF na mesma página para quando voltar a ele.
+    widget.controller.goToPage(pageNumber: n);
+  }
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final style = widget.style;
+    return ColoredBox(
+      color: widget.background,
+      child: Column(children: [
+        Expanded(
+          child: FutureBuilder<List<String>>(
+            future: _load(_page),
+            builder: (context, snap) {
+              if (!snap.hasData) return const Center(child: CircularProgressIndicator());
+              final paragraphs = snap.data!;
+              if (paragraphs.isEmpty) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(32),
+                    child: Text(
+                      'Esta página não tem texto para converter (é uma imagem ou está em branco). '
+                      'Volte às páginas do PDF para vê-la.',
+                      textAlign: TextAlign.center,
+                      style: style.copyWith(fontSize: 16),
+                    ),
+                  ),
+                );
+              }
+              return SelectionArea(
+                child: ListView.builder(
+                  controller: _scroll,
+                  padding: const EdgeInsets.fromLTRB(24, 20, 24, 28),
+                  itemCount: paragraphs.length,
+                  itemBuilder: (context, i) => Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 760),
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 14),
+                        child: SizedBox(
+                          width: double.infinity,
+                          // Linhas curtas isoladas costumam ser títulos.
+                          child: Text(
+                            paragraphs[i],
+                            style: paragraphs[i].length < 70 && !RegExp(r'[.,;]$').hasMatch(paragraphs[i])
+                                ? style.copyWith(fontWeight: FontWeight.bold)
+                                : style,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        Material(
+          elevation: 3,
+          child: SafeArea(
+            top: false,
+            child: Row(children: [
+              IconButton(
+                tooltip: 'Página anterior',
+                icon: const Icon(Icons.chevron_left),
+                onPressed: _page > 1 ? () => _go(_page - 1) : null,
+              ),
+              Expanded(
+                child: Slider(
+                  value: _page.toDouble().clamp(1, _total.toDouble()),
+                  min: 1,
+                  max: _total < 2 ? 2 : _total.toDouble(),
+                  onChanged: (v) => setState(() => _page = v.round()),
+                  onChangeEnd: (v) => _go(v.round()),
+                ),
+              ),
+              Text('$_page de $_total'),
+              IconButton(
+                tooltip: 'Próxima página',
+                icon: const Icon(Icons.chevron_right),
+                onPressed: _page < _total ? () => _go(_page + 1) : null,
+              ),
+            ]),
+          ),
+        ),
+      ]),
+    );
   }
 }

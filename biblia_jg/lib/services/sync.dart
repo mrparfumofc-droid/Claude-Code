@@ -6,7 +6,7 @@ import 'account_service.dart';
 import 'dictionary_service.dart';
 
 /// Preferências que também vão na cópia (plano de leitura, favoritos do hinário, meta).
-const _stringKeys = ['plan_id', 'plan_start'];
+const _stringKeys = ['plan_id', 'plan_start', 'devocional.perfil'];
 const _listKeys = ['plan_done', 'hymn.favorites'];
 const _intKeys = ['goal_minutes'];
 

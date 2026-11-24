@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/daily.dart';
 import '../state/app_state.dart';
 import 'ai_chat_screen.dart';
+import 'devotional_screen.dart' show DevotionalProfile;
 
 String _today() {
   final d = DateTime.now();
@@ -15,15 +16,19 @@ void openDevotional(BuildContext context, AppState app) {
   final ref = verseOfDay(now);
   final bible = app.bible;
   final text = bible == null ? null : verseText(bible, ref);
+  // Com o perfil preenchido ("Devocional sob medida"), o devocional é montado para a pessoa.
+  final profile = DevotionalProfile.load(app.prefs);
   Navigator.of(context).push(MaterialPageRoute(
     builder: (_) => AiChatScreen(
-      title: 'Devocional diário',
+      title: profile.isEmpty ? 'Devocional diário' : 'Meu devocional de hoje',
       task: 'devotional',
       reference: ref.label(bible),
       version: bible?.abbrev,
       verseText: text,
-      cacheKey: 'devo_${now.year}-${now.month}-${now.day}',
-      initialPrompt: 'Escreva o devocional de hoje (${_today()}) usando este versículo como base.',
+      cacheKey: 'devo_${now.year}-${now.month}-${now.day}${profile.isEmpty ? '' : '_${profile.signature}'}',
+      initialPrompt: profile.isEmpty
+          ? 'Escreva o devocional de hoje (${_today()}) usando este versículo como base.'
+          : profile.prompt(_today()),
       quickActions: const [
         ('Oração mais longa', 'chat', 'Escreva uma oração mais longa baseada neste devocional.'),
         ('Para a família', 'chat', 'Adapte este devocional para ler em família, com crianças.'),

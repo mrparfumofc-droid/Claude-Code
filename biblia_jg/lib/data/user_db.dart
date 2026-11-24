@@ -19,6 +19,18 @@ class HistoryEntry {
   HistoryEntry(this.book, this.chapter, this.at);
 }
 
+/// Pregação (esboço) escrita pelo usuário.
+class Sermon {
+  final int? id;
+  final String title;
+  final String passage; // texto base, ex.: "Jo 3:16"
+  final String body;
+  final String preached; // onde/quando foi pregada (livre)
+  final DateTime created;
+  final DateTime updated;
+  Sermon({this.id, required this.title, this.passage = '', this.body = '', this.preached = '', required this.created, required this.updated});
+}
+
 class Prayer {
   final int? id;
   final String text;
@@ -52,7 +64,7 @@ class UserDb {
     final f = factory ?? databaseFactory;
     final dbPath = path ?? p.join(await f.getDatabasesPath(), 'biblia_jg.db');
     final db = await f.openDatabase(dbPath,
-        options: OpenDatabaseOptions(version: 2, onCreate: _create, onUpgrade: _upgrade));
+        options: OpenDatabaseOptions(version: 3, onCreate: _create, onUpgrade: _upgrade));
     return UserDb._(db);
   }
 
@@ -69,11 +81,49 @@ class UserDb {
     await db.execute(
         'CREATE TABLE read_chapters (book INTEGER NOT NULL, chapter INTEGER NOT NULL, at INTEGER NOT NULL, PRIMARY KEY(book, chapter))');
     await _createV2(db);
+    await _createV3(db);
   }
 
   static Future<void> _upgrade(Database db, int from, int to) async {
     if (from < 2) await _createV2(db);
+    if (from < 3) await _createV3(db);
   }
+
+  /// Versão 3: pregações (esboços).
+  static Future<void> _createV3(Database db) async {
+    await db.execute(
+        'CREATE TABLE IF NOT EXISTS sermons (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, passage TEXT, body TEXT NOT NULL, preached TEXT, created INTEGER NOT NULL, updated INTEGER NOT NULL)');
+  }
+
+  Future<List<Sermon>> sermons() async => [
+        for (final r in await db.query('sermons', orderBy: 'updated DESC'))
+          Sermon(
+            id: r['id'] as int,
+            title: r['title'] as String,
+            passage: r['passage'] as String? ?? '',
+            body: r['body'] as String,
+            preached: r['preached'] as String? ?? '',
+            created: DateTime.fromMillisecondsSinceEpoch(r['created'] as int),
+            updated: DateTime.fromMillisecondsSinceEpoch(r['updated'] as int),
+          ),
+      ];
+
+  /// Grava a pregação e devolve o id.
+  Future<int> saveSermon(Sermon s) async {
+    final data = {
+      'title': s.title,
+      'passage': s.passage,
+      'body': s.body,
+      'preached': s.preached,
+      'created': s.created.millisecondsSinceEpoch,
+      'updated': s.updated.millisecondsSinceEpoch,
+    };
+    if (s.id == null) return db.insert('sermons', data);
+    await db.update('sermons', data, where: 'id = ?', whereArgs: [s.id]);
+    return s.id!;
+  }
+
+  Future<void> deleteSermon(int id) => db.delete('sermons', where: 'id = ?', whereArgs: [id]);
 
   /// Versão 2: constância (dias de leitura), diário de oração e memorização.
   static Future<void> _createV2(Database db) async {
@@ -290,7 +340,7 @@ class UserDb {
 
   // ---------- Backup ----------
   static const _v1Tables = {'highlights', 'favorites', 'notes', 'history', 'read_chapters'};
-  static const _tables = ['highlights', 'favorites', 'notes', 'history', 'read_chapters', 'activity', 'prayers', 'memory'];
+  static const _tables = ['highlights', 'favorites', 'notes', 'history', 'read_chapters', 'activity', 'prayers', 'memory', 'sermons'];
 
   Future<Map<String, dynamic>> exportAll() async => {
         'format': 'biblia-jg-backup',
@@ -322,6 +372,13 @@ class UserDb {
         final ex = await tx.query(t, where: 'created = ?', whereArgs: [row['created']], limit: 1);
         if (ex.isEmpty) return false;
         if (ex.first['answered'] == null && row['answered'] != null) {
+          await tx.update(t, row, where: 'id = ?', whereArgs: [ex.first['id']]);
+        }
+        return true;
+      case 'sermons':
+        final ex = await tx.query(t, where: 'created = ?', whereArgs: [row['created']], limit: 1);
+        if (ex.isEmpty) return false;
+        if (n(row['updated']) > n(ex.first['updated'])) {
           await tx.update(t, row, where: 'id = ?', whereArgs: [ex.first['id']]);
         }
         return true;
@@ -365,7 +422,7 @@ class UserDb {
         if (rows is! List) continue;
         for (final r in rows) {
           final row = Map<String, Object?>.from(r as Map);
-          if (t == 'notes' || t == 'history' || t == 'prayers') row.remove('id');
+          if (t == 'notes' || t == 'history' || t == 'prayers' || t == 'sermons') row.remove('id');
           // Ao juntar (sem substituir), não duplica o que já existe e fica com o mais completo.
           if (!replace && await _mergeExisting(tx, t, row)) continue;
           await tx.insert(t, row, conflictAlgorithm: ConflictAlgorithm.replace);

@@ -19,6 +19,7 @@ import 'account_screen.dart';
 import 'ai_chat_screen.dart';
 import 'backup_screen.dart';
 import 'content_screens.dart';
+import 'devotional_screen.dart';
 import 'dictionary_screen.dart';
 import 'history_screen.dart';
 import 'hymnal_screen.dart';
@@ -36,6 +37,7 @@ import 'quiz_screen.dart';
 import 'reader_view.dart';
 import 'reading_plans_screen.dart';
 import 'search_screen.dart';
+import 'sermons_screen.dart';
 import 'settings_screen.dart';
 import 'stories_screen.dart';
 import 'today_screen.dart';
@@ -880,8 +882,10 @@ class StudyHub extends StatelessWidget {
           _HubItem(Icons.volunteer_activism_outlined, const Color(0xFFD81B60), 'Palavra para o momento', 'Versículos para ansiedade, medo, luto…', (c) => _go(c, const NeedsScreen())),
           _HubItem(Icons.psychology_alt_outlined, const Color(0xFF00897B), 'Memorização', 'Guarde versículos no coração', (c) => _go(c, const MemorizeScreen())),
           _HubItem(Icons.self_improvement, const Color(0xFF6A1B9A), 'Diário de oração', 'Pedidos e orações respondidas', (c) => _go(c, const PrayerScreen())),
-          _HubItem(Icons.wb_sunny_outlined, const Color(0xFFEF6C00), 'Devocional diário', 'Uma reflexão para hoje',
-              (c) => openDevotional(c, c.read<AppState>())),
+          _HubItem(Icons.wb_sunny_outlined, const Color(0xFFEF6C00), 'Devocional sob medida', 'Feito para o seu objetivo e a sua rotina',
+              (c) => _go(c, const DevotionalScreen())),
+          _HubItem(Icons.record_voice_over_outlined, const Color(0xFF6D4C41), 'Pregações', 'Esboços, ajuda da IA e modo púlpito',
+              (c) => _go(c, const SermonsScreen())),
           _HubItem(Icons.abc, const Color(0xFF455A64), 'Dicionário bíblico', 'Pessoas, lugares e termos', (c) => _go(c, const DictionaryScreen())),
           _HubItem(Icons.account_tree, const Color(0xFF1B2A4A), 'Panorama bíblico', 'Árvore de Abraão, reis, profetas e os 66 livros', (c) => _go(c, const PanoramaScreen())),
           _HubItem(Icons.public, const Color(0xFF00838F), 'Mapas bíblicos', 'Atlas, viagens de Paulo e lugares no satélite', (c) => _go(c, const MapsScreen())),
