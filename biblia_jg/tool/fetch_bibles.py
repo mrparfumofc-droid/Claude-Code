@@ -49,15 +49,17 @@ def main() -> int:
             cached = pathlib.Path(args.cache) / v["file"]
             if cached.exists():
                 raw = cached.read_bytes()
-        if raw is None:
+        downloaded = raw is None
+        if downloaded:
             raw = fetch(manifest["source"] + v["file"])
-            if args.cache:
-                pathlib.Path(args.cache).mkdir(parents=True, exist_ok=True)
-                (pathlib.Path(args.cache) / v["file"]).write_bytes(raw)
         digest = hashlib.sha256(raw).hexdigest()
         if digest != v["sha256"]:
             print(f"ERRO: {v['file']} mudou na fonte (sha256 {digest}).", file=sys.stderr)
             return 1
+        if downloaded and args.cache:
+            # Só guarda no cache depois de conferir o SHA-256.
+            pathlib.Path(args.cache).mkdir(parents=True, exist_ok=True)
+            (pathlib.Path(args.cache) / v["file"]).write_bytes(raw)
         books = json.loads(raw.decode("utf-8-sig"))
         if len(books) != 66:
             print(f"ERRO: {v['file']} tem {len(books)} livros.", file=sys.stderr)
