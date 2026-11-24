@@ -9,8 +9,8 @@ const supabaseUrl = 'https://ayjsoixzroxkrnkpkkip.supabase.co';
 const supabaseAnonKey =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5anNvaXh6cm94a3Jua3Bra2lwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU0NzcyMDksImV4cCI6MjExMTA1MzIwOX0.AX_pzuq9GY2ugKBjjdwJWVcXZw3Q7DGWNpsUFlWq6f4';
 
-/// Chave do app para a IA (o servidor guarda só o hash e limita o uso por aparelho).
-const _appKey = 'jg_usBloH9hTBbeCNhpF3eVcGxF65MaM0nK';
+/// Chave do app para a IA e as músicas (o servidor guarda só o hash e limita o uso por aparelho).
+const appKey ='jg_usBloH9hTBbeCNhpF3eVcGxF65MaM0nK';
 
 class AiTurn {
   final bool fromUser;
@@ -73,7 +73,7 @@ class AiService {
               'Content-Type': 'application/json',
               'Authorization': 'Bearer $supabaseAnonKey',
               'apikey': supabaseAnonKey,
-              'x-app-key': _appKey,
+              'x-app-key': appKey,
               'x-device-id': await deviceId(),
             },
             body: jsonEncode({

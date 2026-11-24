@@ -50,6 +50,7 @@ dependencies:
   http: ^1.6.0
   flutter_tts: ^4.2.5
   flutter_markdown_plus: ^1.0.12
+  just_audio: ^0.10.4
 
 dev_dependencies:
   flutter_test:

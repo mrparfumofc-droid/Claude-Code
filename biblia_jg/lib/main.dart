@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'data/bible_repository.dart';
 import 'data/user_db.dart';
 import 'screens/home_shell.dart';
+import 'services/music_player.dart';
 import 'services/notifications.dart';
 import 'services/tts.dart';
 import 'state/app_state.dart';
@@ -29,8 +30,11 @@ class BibliaJgApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = context.select<AppState, (Color, bool)>(
         (a) => (a.settings.themeColor, a.settings.nightMode));
-    return ChangeNotifierProvider(
-      create: (_) => ReadAloud(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ReadAloud()),
+        ChangeNotifierProvider(create: (_) => MusicPlayer()),
+      ],
       child: MaterialApp(
         title: 'Bíblia - JG Company',
         debugShowCheckedModeBanner: false,

@@ -15,6 +15,7 @@ import 'quiz_screen.dart';
 import 'reading_plans_screen.dart';
 import 'history_screen.dart';
 import 'marks_screen.dart';
+import 'music_screen.dart';
 import 'notes_screen.dart';
 import 'progress_screen.dart';
 import 'reader_view.dart';
@@ -189,7 +190,11 @@ class _HomeShellState extends State<HomeShell> {
 
     return Scaffold(
       drawer: _MainDrawer(onOpen: _push),
-      body: Column(children: [topBar, Expanded(child: body)]),
+      body: Column(children: [
+        topBar,
+        Expanded(child: body),
+        MiniMusicBar(onOpen: () => _push(const MusicScreen())),
+      ]),
     );
   }
 }
@@ -318,6 +323,7 @@ class _MainDrawer extends StatelessWidget {
         ),
         item(Icons.auto_stories, 'Histórias Bíblicas', const StoriesScreen()),
         item(Icons.quiz, 'Perguntas Bíblicas', const QuizScreen()),
+        item(Icons.music_note, 'Músicas de fundo', const MusicScreen()),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
           child: Text('Próximas etapas', style: theme.textTheme.labelLarge),
@@ -325,7 +331,6 @@ class _MainDrawer extends StatelessWidget {
         soon(Icons.menu_book_outlined, 'Livros (PDF)'),
         soon(Icons.school, 'EBD'),
         soon(Icons.library_music, 'Hinário'),
-        soon(Icons.music_note, 'Músicas de fundo'),
         soon(Icons.public, 'Mapas'),
         soon(Icons.abc, 'Dicionário'),
         const Divider(),

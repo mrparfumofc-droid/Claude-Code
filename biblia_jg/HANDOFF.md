@@ -24,9 +24,15 @@ App Flutter de Bíblia para tablet Android, de uso pessoal do dono (JG Company).
   - Tarefas: `explain`, `commentary`, `term`, `devotional`, `story`, `quiz`, `sermon`, `chat`.
   - Perfis: `assembleiano` (padrão), `geral`, `batista`, `reformado`, `academico`, `catolico`.
 - **IA no app:** `lib/services/ai_service.dart` (chave do app e chave anon do Supabase) e `lib/screens/ai_chat_screen.dart`.
+- **Músicas de fundo (na nuvem, nunca na pasta de músicas do tablet — pedido do dono):**
+  - Bucket **privado** `musicas` no Supabase Storage (limite 50 MB por arquivo no plano grátis). Arquivos em Opus 48 kbps (`.ogg`) e a lista em `musicas.json` (`file`, `title`, `seconds`, `bytes`).
+  - Edge Function `music` (`supabase/functions/music/`): confere o `x-app-key` (mesmo hash de `ai_config`) e devolve a lista com links assinados de 12 h.
+  - App: `lib/services/music_player.dart` (just_audio, toca online; "Baixar" guarda só na área interna do app, com opção de apagar) e `lib/screens/music_screen.dart` (tela + barrinha embaixo da leitura).
+  - Originais em `D:\Claude Code\musicas\MP3` (2,3 GB, 31 faixas, 16,7 h); convertidos em `D:\Claude Code\musicas\nuvem`. Para adicionar músicas: converter com `ffmpeg -i X.mp3 -vn -c:a libopus -b:a 48k X.ogg`, subir no bucket e atualizar `musicas.json` (o app não precisa de nova versão).
+  - Plano grátis: 1 GB de armazenamento e ~5 GB de tráfego/mês (≈ 230 h de música online/mês; as baixadas não gastam).
 
 ## Pendências
-1. **Músicas de fundo.** O dono precisa enviar as MP3 (estão em `D:\Claude Code\musicas` no PC) para `biblia_jg/assets/music/` pelo upload web do GitHub. O Remote Control do PC (DESKTOP-VN235BA) aparece, mas a pasta fica "indisponível"; provavelmente o Claude Desktop precisa ser atualizado no Windows. Depois disso, criar um player com play/pausa, próxima, repetir e volume, tocando junto com a leitura.
+1. ~~Músicas de fundo~~ feito (player na nuvem, ver Infraestrutura). Ideias futuras: abaixar a música enquanto o "Ouvir" lê o versículo; tocar com a tela bloqueada (audio_service).
 2. **Livros (PDF) + EBD.** Leitor de PDF com pastas, anotação à mão (caneta, marca-texto, borracha, cores, desfazer), salvo por página. O módulo EBD: revista em PDF por ano e trimestre, lições marcadas (à mão ou pela IA), Bíblia ao lado, referências clicáveis, lembrete de domingo.
 3. **Hinário.** Só hinos de domínio público, mais importação de hinário próprio. A Harpa Cristã é da CPAD.
 4. **Mapas.** Usar o OpenBible geodata (CC-BY, 1.293 lugares) com flutter_map/OSM, mais os lugares do versículo e jornadas (Êxodo, viagens de Paulo). "Vídeos 3D" só se o dono fornecer os vídeos.
