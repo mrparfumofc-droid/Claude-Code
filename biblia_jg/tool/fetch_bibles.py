@@ -15,6 +15,8 @@ import time
 import urllib.error
 import urllib.request
 
+import enrich
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "tool" / "bibles_manifest.json"
 OUT = ROOT / "assets" / "bibles"
@@ -41,6 +43,7 @@ def main() -> int:
     args = ap.parse_args()
 
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    headings, woj = enrich.load()
     OUT.mkdir(parents=True, exist_ok=True)
     index = []
     for v in manifest["versions"]:
@@ -78,6 +81,7 @@ def main() -> int:
                 for b in books
             ],
         }
+        enrich.enrich_books(data["books"], v.get("lang", "pt"), headings, woj)
         path = OUT / f"{v['id']}.json"
         path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         index.append({k: v[k] for k in ("id", "name", "abbrev", "copyright")} | {"asset": f"assets/bibles/{v['id']}.json"})
