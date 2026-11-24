@@ -11,6 +11,8 @@ import hashlib
 import json
 import pathlib
 import sys
+import time
+import urllib.error
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -18,9 +20,19 @@ MANIFEST = ROOT / "tool" / "bibles_manifest.json"
 OUT = ROOT / "assets" / "bibles"
 
 
-def fetch(url: str) -> bytes:
-    with urllib.request.urlopen(url, timeout=120) as r:
-        return r.read()
+def fetch(url: str, attempts: int = 6) -> bytes:
+    """Baixa com novas tentativas (a fonte às vezes responde 503 por excesso de conexões)."""
+    for i in range(attempts):
+        try:
+            with urllib.request.urlopen(url, timeout=120) as r:
+                return r.read()
+        except (urllib.error.URLError, TimeoutError) as e:
+            if i == attempts - 1:
+                raise
+            wait = 5 * 2**i
+            print(f"falhou ({e}); nova tentativa em {wait}s", file=sys.stderr)
+            time.sleep(wait)
+    raise RuntimeError("inalcançável")
 
 
 def main() -> int:
@@ -39,6 +51,9 @@ def main() -> int:
                 raw = cached.read_bytes()
         if raw is None:
             raw = fetch(manifest["source"] + v["file"])
+            if args.cache:
+                pathlib.Path(args.cache).mkdir(parents=True, exist_ok=True)
+                (pathlib.Path(args.cache) / v["file"]).write_bytes(raw)
         digest = hashlib.sha256(raw).hexdigest()
         if digest != v["sha256"]:
             print(f"ERRO: {v['file']} mudou na fonte (sha256 {digest}).", file=sys.stderr)

@@ -33,8 +33,14 @@ jobs:
       - name: Dependências
         run: flutter pub get
 
+      - name: Cache dos textos bíblicos
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/biblia-jg-bibles
+          key: bibles-${{ hashFiles('biblia_jg/tool/bibles_manifest.json') }}
+
       - name: Baixar versões da Bíblia
-        run: python3 tool/fetch_bibles.py
+        run: python3 tool/fetch_bibles.py --cache ~/.cache/biblia-jg-bibles
 
       - name: Verificar código
         run: flutter analyze
