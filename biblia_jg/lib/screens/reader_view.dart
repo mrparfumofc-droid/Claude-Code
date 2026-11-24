@@ -7,9 +7,13 @@ import 'package:share_plus/share_plus.dart';
 
 import '../models/bible.dart';
 import '../models/reader_settings.dart';
+import '../services/tts.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import '../widgets/note_editor.dart';
+import '../widgets/xrefs_sheet.dart';
+import 'ai_chat_screen.dart';
+import 'verse_image_screen.dart';
 
 /// Texto do capítulo atual com seleção de versículos e ações.
 class ReaderView extends StatefulWidget {
@@ -28,6 +32,7 @@ class _ReaderViewState extends State<ReaderView> {
   final List<TapGestureRecognizer> _recognizers = [];
   String _lastChapterKey = '';
   int? _flashVerse;
+  int? _ttsVerse;
 
   @override
   void dispose() {
@@ -52,6 +57,10 @@ class _ReaderViewState extends State<ReaderView> {
   void _handleChapterChange(AppState app) {
     final key = '${app.bible?.id}:${app.book}:${app.chapter}';
     if (key != _lastChapterKey) {
+      if (_lastChapterKey.isNotEmpty) {
+        final tts = context.read<ReadAloud>();
+        if (tts.speaking) tts.stop();
+      }
       _lastChapterKey = key;
       _selected.clear();
       _keys.clear();
@@ -88,6 +97,21 @@ class _ReaderViewState extends State<ReaderView> {
     if (book == null) return const SizedBox();
     _handleChapterChange(app);
     _disposeRecognizers();
+
+    // Leitura em voz alta: destaca e acompanha o versículo lido.
+    final tts = context.watch<ReadAloud>();
+    if (tts.currentVerse != _ttsVerse) {
+      _ttsVerse = tts.currentVerse;
+      final v = _ttsVerse;
+      if (v != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          final ctx = _keys[v]?.currentContext ?? _blockContextFor(v);
+          if (ctx != null) {
+            Scrollable.ensureVisible(ctx, duration: const Duration(milliseconds: 400), alignment: 0.3);
+          }
+        });
+      }
+    }
 
     final verses = app.currentVerses;
     final textStyle = TextStyle(
@@ -150,6 +174,38 @@ class _ReaderViewState extends State<ReaderView> {
             ),
           ),
         ),
+        if (tts.speaking)
+          Positioned(
+            top: 8,
+            right: 12,
+            child: Material(
+              elevation: 4,
+              borderRadius: BorderRadius.circular(24),
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  const Icon(Icons.volume_up, size: 18),
+                  const SizedBox(width: 4),
+                  Text('Lendo v. ${tts.currentVerse ?? ''}'),
+                  PopupMenuButton<double>(
+                    tooltip: 'Velocidade',
+                    icon: const Icon(Icons.speed, size: 20),
+                    onSelected: tts.setRate,
+                    itemBuilder: (_) => [
+                      for (final (r, l) in const [(0.3, '0,6x'), (0.4, '0,8x'), (0.5, '1x'), (0.6, '1,25x'), (0.75, '1,5x'), (0.9, '2x')])
+                        CheckedPopupMenuItem(value: r, checked: tts.rate == r, child: Text(l)),
+                    ],
+                  ),
+                  IconButton(
+                    tooltip: 'Parar leitura',
+                    icon: const Icon(Icons.stop_circle_outlined),
+                    onPressed: tts.stop,
+                  ),
+                ]),
+              ),
+            ),
+          ),
         if (_selected.isNotEmpty)
           Positioned(
             left: 0,
@@ -217,7 +273,7 @@ class _ReaderViewState extends State<ReaderView> {
     final s = app.settings;
     final text = s.trimLeadingSpace ? raw.trimLeft() : raw;
     final selected = _selected.contains(verse);
-    final flash = _flashVerse == verse;
+    final flash = _flashVerse == verse || _ttsVerse == verse;
     final style = base.copyWith(
       backgroundColor: selected
           ? _selectionBg(s)
@@ -275,7 +331,9 @@ class _ReaderViewState extends State<ReaderView> {
           decoration: BoxDecoration(
             color: _selected.contains(v)
                 ? _selectionBg(s)
-                : bg ?? (_flashVerse == v ? s.themeColor.withValues(alpha: 0.15) : null),
+                : _ttsVerse == v
+                    ? const Color(0xFFFFC107).withValues(alpha: 0.30)
+                    : bg ?? (_flashVerse == v ? s.themeColor.withValues(alpha: 0.15) : null),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Text.rich(
@@ -400,9 +458,32 @@ class _VerseActionBar extends StatelessWidget {
     return '$text\n— $ref (${app.bible!.abbrev})';
   }
 
+  String get _reference => '${app.currentBook!.name} ${app.chapter}:${verseRanges(selected)}';
+
+  String get _plainText {
+    final verses = app.currentVerses;
+    return selected.map((v) => plainVerse(verses[v - 1]).trim()).join(' ');
+  }
+
+  void _push(BuildContext context, Widget page) =>
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => page));
+
   @override
   Widget build(BuildContext context) {
     final allFav = selected.every(app.favorites.contains);
+    final tts = context.read<ReadAloud>();
+    Widget action(IconData icon, String label, VoidCallback onTap) => InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
+              Icon(icon),
+              const SizedBox(height: 2),
+              Text(label, style: const TextStyle(fontSize: 12)),
+            ]),
+          ),
+        );
     return Material(
       elevation: 12,
       color: Theme.of(context).colorScheme.surfaceContainer,
@@ -414,12 +495,60 @@ class _VerseActionBar extends StatelessWidget {
             Row(children: [
               Expanded(
                 child: Text(
-                  '${app.currentBook!.name} ${app.chapter}:${verseRanges(selected)}',
+                  _reference,
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ),
               IconButton(onPressed: onClear, icon: const Icon(Icons.close), tooltip: 'Fechar'),
             ]),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(children: [
+                action(Icons.auto_awesome, 'Estudo bíblico', () {
+                  final ref = _reference, text = _plainText;
+                  onClear();
+                  _push(
+                    context,
+                    AiChatScreen(
+                      title: 'Estudo bíblico',
+                      task: 'explain',
+                      reference: ref,
+                      version: app.bible!.abbrev,
+                      verseText: text,
+                      initialPrompt: 'Explique este trecho em detalhes.',
+                      quickActions: const [
+                        ('Comentário', 'commentary', 'Faça um comentário versículo a versículo deste trecho.'),
+                        ('Esboço de pregação', 'sermon', 'Prepare um esboço de pregação sobre este trecho.'),
+                        ('Palavras no original', 'explain', 'Explique as principais palavras deste trecho no original hebraico ou grego.'),
+                        ('Aplicação para hoje', 'explain', 'Como aplicar este trecho na minha vida hoje?'),
+                      ],
+                    ),
+                  );
+                }),
+                action(Icons.image_outlined, 'Imagem', () {
+                  final ref = '$_reference (${app.bible!.abbrev})', text = _plainText;
+                  onClear();
+                  _push(context, VerseImageScreen(text: text, reference: ref));
+                }),
+                action(Icons.volume_up_outlined, 'Ouvir', () {
+                  final verses = app.currentVerses;
+                  final start = selected.first;
+                  onClear();
+                  tts.speak([
+                    for (var v = start; v <= verses.length; v++) (v, plainVerse(verses[v - 1]).trim()),
+                  ], lang: app.bible!.id == 'kjv' || app.bible!.id == 'niv'
+                      ? 'en-US'
+                      : app.bible!.id == 'rvr1960'
+                          ? 'es-ES'
+                          : 'pt-BR');
+                }),
+                action(Icons.link, 'Referências', () {
+                  final ref = VerseRef(app.book, app.chapter, selected.first);
+                  onClear();
+                  showCrossReferences(context, app, ref);
+                }),
+              ]),
+            ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(children: [

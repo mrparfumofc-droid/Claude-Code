@@ -7,8 +7,12 @@ import '../state/app_state.dart';
 import '../widgets/book_chapter_panel.dart';
 import '../widgets/quick_settings_sheet.dart';
 import '../widgets/update_dialog.dart';
+import '../models/reference_parser.dart';
 import 'about_screen.dart';
 import 'backup_screen.dart';
+import 'content_screens.dart';
+import 'quiz_screen.dart';
+import 'reading_plans_screen.dart';
 import 'history_screen.dart';
 import 'marks_screen.dart';
 import 'notes_screen.dart';
@@ -56,6 +60,48 @@ class _HomeShellState extends State<HomeShell> {
   void _push(Widget page) =>
       Navigator.of(context).push(MaterialPageRoute(builder: (_) => page));
 
+  /// Caixa "Ir para": aceita "Jo 3:16", "Salmos 23", "1 Co 13.4".
+  Future<void> _goToReference(AppState app) async {
+    final controller = TextEditingController();
+    String? error;
+    final passage = await showDialog<Passage>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setLocal) {
+          void submit() {
+            final p = parseReference(controller.text);
+            if (p == null) {
+              setLocal(() => error = 'Não entendi. Exemplos: Jo 3:16, Salmos 23, 1 Co 13.4');
+            } else {
+              Navigator.pop(ctx, p);
+            }
+          }
+
+          return AlertDialog(
+            title: const Text('Ir para'),
+            content: TextField(
+              controller: controller,
+              autofocus: true,
+              textInputAction: TextInputAction.go,
+              onSubmitted: (_) => submit(),
+              decoration: InputDecoration(
+                hintText: 'Ex.: Jo 3:16',
+                errorText: error,
+                border: const OutlineInputBorder(),
+              ),
+            ),
+            actions: [
+              TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar')),
+              FilledButton(onPressed: submit, child: const Text('Ir')),
+            ],
+          );
+        },
+      ),
+    );
+    controller.dispose();
+    if (passage != null) await app.goTo(passage.book, passage.chapter, verse: passage.verse);
+  }
+
   @override
   Widget build(BuildContext context) {
     final app = context.watch<AppState>();
@@ -96,6 +142,11 @@ class _HomeShellState extends State<HomeShell> {
                     child: Text(app.bible!.abbrev,
                         style: const TextStyle(fontWeight: FontWeight.bold)),
                   ),
+                IconButton(
+                  tooltip: 'Ir para referência',
+                  icon: const Icon(Icons.near_me_outlined),
+                  onPressed: () => _goToReference(app),
+                ),
                 IconButton(
                   tooltip: 'Ajustes de leitura',
                   icon: const Icon(Icons.text_fields),
@@ -246,17 +297,37 @@ class _MainDrawer extends StatelessWidget {
         const Divider(),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+          child: Text('Estudo e devoção', style: theme.textTheme.labelLarge),
+        ),
+        ListTile(
+          leading: const Icon(Icons.auto_awesome),
+          title: const Text('Assistente bíblico (IA)'),
+          onTap: () {
+            Navigator.pop(context);
+            openAssistant(context);
+          },
+        ),
+        item(Icons.event_note, 'Planos de Leitura', const ReadingPlansScreen()),
+        ListTile(
+          leading: const Icon(Icons.wb_sunny_outlined),
+          title: const Text('Devocional Diário'),
+          onTap: () {
+            Navigator.pop(context);
+            openDevotional(context, app);
+          },
+        ),
+        item(Icons.auto_stories, 'Histórias Bíblicas', const StoriesScreen()),
+        item(Icons.quiz, 'Perguntas Bíblicas', const QuizScreen()),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
           child: Text('Próximas etapas', style: theme.textTheme.labelLarge),
         ),
-        soon(Icons.event_note, 'Planos de Leitura'),
-        soon(Icons.wb_sunny_outlined, 'Devocional Diário'),
-        soon(Icons.auto_stories, 'Histórias Bíblicas'),
-        soon(Icons.library_music, 'Hinários'),
+        soon(Icons.menu_book_outlined, 'Livros (PDF)'),
+        soon(Icons.school, 'EBD'),
+        soon(Icons.library_music, 'Hinário'),
         soon(Icons.music_note, 'Músicas de fundo'),
-        soon(Icons.picture_as_pdf, 'Leitor de PDF'),
-        soon(Icons.public, 'Mapas 3D'),
+        soon(Icons.public, 'Mapas'),
         soon(Icons.abc, 'Dicionário'),
-        soon(Icons.quiz, 'Perguntas Bíblicas'),
         const Divider(),
         item(Icons.backup, 'Backup', const BackupScreen()),
         item(Icons.settings, 'Configurações', const SettingsScreen()),

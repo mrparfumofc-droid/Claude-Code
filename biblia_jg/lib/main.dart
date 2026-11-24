@@ -6,6 +6,7 @@ import 'data/bible_repository.dart';
 import 'data/user_db.dart';
 import 'screens/home_shell.dart';
 import 'services/notifications.dart';
+import 'services/tts.dart';
 import 'state/app_state.dart';
 import 'theme.dart';
 
@@ -28,13 +29,16 @@ class BibliaJgApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = context.select<AppState, (Color, bool)>(
         (a) => (a.settings.themeColor, a.settings.nightMode));
-    return MaterialApp(
-      title: 'Bíblia - JG Company',
-      debugShowCheckedModeBanner: false,
-      theme: buildTheme(s.$1, Brightness.light),
-      darkTheme: buildTheme(s.$1, Brightness.dark),
-      themeMode: s.$2 ? ThemeMode.dark : ThemeMode.light,
-      home: const HomeShell(),
+    return ChangeNotifierProvider(
+      create: (_) => ReadAloud(),
+      child: MaterialApp(
+        title: 'Bíblia - JG Company',
+        debugShowCheckedModeBanner: false,
+        theme: buildTheme(s.$1, Brightness.light),
+        darkTheme: buildTheme(s.$1, Brightness.dark),
+        themeMode: s.$2 ? ThemeMode.dark : ThemeMode.light,
+        home: const HomeShell(),
+      ),
     );
   }
 }

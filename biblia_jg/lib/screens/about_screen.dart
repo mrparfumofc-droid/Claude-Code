@@ -34,6 +34,14 @@ class AboutScreen extends StatelessWidget {
               icon: const Icon(Icons.system_update),
               label: const Text('Procurar atualização'),
             ),
+            const SizedBox(height: 16),
+            const Text(
+              'Títulos de seção e palavras de Jesus: Berean Standard Bible (domínio público).\n'
+              'Referências cruzadas: OpenBible.info (CC-BY).\n'
+              'IA: Google Gemini.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 12),
+            ),
             const SizedBox(height: 24),
             if (bible != null) ...[
               Text('Texto bíblico: ${bible.name} (${bible.abbrev})',
