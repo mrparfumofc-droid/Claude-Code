@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../services/updater.dart';
 import '../state/app_state.dart';
-import '../theme.dart';
 import '../widgets/update_dialog.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -18,11 +17,9 @@ class AboutScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(32),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            const CircleAvatar(
-              radius: 48,
-              backgroundColor: jgNavy,
-              child: Text('JG',
-                  style: TextStyle(color: jgGold, fontSize: 36, fontWeight: FontWeight.bold)),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Image.asset('assets/branding/logo.png', width: 220, height: 220),
             ),
             const SizedBox(height: 16),
             Text('Bíblia · JG Company', style: Theme.of(context).textTheme.headlineSmall),
