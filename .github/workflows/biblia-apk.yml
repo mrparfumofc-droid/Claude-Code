@@ -60,7 +60,23 @@ jobs:
           KEY_PW: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           if [ -n "$KEYSTORE_B64" ]; then
-            echo "$KEYSTORE_B64" | base64 -d > android/app/release.jks
+            # Remove espaços e quebras de linha que entram ao copiar e colar.
+            B64=$(printf '%s' "$KEYSTORE_B64" | tr -d '[:space:]')
+            STORE_PW=$(printf '%s' "$STORE_PW" | tr -d '[:space:]')
+            KEY_PW=$(printf '%s' "$KEY_PW" | tr -d '[:space:]')
+            KEY_ALIAS=$(printf '%s' "$KEY_ALIAS" | tr -d '[:space:]')
+            echo "ANDROID_KEYSTORE_BASE64 tem ${#B64} caracteres (esperado: 5736)."
+            if ! printf '%s' "$B64" | base64 -d > android/app/release.jks 2>/dev/null; then
+              echo "::error::ANDROID_KEYSTORE_BASE64 não é um texto válido (${#B64} caracteres, esperado 5736). Copie de novo a linha longa do arquivo do Drive, inteira."
+              exit 1
+            fi
+            if ! keytool -list -v -keystore android/app/release.jks -storepass "$STORE_PW" -alias "$KEY_ALIAS" > keyinfo.txt 2>&1; then
+              echo "::error::A chave abriu, mas a senha (ANDROID_KEYSTORE_PASSWORD) ou o nome (ANDROID_KEY_ALIAS) não conferem."
+              exit 1
+            fi
+            echo "Impressão digital da chave (esperada 0E:F3:62:0F:...:D3:18):"
+            grep -E "SHA256:" keyinfo.txt
+            rm -f keyinfo.txt
             {
               echo "storeFile=release.jks"
               echo "storePassword=$STORE_PW"

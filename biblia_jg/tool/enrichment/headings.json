@@ -2668,5 +2668,2179 @@
 "pt": "A morte de Moisés",
 "es": "La muerte de Moisés"
 }
+},
+"JOS": {
+"1:1": {
+"en": "God Instructs Joshua",
+"pt": "Deus comissiona Josué",
+"es": "Dios comisiona a Josué"
+},
+"1:10": {
+"en": "Joshua Takes Charge",
+"pt": "Josué assume o comando",
+"es": "Josué asume el mando"
+},
+"2:1": {
+"en": "Rahab Welcomes the Spies",
+"pt": "Raabe acolhe os espiões",
+"es": "Rahab recibe a los espías"
+},
+"2:8": {
+"en": "The Promise to Rahab",
+"pt": "A promessa feita a Raabe",
+"es": "La promesa a Rahab"
+},
+"3:1": {
+"en": "Crossing the Jordan",
+"pt": "A travessia do Jordão",
+"es": "El paso del Jordán"
+},
+"4:1": {
+"en": "Twelve Stones from the Jordan",
+"pt": "As doze pedras tiradas do Jordão",
+"es": "Las doce piedras del Jordán"
+},
+"4:19": {
+"en": "The Camp at Gilgal",
+"pt": "O acampamento em Gilgal",
+"es": "El campamento en Gilgal"
+},
+"5:1": {
+"en": "The Circumcision and Passover at Gilgal",
+"pt": "A circuncisão e a Páscoa em Gilgal",
+"es": "La circuncisión y la Pascua en Gilgal"
+},
+"5:13": {
+"en": "The Commander of the LORD’s Army",
+"pt": "O príncipe do exército do Senhor",
+"es": "El comandante del ejército del Señor"
+},
+"6:1": {
+"en": "The Walls of Jericho",
+"pt": "As muralhas de Jericó",
+"es": "Los muros de Jericó"
+},
+"7:1": {
+"en": "The Defeat at Ai",
+"pt": "A derrota em Ai",
+"es": "La derrota en Hai"
+},
+"7:16": {
+"en": "The Sin of Achan",
+"pt": "O pecado de Acã",
+"es": "El pecado de Acán"
+},
+"8:1": {
+"en": "The Conquest of Ai",
+"pt": "A conquista de Ai",
+"es": "La conquista de Hai"
+},
+"8:30": {
+"en": "Joshua Renews the Covenant",
+"pt": "Josué renova a aliança",
+"es": "Josué renueva el pacto"
+},
+"9:1": {
+"en": "The Deceit of the Gibeonites",
+"pt": "A astúcia dos gibeonitas",
+"es": "El engaño de los gabaonitas"
+},
+"10:1": {
+"en": "The Day the Sun Stood Still",
+"pt": "O dia em que o sol parou",
+"es": "El día en que el sol se detuvo"
+},
+"10:16": {
+"en": "The Victory at Makkedah",
+"pt": "A vitória em Maquedá",
+"es": "La victoria en Maceda"
+},
+"10:29": {
+"en": "Conquest of the Southern Cities",
+"pt": "A conquista das cidades do sul",
+"es": "Conquista de las ciudades del sur"
+},
+"11:1": {
+"en": "Conquest of the Northern Cities",
+"pt": "A conquista das cidades do norte",
+"es": "Conquista de las ciudades del norte"
+},
+"11:16": {
+"en": "Joshua Takes the Whole Land",
+"pt": "Josué conquista toda a terra",
+"es": "Josué toma toda la tierra"
+},
+"12:1": {
+"en": "The Kings Defeated East of the Jordan",
+"pt": "Os reis derrotados a leste do Jordão",
+"es": "Los reyes derrotados al este del Jordán"
+},
+"12:7": {
+"en": "The Kings Defeated West of the Jordan",
+"pt": "Os reis derrotados a oeste do Jordão",
+"es": "Los reyes derrotados al oeste del Jordán"
+},
+"13:1": {
+"en": "Lands Yet Unconquered",
+"pt": "Terras ainda não conquistadas",
+"es": "Tierras aún no conquistadas"
+},
+"13:8": {
+"en": "The Inheritance East of the Jordan",
+"pt": "A herança a leste do Jordão",
+"es": "La heredad al este del Jordán"
+},
+"13:15": {
+"en": "Reuben’s Inheritance",
+"pt": "A herança de Rúben",
+"es": "La heredad de Rubén"
+},
+"13:24": {
+"en": "Gad’s Inheritance",
+"pt": "A herança de Gade",
+"es": "La heredad de Gad"
+},
+"13:29": {
+"en": "Manasseh’s Eastern Inheritance",
+"pt": "A herança de Manassés a leste",
+"es": "La heredad oriental de Manasés"
+},
+"14:1": {
+"en": "Land Division West of the Jordan",
+"pt": "Divisão da terra a oeste do Jordão",
+"es": "División de la tierra al oeste del Jordán"
+},
+"14:6": {
+"en": "Caleb Requests Hebron",
+"pt": "Calebe pede Hebrom",
+"es": "Caleb pide Hebrón"
+},
+"15:1": {
+"en": "Judah’s Inheritance",
+"pt": "A herança de Judá",
+"es": "La heredad de Judá"
+},
+"15:13": {
+"en": "Caleb’s Portion and Conquest",
+"pt": "A porção e a conquista de Calebe",
+"es": "La porción y conquista de Caleb"
+},
+"15:20": {
+"en": "The Cities of Judah",
+"pt": "As cidades de Judá",
+"es": "Las ciudades de Judá"
+},
+"16:1": {
+"en": "Ephraim’s Inheritance",
+"pt": "A herança de Efraim",
+"es": "La heredad de Efraín"
+},
+"17:1": {
+"en": "Manasseh’s Western Inheritance",
+"pt": "A herança de Manassés a oeste",
+"es": "La heredad occidental de Manasés"
+},
+"18:1": {
+"en": "The Remainder Divided",
+"pt": "A divisão do restante da terra",
+"es": "La división del resto de la tierra"
+},
+"18:11": {
+"en": "Benjamin’s Inheritance",
+"pt": "A herança de Benjamim",
+"es": "La heredad de Benjamín"
+},
+"19:1": {
+"en": "Simeon’s Inheritance",
+"pt": "A herança de Simeão",
+"es": "La heredad de Simeón"
+},
+"19:10": {
+"en": "Zebulun’s Inheritance",
+"pt": "A herança de Zebulom",
+"es": "La heredad de Zabulón"
+},
+"19:17": {
+"en": "Issachar’s Inheritance",
+"pt": "A herança de Issacar",
+"es": "La heredad de Isacar"
+},
+"19:24": {
+"en": "Asher’s Inheritance",
+"pt": "A herança de Aser",
+"es": "La heredad de Aser"
+},
+"19:32": {
+"en": "Naphtali’s Inheritance",
+"pt": "A herança de Naftali",
+"es": "La heredad de Neftalí"
+},
+"19:40": {
+"en": "Dan’s Inheritance",
+"pt": "A herança de Dã",
+"es": "La heredad de Dan"
+},
+"19:49": {
+"en": "Joshua’s Inheritance",
+"pt": "A herança de Josué",
+"es": "La heredad de Josué"
+},
+"20:1": {
+"en": "Six Cities of Refuge",
+"pt": "As seis cidades de refúgio",
+"es": "Las seis ciudades de refugio"
+},
+"21:1": {
+"en": "Forty-Eight Cities for the Levites",
+"pt": "Quarenta e oito cidades para os levitas",
+"es": "Cuarenta y ocho ciudades para los levitas"
+},
+"22:1": {
+"en": "The Eastern Tribes Return Home",
+"pt": "As tribos do leste voltam para casa",
+"es": "Las tribus del este regresan a su tierra"
+},
+"22:9": {
+"en": "The Altar of Witness",
+"pt": "O altar do testemunho",
+"es": "El altar del testimonio"
+},
+"23:1": {
+"en": "Joshua’s Charge to Leaders",
+"pt": "A exortação de Josué aos líderes",
+"es": "La exhortación de Josué a los líderes"
+},
+"24:1": {
+"en": "Joshua Reviews Israel’s History",
+"pt": "Josué relembra a história de Israel",
+"es": "Josué repasa la historia de Israel"
+},
+"24:14": {
+"en": "Choose Whom You Will Serve",
+"pt": "Escolhei a quem servir",
+"es": "Escoged a quién servir"
+},
+"24:29": {
+"en": "Joshua’s Death and Burial",
+"pt": "A morte e o sepultamento de Josué",
+"es": "Muerte y sepultura de Josué"
+}
+},
+"JDG": {
+"1:1": {
+"en": "The Conquest of Canaan Proceeds",
+"pt": "Continua a Conquista de Canaã",
+"es": "Prosigue la Conquista de Canaán"
+},
+"1:8": {
+"en": "The Capture of Jerusalem and Hebron",
+"pt": "A Tomada de Jerusalém e Hebrom",
+"es": "La Conquista de Jerusalén y Hebrón"
+},
+"1:27": {
+"en": "The Failure to Complete the Conquest",
+"pt": "O Fracasso em Completar a Conquista",
+"es": "El Fracaso en Completar la Conquista"
+},
+"2:1": {
+"en": "Israel Rebuked at Bochim",
+"pt": "Israel Repreendido em Boquim",
+"es": "Israel es Reprendido en Boquim"
+},
+"2:6": {
+"en": "Joshua’s Death and Burial",
+"pt": "Morte e Sepultamento de Josué",
+"es": "Muerte y Sepultura de Josué"
+},
+"2:10": {
+"en": "Israel’s Unfaithfulness",
+"pt": "A Infidelidade de Israel",
+"es": "La Infidelidad de Israel"
+},
+"2:16": {
+"en": "Judges Raised Up",
+"pt": "O Senhor Suscita Juízes",
+"es": "Jehová Levanta Jueces"
+},
+"3:1": {
+"en": "Nations Left to Test Israel",
+"pt": "Nações Deixadas para Provar Israel",
+"es": "Naciones Dejadas para Probar a Israel"
+},
+"3:7": {
+"en": "Othniel",
+"pt": "Otniel",
+"es": "Otoniel"
+},
+"3:12": {
+"en": "Ehud",
+"pt": "Eúde",
+"es": "Aod"
+},
+"3:31": {
+"en": "Shamgar",
+"pt": "Sangar",
+"es": "Samgar"
+},
+"4:1": {
+"en": "Deborah and Barak",
+"pt": "Débora e Baraque",
+"es": "Débora y Barac"
+},
+"4:17": {
+"en": "Jael Kills Sisera",
+"pt": "Jael Mata Sísera",
+"es": "Jael Mata a Sísara"
+},
+"5:1": {
+"en": "The Song of Deborah and Barak",
+"pt": "O Cântico de Débora e Baraque",
+"es": "El Cántico de Débora y Barac"
+},
+"6:1": {
+"en": "Midian Oppresses Israel",
+"pt": "Midiã Oprime Israel",
+"es": "Madián Oprime a Israel"
+},
+"6:11": {
+"en": "The Call of Gideon",
+"pt": "O Chamado de Gideão",
+"es": "El Llamamiento de Gedeón"
+},
+"6:25": {
+"en": "Gideon Destroys Baal’s Altar",
+"pt": "Gideão Destrói o Altar de Baal",
+"es": "Gedeón Destruye el Altar de Baal"
+},
+"6:33": {
+"en": "The Sign of the Fleece",
+"pt": "O Sinal da Lã",
+"es": "La Señal del Vellón"
+},
+"7:1": {
+"en": "Gideon’s Army of Three Hundred",
+"pt": "O Exército dos Trezentos de Gideão",
+"es": "El Ejército de los Trescientos de Gedeón"
+},
+"7:9": {
+"en": "The Sword of Gideon",
+"pt": "A Espada de Gideão",
+"es": "La Espada de Gedeón"
+},
+"7:15": {
+"en": "Gideon Defeats Midian",
+"pt": "Gideão Derrota Midiã",
+"es": "Gedeón Derrota a Madián"
+},
+"8:1": {
+"en": "Gideon Defeats Zebah and Zalmunna",
+"pt": "Gideão Derrota Zeba e Zalmuna",
+"es": "Gedeón Derrota a Zeba y Zalmuna"
+},
+"8:22": {
+"en": "Gideon’s Ephod",
+"pt": "O Éfode de Gideão",
+"es": "El Efod de Gedeón"
+},
+"8:28": {
+"en": "Forty Years of Peace",
+"pt": "Quarenta Anos de Paz",
+"es": "Cuarenta Años de Paz"
+},
+"8:32": {
+"en": "Gideon’s Death",
+"pt": "A Morte de Gideão",
+"es": "La Muerte de Gedeón"
+},
+"9:1": {
+"en": "Abimelech’s Conspiracy",
+"pt": "A Conspiração de Abimeleque",
+"es": "La Conspiración de Abimelec"
+},
+"9:7": {
+"en": "Jotham’s Parable",
+"pt": "A Parábola de Jotão",
+"es": "La Parábola de Jotam"
+},
+"9:22": {
+"en": "Gaal Conspires with the Shechemites",
+"pt": "Gaal Conspira contra Abimeleque",
+"es": "Gaal Conspira contra Abimelec"
+},
+"9:30": {
+"en": "The Fall of Shechem",
+"pt": "A Queda de Siquém",
+"es": "La Caída de Siquem"
+},
+"9:50": {
+"en": "Abimelech’s Punishment",
+"pt": "O Castigo de Abimeleque",
+"es": "El Castigo de Abimelec"
+},
+"10:1": {
+"en": "Tola",
+"pt": "Tola",
+"es": "Tola"
+},
+"10:3": {
+"en": "Jair",
+"pt": "Jair",
+"es": "Jair"
+},
+"10:6": {
+"en": "Oppression by the Philistines and Ammonites",
+"pt": "Opressão dos Filisteus e dos Amonitas",
+"es": "Opresión de los Filisteos y de los Amonitas"
+},
+"11:1": {
+"en": "Jephthah Delivers Israel",
+"pt": "Jefté Liberta Israel",
+"es": "Jefté Libera a Israel"
+},
+"11:29": {
+"en": "Jephthah’s Tragic Vow",
+"pt": "O Voto Trágico de Jefté",
+"es": "El Voto Trágico de Jefté"
+},
+"12:1": {
+"en": "Jephthah Defeats Ephraim",
+"pt": "Jefté Derrota Efraim",
+"es": "Jefté Derrota a Efraín"
+},
+"12:8": {
+"en": "Ibzan, Elon, and Abdon",
+"pt": "Ibsã, Elom e Abdom",
+"es": "Ibzán, Elón y Abdón"
+},
+"13:1": {
+"en": "The Birth of Samson",
+"pt": "O Nascimento de Sansão",
+"es": "El Nacimiento de Sansón"
+},
+"14:1": {
+"en": "Samson’s Marriage",
+"pt": "O Casamento de Sansão",
+"es": "El Matrimonio de Sansón"
+},
+"14:8": {
+"en": "Samson’s Riddle",
+"pt": "O Enigma de Sansão",
+"es": "El Enigma de Sansón"
+},
+"15:1": {
+"en": "Samson’s Revenge",
+"pt": "A Vingança de Sansão",
+"es": "La Venganza de Sansón"
+},
+"16:1": {
+"en": "Samson Escapes Gaza",
+"pt": "Sansão Escapa de Gaza",
+"es": "Sansón Escapa de Gaza"
+},
+"16:4": {
+"en": "Samson and Delilah",
+"pt": "Sansão e Dalila",
+"es": "Sansón y Dalila"
+},
+"16:15": {
+"en": "Delilah Learns the Secret",
+"pt": "Dalila Descobre o Segredo",
+"es": "Dalila Descubre el Secreto"
+},
+"16:23": {
+"en": "Samson’s Vengeance and Death",
+"pt": "A Vingança e a Morte de Sansão",
+"es": "La Venganza y la Muerte de Sansón"
+},
+"17:1": {
+"en": "Micah’s Idolatry",
+"pt": "A Idolatria de Mica",
+"es": "La Idolatría de Micaía"
+},
+"18:1": {
+"en": "The Danites Settle in Laish",
+"pt": "Os Danitas se Estabelecem em Laís",
+"es": "Los Danitas se Establecen en Lais"
+},
+"18:14": {
+"en": "The Danites Take Micah’s Idols",
+"pt": "Os Danitas Tomam os Ídolos de Mica",
+"es": "Los Danitas Toman los Ídolos de Micaía"
+},
+"19:1": {
+"en": "The Crime of the Benjamites",
+"pt": "O Crime dos Benjamitas",
+"es": "El Crimen de los Benjamitas"
+},
+"20:1": {
+"en": "The Decree of the Assembly",
+"pt": "O Decreto da Assembleia",
+"es": "El Decreto de la Asamblea"
+},
+"20:18": {
+"en": "Civil War against Benjamin",
+"pt": "Guerra Civil contra Benjamim",
+"es": "Guerra Civil contra Benjamín"
+},
+"21:1": {
+"en": "Wives for the Benjamites",
+"pt": "Mulheres para os Benjamitas",
+"es": "Esposas para los Benjamitas"
+}
+},
+"RUT": {
+"1:1": {
+"en": "Naomi Becomes a Widow",
+"pt": "Noemi fica viúva",
+"es": "Noemí queda viuda"
+},
+"1:6": {
+"en": "Ruth’s Loyalty to Naomi",
+"pt": "A lealdade de Rute a Noemi",
+"es": "La lealtad de Rut hacia Noemí"
+},
+"1:19": {
+"en": "The Return to Bethlehem",
+"pt": "O retorno a Belém",
+"es": "El regreso a Belén"
+},
+"2:1": {
+"en": "Boaz Meets Ruth",
+"pt": "Boaz conhece Rute",
+"es": "Booz conoce a Rut"
+},
+"3:1": {
+"en": "Ruth’s Redemption Assured",
+"pt": "A redenção de Rute é assegurada",
+"es": "Se asegura la redención de Rut"
+},
+"4:1": {
+"en": "Boaz Redeems Ruth",
+"pt": "Boaz resgata Rute",
+"es": "Booz redime a Rut"
+},
+"4:13": {
+"en": "Boaz Marries Ruth",
+"pt": "Boaz se casa com Rute",
+"es": "Booz se casa con Rut"
+},
+"4:18": {
+"en": "The Line of David",
+"pt": "A linhagem de Davi",
+"es": "El linaje de David"
+}
+},
+"1SA": {
+"1:1": {
+"en": "Elkanah and His Wives",
+"pt": "Elcana e suas mulheres",
+"es": "Elcana y sus mujeres"
+},
+"1:9": {
+"en": "Hannah Prays for a Son",
+"pt": "Ana ora por um filho",
+"es": "Ana ora por un hijo"
+},
+"1:19": {
+"en": "The Birth of Samuel",
+"pt": "O nascimento de Samuel",
+"es": "El nacimiento de Samuel"
+},
+"2:1": {
+"en": "Hannah’s Prayer of Thanksgiving",
+"pt": "A oração de gratidão de Ana",
+"es": "La oración de acción de gracias de Ana"
+},
+"2:12": {
+"en": "Eli’s Wicked Sons",
+"pt": "Os filhos perversos de Eli",
+"es": "La maldad de los hijos de Elí"
+},
+"2:27": {
+"en": "A Prophecy against the House of Eli",
+"pt": "Profecia contra a casa de Eli",
+"es": "Profecía contra la casa de Elí"
+},
+"3:1": {
+"en": "The LORD Calls Samuel",
+"pt": "O SENHOR chama Samuel",
+"es": "Jehová llama a Samuel"
+},
+"3:15": {
+"en": "Samuel Shares the Vision",
+"pt": "Samuel relata a visão",
+"es": "Samuel declara la visión"
+},
+"4:1": {
+"en": "The Philistines Capture the Ark",
+"pt": "Os filisteus tomam a arca",
+"es": "Los filisteos capturan el arca"
+},
+"4:12": {
+"en": "The Death of Eli",
+"pt": "A morte de Eli",
+"es": "La muerte de Elí"
+},
+"5:1": {
+"en": "The Ark Afflicts the Philistines",
+"pt": "A arca castiga os filisteus",
+"es": "El arca causa estragos a los filisteos"
+},
+"6:1": {
+"en": "The Ark Returned to Israel",
+"pt": "A arca é devolvida a Israel",
+"es": "El arca es devuelta a Israel"
+},
+"7:1": {
+"en": "Samuel Subdues the Philistines",
+"pt": "Samuel derrota os filisteus",
+"es": "Samuel derrota a los filisteos"
+},
+"8:1": {
+"en": "Israel Demands a King",
+"pt": "Israel pede um rei",
+"es": "Israel pide un rey"
+},
+"8:10": {
+"en": "Samuel’s Warning",
+"pt": "A advertência de Samuel",
+"es": "La advertencia de Samuel"
+},
+"8:19": {
+"en": "God Grants the Request",
+"pt": "Deus atende ao pedido",
+"es": "Dios concede la petición"
+},
+"9:1": {
+"en": "Saul Chosen as King",
+"pt": "Saul é escolhido rei",
+"es": "Saúl es escogido como rey"
+},
+"10:1": {
+"en": "Samuel Anoints Saul",
+"pt": "Samuel unge a Saul",
+"es": "Samuel unge a Saúl"
+},
+"10:9": {
+"en": "Samuel’s Signs Fulfilled",
+"pt": "Cumprem-se os sinais de Samuel",
+"es": "Se cumplen las señales dadas a Saúl"
+},
+"10:17": {
+"en": "Saul Proclaimed King",
+"pt": "Saul é proclamado rei",
+"es": "Saúl es proclamado rey"
+},
+"11:1": {
+"en": "Saul Defeats the Ammonites",
+"pt": "Saul derrota os amonitas",
+"es": "Saúl derrota a los amonitas"
+},
+"11:12": {
+"en": "Saul Confirmed as King",
+"pt": "Saul é confirmado como rei",
+"es": "Saúl es confirmado como rey"
+},
+"12:1": {
+"en": "Samuel’s Farewell Address",
+"pt": "O discurso de despedida de Samuel",
+"es": "El discurso de despedida de Samuel"
+},
+"13:1": {
+"en": "War with the Philistines",
+"pt": "Guerra contra os filisteus",
+"es": "Guerra contra los filisteos"
+},
+"13:8": {
+"en": "Saul’s Unlawful Sacrifice",
+"pt": "O sacrifício ilícito de Saul",
+"es": "El sacrificio ilícito de Saúl"
+},
+"13:16": {
+"en": "Israel without Weapons",
+"pt": "Israel sem armas",
+"es": "Israel sin armas"
+},
+"14:1": {
+"en": "Jonathan’s Victory over the Philistines",
+"pt": "A vitória de Jônatas sobre os filisteus",
+"es": "La victoria de Jonatán sobre los filisteos"
+},
+"14:24": {
+"en": "Jonathan Eats the Honey",
+"pt": "Jônatas come do mel",
+"es": "Jonatán come de la miel"
+},
+"14:37": {
+"en": "The People Save Jonathan",
+"pt": "O povo salva Jônatas",
+"es": "El pueblo salva a Jonatán"
+},
+"14:47": {
+"en": "Saul’s Victories",
+"pt": "As vitórias de Saul",
+"es": "Las victorias de Saúl"
+},
+"15:1": {
+"en": "Saul’s Disobedience",
+"pt": "A desobediência de Saul",
+"es": "La desobediencia de Saúl"
+},
+"15:10": {
+"en": "Samuel Denounces Saul",
+"pt": "Samuel repreende Saul",
+"es": "Samuel reprende a Saúl"
+},
+"15:24": {
+"en": "Saul’s Confession",
+"pt": "A confissão de Saul",
+"es": "La confesión de Saúl"
+},
+"16:1": {
+"en": "Samuel Anoints David",
+"pt": "Samuel unge a Davi",
+"es": "Samuel unge a David"
+},
+"16:14": {
+"en": "David Serves Saul",
+"pt": "Davi a serviço de Saul",
+"es": "David al servicio de Saúl"
+},
+"17:1": {
+"en": "Goliath’s Challenge",
+"pt": "O desafio de Golias",
+"es": "El desafío de Goliat"
+},
+"17:12": {
+"en": "David Accepts the Challenge",
+"pt": "Davi aceita o desafio",
+"es": "David acepta el desafío"
+},
+"17:38": {
+"en": "David Slays Goliath",
+"pt": "Davi mata Golias",
+"es": "David mata a Goliat"
+},
+"18:1": {
+"en": "Jonathan Befriends David",
+"pt": "A amizade de Jônatas e Davi",
+"es": "La amistad de Jonatán y David"
+},
+"18:5": {
+"en": "Saul Envies David",
+"pt": "Saul tem inveja de Davi",
+"es": "Saúl tiene envidia de David"
+},
+"18:17": {
+"en": "David Marries Michal",
+"pt": "Davi casa-se com Mical",
+"es": "David se casa con Mical"
+},
+"19:1": {
+"en": "Saul Tries to Kill David",
+"pt": "Saul tenta matar Davi",
+"es": "Saúl intenta matar a David"
+},
+"20:1": {
+"en": "Jonathan Helps David",
+"pt": "Jônatas ajuda Davi",
+"es": "Jonatán ayuda a David"
+},
+"20:10": {
+"en": "Jonathan and David Renew Their Covenant",
+"pt": "Jônatas e Davi renovam sua aliança",
+"es": "Jonatán y David renuevan su pacto"
+},
+"20:30": {
+"en": "Saul Seeks to Kill Jonathan",
+"pt": "Saul tenta matar Jônatas",
+"es": "Saúl intenta matar a Jonatán"
+},
+"21:1": {
+"en": "David Takes the Consecrated Bread",
+"pt": "Davi toma os pães sagrados",
+"es": "David toma los panes sagrados"
+},
+"21:8": {
+"en": "David Flees to Gath",
+"pt": "Davi foge para Gate",
+"es": "David huye a Gat"
+},
+"22:1": {
+"en": "David Flees to Adullam and Mizpeh",
+"pt": "Davi foge para Adulão e Mispá",
+"es": "David huye a Adulam y Mizpa"
+},
+"22:6": {
+"en": "Saul Slays the Priests of Nob",
+"pt": "Saul manda matar os sacerdotes de Nobe",
+"es": "Saúl mata a los sacerdotes de Nob"
+},
+"23:1": {
+"en": "David Delivers Keilah",
+"pt": "Davi liberta Queila",
+"es": "David libera a Keila"
+},
+"23:7": {
+"en": "Saul Pursues David",
+"pt": "Saul persegue Davi",
+"es": "Saúl persigue a David"
+},
+"24:1": {
+"en": "David Spares Saul",
+"pt": "Davi poupa a vida de Saul",
+"es": "David perdona la vida a Saúl"
+},
+"24:16": {
+"en": "David’s Oath to Saul",
+"pt": "O juramento de Davi a Saul",
+"es": "El juramento de David a Saúl"
+},
+"25:1": {
+"en": "The Death of Samuel",
+"pt": "A morte de Samuel",
+"es": "La muerte de Samuel"
+},
+"25:2": {
+"en": "David, Nabal, and Abigail",
+"pt": "Davi, Nabal e Abigail",
+"es": "David, Nabal y Abigaíl"
+},
+"25:18": {
+"en": "Abigail Intercedes for Nabal",
+"pt": "Abigail intercede por Nabal",
+"es": "Abigaíl intercede por Nabal"
+},
+"25:39": {
+"en": "David Marries Abigail",
+"pt": "Davi casa-se com Abigail",
+"es": "David se casa con Abigaíl"
+},
+"26:1": {
+"en": "David Again Spares Saul",
+"pt": "Davi poupa novamente a Saul",
+"es": "David perdona otra vez la vida a Saúl"
+},
+"26:13": {
+"en": "David Reproves Abner",
+"pt": "Davi repreende Abner",
+"es": "David reprende a Abner"
+},
+"26:21": {
+"en": "Saul Acknowledges His Sin",
+"pt": "Saul reconhece o seu pecado",
+"es": "Saúl reconoce su pecado"
+},
+"27:1": {
+"en": "David and the Philistines",
+"pt": "Davi entre os filisteus",
+"es": "David entre los filisteos"
+},
+"28:1": {
+"en": "The Philistines Gather against Israel",
+"pt": "Os filisteus se ajuntam contra Israel",
+"es": "Los filisteos se reúnen contra Israel"
+},
+"28:7": {
+"en": "Saul and the Medium of Endor",
+"pt": "Saul e a médium de En-Dor",
+"es": "Saúl y la adivina de Endor"
+},
+"29:1": {
+"en": "The Philistines Reject David",
+"pt": "Os filisteus rejeitam Davi",
+"es": "Los filisteos rechazan a David"
+},
+"30:1": {
+"en": "The Amalekites Raid Ziklag",
+"pt": "Os amalequitas saqueiam Ziclaque",
+"es": "Los amalecitas saquean Siclag"
+},
+"30:7": {
+"en": "David Destroys the Amalekites",
+"pt": "Davi derrota os amalequitas",
+"es": "David destruye a los amalecitas"
+},
+"30:21": {
+"en": "The Spoils Are Divided",
+"pt": "A repartição dos despojos",
+"es": "La repartición del botín"
+},
+"31:1": {
+"en": "Saul’s Overthrow and Death",
+"pt": "A derrota e morte de Saul",
+"es": "La derrota y muerte de Saúl"
+},
+"31:7": {
+"en": "The Philistines Possess the Towns",
+"pt": "Os filisteus ocupam as cidades",
+"es": "Los filisteos ocupan las ciudades"
+},
+"31:11": {
+"en": "Jabesh-gilead’s Tribute to Saul",
+"pt": "A homenagem dos homens de Jabes-Gileade a Saul",
+"es": "El homenaje de los hombres de Jabes de Galaad a Saúl"
+}
+},
+"2SA": {
+"1:1": {
+"en": "Saul’s Death Reported to David",
+"pt": "A morte de Saul é anunciada a Davi",
+"es": "David es informado de la muerte de Saúl"
+},
+"1:17": {
+"en": "David’s Song for Saul and Jonathan",
+"pt": "O cântico de Davi por Saul e Jônatas",
+"es": "El lamento de David por Saúl y Jonatán"
+},
+"2:1": {
+"en": "David Anointed King of Judah",
+"pt": "Davi é ungido rei de Judá",
+"es": "David es ungido rey de Judá"
+},
+"2:8": {
+"en": "Ish-bosheth Made King of Israel",
+"pt": "Isbosete é feito rei de Israel",
+"es": "Is-boset es proclamado rey de Israel"
+},
+"2:12": {
+"en": "The Battle of Gibeon",
+"pt": "A batalha de Gibeom",
+"es": "La batalla de Gabaón"
+},
+"3:1": {
+"en": "The House of David Strengthened",
+"pt": "A casa de Davi se fortalece",
+"es": "La casa de David se fortalece"
+},
+"3:6": {
+"en": "Abner Joins David",
+"pt": "Abner une-se a Davi",
+"es": "Abner se une a David"
+},
+"3:22": {
+"en": "Joab Murders Abner",
+"pt": "Joabe assassina Abner",
+"es": "Joab asesina a Abner"
+},
+"3:31": {
+"en": "David Mourns for Abner",
+"pt": "Davi chora a morte de Abner",
+"es": "David llora la muerte de Abner"
+},
+"4:1": {
+"en": "The Murder of Ish-bosheth",
+"pt": "O assassinato de Isbosete",
+"es": "El asesinato de Is-boset"
+},
+"4:9": {
+"en": "The Execution of Rechab and Baanah",
+"pt": "A execução de Recabe e Baaná",
+"es": "La ejecución de Recab y Baana"
+},
+"5:1": {
+"en": "David Anointed King of All Israel",
+"pt": "Davi é ungido rei de todo o Israel",
+"es": "David es ungido rey de todo Israel"
+},
+"5:6": {
+"en": "David Conquers Jerusalem",
+"pt": "Davi conquista Jerusalém",
+"es": "David conquista Jerusalén"
+},
+"5:12": {
+"en": "David’s Family Grows",
+"pt": "A família de Davi cresce",
+"es": "La familia de David crece"
+},
+"5:17": {
+"en": "Two Victories over the Philistines",
+"pt": "Duas vitórias sobre os filisteus",
+"es": "Dos victorias sobre los filisteos"
+},
+"6:1": {
+"en": "David Fetches the Ark",
+"pt": "Davi vai buscar a arca",
+"es": "David va a buscar el arca"
+},
+"6:5": {
+"en": "Uzzah Touches the Ark",
+"pt": "Uzá toca na arca",
+"es": "Uza toca el arca"
+},
+"6:12": {
+"en": "The Ark Brought to Jerusalem",
+"pt": "A arca é levada para Jerusalém",
+"es": "El arca es llevada a Jerusalén"
+},
+"6:16": {
+"en": "Michal’s Contempt for David",
+"pt": "Mical despreza Davi",
+"es": "Mical desprecia a David"
+},
+"7:1": {
+"en": "God’s Covenant with David",
+"pt": "A aliança de Deus com Davi",
+"es": "El pacto de Dios con David"
+},
+"7:18": {
+"en": "David’s Prayer of Thanksgiving",
+"pt": "A oração de gratidão de Davi",
+"es": "La oración de gratitud de David"
+},
+"8:1": {
+"en": "David’s Triumphs",
+"pt": "As vitórias de Davi",
+"es": "Las victorias de David"
+},
+"8:15": {
+"en": "David’s Officers",
+"pt": "Os oficiais de Davi",
+"es": "Los oficiales de David"
+},
+"9:1": {
+"en": "David and Mephibosheth",
+"pt": "Davi e Mefibosete",
+"es": "David y Mefiboset"
+},
+"10:1": {
+"en": "David’s Messengers Disgraced",
+"pt": "Os mensageiros de Davi são humilhados",
+"es": "Los mensajeros de David son humillados"
+},
+"10:9": {
+"en": "David Defeats Ammon and Aram",
+"pt": "Davi derrota Amom e Arã",
+"es": "David derrota a Amón y a Aram"
+},
+"11:1": {
+"en": "David and Bathsheba",
+"pt": "Davi e Bate-Seba",
+"es": "David y Betsabé"
+},
+"11:14": {
+"en": "David Arranges Uriah’s Death",
+"pt": "Davi planeja a morte de Urias",
+"es": "David planea la muerte de Urías"
+},
+"11:26": {
+"en": "David Marries Bathsheba",
+"pt": "Davi casa-se com Bate-Seba",
+"es": "David se casa con Betsabé"
+},
+"12:1": {
+"en": "Nathan Rebukes David",
+"pt": "Natã repreende Davi",
+"es": "Natán reprende a David"
+},
+"12:13": {
+"en": "David’s Loss and Repentance",
+"pt": "A perda e o arrependimento de Davi",
+"es": "La pérdida y el arrepentimiento de David"
+},
+"12:24": {
+"en": "Solomon’s Birth",
+"pt": "O nascimento de Salomão",
+"es": "El nacimiento de Salomón"
+},
+"12:26": {
+"en": "The Capture of Rabbah",
+"pt": "A conquista de Rabá",
+"es": "La conquista de Rabá"
+},
+"13:1": {
+"en": "Amnon and Tamar",
+"pt": "Amnon e Tamar",
+"es": "Amnón y Tamar"
+},
+"13:23": {
+"en": "Absalom’s Revenge on Amnon",
+"pt": "A vingança de Absalão contra Amnon",
+"es": "La venganza de Absalón contra Amnón"
+},
+"13:34": {
+"en": "Absalom Flees to Geshur",
+"pt": "Absalão foge para Gesur",
+"es": "Absalón huye a Gesur"
+},
+"14:1": {
+"en": "Absalom’s Return to Jerusalem",
+"pt": "O regresso de Absalão a Jerusalém",
+"es": "El regreso de Absalón a Jerusalén"
+},
+"14:28": {
+"en": "Absalom Reconciled to David",
+"pt": "Absalão reconcilia-se com Davi",
+"es": "Absalón se reconcilia con David"
+},
+"15:1": {
+"en": "Absalom’s Conspiracy",
+"pt": "A conspiração de Absalão",
+"es": "La conspiración de Absalón"
+},
+"15:13": {
+"en": "David Flees Jerusalem",
+"pt": "Davi foge de Jerusalém",
+"es": "David huye de Jerusalén"
+},
+"15:30": {
+"en": "David Weeps at the Mount of Olives",
+"pt": "Davi chora no Monte das Oliveiras",
+"es": "David llora en el Monte de los Olivos"
+},
+"16:1": {
+"en": "David and Ziba",
+"pt": "Davi e Ziba",
+"es": "David y Siba"
+},
+"16:5": {
+"en": "Shimei Curses David",
+"pt": "Simei amaldiçoa Davi",
+"es": "Simei maldice a David"
+},
+"16:15": {
+"en": "The Counsel of Ahithophel and Hushai",
+"pt": "O conselho de Aitofel e Husai",
+"es": "El consejo de Ahitofel y Husai"
+},
+"17:1": {
+"en": "Hushai Counters Ahithophel’s Advice",
+"pt": "Husai refuta o conselho de Aitofel",
+"es": "Husai refuta el consejo de Ahitofel"
+},
+"17:15": {
+"en": "Hushai’s Warning Saves David",
+"pt": "O aviso de Husai salva Davi",
+"es": "La advertencia de Husai salva a David"
+},
+"18:1": {
+"en": "Absalom Killed",
+"pt": "A morte de Absalão",
+"es": "La muerte de Absalón"
+},
+"18:19": {
+"en": "David Mourns for Absalom",
+"pt": "Davi lamenta a morte de Absalão",
+"es": "David llora por Absalón"
+},
+"19:1": {
+"en": "Joab Reproves David",
+"pt": "Joabe repreende Davi",
+"es": "Joab reprende a David"
+},
+"19:8": {
+"en": "David Restored as King",
+"pt": "Davi é restituído como rei",
+"es": "David es restituido como rey"
+},
+"19:16": {
+"en": "Shimei Pardoned",
+"pt": "Simei é perdoado",
+"es": "Simei es perdonado"
+},
+"19:24": {
+"en": "Mephibosheth Excused",
+"pt": "A justificativa de Mefibosete",
+"es": "Mefiboset se justifica"
+},
+"19:31": {
+"en": "David’s Kindness to Barzillai",
+"pt": "A bondade de Davi para com Barzilai",
+"es": "La bondad de David hacia Barzilai"
+},
+"19:41": {
+"en": "Contention over the King",
+"pt": "Disputa sobre o rei",
+"es": "Disputa por el rey"
+},
+"20:1": {
+"en": "Sheba’s Rebellion",
+"pt": "A rebelião de Seba",
+"es": "La rebelión de Seba"
+},
+"21:1": {
+"en": "David Avenges the Gibeonites",
+"pt": "Davi vinga os gibeonitas",
+"es": "David venga a los gabaonitas"
+},
+"21:15": {
+"en": "Four Battles against the Philistines",
+"pt": "Quatro batalhas contra os filisteus",
+"es": "Cuatro batallas contra los filisteos"
+},
+"22:1": {
+"en": "David’s Song of Deliverance",
+"pt": "O cântico de livramento de Davi",
+"es": "Cántico de liberación de David"
+},
+"23:1": {
+"en": "David’s Last Song",
+"pt": "As últimas palavras de Davi",
+"es": "El último cántico de David"
+},
+"23:8": {
+"en": "David’s Mighty Men",
+"pt": "Os valentes de Davi",
+"es": "Los valientes de David"
+},
+"24:1": {
+"en": "David’s Military Census",
+"pt": "O censo militar de Davi",
+"es": "El censo militar de David"
+},
+"24:10": {
+"en": "Judgment for David’s Sin",
+"pt": "O juízo pelo pecado de Davi",
+"es": "El juicio por el pecado de David"
+},
+"24:15": {
+"en": "A Plague on Israel",
+"pt": "Uma praga sobre Israel",
+"es": "Una plaga sobre Israel"
+},
+"24:18": {
+"en": "David Builds an Altar",
+"pt": "Davi edifica um altar",
+"es": "David edifica un altar"
+}
+},
+"1KI": {
+"1:1": {
+"en": "Abishag Cares for David",
+"pt": "Abisague cuida de Davi",
+"es": "Abisag cuida a David"
+},
+"1:5": {
+"en": "Adonijah Usurps the Kingdom",
+"pt": "Adonias usurpa o trono",
+"es": "Adonías usurpa el trono"
+},
+"1:11": {
+"en": "Nathan and Bathsheba before David",
+"pt": "Natã e Bate-Seba perante Davi",
+"es": "Natán y Betsabé ante David"
+},
+"1:28": {
+"en": "David Renews His Oath to Bathsheba",
+"pt": "Davi renova o juramento a Bate-Seba",
+"es": "David renueva su juramento a Betsabé"
+},
+"1:32": {
+"en": "Solomon Anointed King",
+"pt": "Salomão é ungido rei",
+"es": "Salomón es ungido rey"
+},
+"1:41": {
+"en": "Adonijah Learns of Solomon’s Kingship",
+"pt": "Adonias é informado do reinado de Salomão",
+"es": "Adonías se entera del reinado de Salomón"
+},
+"2:1": {
+"en": "David Instructs Solomon",
+"pt": "Davi instrui Salomão",
+"es": "David instruye a Salomón"
+},
+"2:10": {
+"en": "David’s Reign and Death",
+"pt": "O reinado e a morte de Davi",
+"es": "El reinado y la muerte de David"
+},
+"2:13": {
+"en": "The Execution of Adonijah",
+"pt": "A execução de Adonias",
+"es": "La ejecución de Adonías"
+},
+"2:28": {
+"en": "The Execution of Joab",
+"pt": "A execução de Joabe",
+"es": "La ejecución de Joab"
+},
+"2:36": {
+"en": "The Execution of Shimei",
+"pt": "A execução de Simei",
+"es": "La ejecución de Simei"
+},
+"3:1": {
+"en": "Solomon’s Prayer for Wisdom",
+"pt": "Salomão pede sabedoria",
+"es": "Salomón pide sabiduría"
+},
+"3:16": {
+"en": "Solomon Judges Wisely",
+"pt": "A sábia decisão de Salomão",
+"es": "Salomón juzga con sabiduría"
+},
+"4:1": {
+"en": "Solomon’s Princes",
+"pt": "Os príncipes de Salomão",
+"es": "Los príncipes de Salomón"
+},
+"4:7": {
+"en": "Solomon’s Twelve Officers",
+"pt": "Os doze oficiais de Salomão",
+"es": "Los doce oficiales de Salomón"
+},
+"4:20": {
+"en": "Solomon’s Prosperity",
+"pt": "A prosperidade de Salomão",
+"es": "La prosperidad de Salomón"
+},
+"4:29": {
+"en": "Solomon’s Wisdom",
+"pt": "A sabedoria de Salomão",
+"es": "La sabiduría de Salomón"
+},
+"5:1": {
+"en": "Preparations for the Temple",
+"pt": "Preparativos para a construção do templo",
+"es": "Preparativos para la edificación del templo"
+},
+"5:7": {
+"en": "Hiram’s Reply to Solomon",
+"pt": "A resposta de Hirão a Salomão",
+"es": "La respuesta de Hiram a Salomón"
+},
+"5:13": {
+"en": "Solomon’s Labor Force",
+"pt": "Os trabalhadores de Salomão",
+"es": "Los trabajadores de Salomón"
+},
+"6:1": {
+"en": "Temple Construction Begins",
+"pt": "O início da construção do templo",
+"es": "Comienza la edificación del templo"
+},
+"6:5": {
+"en": "The Chambers",
+"pt": "As câmaras laterais",
+"es": "Las cámaras laterales"
+},
+"6:11": {
+"en": "God’s Promise to Solomon",
+"pt": "A promessa de Deus a Salomão",
+"es": "La promesa de Dios a Salomón"
+},
+"6:14": {
+"en": "The Temple’s Interior",
+"pt": "O interior do templo",
+"es": "El interior del templo"
+},
+"6:23": {
+"en": "The Cherubim",
+"pt": "Os querubins",
+"es": "Los querubines"
+},
+"6:31": {
+"en": "The Doors",
+"pt": "As portas",
+"es": "Las puertas"
+},
+"6:36": {
+"en": "The Courtyard",
+"pt": "O átrio interior",
+"es": "El atrio interior"
+},
+"7:1": {
+"en": "Solomon’s Palace Complex",
+"pt": "O palácio de Salomão",
+"es": "El palacio de Salomón"
+},
+"7:13": {
+"en": "The Pillars and Capitals",
+"pt": "As colunas e os capitéis",
+"es": "Las columnas y los capiteles"
+},
+"7:23": {
+"en": "The Molten Sea",
+"pt": "O mar de fundição",
+"es": "El mar de fundición"
+},
+"7:27": {
+"en": "The Ten Bronze Stands",
+"pt": "Os dez suportes de bronze",
+"es": "Las diez basas de bronce"
+},
+"7:38": {
+"en": "The Ten Bronze Basins",
+"pt": "As dez bacias de bronze",
+"es": "Las diez fuentes de bronce"
+},
+"7:40": {
+"en": "Completion of the Bronze Works",
+"pt": "Conclusão das obras em bronze",
+"es": "Conclusión de las obras de bronce"
+},
+"7:48": {
+"en": "Completion of the Gold Furnishings",
+"pt": "Conclusão dos utensílios de ouro",
+"es": "Conclusión de los utensilios de oro"
+},
+"8:1": {
+"en": "The Ark Enters the Temple",
+"pt": "A arca é levada para o templo",
+"es": "El arca es llevada al templo"
+},
+"8:12": {
+"en": "Solomon Blesses the LORD",
+"pt": "Salomão bendiz ao SENHOR",
+"es": "Salomón bendice al SEÑOR"
+},
+"8:22": {
+"en": "Solomon’s Prayer of Dedication",
+"pt": "A oração de dedicação de Salomão",
+"es": "Oración de dedicación de Salomón"
+},
+"8:54": {
+"en": "Solomon’s Benediction",
+"pt": "A bênção de Salomão",
+"es": "La bendición de Salomón"
+},
+"8:62": {
+"en": "Sacrifices of Dedication",
+"pt": "Sacrifícios de dedicação",
+"es": "Sacrificios de dedicación"
+},
+"9:1": {
+"en": "The LORD’s Response to Solomon",
+"pt": "A resposta do SENHOR a Salomão",
+"es": "La respuesta del SEÑOR a Salomón"
+},
+"9:10": {
+"en": "Solomon’s Additional Achievements",
+"pt": "Outros feitos de Salomão",
+"es": "Otras obras de Salomón"
+},
+"10:1": {
+"en": "The Queen of Sheba",
+"pt": "A rainha de Sabá",
+"es": "La reina de Sabá"
+},
+"10:14": {
+"en": "Solomon’s Wealth and Splendor",
+"pt": "A riqueza e o esplendor de Salomão",
+"es": "Las riquezas y el esplendor de Salomón"
+},
+"11:1": {
+"en": "Solomon’s Foreign Wives",
+"pt": "As mulheres estrangeiras de Salomão",
+"es": "Las mujeres extranjeras de Salomón"
+},
+"11:9": {
+"en": "God’s Anger against Solomon",
+"pt": "A ira de Deus contra Salomão",
+"es": "La ira de Dios contra Salomón"
+},
+"11:14": {
+"en": "Hadad’s Return",
+"pt": "O retorno de Hadade",
+"es": "El regreso de Hadad"
+},
+"11:23": {
+"en": "Rezon’s Hostility",
+"pt": "A hostilidade de Rezom",
+"es": "La hostilidad de Rezón"
+},
+"11:26": {
+"en": "Jeroboam’s Rebellion",
+"pt": "A rebelião de Jeroboão",
+"es": "La rebelión de Jeroboam"
+},
+"11:41": {
+"en": "The Death of Solomon",
+"pt": "A morte de Salomão",
+"es": "La muerte de Salomón"
+},
+"12:1": {
+"en": "Rebellion against Rehoboam",
+"pt": "Rebelião contra Roboão",
+"es": "Rebelión contra Roboam"
+},
+"12:16": {
+"en": "The Kingdom Divided",
+"pt": "A divisão do reino",
+"es": "La división del reino"
+},
+"12:20": {
+"en": "Shemaiah’s Prophecy",
+"pt": "A profecia de Semaías",
+"es": "La profecía de Semaías"
+},
+"12:25": {
+"en": "Jeroboam’s Idolatry",
+"pt": "A idolatria de Jeroboão",
+"es": "La idolatría de Jeroboam"
+},
+"13:1": {
+"en": "Jeroboam’s Hand Withers",
+"pt": "A mão de Jeroboão seca",
+"es": "La mano de Jeroboam se seca"
+},
+"13:11": {
+"en": "The Old Prophet and the Man of God",
+"pt": "O profeta velho e o homem de Deus",
+"es": "El profeta viejo y el hombre de Dios"
+},
+"14:1": {
+"en": "Ahijah’s Prophecy against Jeroboam",
+"pt": "A profecia de Aías contra Jeroboão",
+"es": "Profecía de Ahías contra Jeroboam"
+},
+"14:19": {
+"en": "Nadab Succeeds Jeroboam",
+"pt": "Nadabe sucede a Jeroboão",
+"es": "Nadab sucede a Jeroboam"
+},
+"14:21": {
+"en": "Rehoboam Reigns in Judah",
+"pt": "Roboão reina em Judá",
+"es": "Roboam reina en Judá"
+},
+"14:25": {
+"en": "Shishak Raids Jerusalem",
+"pt": "Sisaque saqueia Jerusalém",
+"es": "Sisac saquea Jerusalén"
+},
+"15:1": {
+"en": "Abijam Reigns in Judah",
+"pt": "Abias reina em Judá",
+"es": "Abiam reina en Judá"
+},
+"15:9": {
+"en": "Asa Reigns in Judah",
+"pt": "Asa reina em Judá",
+"es": "Asa reina en Judá"
+},
+"15:16": {
+"en": "War between Asa and Baasha",
+"pt": "Guerra entre Asa e Baasa",
+"es": "Guerra entre Asa y Baasa"
+},
+"15:23": {
+"en": "Jehoshaphat Succeeds Asa",
+"pt": "Josafá sucede a Asa",
+"es": "Josafat sucede a Asa"
+},
+"15:25": {
+"en": "Nadab Reigns in Israel",
+"pt": "Nadabe reina em Israel",
+"es": "Nadab reina en Israel"
+},
+"15:33": {
+"en": "Baasha Reigns in Israel",
+"pt": "Baasa reina em Israel",
+"es": "Baasa reina en Israel"
+},
+"16:1": {
+"en": "Jehu’s Prophecy against Baasha",
+"pt": "A profecia de Jeú contra Baasa",
+"es": "Profecía de Jehú contra Baasa"
+},
+"16:8": {
+"en": "Elah Reigns in Israel",
+"pt": "Elá reina em Israel",
+"es": "Ela reina en Israel"
+},
+"16:15": {
+"en": "Zimri Reigns in Israel",
+"pt": "Zinri reina em Israel",
+"es": "Zimri reina en Israel"
+},
+"16:21": {
+"en": "Omri Reigns in Israel",
+"pt": "Onri reina em Israel",
+"es": "Omri reina en Israel"
+},
+"16:29": {
+"en": "Ahab Reigns in Israel, Marries Jezebel",
+"pt": "Acabe reina em Israel e casa-se com Jezabel",
+"es": "Acab reina en Israel y se casa con Jezabel"
+},
+"17:1": {
+"en": "The Ravens Feed Elijah",
+"pt": "Os corvos sustentam Elias",
+"es": "Los cuervos alimentan a Elías"
+},
+"17:8": {
+"en": "The Widow of Zarephath",
+"pt": "A viúva de Sarepta",
+"es": "La viuda de Sarepta"
+},
+"17:17": {
+"en": "Elijah Raises the Widow’s Son",
+"pt": "Elias ressuscita o filho da viúva",
+"es": "Elías resucita al hijo de la viuda"
+},
+"18:1": {
+"en": "Elijah’s Message to Ahab",
+"pt": "A mensagem de Elias a Acabe",
+"es": "El mensaje de Elías a Acab"
+},
+"18:16": {
+"en": "Elijah on Mount Carmel",
+"pt": "Elias no monte Carmelo",
+"es": "Elías en el monte Carmelo"
+},
+"18:36": {
+"en": "Elijah’s Prayer",
+"pt": "A oração de Elias",
+"es": "La oración de Elías"
+},
+"18:41": {
+"en": "The LORD Sends Rain",
+"pt": "O SENHOR envia chuva",
+"es": "El SEÑOR envía lluvia"
+},
+"19:1": {
+"en": "Elijah Flees from Jezebel",
+"pt": "Elias foge de Jezabel",
+"es": "Elías huye de Jezabel"
+},
+"19:9": {
+"en": "The LORD Speaks to Elijah at Horeb",
+"pt": "O SENHOR fala a Elias em Horebe",
+"es": "El SEÑOR habla a Elías en Horeb"
+},
+"19:19": {
+"en": "The Call of Elisha",
+"pt": "O chamado de Eliseu",
+"es": "El llamamiento de Eliseo"
+},
+"20:1": {
+"en": "Ben-hadad Attacks Samaria",
+"pt": "Ben-Hadade ataca Samaria",
+"es": "Ben-hadad ataca Samaria"
+},
+"20:13": {
+"en": "Ahab Defeats Ben-hadad",
+"pt": "Acabe derrota Ben-Hadade",
+"es": "Acab derrota a Ben-hadad"
+},
+"20:26": {
+"en": "Another War with Ben-hadad",
+"pt": "Outra guerra contra Ben-Hadade",
+"es": "Otra guerra contra Ben-hadad"
+},
+"20:31": {
+"en": "Ahab Spares Ben-hadad",
+"pt": "Acabe poupa Ben-Hadade",
+"es": "Acab perdona a Ben-hadad"
+},
+"20:35": {
+"en": "A Prophet Reproves Ahab",
+"pt": "Um profeta repreende Acabe",
+"es": "Un profeta reprende a Acab"
+},
+"21:1": {
+"en": "Naboth’s Vineyard",
+"pt": "A vinha de Nabote",
+"es": "La viña de Nabot"
+},
+"21:8": {
+"en": "Jezebel’s Plot",
+"pt": "A conspiração de Jezabel",
+"es": "La conspiración de Jezabel"
+},
+"21:17": {
+"en": "Elijah Denounces Ahab and Jezebel",
+"pt": "Elias denuncia Acabe e Jezabel",
+"es": "Elías denuncia a Acab y a Jezabel"
+},
+"21:25": {
+"en": "Ahab’s Repentance",
+"pt": "O arrependimento de Acabe",
+"es": "El arrepentimiento de Acab"
+},
+"22:1": {
+"en": "Ahab and the False Prophets",
+"pt": "Acabe e os falsos profetas",
+"es": "Acab y los falsos profetas"
+},
+"22:13": {
+"en": "Micaiah Prophesies against Ahab",
+"pt": "Micaías profetiza contra Acabe",
+"es": "Micaías profetiza contra Acab"
+},
+"22:29": {
+"en": "Ahab’s Defeat and Death",
+"pt": "A derrota e a morte de Acabe",
+"es": "La derrota y muerte de Acab"
+},
+"22:41": {
+"en": "Jehoshaphat Reigns in Judah",
+"pt": "Josafá reina em Judá",
+"es": "Josafat reina en Judá"
+},
+"22:51": {
+"en": "Ahaziah Reigns in Israel",
+"pt": "Acazias reina em Israel",
+"es": "Ocozías reina en Israel"
+}
+},
+"2KI": {
+"1:1": {
+"en": "Elijah Denounces Ahaziah",
+"pt": "Elias denuncia Acazias",
+"es": "Elías denuncia a Ocozías"
+},
+"1:17": {
+"en": "Jehoram Succeeds Ahaziah",
+"pt": "Jeorão sucede a Acazias",
+"es": "Joram sucede a Ocozías"
+},
+"2:1": {
+"en": "Elijah Taken Up to Heaven",
+"pt": "Elias é levado ao céu",
+"es": "Elías es llevado al cielo"
+},
+"2:15": {
+"en": "Elisha Succeeds Elijah",
+"pt": "Eliseu sucede a Elias",
+"es": "Eliseo sucede a Elías"
+},
+"2:19": {
+"en": "Elisha Heals the Waters of Jericho",
+"pt": "Eliseu sara as águas de Jericó",
+"es": "Eliseo purifica las aguas de Jericó"
+},
+"2:23": {
+"en": "Elisha Mocked",
+"pt": "Eliseu é zombado",
+"es": "Eliseo y los muchachos burladores"
+},
+"3:1": {
+"en": "Moab’s Rebellion",
+"pt": "A rebelião de Moabe",
+"es": "La rebelión de Moab"
+},
+"4:1": {
+"en": "The Widow’s Oil",
+"pt": "O azeite da viúva",
+"es": "El aceite de la viuda"
+},
+"4:8": {
+"en": "The Shunammite Woman",
+"pt": "A mulher sunamita",
+"es": "La mujer sunamita"
+},
+"4:18": {
+"en": "Elisha Raises the Shunammite’s Son",
+"pt": "Eliseu ressuscita o filho da sunamita",
+"es": "Eliseo resucita al hijo de la sunamita"
+},
+"4:38": {
+"en": "Elisha Purifies the Poisonous Stew",
+"pt": "Eliseu purifica o ensopado envenenado",
+"es": "Eliseo purifica el potaje venenoso"
+},
+"4:42": {
+"en": "Feeding a Hundred Men",
+"pt": "A multiplicação dos pães para cem homens",
+"es": "Eliseo alimenta a cien hombres"
+},
+"5:1": {
+"en": "Naaman Cured of Leprosy",
+"pt": "Naamã é curado da lepra",
+"es": "Naamán es sanado de la lepra"
+},
+"5:15": {
+"en": "Gehazi’s Greed and Leprosy",
+"pt": "A ganância e a lepra de Geazi",
+"es": "La codicia y la lepra de Giezi"
+},
+"6:1": {
+"en": "The Axe Head Floats",
+"pt": "O machado flutua",
+"es": "El hacha flotante"
+},
+"6:8": {
+"en": "Elisha Captures the Blinded Arameans",
+"pt": "Eliseu e o exército sírio ferido de cegueira",
+"es": "Eliseo captura a los sirios cegados"
+},
+"6:24": {
+"en": "The Siege and Famine of Samaria",
+"pt": "O cerco e a fome em Samaria",
+"es": "El sitio y el hambre en Samaria"
+},
+"7:1": {
+"en": "Elisha’s Prophecy of Plenty",
+"pt": "A profecia de Eliseu sobre a fartura",
+"es": "Eliseo profetiza abundancia"
+},
+"7:3": {
+"en": "The Arameans Flee",
+"pt": "A fuga dos sírios",
+"es": "La huida de los sirios"
+},
+"7:16": {
+"en": "Elisha’s Prophecy Fulfilled",
+"pt": "Cumpre-se a profecia de Eliseu",
+"es": "Se cumple la profecía de Eliseo"
+},
+"8:1": {
+"en": "The Shunammite’s Land Restored",
+"pt": "As terras da sunamita são restituídas",
+"es": "Las tierras de la sunamita son restauradas"
+},
+"8:7": {
+"en": "Hazael Murders Ben-hadad",
+"pt": "Hazael assassina Ben-Hadade",
+"es": "Hazael asesina a Ben-hadad"
+},
+"8:16": {
+"en": "Jehoram Reigns in Judah",
+"pt": "O reinado de Jeorão em Judá",
+"es": "El reinado de Joram en Judá"
+},
+"8:20": {
+"en": "Edom and Libnah Rebel",
+"pt": "A rebelião de Edom e de Libna",
+"es": "Edom y Libna se rebelan"
+},
+"8:25": {
+"en": "Ahaziah Reigns in Judah",
+"pt": "O reinado de Acazias em Judá",
+"es": "El reinado de Ocozías en Judá"
+},
+"9:1": {
+"en": "Jehu Anointed King of Israel",
+"pt": "Jeú é ungido rei de Israel",
+"es": "Jehú es ungido rey de Israel"
+},
+"9:14": {
+"en": "Jehu Kills Joram and Ahaziah",
+"pt": "Jeú mata Jorão e Acazias",
+"es": "Jehú mata a Joram y a Ocozías"
+},
+"9:30": {
+"en": "Jezebel’s Violent Death",
+"pt": "A morte violenta de Jezabel",
+"es": "La muerte trágica de Jezabel"
+},
+"10:1": {
+"en": "Ahab’s Seventy Sons Killed",
+"pt": "Os setenta filhos de Acabe são mortos",
+"es": "Los setenta hijos de Acab son muertos"
+},
+"10:18": {
+"en": "Jehu Kills the Priests of Baal",
+"pt": "Jeú extermina os adoradores de Baal",
+"es": "Jehú extermina a los profetas de Baal"
+},
+"10:28": {
+"en": "Jehu Repeats Jeroboam’s Sins",
+"pt": "Jeú segue os pecados de Jeroboão",
+"es": "Jehú repite los pecados de Jeroboam"
+},
+"10:34": {
+"en": "Jehoahaz Succeeds Jehu in Israel",
+"pt": "Jeocaz sucede a Jeú em Israel",
+"es": "Joacaz sucede a Jehú en Israel"
+},
+"11:1": {
+"en": "Athaliah and Joash",
+"pt": "Atalia e Joás",
+"es": "Atalía y Joás"
+},
+"11:4": {
+"en": "Joash Anointed King of Judah",
+"pt": "Joás é coroado rei de Judá",
+"es": "Joás es coronado rey de Judá"
+},
+"11:13": {
+"en": "The Death of Athaliah",
+"pt": "A morte de Atalia",
+"es": "La muerte de Atalía"
+},
+"11:17": {
+"en": "Jehoiada Restores the Worship of the LORD",
+"pt": "Joiada restaura a adoração ao SENHOR",
+"es": "Joiada restablece la adoración a Jehová"
+},
+"12:1": {
+"en": "Joash Repairs the Temple",
+"pt": "Joás repara o templo",
+"es": "Joás repara el templo"
+},
+"12:17": {
+"en": "The Death of Joash",
+"pt": "A morte de Joás",
+"es": "La muerte de Joás"
+},
+"13:1": {
+"en": "Jehoahaz Reigns in Israel",
+"pt": "O reinado de Jeocaz em Israel",
+"es": "El reinado de Joacaz en Israel"
+},
+"13:10": {
+"en": "Jehoash Reigns in Israel",
+"pt": "O reinado de Jeoás em Israel",
+"es": "El reinado de Joás en Israel"
+},
+"13:14": {
+"en": "Elisha’s Final Prophecy",
+"pt": "A última profecia de Eliseu",
+"es": "La última profecía de Eliseo"
+},
+"14:1": {
+"en": "Amaziah Reigns in Judah",
+"pt": "O reinado de Amazias em Judá",
+"es": "El reinado de Amasías en Judá"
+},
+"14:8": {
+"en": "Jehoash Defeats Amaziah",
+"pt": "Jeoás derrota Amazias",
+"es": "Joás derrota a Amasías"
+},
+"14:15": {
+"en": "Jeroboam II Succeeds Jehoash in Israel",
+"pt": "Jeroboão II sucede a Jeoás em Israel",
+"es": "Jeroboam II sucede a Joás en Israel"
+},
+"14:17": {
+"en": "The Death of Amaziah",
+"pt": "A morte de Amazias",
+"es": "La muerte de Amasías"
+},
+"14:21": {
+"en": "Azariah Succeeds Amaziah in Judah",
+"pt": "Azarias sucede a Amazias em Judá",
+"es": "Azarías sucede a Amasías en Judá"
+},
+"14:23": {
+"en": "Jeroboam II Reigns in Israel",
+"pt": "O reinado de Jeroboão II em Israel",
+"es": "El reinado de Jeroboam II en Israel"
+},
+"15:1": {
+"en": "Azariah Reigns in Judah",
+"pt": "O reinado de Azarias em Judá",
+"es": "El reinado de Azarías en Judá"
+},
+"15:8": {
+"en": "Zechariah Reigns in Israel",
+"pt": "O reinado de Zacarias em Israel",
+"es": "El reinado de Zacarías en Israel"
+},
+"15:13": {
+"en": "Shallum Reigns in Israel",
+"pt": "O reinado de Salum em Israel",
+"es": "El reinado de Salum en Israel"
+},
+"15:17": {
+"en": "Menahem Reigns in Israel",
+"pt": "O reinado de Menaém em Israel",
+"es": "El reinado de Manahem en Israel"
+},
+"15:23": {
+"en": "Pekahiah Reigns in Israel",
+"pt": "O reinado de Pecaías em Israel",
+"es": "El reinado de Pekaía en Israel"
+},
+"15:27": {
+"en": "Pekah Reigns in Israel",
+"pt": "O reinado de Peca em Israel",
+"es": "El reinado de Peka en Israel"
+},
+"15:32": {
+"en": "Jotham Reigns in Judah",
+"pt": "O reinado de Jotão em Judá",
+"es": "El reinado de Jotam en Judá"
+},
+"16:1": {
+"en": "Ahaz Reigns in Judah",
+"pt": "O reinado de Acaz em Judá",
+"es": "El reinado de Acaz en Judá"
+},
+"16:10": {
+"en": "The Idolatry of Ahaz",
+"pt": "A idolatria de Acaz",
+"es": "La idolatría de Acaz"
+},
+"17:1": {
+"en": "Hoshea the Last King of Israel",
+"pt": "Oseias, o último rei de Israel",
+"es": "Oseas, el último rey de Israel"
+},
+"17:5": {
+"en": "Israel Carried Captive to Assyria",
+"pt": "A queda de Samaria e o cativeiro de Israel na Assíria",
+"es": "Israel es llevado cautivo a Asiria"
+},
+"17:24": {
+"en": "Samaria Resettled",
+"pt": "Samaria é repovoada",
+"es": "La repoblación de Samaria"
+},
+"18:1": {
+"en": "Hezekiah Destroys Idolatry in Judah",
+"pt": "Ezequias destrói a idolatria em Judá",
+"es": "Ezequías destruye la idolatría en Judá"
+},
+"18:13": {
+"en": "Sennacherib Invades Judah",
+"pt": "Senaqueribe invade Judá",
+"es": "Senaquerib invade a Judá"
+},
+"18:17": {
+"en": "Sennacherib Threatens Jerusalem",
+"pt": "Senaqueribe ameaça Jerusalém",
+"es": "Senaquerib amenaza a Jerusalén"
+},
+"19:1": {
+"en": "Isaiah’s Message of Deliverance",
+"pt": "A mensagem de livramento dada por Isaías",
+"es": "El mensaje de liberación de Isaías"
+},
+"19:8": {
+"en": "Sennacherib’s Blasphemous Letter",
+"pt": "A carta blasfema de Senaqueribe",
+"es": "La carta blasfema de Senaquerib"
+},
+"19:14": {
+"en": "Hezekiah’s Prayer",
+"pt": "A oração de Ezequias",
+"es": "La oración de Ezequías"
+},
+"19:20": {
+"en": "Sennacherib’s Fall Prophesied",
+"pt": "Profetizada a queda de Senaqueribe",
+"es": "Se profetiza la caída de Senaquerib"
+},
+"19:35": {
+"en": "Jerusalem Delivered from the Assyrians",
+"pt": "Jerusalém é livre dos assírios",
+"es": "Jerusalén es librada de los asirios"
+},
+"20:1": {
+"en": "Hezekiah’s Illness and Recovery",
+"pt": "A enfermidade e a cura de Ezequias",
+"es": "Enfermedad y sanidad de Ezequías"
+},
+"20:12": {
+"en": "Hezekiah Shows His Treasures",
+"pt": "Ezequias mostra os seus tesouros",
+"es": "Ezequías muestra sus tesoros"
+},
+"20:20": {
+"en": "Manasseh Succeeds Hezekiah",
+"pt": "Manassés sucede a Ezequias",
+"es": "Manasés sucede a Ezequías"
+},
+"21:1": {
+"en": "Manasseh Reigns in Judah",
+"pt": "O reinado de Manassés em Judá",
+"es": "El reinado de Manasés en Judá"
+},
+"21:10": {
+"en": "Manasseh’s Idolatries Rebuked",
+"pt": "A idolatria de Manassés é repreendida",
+"es": "La idolatría de Manasés es reprendida"
+},
+"21:19": {
+"en": "Amon Reigns in Judah",
+"pt": "O reinado de Amom em Judá",
+"es": "El reinado de Amón en Judá"
+},
+"22:1": {
+"en": "Josiah Reigns in Judah",
+"pt": "O reinado de Josias em Judá",
+"es": "El reinado de Josías en Judá"
+},
+"22:3": {
+"en": "Funding the Temple Repairs",
+"pt": "Os recursos para a reforma do templo",
+"es": "Los fondos para las reparaciones del templo"
+},
+"22:8": {
+"en": "Hilkiah Finds the Book of the Law",
+"pt": "Hilquias encontra o Livro da Lei",
+"es": "Hicías halla el Libro de la Ley"
+},
+"22:14": {
+"en": "Huldah’s Prophecy",
+"pt": "A profecia de Hulda",
+"es": "La profecía de Hulda"
+},
+"23:1": {
+"en": "Josiah Renews the Covenant",
+"pt": "Josias renova a aliança",
+"es": "Josías renueva el pacto"
+},
+"23:4": {
+"en": "Josiah Destroys Idolatry",
+"pt": "Josias destrói a idolatria",
+"es": "Josías destruye la idolatría"
+},
+"23:21": {
+"en": "Josiah Restores the Passover",
+"pt": "Josias celebra a Páscoa",
+"es": "Josías celebra la Pascua"
+},
+"23:28": {
+"en": "The Death of Josiah",
+"pt": "A morte de Josias",
+"es": "La muerte de Josías"
+},
+"23:31": {
+"en": "Jehoahaz Succeeds Josiah",
+"pt": "Jeocaz sucede a Josias",
+"es": "Joacaz sucede a Josías"
+},
+"23:36": {
+"en": "Jehoiakim Reigns in Judah",
+"pt": "O reinado de Jeoaquim em Judá",
+"es": "El reinado de Joacim en Judá"
+},
+"24:1": {
+"en": "Babylon Controls Jehoiakim",
+"pt": "A Babilônia domina Jeoaquim",
+"es": "Babilonia somete a Joacim"
+},
+"24:6": {
+"en": "Jehoiachin Reigns in Judah",
+"pt": "O reinado de Joaquim em Judá",
+"es": "El reinado de Joaquín en Judá"
+},
+"24:10": {
+"en": "The Captivity of Jerusalem",
+"pt": "O cativeiro de Jerusalém",
+"es": "El cautiverio de Jerusalén"
+},
+"24:18": {
+"en": "Zedekiah Reigns in Judah",
+"pt": "O reinado de Zedequias em Judá",
+"es": "El reinado de Sedequías en Judá"
+},
+"25:1": {
+"en": "Nebuchadnezzar Besieges Jerusalem",
+"pt": "Nabucodonosor cerca Jerusalém",
+"es": "Nabucodonosor sitia a Jerusalén"
+},
+"25:8": {
+"en": "The Temple Destroyed",
+"pt": "A destruição do templo",
+"es": "La destrucción del templo"
+},
+"25:18": {
+"en": "Captives Carried to Babylon",
+"pt": "O povo é levado cativo para a Babilônia",
+"es": "Los cautivos son llevados a Babilonia"
+},
+"25:22": {
+"en": "Gedaliah Governs in Judah",
+"pt": "Gedalias é posto por governador em Judá",
+"es": "Gedalías es nombrado gobernador de Judá"
+},
+"25:25": {
+"en": "The Murder of Gedaliah",
+"pt": "O assassinato de Gedalias",
+"es": "El asesinato de Gedalías"
+},
+"25:27": {
+"en": "Jehoiachin Released from Prison",
+"pt": "Joaquim é libertado da prisão",
+"es": "Joaquín es liberado de la prisión"
+}
 }
 }
