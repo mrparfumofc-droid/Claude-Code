@@ -6,6 +6,7 @@ import 'package:biblia_jg/models/daily.dart';
 import 'package:biblia_jg/models/reader_settings.dart';
 import 'package:biblia_jg/screens/reader_view.dart';
 import 'package:biblia_jg/screens/search_screen.dart';
+import 'package:biblia_jg/services/updater.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -64,6 +65,27 @@ void main() {
         const VerseRef(0, 1, 2));
     expect(searchBible(b, 'exodo', SearchScope.oldTestament, 0).length, 1);
     expect(searchBible(b, 'exodo', SearchScope.newTestament, 0), isEmpty);
+  });
+
+  test('atualização: só aceita build mais novo com APK', () {
+    final release = {
+      'tag_name': 'biblia-build-5',
+      'assets': [
+        {
+          'name': 'biblia-jg-build-5.apk',
+          'browser_download_url': 'https://example.com/a.apk',
+          'digest': 'sha256:abc123',
+          'size': 55883031,
+        }
+      ],
+    };
+    final u = parseLatestRelease(release, 3)!;
+    expect(u.build, 5);
+    expect(u.sha256, 'abc123');
+    expect(u.sizeLabel, '53 MB');
+    expect(parseLatestRelease(release, 5), isNull);
+    expect(parseLatestRelease({...release, 'tag_name': 'v1.0'}, 1), isNull);
+    expect(parseLatestRelease({...release, 'assets': []}, 1), isNull);
   });
 
   test('intervalos de versículos', () {

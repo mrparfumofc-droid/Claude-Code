@@ -3,6 +3,7 @@ import 'package:biblia_jg/data/user_db.dart';
 import 'package:biblia_jg/main.dart';
 import 'package:biblia_jg/models/bible.dart';
 import 'package:biblia_jg/models/reader_settings.dart';
+import 'package:biblia_jg/screens/home_shell.dart';
 import 'package:biblia_jg/screens/settings_screen.dart';
 import 'package:biblia_jg/services/notifications.dart';
 import 'package:biblia_jg/state/app_state.dart';
@@ -64,6 +65,7 @@ Future<void> _pump(WidgetTester tester, AppState app, Size size) async {
 }
 
 void main() {
+  HomeShell.autoCheckUpdates = false;
   for (final (name, size) in [('tablet', Size(1280, 800)), ('celular', Size(400, 860))]) {
     testWidgets('tela de leitura no $name', (tester) async {
       final app = await tester.runAsync(_state);

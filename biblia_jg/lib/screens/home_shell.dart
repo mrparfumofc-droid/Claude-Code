@@ -6,6 +6,7 @@ import '../models/daily.dart';
 import '../state/app_state.dart';
 import '../widgets/book_chapter_panel.dart';
 import '../widgets/quick_settings_sheet.dart';
+import '../widgets/update_dialog.dart';
 import 'about_screen.dart';
 import 'backup_screen.dart';
 import 'history_screen.dart';
@@ -23,6 +24,9 @@ const tabletBreakpoint = 840.0;
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 
+  /// Desligado nos testes (evita acesso à rede).
+  static bool autoCheckUpdates = true;
+
   @override
   State<HomeShell> createState() => _HomeShellState();
 }
@@ -31,6 +35,16 @@ class _HomeShellState extends State<HomeShell> {
   bool _barsVisible = true;
   bool _panelOpen = true;
   bool? _lastFullScreen;
+
+  @override
+  void initState() {
+    super.initState();
+    // Procura atualização alguns segundos depois de abrir o app.
+    if (!HomeShell.autoCheckUpdates) return;
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) checkForUpdates(context);
+    });
+  }
 
   void _applyFullScreen(bool full) {
     if (_lastFullScreen == full) return;

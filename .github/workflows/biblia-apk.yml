@@ -46,6 +46,7 @@ jobs:
       # ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS e ANDROID_KEY_PASSWORD.
       # Sem eles o APK sai assinado com uma chave de debug.
       - name: Chave de assinatura
+        id: sign
         env:
           KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
           STORE_PW: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -61,8 +62,10 @@ jobs:
               echo "keyPassword=$KEY_PW"
             } > android/key.properties
             echo "Usando chave de assinatura dos secrets."
+            echo "signed=true" >> "$GITHUB_OUTPUT"
           else
             echo "Secrets de assinatura ausentes: usando chave de debug."
+            echo "signed=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Gerar APK
@@ -86,5 +89,8 @@ jobs:
           body: |
             APK para Android/tablet gerado automaticamente.
             Baixe o arquivo **biblia-jg-build-${{ github.run_number }}.apk** abaixo e abra no tablet para instalar.
+            ${{ steps.sign.outputs.signed == 'true' && 'Assinado com a chave fixa: o app instalado recebe esta atualização pelo aviso "Nova versão disponível".' || 'Pré-versão com chave temporária: não é oferecida como atualização dentro do app.' }}
           files: biblia_jg/build/biblia-jg-build-${{ github.run_number }}.apk
-          make_latest: true
+          # Só builds com a chave fixa viram "latest" (é o que o app consulta para se atualizar).
+          prerelease: ${{ steps.sign.outputs.signed != 'true' }}
+          make_latest: ${{ steps.sign.outputs.signed == 'true' }}
