@@ -14276,5 +14276,939 @@
 "pt": "Guarda o depósito",
 "es": "Guarda lo que se te ha encomendado"
 }
+},
+"2TI": {
+"1:1": {
+"en": "Paul’s Greeting to Timothy",
+"pt": "Saudação de Paulo a Timóteo",
+"es": "Salutación de Pablo a Timoteo"
+},
+"1:3": {
+"en": "Faithfulness under Persecution",
+"pt": "Fidelidade sob perseguição",
+"es": "Fidelidad en medio de la persecución"
+},
+"1:13": {
+"en": "Holding to Sound Teaching",
+"pt": "Apegando-se à sã doutrina",
+"es": "Retened la sana doctrina"
+},
+"2:1": {
+"en": "Grace and Perseverance",
+"pt": "Graça e perseverança",
+"es": "Gracia y perseverancia"
+},
+"2:14": {
+"en": "The Lord’s Approved Workman",
+"pt": "Oobreiro aprovado por Deus",
+"es": "Un obrero aprobado"
+},
+"3:1": {
+"en": "Evil in the Last Days",
+"pt": "Males nos últimos dias",
+"es": "Carácter de los hombres en los postreros días"
+},
+"3:10": {
+"en": "All Scripture Is God-Breathed",
+"pt": "Toda a Escritura é inspirada por Deus",
+"es": "Toda la Escritura es inspirada por Dios"
+},
+"4:1": {
+"en": "Preach the Word",
+"pt": "Pregue a palavra",
+"es": "Predica la palabra"
+},
+"4:9": {
+"en": "Personal Concerns",
+"pt": "Instruções pessoais",
+"es": "Instrucciones personales"
+},
+"4:16": {
+"en": "The Lord Remains Faithful",
+"pt": "O Senhor permanece fiel",
+"es": "El Señor permanece fiel"
+},
+"4:19": {
+"en": "Final Greetings",
+"pt": "Saudações finais",
+"es": "Saludos finales"
+}
+},
+"TIT": {
+"1:1": {
+"en": "Paul’s Greeting to Titus",
+"pt": "Saudação de Paulo a Tito",
+"es": "Saludo de Pablo a Tito"
+},
+"1:5": {
+"en": "Appointing Elders on Crete",
+"pt": "A nomeação de presbíteros em Creta",
+"es": "Nombramiento de ancianos en Creta"
+},
+"1:10": {
+"en": "Correcting False Teachers",
+"pt": "Como combater os falsos mestres",
+"es": "La reprensión a los falsos maestros"
+},
+"2:1": {
+"en": "Teaching Sound Doctrine",
+"pt": "Exortações à sã doutrina",
+"es": "Enseña lo que está de acuerdo con la sana doctrina"
+},
+"2:11": {
+"en": "God’s Grace Brings Salvation",
+"pt": "A graça de Deus traz salvação",
+"es": "La gracia de Dios se ha manifestado para salvación"
+},
+"3:1": {
+"en": "Heirs of Grace",
+"pt": "Herdeiros da graça",
+"es": "Justificados por su gracia"
+},
+"3:9": {
+"en": "Avoid Divisions",
+"pt": "Evite divisões e discussões tolas",
+"es": "Evita las discusiones necias"
+},
+"3:12": {
+"en": "Final Remarks and Greetings",
+"pt": "Saudações e instruções finais",
+"es": "Instrucciones y saludos finales"
+}
+},
+"PHM": {
+"1:1": {
+"en": "Greetings from Paul and Timothy",
+"pt": "Saudações de Paulo e Timóteo",
+"es": "Saludos de Pablo y Timoteo"
+},
+"1:4": {
+"en": "Philemon’s Faith and Love",
+"pt": "A fé e o amor de Filemom",
+"es": "La fe y el amor de Filemón"
+},
+"1:8": {
+"en": "Paul’s Appeal for Onesimus",
+"pt": "O apelo de Paulo em favor de Onésimo",
+"es": "Súplica de Pablo por Onésimo"
+},
+"1:23": {
+"en": "Additional Greetings",
+"pt": "Saudações finais",
+"es": "Saludos finales"
+}
+},
+"HEB": {
+"1:1": {
+"en": "The Supremacy of the Son",
+"pt": "A Supremacia do Filho",
+"es": "La supremacía del Hijo"
+},
+"2:1": {
+"en": "Salvation Confirmed",
+"pt": "A Salvação Confirmada",
+"es": "La salvación confirmada"
+},
+"2:5": {
+"en": "Jesus like His Brothers",
+"pt": "Jesus Semelhante aos Seus Irmãos",
+"es": "Jesús, semejante a sus hermanos"
+},
+"3:1": {
+"en": "Jesus Our Apostle and High Priest",
+"pt": "Jesus, Nosso Apóstolo e Sumo Sacerdote",
+"es": "Jesús, el apóstol y sumo sacerdote"
+},
+"3:7": {
+"en": "Do Not Harden Your Hearts",
+"pt": "Não Endureçam o Coração",
+"es": "No endurezcáis vuestro corazón"
+},
+"3:12": {
+"en": "The Peril of Unbelief",
+"pt": "O Perigo da Incredulidade",
+"es": "El peligro de la incredulidade"
+},
+"4:1": {
+"en": "The Sabbath Rest",
+"pt": "O Descanso do Sábado",
+"es": "El reposo de Dios"
+},
+"4:12": {
+"en": "The Living Word",
+"pt": "A Palavra Viva",
+"es": "La palabra de Dios es viva"
+},
+"5:1": {
+"en": "The Perfect High Priest",
+"pt": "O Perfeito Sumo Sacerdote",
+"es": "Jesús, el gran sumo sacerdote"
+},
+"5:11": {
+"en": "Milk and Solid Food",
+"pt": "Leite e Alimento Sólido",
+"es": "Leche y alimento sólido"
+},
+"6:1": {
+"en": "A Call to Maturity",
+"pt": "Um Chamado à Maturidade",
+"es": "Advertencia contra la apostasía"
+},
+"6:13": {
+"en": "God’s Unchangeable Promise",
+"pt": "A Promessa Imutável de Deus",
+"es": "La certeza de la promesa de Dios"
+},
+"7:1": {
+"en": "Melchizedek and Abraham",
+"pt": "Melquisedeque e Abraão",
+"es": "Melquisedec y Abraham"
+},
+"7:11": {
+"en": "A Superior Priesthood",
+"pt": "Um Sacerdócio Superior",
+"es": "El sacerdocio de Melquisedec"
+},
+"8:1": {
+"en": "Christ’s Eternal Priesthood",
+"pt": "O Sacerdócio Eterno de Cristo",
+"es": "El sacerdocio eterno de Cristo"
+},
+"8:6": {
+"en": "The New Covenant",
+"pt": "A Nova Aliança",
+"es": "El nuevo pacto"
+},
+"9:1": {
+"en": "The Earthly Tabernacle",
+"pt": "O Tabernáculo Terrestre",
+"es": "El tabernáculo terrenal"
+},
+"9:11": {
+"en": "Redemption through His Blood",
+"pt": "A Redenção Através do Seu Sangue",
+"es": "La sangre de Cristo"
+},
+"10:1": {
+"en": "Christ’s Perfect Sacrifice",
+"pt": "O Sacrifício Perfeito de Cristo",
+"es": "El sacrificio perfecto de Cristo"
+},
+"10:19": {
+"en": "A Call to Persevere",
+"pt": "Um Chamado à Perseverança",
+"es": "El camino nuevo y vivo"
+},
+"11:1": {
+"en": "Faith and Assurance",
+"pt": "Fé e Certeza",
+"es": "La fe"
+},
+"11:4": {
+"en": "The Faith of Abel, Enoch, Noah",
+"pt": "A Fé de Abel, Enoque e Noé",
+"es": "La fe de Abel, Enoc y Noé"
+},
+"11:8": {
+"en": "The Faith of Abraham and Sarah",
+"pt": "A Fé de Abraão e Sara",
+"es": "La fe de Abraham y Sara"
+},
+"11:20": {
+"en": "The Faith of Isaac, Jacob, and Joseph",
+"pt": "A Fé de Isaque, Jacó e José",
+"es": "La fe de Isaac, Jacob y José"
+},
+"11:23": {
+"en": "The Faith of Moses",
+"pt": "A Fé de Moisés",
+"es": "La fe de Moisés"
+},
+"11:30": {
+"en": "The Faith of Many",
+"pt": "A Fé de Muitos",
+"es": "El ejemplo de otros héroes de la fe"
+},
+"12:1": {
+"en": "A Call to Endurance",
+"pt": "Um Chamado à Resistência",
+"es": "El ejemplo de Jesús"
+},
+"12:4": {
+"en": "God Disciplines His Sons",
+"pt": "Deus Disciplina Seus Filhos",
+"es": "La disciplina de Dios"
+},
+"12:14": {
+"en": "A Call to Holiness",
+"pt": "Um Chamado à Santidade",
+"es": "Advertencia contra el rechazo de Dios"
+},
+"12:18": {
+"en": "An Unshakable Kingdom",
+"pt": "Um Reino Inabalável",
+"es": "El reino inquebrantable"
+},
+"13:1": {
+"en": "Brotherly Love",
+"pt": "Amor Fraterno",
+"es": "Deberes cristianos"
+},
+"13:5": {
+"en": "Christ’s Unchanging Nature",
+"pt": "A Natureza Imutável de Cristo",
+"es": "Ofrendas aceptables"
+},
+"13:15": {
+"en": "Sacrifice, Obedience, and Prayer",
+"pt": "Sacrifício, Obediência e Oração",
+"es": "Exhortaciones y bendiciones finales"
+},
+"13:20": {
+"en": "Benediction and Farewell",
+"pt": "Bênção e Despedida",
+"es": "Saludos y bendición final"
+}
+},
+"JAS": {
+"1:1": {
+"en": "A Greeting from James",
+"pt": "Saudações de Tiago",
+"es": "Saludo de Santiago"
+},
+"1:2": {
+"en": "Rejoicing in Trials",
+"pt": "A alegria nas provações",
+"es": "La sabiduría en las pruebas"
+},
+"1:13": {
+"en": "Good and Perfect Gifts",
+"pt": "Boas e perfeitas dádivas",
+"es": "Buenas y perfectas dádivas"
+},
+"1:19": {
+"en": "Hearing and Doing",
+"pt": "O ouvir e o praticar a Palavra",
+"es": "Hacedores de la palabra y no tan solo oidores"
+},
+"2:1": {
+"en": "A Warning against Favoritism",
+"pt": "Advertência contra o favoritismo",
+"es": "Advertencia contra la parcialidad"
+},
+"2:14": {
+"en": "Faith and Works",
+"pt": "A fé e as obras",
+"es": "La fe y las obras"
+},
+"3:1": {
+"en": "Taming the Tongue",
+"pt": "O domínio da língua",
+"es": "La lengua"
+},
+"3:13": {
+"en": "The Wisdom from Above",
+"pt": "A sabedoria que vem do alto",
+"es": "La sabiduría que es de lo alto"
+},
+"4:1": {
+"en": "A Warning against Pride",
+"pt": "Advertência contra a orgulho",
+"es": "Advertencia contra la mundanalidad"
+},
+"4:7": {
+"en": "Drawing Near to God",
+"pt": "Aproximando-se de Deus",
+"es": "Acercaos a Dios"
+},
+"4:13": {
+"en": "Do Not Boast about Tomorrow",
+"pt": "Não vos vanglorieis do amanhã",
+"es": "No os ufanéis del día de mañana"
+},
+"5:1": {
+"en": "A Warning to the Rich",
+"pt": "Advertência aos ricos",
+"es": "Advertencia a los ricos"
+},
+"5:7": {
+"en": "Patience in Suffering",
+"pt": "Paciência no sofrimento",
+"es": "Paciencia en el sufrimiento"
+},
+"5:13": {
+"en": "The Prayer of Faith",
+"pt": "A oração da fé",
+"es": "La oración de fe"
+},
+"5:19": {
+"en": "Restoring a Sinner",
+"pt": "Restaurando um irmão desviado",
+"es": "Restauración del pecador"
+}
+},
+"1PE": {
+"1:1": {
+"en": "A Greeting from Peter",
+"pt": "Saudação de Pedro",
+"es": "Saludo de Pedro"
+},
+"1:3": {
+"en": "A Living Hope",
+"pt": "Uma Esperança Viva",
+"es": "Una esperanza viva"
+},
+"1:13": {
+"en": "A Call to Holiness",
+"pt": "Chamado para a Santidade",
+"es": "Un llamado a la santidad"
+},
+"1:22": {
+"en": "The Enduring Word",
+"pt": "A Palavra que Permanece para Sempre",
+"es": "La palabra del Señor permanece para siempre"
+},
+"2:1": {
+"en": "The Living Stone and Chosen People",
+"pt": "A Pedra Viva e o Povo Eleito",
+"es": "La piedra viva y el sacerdocio santo"
+},
+"2:13": {
+"en": "Submission to Authorities",
+"pt": "Submissão às Autoridades",
+"es": "Sumisión a las autoridades"
+},
+"2:21": {
+"en": "Christ’s Example of Suffering",
+"pt": "O Exemplo de Sofrimento de Cristo",
+"es": "El ejemplo de sufrimiento de Cristo"
+},
+"3:1": {
+"en": "Wives and Husbands",
+"pt": "Deveres dos Maridos e Esposas",
+"es": "Deberes de los esposos y las esposas"
+},
+"3:8": {
+"en": "Turning from Evil",
+"pt": "Apartando-se do Mal",
+"es": "Apartaos del mal y haced el bien"
+},
+"3:14": {
+"en": "Suffering for Righteousness",
+"pt": "Sofrimento por Causa da Justiça",
+"es": "Sufrir por hacer el bien"
+},
+"4:1": {
+"en": "Living for God’s Glory",
+"pt": "Vivendo para a Glória de Deus",
+"es": "Vivir para la gloria de Dios"
+},
+"4:12": {
+"en": "Suffering as Christians",
+"pt": "Sofrendo como Cristãos",
+"es": "Sufrir como cristianos"
+},
+"5:1": {
+"en": "Instructions to Elders",
+"pt": "Instruções aos Presbíteros",
+"es": "Deberes de los ancianos"
+},
+"5:5": {
+"en": "Cast Your Cares on Him",
+"pt": "Lancem sobre Ele Toda a Vossa Ansiedade",
+"es": "Echad toda vuestra ansiedad sobre él"
+},
+"5:10": {
+"en": "Benediction and Farewell",
+"pt": "Saudações Finais e Bênção",
+"es": "Salutaciones y bendición final"
+}
+},
+"2PE": {
+"1:1": {
+"en": "A Greeting from Peter",
+"pt": "Saudação de Pedro",
+"es": "Saludo de Pedro"
+},
+"1:3": {
+"en": "Partakers of the Divine Nature",
+"pt": "Participantes da natureza divina",
+"es": "Participantes de la naturaleza divina"
+},
+"1:16": {
+"en": "Eyewitnesses of His Majesty",
+"pt": "Testemunhas oculares da sua majestade",
+"es": "Testigos oculares de su majestad"
+},
+"2:1": {
+"en": "Deliverance from False Prophets",
+"pt": "O livramento dos falsos profetas",
+"es": "Liberación de los falsos profetas"
+},
+"3:1": {
+"en": "The Coming Judgment",
+"pt": "O juízo futuro",
+"es": "El juicio venidero"
+},
+"3:8": {
+"en": "The Day of the Lord",
+"pt": "O Dia do Senhor",
+"es": "El día del Señor"
+},
+"3:14": {
+"en": "Final Exhortations",
+"pt": "Últimas exortações",
+"es": "Exhortaciones finales"
+}
+},
+"1JN": {
+"1:1": {
+"en": "The Word of Life",
+"pt": "A Palavra da Vida",
+"es": "El Verbo de la Vida"
+},
+"1:5": {
+"en": "Walking in the Light",
+"pt": "Andando na Luz",
+"es": "Andando en la Luz"
+},
+"2:1": {
+"en": "Jesus Our Advocate",
+"pt": "Jesus, o Nosso Advogado",
+"es": "Jesús, nuestro Abogado"
+},
+"2:7": {
+"en": "A New Commandment",
+"pt": "Um Novo Mandamento",
+"es": "Un Mandamiento Nuevo"
+},
+"2:15": {
+"en": "Do Not Love the World",
+"pt": "Não Ameis o Mundo",
+"es": "No Améis al Mundo"
+},
+"2:18": {
+"en": "Beware of Antichrists",
+"pt": "O Alerta Contra os Anticristos",
+"es": "Advertencia sobre los Anticristos"
+},
+"2:24": {
+"en": "Remain in Christ",
+"pt": "Permanecei em Cristo",
+"es": "Permaneced en Cristo"
+},
+"3:1": {
+"en": "Children of God",
+"pt": "Filhos de Deus",
+"es": "Hijos de Dios"
+},
+"3:11": {
+"en": "Love One Another",
+"pt": "Amai-vos Uns aos Outros",
+"es": "Amaos unos a otros"
+},
+"4:1": {
+"en": "Testing the Spirits",
+"pt": "Provai os Espíritos",
+"es": "Probad los Espíritus"
+},
+"4:7": {
+"en": "Love Comes from God",
+"pt": "Deus é Amor",
+"es": "Dios es Amor"
+},
+"5:1": {
+"en": "Overcoming the World",
+"pt": "A Vitória sobre o Mundo",
+"es": "La Victoria sobre el Mundo"
+},
+"5:9": {
+"en": "God’s Testimony about His Son",
+"pt": "O Testemunho acerca do Filho de Deus",
+"es": "El Testimonio acerca del Hijo de Deus"
+},
+"5:13": {
+"en": "Effective Prayer",
+"pt": "A Oração Eficaz",
+"es": "La Oración Eficaz"
+},
+"5:18": {
+"en": "The True God",
+"pt": "O Verdadeiro Deus",
+"es": "El Verdadero Dios"
+}
+},
+"2JN": {
+"1:1": {
+"en": "A Greeting from the Elder",
+"pt": "Saudação do Presbítero",
+"es": "Salutación del anciano"
+},
+"1:4": {
+"en": "Walking in the Truth",
+"pt": "Andando na Verdade",
+"es": "Andando en la verdad"
+},
+"1:7": {
+"en": "Beware of Deceivers",
+"pt": "Cuidado com os Enganadores",
+"es": "Los engañadores"
+},
+"1:12": {
+"en": "Conclusion",
+"pt": "Conclusão",
+"es": "Conclusión"
+}
+},
+"3JN": {
+"1:1": {
+"en": "A Greeting from the Elder",
+"pt": "Saudação do Presbítero",
+"es": "Salutación del anciano"
+},
+"1:5": {
+"en": "Gaius Commended for Hospitality",
+"pt": "Elogio à hospitalidade de Gaio",
+"es": "Elogio a la hospitalidad de Gayo"
+},
+"1:9": {
+"en": "Diotrephes and Demetrius",
+"pt": "Diótrefes e Demétrio",
+"es": "Diótrefes y Demetrio"
+},
+"1:13": {
+"en": "Conclusion",
+"pt": "Conclusão",
+"es": "Conclusión"
+}
+},
+"JUD": {
+"1:1": {
+"en": "A Greeting from Jude",
+"pt": "Saudação de Judas",
+"es": "Saludo de Judas"
+},
+"1:3": {
+"en": "God’s Judgment on the Ungodly",
+"pt": "O Juízo de Deus sobre os Ímpios",
+"es": "El juicio de Dios contra los impíos"
+},
+"1:17": {
+"en": "A Call to Persevere",
+"pt": "Um Chamado à Perseverança",
+"es": "Un llamado a la perseverancia"
+},
+"1:24": {
+"en": "Doxology",
+"pt": "Doxologia",
+"es": "Doxología"
+}
+},
+"REV": {
+"1:1": {
+"en": "Prologue",
+"pt": "Prólogo",
+"es": "Prólogo"
+},
+"1:4": {
+"en": "John Greets the Seven Churches",
+"pt": "João saúda as sete igrejas",
+"es": "Juan saluda a las siete iglesias"
+},
+"1:9": {
+"en": "John’s Vision on Patmos",
+"pt": "A visão de João em Patmos",
+"es": "La visión de Juan en Patmos"
+},
+"2:1": {
+"en": "To the Church in Ephesus",
+"pt": "À igreja em Éfeso",
+"es": "A la iglesia en Éfeso"
+},
+"2:8": {
+"en": "To the Church in Smyrna",
+"pt": "À igreja em Esmirna",
+"es": "A la iglesia en Esmirna"
+},
+"2:12": {
+"en": "To the Church in Pergamum",
+"pt": "À igreja em Pérgamo",
+"es": "A la iglesia en Pérgamo"
+},
+"2:18": {
+"en": "To the Church in Thyatira",
+"pt": "À igreja em Tiatira",
+"es": "A la iglesia en Tiatira"
+},
+"3:1": {
+"en": "To the Church in Sardis",
+"pt": "À igreja em Sardes",
+"es": "A la iglesia en Sardis"
+},
+"3:7": {
+"en": "To the Church in Philadelphia",
+"pt": "À igreja em Filadélfia",
+"es": "A la iglesia en Filadelfia"
+},
+"3:14": {
+"en": "To the Church in Laodicea",
+"pt": "À igreja em Laodicéia",
+"es": "A la iglesia en Laodicea"
+},
+"4:1": {
+"en": "The Throne in Heaven",
+"pt": "O trono no céu",
+"es": "El trono en el cielo"
+},
+"4:5": {
+"en": "Worship of the Creator",
+"pt": "A adoração ao Criador",
+"es": "La adoración al Creador"
+},
+"5:1": {
+"en": "The Lamb Takes the Scroll",
+"pt": "O Cordeiro toma o livro",
+"es": "El Cordero toma el libro"
+},
+"5:11": {
+"en": "The Lamb Exalted",
+"pt": "O Cordeiro é glorificado",
+"es": "El Cordero es exaltado"
+},
+"6:1": {
+"en": "The First Seal: The White Horse",
+"pt": "O primeiro selo: O cavalo branco",
+"es": "El primer sello: El caballo blanco"
+},
+"6:3": {
+"en": "The Second Seal: War",
+"pt": "O segundo selo: A guerra",
+"es": "El segundo sello: La guerra"
+},
+"6:5": {
+"en": "The Third Seal: Famine",
+"pt": "O terceiro selo: A fome",
+"es": "El tercer sello: El hambre"
+},
+"6:7": {
+"en": "The Fourth Seal: Death",
+"pt": "O quarto selo: A morte",
+"es": "El cuarto sello: La muerte"
+},
+"6:9": {
+"en": "The Fifth Seal: The Martyrs",
+"pt": "O quinto selo: Os mártires",
+"es": "El quinto sello: Los mártires"
+},
+"6:12": {
+"en": "The Sixth Seal: Terror",
+"pt": "O sexto selo: O terror",
+"es": "El sexto sello: El terror"
+},
+"7:1": {
+"en": "144,000 Sealed",
+"pt": "Os cento e quarenta e quatro mil selados",
+"es": "Los 144.000 sellados"
+},
+"7:9": {
+"en": "Praise from the Great Multitude",
+"pt": "O louvor da grande multidão",
+"es": "La alabanza de la gran multitud"
+},
+"8:1": {
+"en": "The Seventh Seal",
+"pt": "O sétimo selo",
+"es": "El séptimo sello"
+},
+"8:6": {
+"en": "The First Four Trumpets",
+"pt": "As primeiras quatro trombetas",
+"es": "Las primeras cuatro trompetas"
+},
+"9:1": {
+"en": "The Fifth Trumpet",
+"pt": "A quinta trombeta",
+"es": "La quinta trombeta"
+},
+"9:13": {
+"en": "The Sixth Trumpet",
+"pt": "A sexta trombeta",
+"es": "La sexta trombeta"
+},
+"10:1": {
+"en": "The Angel and the Small Scroll",
+"pt": "O anjo e o livrinho",
+"es": "El ángel y el librito"
+},
+"11:1": {
+"en": "The Two Witnesses",
+"pt": "As duas testemunhas",
+"es": "Los dos testigos"
+},
+"11:7": {
+"en": "The Witnesses Killed and Raised",
+"pt": "A morte e a ressurreição das testemunhas",
+"es": "La muerte y resurrección de los testigos"
+},
+"11:15": {
+"en": "The Seventh Trumpet",
+"pt": "A sétima trombeta",
+"es": "La séptima trombeta"
+},
+"12:1": {
+"en": "The Woman and the Dragon",
+"pt": "A mulher e o dragão",
+"es": "La mujer y el dragón"
+},
+"12:7": {
+"en": "The War in Heaven",
+"pt": "A guerra no céu",
+"es": "La guerra en el cielo"
+},
+"12:13": {
+"en": "The Woman Persecuted",
+"pt": "A perseguição à mulher",
+"es": "La mujer perseguida"
+},
+"13:1": {
+"en": "The Beast from the Sea",
+"pt": "A bestas que sai do mar",
+"es": "La bestia que sale del mar"
+},
+"13:11": {
+"en": "The Beast from the Earth",
+"pt": "A besta que sai da terra",
+"es": "La bestia que sale de la tierra"
+},
+"13:16": {
+"en": "The Mark of the Beast",
+"pt": "A marca da besta",
+"es": "La marca de la bestia"
+},
+"14:1": {
+"en": "The Lamb and the 144,000",
+"pt": "O Cordeiro e os 144.000",
+"es": "El Cordero y los 144.000"
+},
+"14:6": {
+"en": "The Three Angels and Babylon’s Fall",
+"pt": "Os três anjos e a queda de Babilônia",
+"es": "Los tres ángeles y la caída de Babilonia"
+},
+"14:14": {
+"en": "The Harvest of the Earth",
+"pt": "A colheita da terra",
+"es": "La siega de la tierra"
+},
+"15:1": {
+"en": "The Song of Moses and the Lamb",
+"pt": "O cântico de Moisés e do Cordeiro",
+"es": "El cántico de Moisés y del Cordero"
+},
+"15:5": {
+"en": "Preparation for Judgment",
+"pt": "A preparação para o juízo",
+"es": "La preparación para el juicio"
+},
+"16:1": {
+"en": "The First Six Bowls of Wrath",
+"pt": "As primeiras seis taças da ira",
+"es": "Las primeras seis copas de la ira"
+},
+"16:17": {
+"en": "The Seventh Bowl of Wrath",
+"pt": "A sétima taça da ira",
+"es": "La séptima copa de la ira"
+},
+"17:1": {
+"en": "The Woman on the Beast",
+"pt": "A mulher montada na besta",
+"es": "La mujer sobre la bestia"
+},
+"17:6": {
+"en": "The Mystery Explained",
+"pt": "A explicação do mistério",
+"es": "El misterio explicado"
+},
+"17:14": {
+"en": "The Victory of the Lamb",
+"pt": "A vitória do Cordeiro",
+"es": "La victoria del Cordero"
+},
+"18:1": {
+"en": "Babylon Is Fallen",
+"pt": "A queda de Babilônia",
+"es": "Ha caído Babilonia"
+},
+"18:9": {
+"en": "Lament over Babylon",
+"pt": "Lamento sobre Babilônia",
+"es": "Lamentación sobre Babilonia"
+},
+"18:21": {
+"en": "The Doom of Babylon",
+"pt": "A condenação de Babilônia",
+"es": "La perdición de Babilonia"
+},
+"19:1": {
+"en": "Rejoicing in Heaven",
+"pt": "Regozijo no céu",
+"es": "Regocijo en el cielo"
+},
+"19:6": {
+"en": "The Marriage of the Lamb",
+"pt": "As bodas do Cordeiro",
+"es": "Las bodas del Cordero"
+},
+"19:11": {
+"en": "The Rider on the White Horse",
+"pt": "O cavaleiro do cavalo branco",
+"es": "El jinete del caballo blanco"
+},
+"19:17": {
+"en": "Defeat of the Beast and False Prophet",
+"pt": "A derrota da besta e do falso profeta",
+"es": "La derrota de la bestia y del falso profeta"
+},
+"20:1": {
+"en": "Satan Bound",
+"pt": "A prisão de Satanás",
+"es": "Satanás atado"
+},
+"20:7": {
+"en": "Satan Cast into the Lake of Fire",
+"pt": "Satanás é lançado no lago de fogo",
+"es": "Satanás es lanzado al lago de fuego"
+},
+"20:11": {
+"en": "Judgment before the Great White Throne",
+"pt": "O juízo diante do grande trono branco",
+"es": "El juicio ante el gran trono blanco"
+},
+"21:1": {
+"en": "A New Heaven and a New Earth",
+"pt": "Novo céu e nova terra",
+"es": "Un cielo nuevo y una tierra nueva"
+},
+"21:9": {
+"en": "The New Jerusalem",
+"pt": "A nova Jerusalém",
+"es": "La nueva Jerusalén"
+},
+"22:1": {
+"en": "The River of Life",
+"pt": "O rio da vida",
+"es": "El río de la vida"
+},
+"22:6": {
+"en": "Jesus Is Coming",
+"pt": "Jesus está chegando",
+"es": "Jesús viene"
+},
+"22:18": {
+"en": "Nothing May Be Added or Removed",
+"pt": "Nada deve ser acrescentado ou retirado",
+"es": "Nada debe ser añadido ni quitado"
+}
 }
 }
