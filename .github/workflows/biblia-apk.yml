@@ -46,7 +46,14 @@ jobs:
         run: flutter analyze
 
       - name: Testes
-        run: flutter test
+        run: |
+          set -o pipefail
+          if ! flutter test --reporter expanded 2>&1 | tee test.log; then
+            # Mostra o motivo da falha como anotação do build (dá para ler sem login).
+            MSG=$(grep -E "\[E\]|Expected:|Actual:|Which:|Exception|Error:|overflowed|was thrown" test.log | tail -n 40 | sed 's/%/%25/g' | awk '{printf "%s%%0A", $0}')
+            echo "::error title=Testes que falharam::${MSG}"
+            exit 1
+          fi
 
       # Assinatura fixa (opcional): crie os secrets ANDROID_KEYSTORE_BASE64,
       # ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS e ANDROID_KEY_PASSWORD.

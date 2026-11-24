@@ -289,6 +289,7 @@ class UserDb {
   }
 
   // ---------- Backup ----------
+  static const _v1Tables = {'highlights', 'favorites', 'notes', 'history', 'read_chapters'};
   static const _tables = ['highlights', 'favorites', 'notes', 'history', 'read_chapters', 'activity', 'prayers', 'memory'];
 
   Future<Map<String, dynamic>> exportAll() async => {
@@ -357,9 +358,11 @@ class UserDb {
     await db.transaction((tx) async {
       for (final t in _tables) {
         final rows = data[t];
-        // Backups antigos não têm as tabelas novas: não apaga o que já existe.
-        if (rows is! List) continue;
+        // Backups antigos não têm as tabelas novas (oração, memorização, constância):
+        // nesse caso não apaga o que já existe nelas.
+        if (rows is! List && !_v1Tables.contains(t)) continue;
         if (replace) await tx.delete(t);
+        if (rows is! List) continue;
         for (final r in rows) {
           final row = Map<String, Object?>.from(r as Map);
           if (t == 'notes' || t == 'history' || t == 'prayers') row.remove('id');
