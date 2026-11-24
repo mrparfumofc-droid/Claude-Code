@@ -159,6 +159,11 @@ class AccountService extends ChangeNotifier {
     notifyListeners();
   }
 
+  String? get userId => _userId;
+
+  /// Token de acesso válido (renova sozinho quando está para vencer).
+  Future<String> accessToken() => _token();
+
   Future<String> _token() async {
     if (!signedIn) throw const AccountException('Entre com a conta Google primeiro.');
     if (_access == null || _expiresAt == null ||

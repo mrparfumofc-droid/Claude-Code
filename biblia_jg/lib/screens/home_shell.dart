@@ -6,6 +6,7 @@ import '../models/daily.dart';
 import '../services/account_service.dart';
 import '../services/sync.dart';
 import 'account_screen.dart';
+import 'library_screen.dart';
 import '../state/app_state.dart';
 import '../widgets/book_chapter_panel.dart';
 import '../widgets/quick_settings_sheet.dart';
@@ -356,12 +357,12 @@ class _MainDrawer extends StatelessWidget {
         item(Icons.auto_stories, 'Histórias Bíblicas', const StoriesScreen()),
         item(Icons.quiz, 'Perguntas Bíblicas', const QuizScreen()),
         item(Icons.music_note, 'Músicas de fundo', const MusicScreen()),
+        item(Icons.menu_book_outlined, 'Livros (PDF)', const LibraryScreen()),
+        item(Icons.school, 'EBD', const LibraryScreen(initialTab: 1)),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
           child: Text('Próximas etapas', style: theme.textTheme.labelLarge),
         ),
-        soon(Icons.menu_book_outlined, 'Livros (PDF)'),
-        soon(Icons.school, 'EBD'),
         soon(Icons.library_music, 'Hinário'),
         soon(Icons.public, 'Mapas'),
         soon(Icons.abc, 'Dicionário'),
