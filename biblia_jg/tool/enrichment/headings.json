@@ -7562,5 +7562,607 @@
 "pt": "O Anseio pelo Amado",
 "es": "El anhelo por su amado"
 }
+},
+"ISA": {
+"1:1": {
+"en": "Judah’s Rebellion",
+"pt": "A rebeldia de Judá",
+"es": "La rebeldía de Judá"
+},
+"1:10": {
+"en": "Meaningless Offerings",
+"pt": "Ofertas vãs",
+"es": "Ofrendas vanas"
+},
+"1:21": {
+"en": "The Corruption of Zion",
+"pt": "A corrupção de Sião",
+"es": "La corrupción de Sión"
+},
+"2:1": {
+"en": "The Mountain of the House of the LORD",
+"pt": "O monte da Casa do SENHOR",
+"es": "El monte de la casa de Jehová"
+},
+"2:5": {
+"en": "The Day of Reckoning",
+"pt": "O Dia do Acerto de Contas",
+"es": "El día de la retribución"
+},
+"3:1": {
+"en": "Judgment on Jerusalem and Judah",
+"pt": "Juízo sobre Jerusalém e Judá",
+"es": "Juicio sobre Jerusalén y Judá"
+},
+"3:16": {
+"en": "A Warning to the Daughters of Zion",
+"pt": "Uma advertência às filhas de Sião",
+"es": "Amonestación a las hijas de Sión"
+},
+"4:1": {
+"en": "A Remnant in Zion",
+"pt": "Um remanescente em Sião",
+"es": "Un remanente en Sión"
+},
+"5:1": {
+"en": "The Song of the Vineyard",
+"pt": "O cântico da vinha",
+"es": "El cántico de la viña"
+},
+"5:8": {
+"en": "Woes to the Wicked",
+"pt": "Ai dos ímpios",
+"es": "Ayes contra los malos"
+},
+"6:1": {
+"en": "Isaiah’s Commission",
+"pt": "A vocação de Isaías",
+"es": "Visión y llamamiento de Isaías"
+},
+"7:1": {
+"en": "A Message to Ahaz",
+"pt": "Uma mensagem a Acaz",
+"es": "Mensaje a Acaz"
+},
+"7:10": {
+"en": "The Sign of Immanuel",
+"pt": "O sinal de Emanuel",
+"es": "La señal de Emanuel"
+},
+"7:17": {
+"en": "Judgment to Come",
+"pt": "Juízo vindouro",
+"es": "Juicio venidero"
+},
+"8:1": {
+"en": "Assyrian Invasion Prophesied",
+"pt": "Profecia da invasão assíria",
+"es": "Profecía sobre la invasión asiria"
+},
+"8:11": {
+"en": "A Call to Fear God",
+"pt": "Um chamado para temer a Deus",
+"es": "Llamado a temer a Dios"
+},
+"8:19": {
+"en": "Darkness and Light",
+"pt": "Trevas e luz",
+"es": "Tinieblas y luz"
+},
+"9:1": {
+"en": "Unto Us a Child Is Born",
+"pt": "Um menino nos nasceu",
+"es": "Un niño nos es nacido"
+},
+"9:8": {
+"en": "Judgment against Israel’s Pride",
+"pt": "Juízo contra a soberba de Israel",
+"es": "Juicio contra la soberbia de Israel"
+},
+"9:13": {
+"en": "Judgment against Israel’s Hypocrisy",
+"pt": "Juízo contra a hipocrisia de Israel",
+"es": "Juicio contra la hipocresía de Israel"
+},
+"9:18": {
+"en": "Judgment against Israel’s Unrepentance",
+"pt": "Juízo contra a impenitência de Israel",
+"es": "Juicio contra la impenitencia de Israel"
+},
+"10:1": {
+"en": "Woe to Tyrants",
+"pt": "Ai dos tiranos",
+"es": "¡Ay de los tiranos!"
+},
+"10:5": {
+"en": "Judgment on Assyria",
+"pt": "Juízo sobre a Assíria",
+"es": "Juicio sobre Asiria"
+},
+"10:20": {
+"en": "A Remnant Shall Return",
+"pt": "Um remanescente voltará",
+"es": "Un remanente volverá"
+},
+"11:1": {
+"en": "The Root of Jesse",
+"pt": "O rebento de Jessé",
+"es": "El renuevo de Isaí"
+},
+"12:1": {
+"en": "Joyful Thanksgiving",
+"pt": "Ação de graças jubilosas",
+"es": "Canto de alabanza y acción de gracias"
+},
+"13:1": {
+"en": "The Burden against Babylon",
+"pt": "O peso contra a Babilônia",
+"es": "Profecía sobre Babilonia"
+},
+"14:1": {
+"en": "Restoration for Israel",
+"pt": "Restauração para Israel",
+"es": "Restauración de Israel"
+},
+"14:3": {
+"en": "The Fall of the King of Babylon",
+"pt": "A queda do rei da Babilônia",
+"es": "La caída del rey de Babilonia"
+},
+"14:24": {
+"en": "God’s Purpose against Assyria",
+"pt": "O propósito de Deus contra a Assíria",
+"es": "El propósito de Dios contra Asiria"
+},
+"14:28": {
+"en": "Philistia Will Be Destroyed",
+"pt": "A Filístia será destruída",
+"es": "Profecía sobre los filisteos"
+},
+"15:1": {
+"en": "The Burden against Moab",
+"pt": "O peso contra Moabe",
+"es": "Profecía sobre Moab"
+},
+"16:1": {
+"en": "Moab’s Destruction",
+"pt": "A destruição de Moabe",
+"es": "La destrucción de Moab"
+},
+"17:1": {
+"en": "The Burden against Damascus",
+"pt": "O peso contra Damasco",
+"es": "Profecía sobre Damasco"
+},
+"18:1": {
+"en": "A Message to Cush",
+"pt": "Uma mensagem a Cuxe",
+"es": "Profecía sobre Etiopía"
+},
+"19:1": {
+"en": "The Burden against Egypt",
+"pt": "O peso contra o Egito",
+"es": "Profecía sobre Egipto"
+},
+"19:16": {
+"en": "A Blessing upon the Earth",
+"pt": "Uma bênção sobre a terra",
+"es": "Bendición para Egipto y Asiria"
+},
+"20:1": {
+"en": "A Sign against Egypt and Cush",
+"pt": "Um sinal contra o Egito e Cuxe",
+"es": "Señal contra Egipto y Etiopía"
+},
+"21:1": {
+"en": "Babylon Is Fallen",
+"pt": "A Babilônia caiu",
+"es": "La caída de Babilonia"
+},
+"21:11": {
+"en": "The Burden against Edom",
+"pt": "O peso contra Edom",
+"es": "Profecía sobre Edom"
+},
+"21:13": {
+"en": "The Burden against Arabia",
+"pt": "O peso contra a Arábia",
+"es": "Profecía sobre Arabia"
+},
+"22:1": {
+"en": "The Valley of Vision",
+"pt": "O vale da visão",
+"es": "Profecía sobre el valle de la visión"
+},
+"22:15": {
+"en": "A Message for Shebna",
+"pt": "Uma mensagem para Sebna",
+"es": "Mensaje para Sebna"
+},
+"23:1": {
+"en": "The Burden against Tyre",
+"pt": "O peso contra Tiro",
+"es": "Profecía sobre Tiro"
+},
+"24:1": {
+"en": "God’s Judgment on the Earth",
+"pt": "O juízo de Deus sobre a terra",
+"es": "Juicio de Dios sobre la tierra"
+},
+"25:1": {
+"en": "Praise to the Victorious God",
+"pt": "Louvor ao Deus vitorioso",
+"es": "Alabanza por el rescate de Dios"
+},
+"26:1": {
+"en": "A Song of Salvation",
+"pt": "Um cântico de salvação",
+"es": "Cántico de salvación"
+},
+"27:1": {
+"en": "The LORD’s Vineyard",
+"pt": "A vinha do SENHOR",
+"es": "La viña de Jehová"
+},
+"28:1": {
+"en": "The Captivity of Ephraim",
+"pt": "O cativeiro de Efraim",
+"es": "El cautiverio de Efraín"
+},
+"28:14": {
+"en": "A Cornerstone in Zion",
+"pt": "Uma pedra angular em Sião",
+"es": "La piedra angular en Sión"
+},
+"28:23": {
+"en": "Listen and Hear",
+"pt": "Ouvi e escutai",
+"es": "Escuchad y oid"
+},
+"29:1": {
+"en": "Woe to David’s City",
+"pt": "Ai da cidade de Davi",
+"es": "¡Ay de la ciudad de David!"
+},
+"29:17": {
+"en": "Sanctification for the Godly",
+"pt": "Santificação para os piedosos",
+"es": "Santificación para los piadosos"
+},
+"30:1": {
+"en": "The Worthless Treaty with Egypt",
+"pt": "O tratado inútil com o Egito",
+"es": "La inútil alianza con Egipto"
+},
+"30:18": {
+"en": "God Will Be Gracious",
+"pt": "Deus será gracioso",
+"es": "Dios tendrá piedad"
+},
+"31:1": {
+"en": "Woe to Those Who Rely on Egypt",
+"pt": "Ai dos que confiam no Egito",
+"es": "¡Ay de los que descienden a Egipto!"
+},
+"32:1": {
+"en": "A Righteous King",
+"pt": "Um rei justo",
+"es": "Un rey justo"
+},
+"32:9": {
+"en": "The Women of Jerusalem",
+"pt": "As mulheres de Jerusalém",
+"es": "Las mujeres de Jerusalén"
+},
+"33:1": {
+"en": "The LORD Is Exalted",
+"pt": "O SENHOR é exaltado",
+"es": "Jehová es exaltado"
+},
+"34:1": {
+"en": "Judgment on the Nations",
+"pt": "Juízo sobre as nações",
+"es": "Juicio sobre las naciones"
+},
+"34:5": {
+"en": "Judgment on Edom",
+"pt": "Juízo sobre Edom",
+"es": "Juicio sobre Edom"
+},
+"35:1": {
+"en": "The Glory of Zion",
+"pt": "A glória de Sião",
+"es": "La gloria de Sión"
+},
+"36:1": {
+"en": "Sennacherib Threatens Jerusalem",
+"pt": "Senaqueribe ameaça Jerusalém",
+"es": "Senaquerib amenaza a Jerusalén"
+},
+"37:1": {
+"en": "Isaiah’s Message of Deliverance",
+"pt": "A mensagem de livramento de Isaías",
+"es": "Mensaje de liberación de Isaías"
+},
+"37:8": {
+"en": "Sennacherib’s Blasphemous Letter",
+"pt": "A carta blasfema de Senaquerib",
+"es": "La carta blasfema de Senaquerib"
+},
+"37:14": {
+"en": "Hezekiah’s Prayer",
+"pt": "A oração de Ezequias",
+"es": "Oración de Ezequías"
+},
+"37:21": {
+"en": "Sennacherib’s Fall Prophesied",
+"pt": "Profecia da queda de Senaqueribe",
+"es": "Profecía sobre la caída de Senaquerib"
+},
+"37:36": {
+"en": "Jerusalem Delivered from the Assyrians",
+"pt": "Jerusalém livrada dos assírios",
+"es": "Jerusalén librada de los asirios"
+},
+"38:1": {
+"en": "Hezekiah’s Illness and Recovery",
+"pt": "A doença e a recuperação de Ezequias",
+"es": "Enfermedad y recuperación de Ezequías"
+},
+"38:9": {
+"en": "Hezekiah’s Song of Thanksgiving",
+"pt": "O cântico de ação de graças de Ezequias",
+"es": "Cántico de agradecimiento de Ezequías"
+},
+"39:1": {
+"en": "Hezekiah Shows His Treasures",
+"pt": "Ezequias mostra os seus tesouros",
+"es": "Ezequías muestra sus tesoros"
+},
+"40:1": {
+"en": "Prepare the Way for the LORD",
+"pt": "Preparai o caminho do SENHOR",
+"es": "Preparad el camino de Jehová"
+},
+"40:6": {
+"en": "The Enduring Word",
+"pt": "A palavra que permanece para sempre",
+"es": "La palabra del Dios nuestro permanece para siempre"
+},
+"40:9": {
+"en": "Here Is Your God!",
+"pt": "Eis o vosso Deus!",
+"es": "¡Aquí está vuestro Dios!"
+},
+"41:1": {
+"en": "God’s Help to Israel",
+"pt": "O auxílio de Deus a Israel",
+"es": "Dios ayuda a Israel"
+},
+"41:21": {
+"en": "Meaningless Idols",
+"pt": "Ídolos sem valor",
+"es": "Ídolos vanos"
+},
+"42:1": {
+"en": "Here Is My Servant",
+"pt": "Eis o meu servo",
+"es": "He aquí mi siervo"
+},
+"42:10": {
+"en": "A New Song of Praise",
+"pt": "Um novo cântico de louvor",
+"es": "Un nuevo cántico de alabanza"
+},
+"42:18": {
+"en": "Israel Is Deaf and Blind",
+"pt": "Israel é surdo e cego",
+"es": "Israel es ciego y sordo"
+},
+"43:1": {
+"en": "Israel’s Only Savior",
+"pt": "O único Salvador de Israel",
+"es": "El único Salvador de Israel"
+},
+"43:14": {
+"en": "A Way in the Wilderness",
+"pt": "Um caminho no deserto",
+"es": "Camino en el desierto"
+},
+"43:22": {
+"en": "Israel’s Unfaithfulness",
+"pt": "A infidelidade de Israel",
+"es": "La infidelidad de Israel"
+},
+"44:1": {
+"en": "The LORD Has Chosen Israel",
+"pt": "O SENHOR escolheu a Israel",
+"es": "El SENHOR ha escogido a Israel"
+},
+"44:21": {
+"en": "Jerusalem to Be Restored",
+"pt": "Jerusalém será restaurada",
+"es": "Jerusalén será restaurada"
+},
+"45:1": {
+"en": "God Calls Cyrus",
+"pt": "Deus chama a Ciro",
+"es": "Dios llama a Ciro"
+},
+"46:1": {
+"en": "Babylon’s Idols",
+"pt": "Os ídolos da Babilônia",
+"es": "Los ídolos de Babilonia"
+},
+"47:1": {
+"en": "The Humiliation of Babylon",
+"pt": "A humilhação da Babilônia",
+"es": "La humillación de Babilonia"
+},
+"48:1": {
+"en": "Israel’s Stubbornness",
+"pt": "A obstinação de Israel",
+"es": "La obstinación de Israel"
+},
+"48:12": {
+"en": "Deliverance Promised to Israel",
+"pt": "Promessa de libertação para Israel",
+"es": "Promesa de liberación para Israel"
+},
+"49:1": {
+"en": "The Servant and Light to the Gentiles",
+"pt": "O Servo e luz para os gentios",
+"es": "El siervo, luz de las naciones"
+},
+"50:1": {
+"en": "Israel’s Sin",
+"pt": "O pecado de Israel",
+"es": "El pecado de Israel"
+},
+"50:4": {
+"en": "The Servant’s Obedience",
+"pt": "A obediência do Servo",
+"es": "La obediencia del siervo"
+},
+"51:1": {
+"en": "Salvation for Zion",
+"pt": "Salvação para Sião",
+"es": "Salvación para Sión"
+},
+"51:17": {
+"en": "God’s Fury Removed",
+"pt": "O furor de Deus removido",
+"es": "El furor de Dios apartado"
+},
+"52:1": {
+"en": "Deliverance for Jerusalem",
+"pt": "Libertação para Jerusalém",
+"es": "Liberación para Jerusalén"
+},
+"52:13": {
+"en": "The Servant Exalted",
+"pt": "O Servo exaltado",
+"es": "El siervo exaltado"
+},
+"53:1": {
+"en": "The Suffering Servant",
+"pt": "O Servo Sofridor",
+"es": "El siervo sufriente"
+},
+"53:9": {
+"en": "A Grave Assigned",
+"pt": "Uma sepultura designada",
+"es": "Su sepultura con los impíos"
+},
+"54:1": {
+"en": "Future Blessings for Zion",
+"pt": "Futuras bênçãos para Sião",
+"es": "Futuras bendiciones para Sión"
+},
+"55:1": {
+"en": "Invitation to the Needy",
+"pt": "Convite aos necessitados",
+"es": "Invitación a los sedientos"
+},
+"56:1": {
+"en": "Salvation for Foreigners",
+"pt": "Salvação para os estrangeiros",
+"es": "Salvación para los extranjeros"
+},
+"56:9": {
+"en": "Israel’s Sinful Leaders",
+"pt": "Os líderes pecaminosos de Israel",
+"es": "Los líderes pecaminosos de Israel"
+},
+"57:1": {
+"en": "The Blessed Death of the Righteous",
+"pt": "A morte abençoada dos justos",
+"es": "La muerte de los justos"
+},
+"57:3": {
+"en": "God Condemns Idolatry",
+"pt": "Deus condena a idolatria",
+"es": "Dios condena la idolatría"
+},
+"57:14": {
+"en": "Healing for the Repentant",
+"pt": "Cura para o arrependido",
+"es": "Consuelo para el arrepentido"
+},
+"58:1": {
+"en": "True Fasts and Sabbaths",
+"pt": "Jejuns e sábados verdadeiros",
+"es": "El ayuno verdadero"
+},
+"59:1": {
+"en": "Sin Separates Us from God",
+"pt": "O pecado nos separa de Deus",
+"es": "El pecado separa al hombre de Dios"
+},
+"59:18": {
+"en": "The Covenant of the Redeemer",
+"pt": "A aliança do Redentor",
+"es": "El pacto del Redentor"
+},
+"60:1": {
+"en": "Future Glory for Zion",
+"pt": "Futura glória para Sião",
+"es": "La futura gloria de Sión"
+},
+"61:1": {
+"en": "The Year of the LORD’s Favor",
+"pt": "O ano da graça do SENHOR",
+"es": "El año de la buena voluntad de Jehová"
+},
+"62:1": {
+"en": "Zion’s Salvation and New Name",
+"pt": "A salvação de Sião e seu novo nome",
+"es": "La salvación de Sión y su nuevo nombre"
+},
+"63:1": {
+"en": "God’s Vengeance on the Nations",
+"pt": "A vingança de Deus sobre as nações",
+"es": "La venganza de Dios sobre las naciones"
+},
+"63:7": {
+"en": "God’s Mercies Recalled",
+"pt": "As misericórdias de Deus relembradas",
+"es": "Las misericordias de Jehová recordadas"
+},
+"63:15": {
+"en": "A Prayer for Mercy",
+"pt": "Uma oração por misericórdia",
+"es": "Oración pidiendo misericordia"
+},
+"64:1": {
+"en": "A Prayer for God’s Power",
+"pt": "Uma oração pelo poder de Deus",
+"es": "Oración pidiendo el poder de Dios"
+},
+"65:1": {
+"en": "Judgments and Promises",
+"pt": "Juízos e promessas",
+"es": "Juicios y promesas"
+},
+"65:17": {
+"en": "A New Heaven and a New Earth",
+"pt": "Um novo céu e uma nova terra",
+"es": "Cielos nuevos y tierra nueva"
+},
+"66:1": {
+"en": "Heaven Is My Throne",
+"pt": "O céu é o meu trono",
+"es": "El cielo es mi trono"
+},
+"66:7": {
+"en": "Rejoice with Jerusalem",
+"pt": "Alegrai-vos com Jerusalém",
+"es": "Alegría en Jerusalén"
+},
+"66:15": {
+"en": "Final Judgments against the Wicked",
+"pt": "Juízos finais contra os ímpios",
+"es": "Juicios finales contra los malos"
+}
 }
 }
