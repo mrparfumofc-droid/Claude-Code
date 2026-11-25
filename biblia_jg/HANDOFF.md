@@ -85,6 +85,13 @@ O dono mostrou vídeos de livros do tipo "panorama bíblico" (árvore genealógi
 - **Panorama**: linha do tempo da Bíblia e o tabernáculo visto de cima (`panorama_diagrams.dart`).
 - **Não feito, e por quê**: Harpa Cristã (hinário da CPAD, com direito autoral: o dono pode importar a cópia dele em "Meu hinário"); voz idêntica à do vídeo de referência (não se copia a voz de uma pessoa real); retratos dos personagens e mais ilustrações (dependem da cota de imagens do Gemini, usada pelas histórias); as tarefas agendadas de ilustração ficaram paradas esperando aprovação de permissão no app do Claude.
 
+## Fase 6 (build 33): Panorama ilustrado e retratos dos personagens
+- **Ilustrações das histórias completas:** 193 imagens na nuvem, 199 de 199 cenas ilustradas (24/11/2026).
+- **Retratos:** recortes das ilustrações, 320 px, em `historias/retratos/<id>.jpg`, com o índice `retratos.json` (nome → id) na nuvem e em `assets/data/`. `Portraits` (`lib/services/portraits.dart`) carrega o do app, a cópia do aparelho e confere a nuvem: retrato novo aparece sem novo APK. Só vale o nome exato; reis e profetas são procurados como "Rei X" e "Profeta X", porque há nomes repetidos (Oseias, Zacarias).
+- **Onde aparecem:** `PortraitAvatar` e `PersonChip` (`lib/widgets/portrait.dart`) na árvore de Abraão, nos reis do reino unido, nos profetas, nos personagens das fichas dos livros e nas épocas da linha do tempo. Toque no retrato amplia.
+- **Fundos ilustrados:** `ArtBackdrop` na entrada do Panorama e no cabeçalho das fichas; faixa ilustrada em cada época. As chaves ficam em `lib/screens/panorama_art.dart` (um teste confere que todas existem no índice das histórias).
+- **Como acrescentar retratos:** `tool/panorama/retratos.py grade <pasta> <cenas>` gera folhas com grade para marcar o rosto (centro e lado em %), `retratos_def.json` guarda as marcações, `cortar` recorta e `enviar` publica. Faltam os reis depois de Salomão, 14 profetas e parte da árvore: não há ilustração deles ainda.
+
 ## Pendências
 1. ~~Músicas de fundo~~ feito (player na nuvem, ver Infraestrutura). Ideias futuras: abaixar a música enquanto o "Ouvir" lê o versículo; tocar com a tela bloqueada (audio_service).
 2. ~~Livros (PDF) + EBD~~ feito (falta: lembrete de domingo da lição da EBD). Leitor de PDF com pastas, anotação à mão (caneta, marca-texto, borracha, cores, desfazer), salvo por página. O módulo EBD: revista em PDF por ano e trimestre, lições marcadas (à mão ou pela IA), Bíblia ao lado, referências clicáveis, lembrete de domingo.

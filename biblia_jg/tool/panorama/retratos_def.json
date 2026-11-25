@@ -1,0 +1,532 @@
+{
+ "abraao": {
+  "cena": "abraao-estrelas",
+  "cx": 66,
+  "cy": 40,
+  "s": 20,
+  "nomes": [
+   "Abraão"
+  ]
+ },
+ "sara": {
+  "cena": "abraao-visitantes",
+  "cx": 78.5,
+  "cy": 62,
+  "s": 11,
+  "nomes": [
+   "Sara"
+  ]
+ },
+ "isaque": {
+  "cena": "moria-sacrificio",
+  "cx": 73.5,
+  "cy": 53,
+  "s": 11,
+  "nomes": [
+   "Isaque"
+  ]
+ },
+ "jaco": {
+  "cena": "jaco-gosen",
+  "cx": 28,
+  "cy": 28,
+  "s": 12,
+  "nomes": [
+   "Jacó"
+  ]
+ },
+ "jose": {
+  "cena": "jose-celeiros",
+  "cx": 79,
+  "cy": 25,
+  "s": 27,
+  "nomes": [
+   "José"
+  ]
+ },
+ "moises": {
+  "cena": "nebo-vista",
+  "cx": 33.5,
+  "cy": 23,
+  "s": 17,
+  "nomes": [
+   "Moisés"
+  ]
+ },
+ "josue": {
+  "cena": "josue-sol",
+  "cx": 32.5,
+  "cy": 27,
+  "s": 13,
+  "nomes": [
+   "Josué"
+  ]
+ },
+ "rute": {
+  "cena": "rute-espigas",
+  "cx": 38.5,
+  "cy": 35,
+  "s": 17,
+  "nomes": [
+   "Rute"
+  ]
+ },
+ "boaz": {
+  "cena": "rute-espigas",
+  "cx": 68,
+  "cy": 28,
+  "s": 15,
+  "nomes": [
+   "Boaz"
+  ]
+ },
+ "noemi": {
+  "cena": "noemi-rute",
+  "cx": 66.5,
+  "cy": 33,
+  "s": 11,
+  "nomes": [
+   "Noemi"
+  ]
+ },
+ "samuel": {
+  "cena": "davi-uncao",
+  "cx": 23,
+  "cy": 27,
+  "s": 30,
+  "nomes": [
+   "Samuel"
+  ]
+ },
+ "saul": {
+  "cena": "saul-lanca",
+  "cx": 31,
+  "cy": 27,
+  "s": 14,
+  "nomes": [
+   "Saul",
+   "Rei Saul"
+  ]
+ },
+ "davi": {
+  "cena": "davi-harpa",
+  "cx": 70.5,
+  "cy": 28,
+  "s": 15,
+  "nomes": [
+   "Davi",
+   "Rei Davi"
+  ]
+ },
+ "salomao": {
+  "cena": "salomao-julgamento",
+  "cx": 78,
+  "cy": 29,
+  "s": 11,
+  "nomes": [
+   "Salomão",
+   "Rei Salomão"
+  ]
+ },
+ "elias": {
+  "cena": "elias-corvos",
+  "cx": 76,
+  "cy": 39,
+  "s": 14,
+  "nomes": [
+   "Elias",
+   "O profeta Elias"
+  ]
+ },
+ "jonas": {
+  "cena": "jonas-planta",
+  "cx": 33,
+  "cy": 49,
+  "s": 12,
+  "nomes": [
+   "Jonas",
+   "Profeta Jonas"
+  ]
+ },
+ "daniel": {
+  "cena": "daniel-estatua",
+  "cx": 44.5,
+  "cy": 40,
+  "s": 17,
+  "nomes": [
+   "Daniel",
+   "Profeta Daniel"
+  ]
+ },
+ "nabucodonosor": {
+  "cena": "daniel-estatua",
+  "cx": 74.5,
+  "cy": 38,
+  "s": 17,
+  "nomes": [
+   "Nabucodonosor"
+  ]
+ },
+ "sadraque": {
+  "cena": "fornalha",
+  "cx": 29.5,
+  "cy": 44,
+  "s": 20,
+  "nomes": [
+   "Sadraque, Mesaque e Abede-Nego"
+  ]
+ },
+ "ester": {
+  "cena": "ester-rei",
+  "cx": 41.5,
+  "cy": 45,
+  "s": 10,
+  "nomes": [
+   "Ester"
+  ]
+ },
+ "assuero": {
+  "cena": "ester-rainha",
+  "cx": 70,
+  "cy": 24,
+  "s": 12,
+  "nomes": [
+   "Assuero"
+  ]
+ },
+ "mardoqueu": {
+  "cena": "mardoqueu-porta",
+  "cx": 33,
+  "cy": 33,
+  "s": 11,
+  "nomes": [
+   "Mardoqueu"
+  ]
+ },
+ "neemias": {
+  "cena": "neemias-copeiro",
+  "cx": 69,
+  "cy": 29,
+  "s": 22,
+  "nomes": [
+   "Neemias"
+  ]
+ },
+ "artaxerxes": {
+  "cena": "neemias-copeiro",
+  "cx": 31.5,
+  "cy": 37,
+  "s": 12,
+  "nomes": [
+   "Artaxerxes"
+  ]
+ },
+ "esdras": {
+  "cena": "esdras-lei",
+  "cx": 66.5,
+  "cy": 26,
+  "s": 10,
+  "nomes": [
+   "Esdras"
+  ]
+ },
+ "ciro": {
+  "cena": "ciro-decreto",
+  "cx": 77,
+  "cy": 28,
+  "s": 8,
+  "nomes": [
+   "Ciro"
+  ]
+ },
+ "noe": {
+  "cena": "noe-pomba",
+  "cx": 42,
+  "cy": 32,
+  "s": 22,
+  "nomes": [
+   "Noé"
+  ]
+ },
+ "adao-eva": {
+  "cena": "criacao-vida",
+  "cx": 38.8,
+  "cy": 54,
+  "s": 20,
+  "nomes": [
+   "Adão e Eva",
+   "Adão"
+  ]
+ },
+ "farao": {
+  "cena": "jose-farao",
+  "cx": 65,
+  "cy": 47,
+  "s": 8,
+  "nomes": [
+   "Faraó"
+  ]
+ },
+ "raabe": {
+  "cena": "raabe-espias",
+  "cx": 72.5,
+  "cy": 24,
+  "s": 8,
+  "nomes": [
+   "Raabe"
+  ]
+ },
+ "jesus": {
+  "cena": "emaus",
+  "cx": 40,
+  "cy": 28,
+  "s": 22,
+  "nomes": [
+   "Jesus",
+   "Jesus Cristo",
+   "Jesus Cristo, o Cordeiro"
+  ]
+ },
+ "maria": {
+  "cena": "anunciacao",
+  "cx": 38,
+  "cy": 47,
+  "s": 11,
+  "nomes": [
+   "Maria"
+  ]
+ },
+ "gabriel": {
+  "cena": "anunciacao",
+  "cx": 70.5,
+  "cy": 20,
+  "s": 11,
+  "nomes": [
+   "Gabriel"
+  ]
+ },
+ "joao-batista": {
+  "cena": "batismo-jesus",
+  "cx": 40,
+  "cy": 35,
+  "s": 11,
+  "nomes": [
+   "João Batista"
+  ]
+ },
+ "pedro": {
+  "cena": "pedro-sermao",
+  "cx": 73.5,
+  "cy": 30,
+  "s": 14,
+  "nomes": [
+   "Pedro",
+   "Pedro (Cefas)",
+   "Cefas"
+  ]
+ },
+ "joao": {
+  "cena": "patmos-joao",
+  "cx": 36,
+  "cy": 52,
+  "s": 11,
+  "nomes": [
+   "João",
+   "O presbítero"
+  ]
+ },
+ "tome": {
+  "cena": "tome",
+  "cx": 42,
+  "cy": 44,
+  "s": 10,
+  "nomes": [
+   "Tomé"
+  ]
+ },
+ "madalena": {
+  "cena": "madalena-jardim",
+  "cx": 42.5,
+  "cy": 48,
+  "s": 12,
+  "nomes": [
+   "Maria Madalena"
+  ]
+ },
+ "emaus": {
+  "cena": "emaus",
+  "cx": 73,
+  "cy": 33,
+  "s": 24,
+  "nomes": [
+   "Os discípulos de Emaús"
+  ]
+ },
+ "estevao": {
+  "cena": "estevao-sinedrio",
+  "cx": 50,
+  "cy": 47,
+  "s": 13,
+  "nomes": [
+   "Estêvão"
+  ]
+ },
+ "filipe": {
+  "cena": "filipe-etiope",
+  "cx": 58,
+  "cy": 30,
+  "s": 9,
+  "nomes": [
+   "Filipe"
+  ]
+ },
+ "cornelio": {
+  "cena": "cornelio-anjo",
+  "cx": 43,
+  "cy": 42,
+  "s": 11,
+  "nomes": [
+   "Cornélio"
+  ]
+ },
+ "paulo": {
+  "cena": "felix",
+  "cx": 32,
+  "cy": 28,
+  "s": 19,
+  "nomes": [
+   "Paulo",
+   "Paulo (Saulo)"
+  ]
+ },
+ "barnabe": {
+  "cena": "barnabe-paulo",
+  "cx": 62,
+  "cy": 22,
+  "s": 12,
+  "nomes": [
+   "Barnabé"
+  ]
+ },
+ "timoteo": {
+  "cena": "timoteo",
+  "cx": 56,
+  "cy": 35,
+  "s": 14,
+  "nomes": [
+   "Timóteo"
+  ]
+ },
+ "loide-eunice": {
+  "cena": "timoteo",
+  "cx": 75.5,
+  "cy": 36,
+  "s": 22,
+  "nomes": [
+   "Lóide e Eunice"
+  ]
+ },
+ "aquila-priscila": {
+  "cena": "corinto-tendas",
+  "cx": 69,
+  "cy": 33,
+  "s": 18,
+  "nomes": [
+   "Priscila e Áquila",
+   "Áquila e Priscila"
+  ]
+ },
+ "arao": {
+  "cena": "moises-farao",
+  "cx": 31,
+  "cy": 41,
+  "s": 9,
+  "nomes": [
+   "Arão"
+  ]
+ },
+ "calebe": {
+  "cena": "espias-uvas",
+  "cx": 29.5,
+  "cy": 33,
+  "s": 13,
+  "nomes": [
+   "Calebe"
+  ]
+ },
+ "golias": {
+  "cena": "davi-golias",
+  "cx": 70.5,
+  "cy": 22,
+  "s": 11,
+  "nomes": [
+   "Golias"
+  ]
+ },
+ "rainha-saba": {
+  "cena": "rainha-saba",
+  "cx": 46.5,
+  "cy": 50,
+  "s": 8,
+  "nomes": [
+   "A rainha de Sabá"
+  ]
+ },
+ "hama": {
+  "cena": "ester-banquete",
+  "cx": 26.5,
+  "cy": 45,
+  "s": 10,
+  "nomes": [
+   "Hamã"
+  ]
+ },
+ "jose-maria": {
+  "cena": "natal-manjedoura",
+  "cx": 60,
+  "cy": 37,
+  "s": 22,
+  "nomes": [
+   "José e Maria"
+  ]
+ },
+ "pilatos": {
+  "cena": "pilatos",
+  "cx": 76,
+  "cy": 32,
+  "s": 8,
+  "nomes": [
+   "Pilatos",
+   "Pôncio Pilatos"
+  ]
+ },
+ "lazaro": {
+  "cena": "lazaro",
+  "cx": 40.5,
+  "cy": 44,
+  "s": 11,
+  "nomes": [
+   "Lázaro, Marta e Maria"
+  ]
+ },
+ "os-doze": {
+  "cena": "ultima-ceia",
+  "cx": 50,
+  "cy": 45,
+  "s": 46,
+  "nomes": [
+   "Os doze",
+   "Os doze discípulos"
+  ]
+ },
+ "silas": {
+  "cena": "filipos-prisao",
+  "cx": 42.5,
+  "cy": 46,
+  "s": 12,
+  "nomes": [
+   "Silas",
+   "Silvano"
+  ]
+ }
+}

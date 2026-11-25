@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../theme.dart';
+import '../widgets/parallax_image.dart' show StoryThumb;
+import '../widgets/portrait.dart';
+import 'panorama_art.dart';
 import 'panorama_kings.dart';
 import 'panorama_tree.dart';
 import 'stories_screen.dart';
@@ -76,6 +79,15 @@ class BibleTimelineScreen extends StatelessWidget {
           child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
             child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(14),
+                child: SizedBox(
+                  height: 210,
+                  width: double.infinity,
+                  child: StoryThumb(imageKey: eraArt[_eras.indexOf(e)], tint: e.color, large: true, cacheWidth: 1200),
+                ),
+              ),
+              const SizedBox(height: 14),
               Row(children: [
                 CircleAvatar(backgroundColor: e.color, child: Icon(e.icon, color: Colors.white)),
                 const SizedBox(width: 12),
@@ -88,6 +100,16 @@ class BibleTimelineScreen extends StatelessWidget {
               ]),
               const SizedBox(height: 12),
               Text(e.text, style: const TextStyle(fontSize: 16, height: 1.45)),
+              if (e.people.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                Wrap(spacing: 8, runSpacing: 8, children: [
+                  for (final p in e.people)
+                    PersonChip(p,
+                        background: e.color.withValues(alpha: 0.16),
+                        foreground: Theme.of(ctx).colorScheme.onSurface,
+                        radius: 17),
+                ]),
+              ],
               const SizedBox(height: 10),
               Text('Onde ler: ${e.books}', style: Theme.of(ctx).textTheme.bodyMedium),
               const SizedBox(height: 10),
@@ -118,11 +140,30 @@ class BibleTimelineScreen extends StatelessWidget {
         Widget card(_Era e) => Material(
               color: e.color,
               borderRadius: BorderRadius.circular(16),
+              clipBehavior: Clip.antiAlias,
               child: InkWell(
-                borderRadius: BorderRadius.circular(16),
                 onTap: () => _open(context, e),
-                child: Padding(
-                  padding: const EdgeInsets.all(14),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  // Ilustração da época, esmaecendo para a cor do cartão.
+                  SizedBox(
+                    height: 132,
+                    width: double.infinity,
+                    child: Stack(fit: StackFit.expand, children: [
+                      StoryThumb(imageKey: eraArt[_eras.indexOf(e)], tint: e.color, large: true, cacheWidth: 900),
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            stops: const [0.45, 1],
+                            colors: [e.color.withValues(alpha: 0), e.color],
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                  Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 4, 14, 14),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Row(children: [
                       Icon(e.icon, color: Colors.white, size: 26),
@@ -138,17 +179,11 @@ class BibleTimelineScreen extends StatelessWidget {
                     Text(e.text, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 14.5, height: 1.35)),
                     if (e.people.isNotEmpty) ...[
                       const SizedBox(height: 10),
-                      Wrap(spacing: 6, runSpacing: 6, children: [
-                        for (final p in e.people)
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
-                            decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(10)),
-                            child: Text(p, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
-                          ),
-                      ]),
+                      Wrap(spacing: 6, runSpacing: 6, children: [for (final p in e.people) PersonChip(p)]),
                     ],
                   ]),
-                ),
+                  ),
+                ]),
               ),
             );
         Widget dot(_Era e) => Container(

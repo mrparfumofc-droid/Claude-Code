@@ -255,8 +255,8 @@ class StoryMedia {
     if (hit != null) return hit;
     final f = _load(path);
     _memory[path] = f;
-    // Miniaturas são pequenas e ficam todas na memória; as ilustrações grandes, só as últimas.
-    if (!path.startsWith('thumb/')) {
+    // Miniaturas e retratos são pequenos e ficam todos na memória; as ilustrações grandes, só as últimas.
+    if (!path.startsWith('thumb/') && !path.startsWith('retratos/')) {
       _order.add(path);
       while (_order.length > 16) {
         _memory.remove(_order.removeAt(0));

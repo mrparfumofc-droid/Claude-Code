@@ -6,7 +6,9 @@ import '../services/panorama.dart';
 import '../services/stories.dart' show parseStoryReference;
 import '../state/app_state.dart';
 import '../theme.dart';
+import '../widgets/portrait.dart';
 import 'ai_chat_screen.dart';
+import 'panorama_art.dart';
 import 'panorama_diagrams.dart';
 import 'panorama_kings.dart';
 import 'panorama_tree.dart';
@@ -42,15 +44,15 @@ class PanoramaScreen extends StatelessWidget {
           mainAxisSpacing: 14,
           childAspectRatio: cols == 2 ? 2.9 : 2.6,
           children: [
-            for (final (icon, color, title, subtitle, page) in items)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(18),
+            for (final (i, (icon, color, title, subtitle, page)) in items.indexed)
+              ArtBackdrop(
+                art: hubArt[i],
+                color: color,
                 child: Material(
-                  color: color,
+                  type: MaterialType.transparency,
                   child: InkWell(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => page)),
                     child: Stack(children: [
-                      Positioned(right: -18, bottom: -22, child: Icon(icon, size: 150, color: Colors.white.withValues(alpha: 0.10))),
                       Padding(
                         padding: const EdgeInsets.all(18),
                         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -155,6 +157,13 @@ class _ProphetsScreenState extends State<ProphetsScreen> {
                                 color: color,
                                 padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
                                 child: Row(children: [
+                                  PortraitAvatar(
+                                      name: 'Profeta ${p.name}',
+                                      radius: 22,
+                                      hideWhenMissing: true,
+                                      ring: Colors.white54,
+                                      zoomable: true,
+                                      margin: const EdgeInsets.only(right: 10)),
                                   Expanded(
                                     child: Text(p.name,
                                         style: const TextStyle(
@@ -370,17 +379,13 @@ class _BookSheetScreenState extends State<BookSheetScreen> {
           constraints: const BoxConstraints(maxWidth: 900),
           child: ListView(padding: const EdgeInsets.fromLTRB(16, 16, 16, 28), children: [
             // Cabeçalho colorido com os números do livro.
-            Container(
-              padding: const EdgeInsets.all(18),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [group.color, Color.lerp(group.color, const Color(0xFF0E1626), 0.45)!],
-                ),
-              ),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            ArtBackdrop(
+              art: bookArt[n],
+              color: group.color,
+              reveal: 0.85,
+              child: Padding(
+                padding: const EdgeInsets.all(18),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text('$nº livro · ${group.name} · ${n <= 39 ? 'Antigo' : 'Novo'} Testamento',
                     style: const TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.w600)),
                 const SizedBox(height: 2),
@@ -403,6 +408,7 @@ class _BookSheetScreenState extends State<BookSheetScreen> {
                   Text('Autoria: ${sheet.authorNote}', style: const TextStyle(color: Colors.white70, fontSize: 12.5)),
                 ],
               ]),
+              ),
             ),
             if (sheet == null)
               const Padding(
@@ -445,11 +451,8 @@ class _BookSheetScreenState extends State<BookSheetScreen> {
                         border: Border.all(color: group.color.withValues(alpha: 0.35)),
                       ),
                       child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        CircleAvatar(
-                          radius: 18,
-                          backgroundColor: group.color,
-                          child: Text(who.characters.first, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                        ),
+                        PortraitAvatar(
+                            name: who, radius: 24, fallbackRadius: 18, color: group.color, ring: group.color, zoomable: true),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

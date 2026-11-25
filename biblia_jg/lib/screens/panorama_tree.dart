@@ -10,6 +10,7 @@ import '../services/step_narrator.dart';
 import '../services/stories.dart' show parseStoryReference;
 import '../services/tts.dart';
 import '../theme.dart';
+import '../widgets/portrait.dart';
 import 'dictionary_screen.dart' show showBiblePassage;
 
 const _navy = Color(0xFF1B2A4A);
@@ -240,7 +241,7 @@ class _FamilyTreeScreenState extends State<FamilyTreeScreen> with SingleTickerPr
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
             Row(children: [
-              CircleAvatar(backgroundColor: color, child: Text(n.name.characters.first, style: const TextStyle(color: Colors.white))),
+              PortraitAvatar(name: n.name, radius: 38, fallbackRadius: 20, color: color, ring: color, zoomable: true),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -382,10 +383,16 @@ class _NodeChip extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: color, width: 1.4),
             ),
-            child: Text(node.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: color, fontSize: 12.5, fontWeight: FontWeight.w700)),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              PortraitAvatar(
+                  name: node.name, radius: 11, hideWhenMissing: true, margin: const EdgeInsets.only(left: 2, right: 4)),
+              Flexible(
+                child: Text(node.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(color: color, fontSize: 12.5, fontWeight: FontWeight.w700)),
+              ),
+            ]),
           )
         : Container(
             padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -398,9 +405,11 @@ class _NodeChip extends StatelessWidget {
               ],
             ),
             child: Row(children: [
-              CircleAvatar(
-                radius: patriarch ? 15 : 13,
-                backgroundColor: Colors.white24,
+              PortraitAvatar(
+                name: node.name,
+                radius: patriarch ? 21 : 18,
+                fallbackRadius: patriarch ? 15 : 13,
+                color: Colors.white24,
                 child: Text(node.name.characters.first,
                     style: TextStyle(color: patriarch ? jgGold : Colors.white, fontSize: 13, fontWeight: FontWeight.bold)),
               ),

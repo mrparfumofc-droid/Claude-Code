@@ -217,8 +217,16 @@ class StoryThumb extends StatelessWidget {
 
   /// true = ilustração em tamanho grande (destaques); false = miniatura.
   final bool large;
+
+  /// Largura (em pixels) para decodificar a ilustração grande já reduzida e gastar menos memória.
+  final int? cacheWidth;
   const StoryThumb(
-      {super.key, required this.imageKey, this.tint = const Color(0xFF0E1626), this.fit = BoxFit.cover, this.large = false});
+      {super.key,
+      required this.imageKey,
+      this.tint = const Color(0xFF0E1626),
+      this.fit = BoxFit.cover,
+      this.large = false,
+      this.cacheWidth});
 
   @override
   Widget build(BuildContext context) => FutureBuilder<Uint8List?>(
@@ -242,7 +250,12 @@ class StoryThumb extends StatelessWidget {
                     child: const SizedBox.expand(),
                   )
                 : Image.memory(b,
-                    key: ValueKey(imageKey), fit: fit, width: double.infinity, height: double.infinity, gaplessPlayback: true),
+                    key: ValueKey(imageKey),
+                    fit: fit,
+                    width: double.infinity,
+                    height: double.infinity,
+                    cacheWidth: cacheWidth,
+                    gaplessPlayback: true),
           );
         },
       );

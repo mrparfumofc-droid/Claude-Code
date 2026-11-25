@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../services/panorama.dart';
+import '../widgets/portrait.dart';
 import 'panorama_tree.dart' show RefChip, openPanoramaRef;
 
 const _ppy = 4.2; // pontos por ano na linha do tempo
@@ -77,8 +78,22 @@ class _KingsScreenState extends State<KingsScreen> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(k.name, style: Theme.of(ctx).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, fontFamily: 'serif')),
-            Text('$kingdom · ${k.dates} · ${k.years}', style: Theme.of(ctx).textTheme.bodyMedium),
+            Row(children: [
+              PortraitAvatar(
+                  name: 'Rei ${k.name}',
+                  radius: 38,
+                  hideWhenMissing: true,
+                  ring: color,
+                  zoomable: true,
+                  margin: const EdgeInsets.only(right: 14)),
+              Expanded(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(k.name,
+                      style: Theme.of(ctx).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, fontFamily: 'serif')),
+                  Text('$kingdom · ${k.dates} · ${k.years}', style: Theme.of(ctx).textTheme.bodyMedium),
+                ]),
+              ),
+            ]),
             const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -195,12 +210,26 @@ class _KingsScreenState extends State<KingsScreen> {
                             onTap: () => _open(k, 'Reino unido'),
                             child: Padding(
                               padding: const EdgeInsets.all(10),
-                              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                Text(k.name,
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'serif')),
-                                Text('${k.dates.replaceAll(' a.C.', '')} · ${k.years}',
-                                    style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                              child: Row(children: [
+                                PortraitAvatar(
+                                    name: 'Rei ${k.name}',
+                                    radius: 24,
+                                    hideWhenMissing: true,
+                                    ring: Colors.white54,
+                                    margin: const EdgeInsets.only(right: 10)),
+                                Expanded(
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                    Text(k.name,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'serif')),
+                                    Text('${k.dates.replaceAll(' a.C.', '')} · ${k.years}',
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                                  ]),
+                                ),
                               ]),
                             ),
                           ),
