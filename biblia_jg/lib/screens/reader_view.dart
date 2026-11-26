@@ -4,9 +4,11 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/bible.dart';
 import '../models/reader_settings.dart';
+import '../services/chapter_audio.dart';
 import '../services/tts.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
@@ -16,7 +18,6 @@ import '../widgets/xrefs_sheet.dart';
 import 'ai_chat_screen.dart';
 import 'maps_screen.dart';
 import 'verse_image_screen.dart';
-import 'voice_screen.dart';
 
 /// Texto do capítulo atual com seleção de versículos e ações.
 class ReaderView extends StatefulWidget {
@@ -196,7 +197,9 @@ class _ReaderViewState extends State<ReaderView> {
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
                   const Icon(Icons.volume_up, size: 18),
                   const SizedBox(width: 4),
-                  Text('Lendo v. ${tts.currentVerse ?? ''}'),
+                  Text(tts.recorded
+                      ? 'Voz ${ChapterAudio.voice} · v. ${tts.currentVerse ?? ''}'
+                      : 'Lendo v. ${tts.currentVerse ?? ''}'),
                   PopupMenuButton<double>(
                     tooltip: 'Velocidade',
                     icon: const Icon(Icons.speed, size: 20),
@@ -205,12 +208,6 @@ class _ReaderViewState extends State<ReaderView> {
                       for (final (r, l) in const [(0.3, '0,6x'), (0.4, '0,8x'), (0.5, '1x'), (0.6, '1,25x'), (0.75, '1,5x'), (0.9, '2x')])
                         CheckedPopupMenuItem(value: r, checked: tts.rate == r, child: Text(l)),
                     ],
-                  ),
-                  IconButton(
-                    tooltip: 'Escolher voz',
-                    icon: const Icon(Icons.record_voice_over, size: 20),
-                    onPressed: () => Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) => const VoiceScreen())),
                   ),
                   IconButton(
                     tooltip: 'Parar leitura',
@@ -577,17 +574,30 @@ class _VerseActionBar extends StatelessWidget {
                   onClear();
                   _push(context, VerseImageScreen(text: text, reference: ref));
                 }),
-                action(Icons.volume_up_outlined, 'Ouvir', () {
+                action(Icons.volume_up_outlined, 'Ouvir', () async {
                   final verses = app.currentVerses;
                   final start = selected.first;
+                  final id = app.bible!.id;
+                  final messenger = ScaffoldMessenger.of(context);
                   onClear();
-                  tts.speak([
-                    for (var v = start; v <= verses.length; v++) (v, plainVerse(verses[v - 1]).trim()),
-                  ], lang: app.bible!.id == 'kjv' || app.bible!.id == 'niv'
-                      ? 'en-US'
-                      : app.bible!.id == 'rvr1960'
-                          ? 'es-ES'
-                          : 'pt-BR');
+                  // A voz do app é a Algieba (gravada). Onde ainda não há gravação, lê a voz do aparelho.
+                  final source = await tts.speakChapter(
+                    bibleId: id,
+                    book: app.book,
+                    chapter: app.chapter,
+                    verses: [
+                      for (var v = start; v <= verses.length; v++) (v, plainVerse(verses[v - 1]).trim()),
+                    ],
+                    lang: id == 'kjv' || id == 'niv'
+                        ? 'en-US'
+                        : id == 'rvr1960'
+                            ? 'es-ES'
+                            : 'pt-BR',
+                  );
+                  final note = listenNote(source, app.prefs, DateTime.now());
+                  if (note != null) {
+                    messenger.showSnackBar(SnackBar(content: Text(note), duration: const Duration(seconds: 7)));
+                  }
                 }),
                 action(Icons.link, 'Referências', () {
                   final ref = VerseRef(app.book, app.chapter, selected.first);
@@ -669,5 +679,23 @@ class _VerseActionBar extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+/// Aviso depois de tocar em "Ouvir", quando quem lê não é a gravação com a voz do app.
+/// O aviso da versão sem gravação aparece no máximo uma vez por dia.
+String? listenNote(ReadSource source, SharedPreferences prefs, DateTime now) {
+  switch (source) {
+    case ReadSource.recorded:
+      return null;
+    case ReadSource.requested:
+      return 'Pedi a gravação deste capítulo com a voz ${ChapterAudio.voice}; ela chega em breve. '
+          'Por enquanto, quem lê é a voz do aparelho.';
+    case ReadSource.device:
+      final today = '${now.year}-${now.month}-${now.day}';
+      if (prefs.getString('leitura.aviso') == today) return null;
+      prefs.setString('leitura.aviso', today);
+      return 'A voz ${ChapterAudio.voice} lê as versões livres (Bíblia Livre, Almeida 1911, Tradução Brasileira e KJV). '
+          'Nesta versão, quem lê é a voz do aparelho.';
   }
 }

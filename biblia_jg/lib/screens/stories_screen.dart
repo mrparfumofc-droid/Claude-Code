@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 
 import '../services/stories.dart';
 import '../theme.dart';
@@ -18,37 +17,12 @@ class StoriesScreen extends StatefulWidget {
 class _StoriesScreenState extends State<StoriesScreen> {
   StoriesData? _data;
   Set<String> _done = const {};
-  (List<String>, String)? _voices; // amostras de voz do narrador (quando houver)
 
   @override
   void initState() {
     super.initState();
     StoriesData.revision.addListener(_reload);
     _reload().then((_) => StoriesData.refreshIfStale());
-    NarratorVoices.load().then((v) {
-      if (mounted && v != null) setState(() => _voices = v);
-    });
-  }
-
-  Future<void> _pickVoice() async {
-    final voices = _voices;
-    if (voices == null) return;
-    final chosen = await showModalBottomSheet<String>(
-      context: context,
-      showDragHandle: true,
-      isScrollControlled: true,
-      builder: (_) => _VoiceSheet(voices: voices.$1, current: voices.$2),
-    );
-    if (chosen == null || !mounted) return;
-    final messenger = ScaffoldMessenger.of(context);
-    final ok = await NarratorVoices.choose(chosen);
-    if (!mounted) return;
-    if (ok) setState(() => _voices = (voices.$1, chosen));
-    messenger.showSnackBar(SnackBar(
-      content: Text(ok
-          ? 'Voz escolhida. As narrações passam a ser gravadas com ela, cerca de 40 por dia.'
-          : 'Não consegui guardar a escolha. Confira a internet e tente de novo.'),
-    ));
   }
 
   @override
@@ -125,19 +99,16 @@ class _StoriesScreenState extends State<StoriesScreen> {
                     ),
                   ],
                 const SizedBox(height: 12),
-                if (_voices != null)
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                    child: Card(
-                      child: ListTile(
-                        leading: const Icon(Icons.record_voice_over),
-                        title: const Text('Voz do narrador'),
-                        subtitle: Text('Em uso: ${_voices!.$2}. Ouça as amostras e escolha a que preferir.'),
-                        trailing: const Icon(Icons.chevron_right),
-                        onTap: _pickVoice,
-                      ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: Card(
+                    child: ListTile(
+                      leading: const Icon(Icons.record_voice_over),
+                      title: const Text('Narração com a voz $narratorVoice'),
+                      subtitle: Text(narrationProgress(data)),
                     ),
                   ),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Card(
@@ -163,78 +134,6 @@ class _StoriesScreenState extends State<StoriesScreen> {
             }),
     );
   }
-}
-
-/// Lista as vozes com amostra: tocar para ouvir, escolher para usar nas próximas gravações.
-class _VoiceSheet extends StatefulWidget {
-  final List<String> voices;
-  final String current;
-  const _VoiceSheet({required this.voices, required this.current});
-
-  @override
-  State<_VoiceSheet> createState() => _VoiceSheetState();
-}
-
-class _VoiceSheetState extends State<_VoiceSheet> {
-  final _player = AudioPlayer();
-  String? _playing;
-
-  @override
-  void initState() {
-    super.initState();
-    _player.playerStateStream.listen((s) {
-      if (s.processingState == ProcessingState.completed && mounted) setState(() => _playing = null);
-    });
-  }
-
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
-  }
-
-  Future<void> _toggle(String voice) async {
-    if (_playing == voice) {
-      await _player.stop();
-      if (mounted) setState(() => _playing = null);
-      return;
-    }
-    setState(() => _playing = voice);
-    try {
-      await _player.setUrl(NarratorVoices.sampleUrl(voice));
-      await _player.play();
-    } catch (_) {
-      if (mounted) setState(() => _playing = null);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 0, 8, 16),
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            const ListTile(
-              title: Text('Escolha a voz do narrador', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-              subtitle: Text('São vozes masculinas de locução. A escolhida vale para as próximas gravações; '
-                  'as cenas já gravadas são refeitas aos poucos.'),
-            ),
-            for (final v in widget.voices)
-              ListTile(
-                leading: IconButton.filledTonal(
-                  tooltip: 'Ouvir a amostra',
-                  icon: Icon(_playing == v ? Icons.stop : Icons.play_arrow),
-                  onPressed: () => _toggle(v),
-                ),
-                title: Text('Voz $v'),
-                subtitle: v == widget.current ? const Text('em uso agora') : null,
-                trailing: FilledButton(
-                  onPressed: v == widget.current ? null : () => Navigator.pop(context, v),
-                  child: const Text('Escolher'),
-                ),
-              ),
-          ]),
-        ),
-      );
 }
 
 String _meta(BibleStory s) => '${s.scenes.length} cenas · ${s.minutes} min${s.hasMap ? ' · com mapa' : ''}';

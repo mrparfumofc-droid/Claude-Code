@@ -51,20 +51,8 @@ const bookArt = <int, String>{
   66: 'nova-jerusalem', // Apocalipse
 };
 
-/// Ilustração de cada época da linha do tempo, na mesma ordem das épocas.
-const eraArt = <String>[
-  'criacao-vida', // Os começos
-  'abraao-caravana', // Os patriarcas
-  'mar-vermelho', // Egito e Êxodo
-  'jerico-muros', // Conquista e juízes
-  'templo-salomao', // O reino unido
-  'carmelo-fogo', // O reino dividido
-  'babilonia-portao', // O exílio
-  'neemias-muros', // A volta
-  'estrada-romana', // Entre os testamentos
-  'sermao-monte', // A vida de Jesus
-  'pentecostes', // A igreja primitiva
-];
+// A ilustração de cada época e de cada acontecimento da linha do tempo vem de assets/data/linha_tempo.json;
+// a de cada parte dos livros do Novo Testamento, de assets/data/nt_livros.json.
 
 /// Ilustração de cada quadro na entrada do Panorama, na ordem em que aparecem.
 const hubArt = <String>[

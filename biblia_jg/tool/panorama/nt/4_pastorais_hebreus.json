@@ -1,0 +1,170 @@
+[
+  {
+    "n": 54, "grupo": "paulo", "ordem": 17, "capa": "efeso-escola",
+    "tema": "Como se deve viver na casa de Deus, a igreja do Deus vivo",
+    "autor": "Paulo, apóstolo",
+    "data": "c. 63–65 d.C.",
+    "de": "Provavelmente da Macedônia, depois de solto da primeira prisão em Roma",
+    "para": "Timóteo, seu filho na fé, deixado em Éfeso",
+    "porque": "Paulo havia avisado os presbíteros de Éfeso que surgiriam lobos no meio do rebanho, e foi o que aconteceu. Ele deixa Timóteo, jovem e tímido, para pôr ordem na igreja: calar os falsos mestres, organizar o culto, escolher bons líderes e cuidar dos diferentes grupos. A carta é um manual de pastor escrito por um pai.",
+    "historias": ["paulo-final"],
+    "partes": [
+      {"caps": "1", "titulo": "A sã doutrina e a graça que alcançou Paulo", "arte": "mileto-adeus", "refs": ["1Tm 1:3-5", "1Tm 1:15-16", "1Tm 1:18-19"],
+       "texto": "Timóteo deve ficar em Éfeso e mandar certas pessoas pararem de ensinar fábulas e genealogias sem fim. O alvo de todo ensino é o amor, que vem de coração puro, boa consciência e fé sincera. Paulo lembra que ele mesmo foi blasfemo e perseguidor: “Cristo Jesus veio ao mundo para salvar os pecadores, dos quais eu sou o principal.” Se a graça o alcançou, alcança qualquer um."},
+      {"caps": "2", "titulo": "A oração e o culto", "arte": "cenaculo-oracao", "refs": ["1Tm 2:1-4", "1Tm 2:5-6", "1Tm 2:8"],
+       "texto": "Antes de tudo, a igreja deve orar por todas as pessoas, inclusive reis e autoridades, para viver em paz. Deus quer que todos se salvem e cheguem ao conhecimento da verdade. Há um só Deus e um só Mediador entre Deus e os homens, Cristo Jesus, que se deu em resgate por todos. Paulo orienta homens e mulheres sobre a postura no culto: mãos santas, sem ira; modéstia e boas obras."},
+      {"caps": "3", "titulo": "Bispos, diáconos e o mistério da piedade", "arte": "anciaos", "refs": ["1Tm 3:1-7", "1Tm 3:8-13", "1Tm 3:14-16"],
+       "texto": "Quem deseja liderar deseja uma obra excelente, mas precisa ter caráter: irrepreensível, fiel no casamento, moderado, hospitaleiro, apto para ensinar, bom governante da própria casa, não recém-convertido. Os diáconos passam por exame semelhante. Tudo isso para que se saiba como proceder na igreja, coluna e firmeza da verdade. E a verdade é uma pessoa: manifestado em carne, pregado entre as nações, recebido na glória."},
+      {"caps": "4", "titulo": "O bom ministro", "arte": "timoteo", "refs": ["1Tm 4:7-8", "1Tm 4:12-13", "1Tm 4:16"],
+       "texto": "O Espírito avisa que alguns se desviarão, proibindo o casamento e certos alimentos que Deus criou para serem recebidos com gratidão. Timóteo deve exercitar-se na piedade, que tem promessa para esta vida e para a futura. “Ninguém despreze a tua mocidade; mas sê o exemplo dos fiéis.” Dedique-se à leitura, à exortação e ao ensino, e cuide de si mesmo e da doutrina."},
+      {"caps": "5:1–6:2", "titulo": "Cuidando de cada grupo", "arte": "pedro-tabita", "refs": ["1Tm 5:1-2", "1Tm 5:8", "1Tm 5:17"],
+       "texto": "A igreja é uma família: os mais velhos devem ser tratados como pais e mães, os mais novos como irmãos e irmãs, com toda a pureza. As viúvas realmente necessitadas devem ser sustentadas, mas primeiro pelos filhos e netos: quem não cuida dos seus negou a fé. Os presbíteros que governam bem e ensinam merecem honra dobrada, e acusações contra eles exigem testemunhas."},
+      {"caps": "6:3-21", "titulo": "Piedade com contentamento", "arte": "roma-cidade", "refs": ["1Tm 6:6-10", "1Tm 6:11-12", "1Tm 6:17-19"],
+       "texto": "Há quem veja a religião como fonte de lucro. Grande lucro, porém, é a piedade com contentamento: nada trouxemos para o mundo e nada levaremos. O amor ao dinheiro é raiz de todos os males. “Mas tu, ó homem de Deus, foge destas coisas” e combate o bom combate da fé. Os ricos devem pôr a esperança em Deus e ser ricos em boas obras. Guarda o depósito que te foi confiado."}
+    ],
+    "chaves": ["1Tm 3:15", "1Tm 2:5", "1Tm 4:12", "1Tm 6:6"],
+    "licoes": [
+      "O que qualifica um líder é o caráter provado, mais do que o talento.",
+      "A doutrina certa produz amor, boa consciência e fé sincera.",
+      "Contentamento protege o coração do amor ao dinheiro."
+    ],
+    "ligacoes": [
+      {"texto": "Timóteo entra na história em Listra, filho de mãe crente.", "refs": ["At 16:1-3", "2Tm 1:5"], "livro": 44},
+      {"texto": "Paulo havia avisado os presbíteros de Éfeso sobre os falsos mestres.", "refs": ["At 20:28-30"]},
+      {"texto": "Tito recebe instruções parecidas para as igrejas de Creta.", "refs": ["Tt 1:5-9"], "livro": 56}
+    ]
+  },
+  {
+    "n": 55, "grupo": "paulo", "ordem": 22, "capa": "paulo-carcere",
+    "tema": "A última carta de Paulo: guarda o evangelho e passa-o adiante",
+    "autor": "Paulo, apóstolo",
+    "data": "c. 66–67 d.C.",
+    "de": "Roma, na segunda prisão, pouco antes do martírio",
+    "para": "Timóteo, amado filho",
+    "porque": "A situação é outra: Paulo não está mais numa casa alugada, e sim acorrentado como malfeitor, com frio, sozinho e certo de que vai morrer. Muitos o abandonaram. Ele escreve para passar o bastão: pede que Timóteo venha logo e, sobretudo, que não se envergonhe do evangelho, sofra por ele e o confie a outros.",
+    "historias": ["paulo-final"],
+    "partes": [
+      {"caps": "1", "titulo": "Reaviva o dom de Deus", "arte": "timoteo", "refs": ["2Tm 1:5-7", "2Tm 1:8-10", "2Tm 1:12"],
+       "texto": "Paulo lembra as lágrimas de Timóteo e a fé sincera que morou primeiro na avó Lóide e na mãe Eunice. Pede que reavive o dom de Deus, porque Deus não nos deu espírito de covardia, mas de poder, de amor e de moderação. Não se envergonhe do testemunho do Senhor nem do seu prisioneiro. “Eu sei em quem tenho crido.” Onesíforo, que o procurou na prisão, é exemplo de lealdade."},
+      {"caps": "2", "titulo": "Soldado, atleta, lavrador e obreiro", "arte": "estrada-romana", "refs": ["2Tm 2:1-2", "2Tm 2:3-6", "2Tm 2:15"],
+       "texto": "O que Timóteo ouviu deve ser confiado a homens fiéis, capazes de ensinar outros: quatro gerações num versículo. O ministério exige a entrega do soldado, a disciplina do atleta e a paciência do lavrador. Lembra-te de Jesus Cristo, ressuscitado dentre os mortos. Procura apresentar-te a Deus aprovado, como obreiro que maneja bem a palavra da verdade, e corrige com mansidão os que se opõem."},
+      {"caps": "3", "titulo": "Tempos difíceis e a Escritura inspirada", "arte": "bereia-escrituras", "refs": ["2Tm 3:1-5", "2Tm 3:12", "2Tm 3:14-17"],
+       "texto": "Nos últimos dias haverá gente amante de si mesma, do dinheiro e dos prazeres, com aparência de piedade, mas sem o seu poder. Todos os que querem viver piedosamente em Cristo serão perseguidos. A resposta é permanecer no que aprendeu desde a infância: as sagradas letras. Toda a Escritura é inspirada por Deus e útil para ensinar, repreender, corrigir e educar na justiça."},
+      {"caps": "4:1-8", "titulo": "Prega a palavra", "arte": "paulo-carcere", "refs": ["2Tm 4:1-2", "2Tm 4:5", "2Tm 4:6-8"],
+       "texto": "Diante de Deus e de Cristo, que há de julgar os vivos e os mortos, vem a ordem solene: prega a palavra, a tempo e fora de tempo. Virá o tempo em que muitos não suportarão a sã doutrina e procurarão mestres conforme os próprios desejos. Quanto a Paulo, a hora da partida chegou: “Combati o bom combate, acabei a carreira, guardei a fé.” A coroa da justiça o espera."},
+      {"caps": "4:9-22", "titulo": "Os últimos pedidos", "arte": "roma-cidade", "refs": ["2Tm 4:9-13", "2Tm 4:16-18"],
+       "texto": "O fim da carta é muito humano. Demas o abandonou; só Lucas está com ele. “Toma Marcos e traze-o contigo”: o jovem que um dia desistiu agora é útil. Paulo pede a capa que deixou em Trôade, os livros e os pergaminhos, e que Timóteo venha antes do inverno. Na primeira defesa ninguém ficou ao seu lado, mas o Senhor o assistiu e fortaleceu."}
+    ],
+    "chaves": ["2Tm 3:16-17", "2Tm 1:7", "2Tm 2:2", "2Tm 4:7-8"],
+    "licoes": [
+      "A fé se transmite de geração em geração: alguém nos ensinou, e devemos ensinar outros.",
+      "A Bíblia é inspirada por Deus e suficiente para preparar o crente para toda boa obra.",
+      "Terminar bem importa: fidelidade até o fim vale mais que começo brilhante."
+    ],
+    "ligacoes": [
+      {"texto": "A avó e a mãe de Timóteo, em Listra.", "refs": ["At 16:1-2", "2Tm 1:5"], "livro": 44},
+      {"texto": "Marcos, antes motivo de desentendimento, agora é chamado de útil.", "refs": ["At 15:37-39", "2Tm 4:11"], "livro": 41},
+      {"texto": "Filipenses foi escrita na primeira prisão, ainda com esperança de soltura.", "refs": ["Fp 1:25-26"], "livro": 50}
+    ]
+  },
+  {
+    "n": 56, "grupo": "paulo", "ordem": 18, "capa": "bons-portos",
+    "tema": "A graça de Deus ensina a viver bem e a praticar boas obras",
+    "autor": "Paulo, apóstolo",
+    "data": "c. 63–65 d.C.",
+    "de": "Provavelmente da Macedônia ou a caminho de Nicópolis",
+    "para": "Tito, verdadeiro filho na fé, deixado na ilha de Creta",
+    "porque": "Tito era gentio, convertido por Paulo e homem de confiança para missões difíceis, como a de Corinto. Em Creta, ilha de má fama, as igrejas eram novas e desorganizadas. Paulo lhe escreve o que fazer: estabelecer presbíteros em cada cidade, calar os enganadores e ensinar cada grupo a viver de modo que enfeite a doutrina.",
+    "historias": ["paulo-final"],
+    "partes": [
+      {"caps": "1", "titulo": "Presbíteros para cada cidade", "arte": "bons-portos", "refs": ["Tt 1:5-9", "Tt 1:15-16"],
+       "texto": "Tito ficou em Creta para pôr em ordem o que faltava e estabelecer presbíteros em cada cidade. Eles devem ser irrepreensíveis, fiéis no casamento, com filhos crentes, sem arrogância nem violência, hospitaleiros e apegados à palavra fiel, capazes de exortar e de convencer os que contradizem. Há muitos faladores que transtornam casas inteiras por dinheiro: dizem conhecer a Deus, mas o negam pelas obras."},
+      {"caps": "2", "titulo": "A doutrina que se vê na vida", "arte": "anciaos", "refs": ["Tt 2:1-5", "Tt 2:7-8", "Tt 2:11-14"],
+       "texto": "Tito deve ensinar o que combina com a sã doutrina, a cada grupo: homens idosos, mulheres idosas, que por sua vez ensinam as mais novas, jovens e servos. Ele mesmo deve ser o modelo. O motivo vem em seguida: a graça de Deus se manifestou trazendo salvação a todos e nos educa para renunciar à impiedade e viver de modo sensato, justo e piedoso, aguardando a bendita esperança."},
+      {"caps": "3:1-8", "titulo": "Salvos pela misericórdia", "arte": "etiope-batismo", "refs": ["Tt 3:1-2", "Tt 3:4-7", "Tt 3:8"],
+       "texto": "Os cristãos devem respeitar as autoridades, não difamar ninguém e ser mansos com todos, lembrando que eles também já foram insensatos e escravos de paixões. Quando, porém, apareceu a bondade de Deus, ele nos salvou, não por obras de justiça que tivéssemos feito, mas pela sua misericórdia, pelo lavar regenerador e renovador do Espírito Santo. Quem crê em Deus deve se aplicar às boas obras."},
+      {"caps": "3:9-15", "titulo": "Evitar contendas e servir", "arte": "navio-partida", "refs": ["Tt 3:9-11", "Tt 3:13-14"],
+       "texto": "Discussões tolas, genealogias e brigas sobre a lei são inúteis. Quem causa divisão deve ser advertido uma e outra vez, e depois evitado. Paulo dá instruções de viagem: Tito deve encontrá-lo em Nicópolis, onde passará o inverno, e ajudar Zenas e Apolo para que nada lhes falte. Que os nossos aprendam a praticar boas obras e não sejam infrutíferos."}
+    ],
+    "chaves": ["Tt 2:11-14", "Tt 3:5", "Tt 1:5"],
+    "licoes": [
+      "Não somos salvos pelas boas obras, mas somos salvos para elas.",
+      "A graça não só perdoa: ela educa e muda o modo de viver.",
+      "Os mais velhos na fé têm a tarefa de ensinar os mais novos."
+    ],
+    "ligacoes": [
+      {"texto": "Tito foi o enviado de Paulo na crise de Corinto.", "refs": ["2Co 7:6-7", "2Co 8:16-17"], "livro": 47},
+      {"texto": "Paulo passou por Creta na viagem a Roma.", "refs": ["At 27:7-13"], "livro": 44},
+      {"texto": "As qualificações dos líderes repetem as de 1 Timóteo.", "refs": ["1Tm 3:1-7"], "livro": 54}
+    ]
+  },
+  {
+    "n": 57, "grupo": "paulo", "ordem": 13, "capa": "roma-casa",
+    "tema": "O evangelho transforma um escravo fugido em irmão amado",
+    "autor": "Paulo, prisioneiro, com Timóteo",
+    "data": "c. 60–62 d.C.",
+    "de": "Roma, da prisão",
+    "para": "Filemom, cristão de Colossos, e a igreja que se reunia em sua casa",
+    "porque": "Onésimo, escravo de Filemom, fugiu, ao que parece levando algo do seu senhor, e foi parar em Roma, onde conheceu Paulo e se converteu. Paulo o manda de volta com esta carta, a mais curta e pessoal que escreveu. Não dá ordem: pede, em nome do amor, que Filemom o receba como irmão.",
+    "historias": ["paulo-final"],
+    "partes": [
+      {"caps": "v. 1-7", "titulo": "Um amigo que reanima os irmãos", "arte": "nt-carta-lida", "refs": ["Fm 1:1-3", "Fm 1:4-7"],
+       "texto": "Paulo saúda Filemom, Áfia, Arquipo e a igreja que se reúne na casa dele. A carta é pessoal, mas será lida diante de todos. Antes de fazer o pedido, agradece a Deus pelo amor e pela fé de Filemom, que tantas vezes reanimou o coração dos santos. É a esse homem generoso que ele vai pedir um gesto de generosidade ainda maior."},
+      {"caps": "v. 8-16", "titulo": "Não mais como escravo, mas como irmão", "arte": "roma-casa", "refs": ["Fm 1:8-11", "Fm 1:15-16"],
+       "texto": "Paulo poderia ordenar, mas prefere pedir, como velho e prisioneiro, em favor de “meu filho Onésimo, que gerei nas minhas prisões”. O nome quer dizer útil: antes inútil, agora é útil de verdade. Gostaria de ficar com ele, mas nada quer fazer sem o consentimento de Filemom. Talvez Onésimo tenha se afastado por um tempo para voltar para sempre, não mais como escravo, e sim como irmão amado."},
+      {"caps": "v. 17-25", "titulo": "“Põe isso na minha conta”", "arte": "paulo-escrevendo", "refs": ["Fm 1:17-19", "Fm 1:21-22"],
+       "texto": "Recebe-o como a mim mesmo. Se ele te causou dano ou te deve alguma coisa, põe na minha conta: eu, Paulo, escrevo de próprio punho, eu pagarei. É um retrato do que Cristo fez por nós diante do Pai. Paulo confia que Filemom fará até mais do que pede e avisa que espera visitá-lo em breve. A carta plantou a semente que, com o tempo, minaria a escravidão por dentro."}
+    ],
+    "chaves": ["Fm 1:15-16", "Fm 1:18"],
+    "licoes": [
+      "Em Cristo, as relações mudam: quem era tratado como coisa passa a ser irmão.",
+      "Perdoar custa, e alguém paga a conta; foi o que Jesus fez por nós.",
+      "A boa liderança convence pelo amor em vez de impor pela autoridade."
+    ],
+    "ligacoes": [
+      {"texto": "Onésimo volta acompanhado de Tíquico, que leva também a carta aos colossenses.", "refs": ["Cl 4:7-9"], "livro": 51},
+      {"texto": "Em Cristo não há escravo nem livre.", "refs": ["Gl 3:28", "Cl 3:11"], "livro": 48},
+      {"texto": "Arquipo, saudado aqui, recebe um recado em Colossenses.", "refs": ["Cl 4:17"]}
+    ]
+  },
+  {
+    "n": 58, "grupo": "gerais", "ordem": 19, "capa": "nt-sumo-sacerdote",
+    "tema": "Jesus é superior a tudo: não voltem atrás",
+    "autor": "Desconhecido. A carta não traz nome; já foram sugeridos Paulo, Barnabé, Apolo e Lucas",
+    "data": "c. 64–68 d.C., ao que parece antes da destruição do templo",
+    "de": "Incerto; o autor manda saudações “dos da Itália”",
+    "para": "Cristãos de origem judaica, cansados e tentados a voltar ao judaísmo",
+    "porque": "Os leitores já haviam sofrido pela fé e estavam esmorecendo. Voltar à sinagoga, religião permitida pelo império, parecia mais seguro. O autor, que chama o texto de “palavra de exortação”, compara Jesus com tudo o que eles admiravam: os anjos, Moisés, o sacerdócio, os sacrifícios. Em tudo Jesus é melhor. Entre uma comparação e outra, intercala avisos sérios.",
+    "historias": [],
+    "partes": [
+      {"caps": "1:1–2:18", "titulo": "O Filho, superior aos anjos", "arte": "transfiguracao", "refs": ["Hb 1:1-3", "Hb 2:1-3", "Hb 2:14-18"],
+       "texto": "Deus falou muitas vezes pelos profetas; agora falou pelo Filho, resplendor da sua glória, que fez a purificação dos pecados e se assentou à direita da Majestade. Nenhum anjo recebeu o nome que ele tem. Primeiro aviso: não podemos negligenciar tão grande salvação. Esse Filho se fez semelhante a nós, provou a morte por todos e, por ter sido tentado, pode socorrer os que são tentados."},
+      {"caps": "3:1–4:13", "titulo": "Maior que Moisés: o descanso de Deus", "arte": "deserto-mana", "refs": ["Hb 3:5-6", "Hb 3:12-14", "Hb 4:12"],
+       "texto": "Moisés foi fiel como servo na casa de Deus; Cristo, como Filho sobre a casa. Segundo aviso, com o Salmo 95: a geração que saiu do Egito não entrou no descanso por causa da incredulidade. “Hoje, se ouvirdes a sua voz, não endureçais o coração.” Ainda resta um descanso para o povo de Deus. A palavra de Deus é viva e eficaz, e discerne os pensamentos do coração."},
+      {"caps": "4:14–7:28", "titulo": "Um sumo sacerdote para sempre", "arte": "nt-sumo-sacerdote", "refs": ["Hb 4:14-16", "Hb 6:19-20", "Hb 7:24-25"],
+       "texto": "Temos um grande sumo sacerdote que se compadece das nossas fraquezas; cheguemos com confiança ao trono da graça. Terceiro aviso: os leitores continuam crianças na fé e precisam avançar. Jesus é sacerdote segundo a ordem de Melquisedeque, rei e sacerdote a quem Abraão deu o dízimo. Como vive para sempre, o seu sacerdócio não passa a outro, e ele pode salvar totalmente os que por ele se chegam a Deus."},
+      {"caps": "8–9", "titulo": "Nova aliança, santuário verdadeiro", "arte": "tabernaculo", "refs": ["Hb 8:10-12", "Hb 9:11-14", "Hb 9:27-28"],
+       "texto": "O autor cita Jeremias: Deus prometeu uma nova aliança, com a lei escrita no coração e os pecados esquecidos. O tabernáculo terrestre era figura do celestial. O sumo sacerdote entrava no Santo dos Santos uma vez por ano, com sangue de animais; Cristo entrou uma vez por todas no próprio céu, com o seu próprio sangue, e obteve eterna redenção. Sem derramamento de sangue não há remissão."},
+      {"caps": "10", "titulo": "Um sacrifício único; aproximemo-nos", "arte": "calvario", "refs": ["Hb 10:11-14", "Hb 10:19-25", "Hb 10:35-36"],
+       "texto": "Os sacerdotes ficavam de pé, repetindo sacrifícios que nunca tiravam pecados. Cristo ofereceu um único sacrifício e se assentou: a obra está completa. Por isso temos ousadia para entrar no santuário pelo novo e vivo caminho. Aproximemo-nos, retenhamos a esperança, consideremo-nos uns aos outros e não deixemos de nos congregar. Quarto aviso: não rejeitem a confiança, que tem grande recompensa."},
+      {"caps": "11", "titulo": "A galeria da fé", "arte": "abraao-caravana", "refs": ["Hb 11:1", "Hb 11:6", "Hb 11:13-16"],
+       "texto": "A fé é a certeza do que se espera e a prova do que não se vê. Desfilam Abel, Enoque, Noé, Abraão e Sara, Isaque, Jacó, José, Moisés, Raabe, os juízes e os profetas. Uns fecharam a boca de leões; outros foram torturados e mortos. Todos morreram sem receber a promessa, vendo-a de longe, como estrangeiros em busca de uma pátria melhor. Sem fé é impossível agradar a Deus."},
+      {"caps": "12", "titulo": "Olhando para Jesus", "arte": "sinai-lei", "refs": ["Hb 12:1-2", "Hb 12:5-6", "Hb 12:11", "Hb 12:28"],
+       "texto": "Cercados por tão grande nuvem de testemunhas, corramos com perseverança, olhando para Jesus, autor e consumador da fé, que suportou a cruz. O sofrimento é disciplina de Pai, que corrige os filhos que ama; depois produz fruto de justiça. Vocês não chegaram ao monte Sinai, com fogo e medo, mas ao monte Sião e a Jesus. Quinto aviso: não rejeitem aquele que fala do céu."},
+      {"caps": "13", "titulo": "Vida prática e bênção final", "arte": "igreja-primitiva", "refs": ["Hb 13:1-3", "Hb 13:5-8", "Hb 13:20-21"],
+       "texto": "A carta termina no chão do dia a dia: amor fraternal, hospitalidade, lembrança dos presos, honra ao casamento, contentamento sem amor ao dinheiro. Lembrem-se dos seus líderes e imitem a fé que tiveram. Jesus Cristo é o mesmo ontem, hoje e eternamente. Saiamos a ele, fora do arraial, levando a sua desonra. Que o Deus de paz, que ressuscitou o grande Pastor das ovelhas, os aperfeiçoe em todo bem."}
+    ],
+    "chaves": ["Hb 1:1-3", "Hb 4:14-16", "Hb 11:1", "Hb 12:1-2"],
+    "licoes": [
+      "Voltar atrás não faz sentido quando se entende quem Jesus é e o que ele fez.",
+      "O sacrifício de Cristo é completo: nada precisa nem pode ser acrescentado a ele.",
+      "A fé persevera olhando para Jesus e caminhando junto com os irmãos."
+    ],
+    "ligacoes": [
+      {"texto": "Hebreus é o melhor comentário de Levítico: explica o sacerdócio, o tabernáculo e o Dia da Expiação.", "refs": ["Lv 16:15-16", "Hb 9:6-12"]},
+      {"texto": "Melquisedeque aparece em Gênesis e no Salmo 110.", "refs": ["Gn 14:18-20", "Sl 110:4"]},
+      {"texto": "A nova aliança anunciada por Jeremias.", "refs": ["Jr 31:31-34", "Hb 8:8-12"]},
+      {"texto": "Timóteo é citado no fim da carta.", "refs": ["Hb 13:23"], "livro": 54}
+    ]
+  }
+]

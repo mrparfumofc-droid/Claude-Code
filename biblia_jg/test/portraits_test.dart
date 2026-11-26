@@ -36,9 +36,9 @@ void main() {
           if ((c as Map<String, dynamic>)['i'] == true) '${c['img']}',
     };
     expect(bookArt.keys.every((n) => n >= 1 && n <= 66), isTrue);
-    expect(eraArt.length, 11);
-    expect(hubArt.length, 6);
-    for (final art in [...bookArt.values, ...eraArt, ...hubArt]) {
+    expect(hubArt.length, greaterThanOrEqualTo(6));
+    // (A arte da linha do tempo e do guia do Novo Testamento é conferida em nt_guide_test.dart.)
+    for (final art in [...bookArt.values, ...hubArt]) {
       expect(keys, contains(art), reason: art);
     }
   });

@@ -1,0 +1,160 @@
+[
+  {
+    "n": 44, "grupo": "atos", "ordem": 15, "capa": "pentecostes",
+    "tema": "O Espírito Santo leva o evangelho de Jerusalém até os confins da terra",
+    "autor": "Lucas, o médico, companheiro de Paulo",
+    "data": "c. 62 d.C.",
+    "de": "Provavelmente de Roma",
+    "para": "Teófilo, como continuação do Evangelho de Lucas",
+    "porque": "Lucas continua a história: o primeiro livro contou o que Jesus começou a fazer e a ensinar; o segundo conta o que ele continuou a fazer, do céu, pelo Espírito Santo, por meio da igreja. O versículo 1:8 dá o roteiro: Jerusalém, Judeia e Samaria, e os confins da terra. Em trechos da viagem o autor escreve “nós”: ele estava lá.",
+    "historias": ["pentecostes", "estevao-filipe", "pedro-cornelio", "saulo", "paulo1", "paulo2", "paulo3", "paulo-preso", "roma"],
+    "partes": [
+      {"caps": "1", "titulo": "A promessa e a ascensão", "arte": "ascensao", "refs": ["At 1:4-5", "At 1:8", "At 1:11"],
+       "texto": "Durante quarenta dias o Ressuscitado fala do Reino de Deus e manda os discípulos esperarem em Jerusalém a promessa do Pai. Eles receberão poder ao descer o Espírito Santo e serão testemunhas até os confins da terra. Jesus sobe ao céu, e dois anjos garantem que ele voltará. O grupo ora unido, e Matias ocupa o lugar de Judas."},
+      {"caps": "2", "titulo": "Pentecostes", "arte": "pentecostes", "refs": ["At 2:1-4", "At 2:38-39", "At 2:42"],
+       "texto": "No dia de Pentecostes, todos são cheios do Espírito Santo e falam em outras línguas. Pedro, que havia negado Jesus, levanta-se e prega: o que vocês veem foi anunciado por Joel; Deus ressuscitou e exaltou aquele que vocês crucificaram. Cerca de três mil são batizados. A promessa, diz ele, é para vocês, para os seus filhos e para todos os que estão longe."},
+      {"caps": "3–5", "titulo": "A igreja em Jerusalém", "arte": "coxo-formosa", "refs": ["At 3:6", "At 4:12", "At 5:29"],
+       "texto": "Um coxo de nascença é curado à porta do templo, e a pregação de Pedro leva os apóstolos ao Sinédrio. “Em nenhum outro há salvação.” Ameaçada, a igreja ora pedindo ousadia. Os crentes repartem os bens; Ananias e Safira mentem ao Espírito Santo e morrem. Presos e açoitados, os apóstolos saem alegres: “Importa obedecer a Deus mais do que aos homens.”"},
+      {"caps": "6–8", "titulo": "Estêvão, a dispersão e Filipe", "arte": "estevao-martir", "refs": ["At 6:3-4", "At 7:59-60", "At 8:4"],
+       "texto": "Sete homens são escolhidos para servir às mesas. Um deles, Estêvão, torna-se o primeiro mártir, e a perseguição que se segue espalha os crentes pela Judeia e por Samaria. O que parecia derrota cumpre o roteiro: os que foram dispersos iam por toda parte anunciando a Palavra. Filipe prega em Samaria e batiza um alto funcionário etíope na estrada de Gaza."},
+      {"caps": "9–12", "titulo": "Saulo, Cornélio e Antioquia", "arte": "damasco-luz", "refs": ["At 9:15-16", "At 10:34-35", "At 11:26"],
+       "texto": "Três portas se abrem. O perseguidor Saulo encontra Jesus no caminho de Damasco e é chamado para levar o seu nome aos gentios. Pedro, depois de uma visão, entra na casa do centurião Cornélio, e o Espírito desce sobre os que não eram judeus. Em Antioquia surge uma igreja de judeus e gregos, onde os discípulos recebem o nome de cristãos. Herodes mata Tiago, mas Pedro é liberto."},
+      {"caps": "13–14", "titulo": "A primeira viagem missionária", "arte": "antioquia-envio", "refs": ["At 13:2-3", "At 13:47", "At 14:22"],
+       "texto": "O centro da história passa de Jerusalém para Antioquia e de Pedro para Paulo. Enviados pelo Espírito, Barnabé e Saulo pregam em Chipre e nas cidades do sul da Galácia. O padrão se repete: primeiro a sinagoga, depois os gentios; muitos creem, e a oposição os expulsa. Na volta, fortalecem os discípulos: por muitas tribulações nos importa entrar no Reino de Deus."},
+      {"caps": "15:1-35", "titulo": "O concílio de Jerusalém", "arte": "concilio-jerusalem", "refs": ["At 15:8-11", "At 15:28-29"],
+       "texto": "É a decisão mais importante do livro. Alguns exigem que os gentios convertidos sejam circuncidados e guardem a lei de Moisés. Pedro lembra a casa de Cornélio, Paulo e Barnabé contam o que Deus fez, e Tiago cita os profetas. A conclusão é que judeus e gentios são salvos do mesmo modo, pela graça do Senhor Jesus. Uma carta leva alegria às igrejas."},
+      {"caps": "15:36–21:16", "titulo": "A segunda e a terceira viagens", "arte": "areopago", "refs": ["At 16:9-10", "At 16:30-31", "At 17:11", "At 20:24"],
+       "texto": "Com Silas, Timóteo e Lucas, Paulo cruza para a Europa: Lídia e o carcereiro creem em Filipos; há tumulto em Tessalônica e exame das Escrituras em Bereia; ele prega aos filósofos em Atenas e fica um ano e meio em Corinto. Na terceira viagem, passa três anos em Éfeso. Desse período saem as cartas aos tessalonicenses, aos coríntios e aos romanos."},
+      {"caps": "21:17–28:31", "titulo": "De Jerusalém a Roma, em cadeias", "arte": "naufragio", "refs": ["At 23:11", "At 26:28-29", "At 28:30-31"],
+       "texto": "Preso no templo, Paulo conta a sua conversão à multidão, ao Sinédrio, a dois governadores e a um rei. Apela para César e embarca como prisioneiro; depois de uma tempestade e de um naufrágio em Malta, chega a Roma. O livro termina sem contar o julgamento: o que importa é que, mesmo com o apóstolo preso, a Palavra corre “sem impedimento algum”."}
+    ],
+    "chaves": ["At 1:8", "At 2:42", "At 4:12"],
+    "licoes": [
+      "A igreja não avança por estratégia humana, mas pelo poder do Espírito Santo e pela oração.",
+      "Perseguição e portas fechadas costumam ser o caminho por onde o evangelho chega mais longe.",
+      "O evangelho é para todos os povos: nenhuma barreira de raça ou cultura resiste a ele."
+    ],
+    "ligacoes": [
+      {"texto": "Atos 16 conta como nasceu a igreja que recebeu a carta aos Filipenses.", "refs": ["At 16:12-40"], "livro": 50},
+      {"texto": "Atos 17 é o pano de fundo das cartas aos Tessalonicenses.", "refs": ["At 17:1-10"], "livro": 52},
+      {"texto": "Atos 18 mostra a fundação da igreja de Corinto.", "refs": ["At 18:1-11"], "livro": 46},
+      {"texto": "O adeus de Paulo em Mileto antecipa o que ele escreve aos efésios e a Timóteo.", "refs": ["At 20:28-32"], "livro": 49}
+    ]
+  },
+  {
+    "n": 45, "grupo": "paulo", "ordem": 7, "capa": "paulo-escrevendo",
+    "tema": "O evangelho é o poder de Deus para a salvação de todo aquele que crê",
+    "autor": "Paulo, apóstolo (Tércio foi quem escreveu o que ele ditou)",
+    "data": "c. 57 d.C.",
+    "de": "Corinto, no fim da terceira viagem missionária",
+    "para": "Os cristãos de Roma, judeus e gentios, que Paulo ainda não conhecia",
+    "porque": "Paulo quer visitar Roma e, dali, seguir para a Espanha. Como a igreja não foi fundada por ele, apresenta-se expondo com ordem o evangelho que prega. Também quer unir crentes judeus e gentios, que se estranhavam. O resultado é a explicação mais completa da salvação em toda a Bíblia: do pecado à glória, pela graça, mediante a fé.",
+    "historias": ["paulo3"],
+    "partes": [
+      {"caps": "1:1-17", "titulo": "O tema da carta", "arte": "paulo-escrevendo", "refs": ["Rm 1:1-4", "Rm 1:16-17"],
+       "texto": "Paulo se apresenta como servo de Jesus Cristo, separado para o evangelho de Deus, prometido pelos profetas e centrado no Filho, descendente de Davi e ressuscitado dentre os mortos. Agradece pela fé dos romanos e diz que deseja visitá-los. Então anuncia o assunto: não se envergonha do evangelho, pois nele se revela a justiça de Deus, e o justo viverá pela fé."},
+      {"caps": "1:18–3:20", "titulo": "Todos pecaram", "arte": "roma-cidade", "refs": ["Rm 1:20-21", "Rm 2:1", "Rm 3:10-12", "Rm 3:23"],
+       "texto": "Antes da boa notícia, o diagnóstico. Os gentios conheceram a Deus pela criação e o trocaram por ídolos. Quem os julga faz as mesmas coisas. Os judeus têm a lei e não a cumprem. A conclusão, costurada com versículos dos Salmos, não deixa ninguém de fora: não há justo, nem um sequer. A lei não salva; ela mostra o pecado e fecha toda boca."},
+      {"caps": "3:21–5:21", "titulo": "Justificados pela fé", "arte": "abraao-estrelas", "refs": ["Rm 3:24-26", "Rm 4:3", "Rm 5:1", "Rm 5:8"],
+       "texto": "“Mas agora” a justiça de Deus se manifestou: somos justificados gratuitamente, pela graça, por meio da redenção que há em Cristo Jesus. Abraão é a prova de que sempre foi assim: creu, e isso lhe foi contado como justiça, antes da circuncisão e da lei. O resultado é paz com Deus. Em Adão veio a condenação para todos; em Cristo, a graça transbordou."},
+      {"caps": "6–7", "titulo": "Livres do pecado e da lei", "arte": "etiope-batismo", "refs": ["Rm 6:4", "Rm 6:23", "Rm 7:24-25"],
+       "texto": "Se a graça é tão grande, podemos continuar pecando? De modo nenhum. Quem foi batizado em Cristo morreu com ele e ressuscitou para uma vida nova; mudou de senhor. O salário do pecado é a morte, mas o dom de Deus é a vida eterna. Paulo descreve a luta de quem quer fazer o bem e não consegue e pergunta quem o livrará. A resposta é uma pessoa: Jesus Cristo."},
+      {"caps": "8", "titulo": "A vida no Espírito", "arte": "pentecostes", "refs": ["Rm 8:1-2", "Rm 8:14-16", "Rm 8:28", "Rm 8:38-39"],
+       "texto": "É o ponto mais alto da carta. Nenhuma condenação há para os que estão em Cristo Jesus. O Espírito Santo habita no crente, guia, dá testemunho de que somos filhos e intercede com gemidos quando não sabemos orar. A criação inteira geme esperando a redenção. Todas as coisas cooperam para o bem dos que amam a Deus, e nada poderá nos separar do seu amor."},
+      {"caps": "9–11", "titulo": "Israel no plano de Deus", "arte": "jerusalem-vista", "refs": ["Rm 9:1-5", "Rm 10:9-13", "Rm 11:33-36"],
+       "texto": "E Israel, que em sua maioria não creu? Paulo responde com dor de irmão. A palavra de Deus não falhou: sempre houve um remanescente escolhido pela graça. A salvação está perto, na boca e no coração, para todo aquele que invocar o nome do Senhor. A incredulidade de Israel abriu a porta aos gentios, e Deus não rejeitou o seu povo. O apóstolo termina adorando."},
+      {"caps": "12–13", "titulo": "Sacrifício vivo", "arte": "igreja-primitiva", "refs": ["Rm 12:1-2", "Rm 12:9-10", "Rm 12:21", "Rm 13:8"],
+       "texto": "“Rogo-vos, pois”: a doutrina vira vida. Em resposta às misericórdias de Deus, o cristão entrega o corpo como sacrifício vivo e deixa a mente ser renovada. Isso aparece no uso dos dons, no amor sem fingimento, na hospitalidade, em vencer o mal com o bem, no respeito às autoridades e em não dever nada a ninguém, a não ser o amor."},
+      {"caps": "14:1–15:13", "titulo": "Fortes e fracos na mesma mesa", "arte": "antioquia-igreja", "refs": ["Rm 14:10-12", "Rm 14:17-19", "Rm 15:5-7"],
+       "texto": "Na igreja de Roma, alguns comiam de tudo e outros não; alguns guardavam dias especiais e outros não. Paulo não manda todos pensarem igual. Manda que não se julguem nem se desprezem, porque cada um dará contas a Deus. O Reino de Deus não é comida nem bebida, mas justiça, paz e alegria no Espírito Santo. Recebam uns aos outros como Cristo os recebeu."},
+      {"caps": "15:14–16:27", "titulo": "Planos, saudações e louvor", "arte": "navio-partida", "refs": ["Rm 15:20-24", "Rm 16:1-2", "Rm 16:25-27"],
+       "texto": "Paulo explica a sua ambição: pregar onde Cristo ainda não foi anunciado. Antes de ir a Roma e à Espanha, levará a Jerusalém a oferta das igrejas gentias, e pede oração. Recomenda Febe, portadora da carta, e saúda pelo nome mais de vinte e cinco pessoas, entre elas Priscila e Áquila. O último capítulo mostra uma igreja de casas, de famílias e de amigos."}
+    ],
+    "chaves": ["Rm 1:16-17", "Rm 3:23-24", "Rm 8:1", "Rm 12:1-2"],
+    "licoes": [
+      "Ninguém é justo por si mesmo; a salvação é presente de Deus, recebido pela fé.",
+      "Quem foi justificado recebe o Espírito Santo e passa a viver de outro modo.",
+      "Irmãos que pensam diferente em questões secundárias devem acolher-se, não julgar-se."
+    ],
+    "ligacoes": [
+      {"texto": "A frase “o justo viverá pela fé” vem do profeta Habacuque.", "refs": ["Hc 2:4", "Rm 1:17"]},
+      {"texto": "Paulo escreve de Corinto, onde passou três meses.", "refs": ["At 20:2-3"], "livro": 44},
+      {"texto": "Gálatas trata do mesmo tema, de forma mais breve e urgente.", "refs": ["Gl 2:16"], "livro": 48},
+      {"texto": "A chegada a Roma, anos depois e como prisioneiro, está no fim de Atos.", "refs": ["At 28:14-16"]}
+    ]
+  },
+  {
+    "n": 46, "grupo": "paulo", "ordem": 5, "capa": "corinto-tendas",
+    "tema": "Uma igreja cheia de dons e de problemas aprende a viver a cruz e o amor",
+    "autor": "Paulo, com Sóstenes",
+    "data": "c. 55 d.C.",
+    "de": "Éfeso, durante a terceira viagem",
+    "para": "A igreja de Deus em Corinto, fundada por Paulo poucos anos antes",
+    "porque": "Corinto era um porto rico, famoso pela imoralidade. Paulo recebeu notícias preocupantes trazidas pela família de Cloe e uma carta da igreja com perguntas. Ele responde ponto por ponto. Por isso a carta parece uma lista de assuntos, e é a mais prática de todas: mostra como o evangelho resolve problemas reais de uma igreja local.",
+    "historias": ["paulo2"],
+    "partes": [
+      {"caps": "1–4", "titulo": "Partidos na igreja e a loucura da cruz", "arte": "corinto-tendas", "refs": ["1Co 1:10", "1Co 1:18", "1Co 3:6-7"],
+       "texto": "“Eu sou de Paulo, eu de Apolo, eu de Cefas.” A igreja se dividiu em torno de pregadores. Paulo responde com a cruz: Deus escolheu salvar por uma mensagem que o mundo considera loucura, e escolheu gente simples, para ninguém se gloriar. Os obreiros são apenas servos: um planta, outro rega, mas é Deus quem dá o crescimento. O alicerce é um só, Jesus Cristo."},
+      {"caps": "5–6", "titulo": "Pecado tolerado e processos entre irmãos", "arte": "anciaos", "refs": ["1Co 5:6-7", "1Co 6:11", "1Co 6:19-20"],
+       "texto": "Um caso de imoralidade que nem os pagãos aceitariam era motivo de orgulho na igreja; Paulo manda discipliná-lo, porque um pouco de fermento leveda toda a massa. Irmãos levavam irmãos aos tribunais. Alguns diziam que o corpo não importa. A resposta: vocês foram lavados e comprados por preço; o corpo é templo do Espírito Santo."},
+      {"caps": "7", "titulo": "Casados, solteiros e viúvos", "arte": "timoteo", "refs": ["1Co 7:3-5", "1Co 7:17", "1Co 7:39"],
+       "texto": "Começam as respostas à carta dos coríntios. O casamento é bom, e marido e mulher se pertencem. Ficar solteiro também é bom, para quem recebeu esse dom, e permite servir ao Senhor com mais liberdade. Quem tem cônjuge descrente não deve abandoná-lo. A regra geral é permanecer com Deus na situação em que foi chamado."},
+      {"caps": "8–10", "titulo": "Liberdade que cede por amor", "arte": "areopago", "refs": ["1Co 8:9", "1Co 9:22-23", "1Co 10:13", "1Co 10:31"],
+       "texto": "Podia-se comer carne oferecida a ídolos? O ídolo nada é, diz Paulo, mas o conhecimento sem amor pode ferir o irmão fraco. Ele mesmo abre mão de direitos, como o sustento, para ganhar o maior número possível. Lembra que Israel caiu no deserto e avisa: quem pensa estar em pé, cuide para não cair. Façam tudo para a glória de Deus."},
+      {"caps": "11", "titulo": "A ordem no culto e a Ceia do Senhor", "arte": "ultima-ceia", "refs": ["1Co 11:23-26", "1Co 11:28"],
+       "texto": "Nas reuniões, os mais ricos comiam à vontade enquanto os pobres passavam fome, e isso na mesa do Senhor. Paulo repete o que recebeu: na noite em que foi traído, Jesus tomou o pão e o cálice. Cada vez que a igreja come e bebe, anuncia a morte do Senhor até que ele venha. Por isso cada um deve examinar a si mesmo antes de participar."},
+      {"caps": "12–14", "titulo": "Os dons espirituais e o caminho do amor", "arte": "pentecostes", "refs": ["1Co 12:4-7", "1Co 12:27", "1Co 13:4-7", "1Co 14:40"],
+       "texto": "Os dons são diferentes, mas o Espírito é o mesmo, e cada um os recebe para o proveito de todos. A igreja é um corpo: nenhum membro é dispensável. No centro está o capítulo 13: sem amor, línguas, profecia e fé nada valem. No culto, tudo deve edificar: procurem os dons, sobretudo o de profetizar, não proíbam o falar em línguas, e que tudo se faça com decência e ordem."},
+      {"caps": "15", "titulo": "A ressurreição", "arte": "tumulo-vazio", "refs": ["1Co 15:3-4", "1Co 15:20", "1Co 15:55-58"],
+       "texto": "Alguns negavam a ressurreição dos mortos. Paulo recita o evangelho que recebeu: Cristo morreu pelos nossos pecados, foi sepultado e ressuscitou ao terceiro dia, e foi visto por mais de quinhentos irmãos. Se ele não ressuscitou, a fé é vã. Mas ressuscitou, como o primeiro de uma grande colheita. O corpo semeado em fraqueza ressurgirá em glória, e a morte será tragada pela vitória."},
+      {"caps": "16", "titulo": "A oferta e os planos", "arte": "navio-partida", "refs": ["1Co 16:1-2", "1Co 16:8-9", "1Co 16:13-14"],
+       "texto": "Paulo orienta a coleta para os crentes pobres de Jerusalém: cada um separe algo no primeiro dia da semana. Conta que ficará em Éfeso até Pentecostes, porque uma porta grande se abriu e há muitos adversários. Recomenda Timóteo e Apolo e deixa cinco ordens curtas: vigiem, fiquem firmes na fé, sejam corajosos e fortes, façam tudo com amor."}
+    ],
+    "chaves": ["1Co 1:18", "1Co 13:13", "1Co 15:3-4", "1Co 10:31"],
+    "licoes": [
+      "A igreja pertence a Cristo, não a líderes; divisões por nomes negam a cruz.",
+      "Dons espirituais sem amor fazem barulho, mas não edificam.",
+      "A ressurreição de Jesus garante a nossa e dá sentido ao trabalho de hoje."
+    ],
+    "ligacoes": [
+      {"texto": "A fundação da igreja de Corinto, com Priscila e Áquila.", "refs": ["At 18:1-11"], "livro": 44},
+      {"texto": "Paulo escreve de Éfeso, onde ficou cerca de três anos.", "refs": ["At 19:8-10", "1Co 16:8"]},
+      {"texto": "A segunda carta continua a conversa, depois de uma crise.", "refs": ["2Co 7:8-9"], "livro": 47}
+    ]
+  },
+  {
+    "n": 47, "grupo": "paulo", "ordem": 6, "capa": "paulo-cesto",
+    "tema": "O poder de Deus se aperfeiçoa na fraqueza",
+    "autor": "Paulo, com Timóteo",
+    "data": "c. 56 d.C.",
+    "de": "Macedônia, a caminho de Corinto",
+    "para": "A igreja de Corinto e os crentes de toda a Acaia",
+    "porque": "Depois da primeira carta, a relação piorou: Paulo fez uma visita dolorosa e escreveu uma carta severa, entre lágrimas. Na Macedônia, Tito traz a boa notícia de que a maioria se arrependeu. Mas alguns “superapóstolos” ainda o atacam, dizendo que é fraco e sem credenciais. É a carta em que Paulo mais abre o coração.",
+    "historias": ["paulo3"],
+    "partes": [
+      {"caps": "1:1–2:13", "titulo": "O Deus de toda consolação", "arte": "nt-carta-lida", "refs": ["2Co 1:3-4", "2Co 1:20", "2Co 2:7-8"],
+       "texto": "Paulo começa bendizendo o Pai das misericórdias, que nos consola para que possamos consolar outros. Conta que, na Ásia, chegou a perder a esperança de viver. Explica por que mudou os planos de viagem: não por leviandade, mas para poupá-los. Pede que perdoem e consolem o irmão que foi disciplinado, para que não seja consumido pela tristeza."},
+      {"caps": "2:14–5:10", "titulo": "Tesouro em vasos de barro", "arte": "paulo-escrevendo", "refs": ["2Co 3:17-18", "2Co 4:7", "2Co 4:16-18"],
+       "texto": "Qual é a credencial de um ministro? Não cartas de recomendação, mas vidas transformadas. A nova aliança, do Espírito, tem mais glória que a de Moisés, e quem contempla o Senhor é transformado de glória em glória. Esse tesouro está em vasos de barro, para que o poder seja de Deus. Por isso Paulo não desanima: a tribulação é leve e passageira diante do peso eterno de glória."},
+      {"caps": "5:11–7:16", "titulo": "Embaixadores da reconciliação", "arte": "barnabe-paulo", "refs": ["2Co 5:17", "2Co 5:20-21", "2Co 7:10"],
+       "texto": "O amor de Cristo nos constrange. Quem está em Cristo é nova criatura: as coisas velhas passaram. Deus nos reconciliou consigo e nos confiou o ministério da reconciliação; somos embaixadores, rogando em nome de Cristo. Paulo pede que os coríntios abram o coração e conta a alegria que sentiu com a chegada de Tito: a tristeza segundo Deus produziu arrependimento."},
+      {"caps": "8–9", "titulo": "A graça de contribuir", "arte": "igreja-primitiva", "refs": ["2Co 8:1-5", "2Co 8:9", "2Co 9:6-8"],
+       "texto": "Dois capítulos sobre a oferta para os pobres de Jerusalém. As igrejas da Macedônia, muito pobres, deram além das forças, porque antes se deram ao Senhor. O modelo é Cristo, que sendo rico se fez pobre por nós. Paulo cuida da transparência, enviando homens de confiança, e ensina o princípio: cada um contribua conforme propôs no coração, pois Deus ama a quem dá com alegria."},
+      {"caps": "10–11", "titulo": "Paulo defende o seu ministério", "arte": "paulo-cesto", "refs": ["2Co 10:3-5", "2Co 11:23-28", "2Co 11:30"],
+       "texto": "O tom muda. Aos que o chamam de fraco em pessoa e forte só por carta, Paulo responde que as suas armas não são carnais. Constrangido, faz o que chama de loucura: gloria-se. Mas a lista é de açoites, prisões, naufrágios, fome e a preocupação diária com as igrejas. Termina com uma cena humilhante: a fuga de Damasco, descido num cesto pela muralha."},
+      {"caps": "12–13", "titulo": "“A minha graça te basta”", "arte": "paulo-visao-noite", "refs": ["2Co 12:7-10", "2Co 13:5", "2Co 13:11"],
+       "texto": "Paulo teve visões e revelações, mas prefere falar do espinho na carne. Três vezes pediu que fosse tirado, e ouviu: “A minha graça te basta, porque o meu poder se aperfeiçoa na fraqueza.” Por isso sente prazer nas fraquezas: quando é fraco, então é forte. Anuncia a terceira visita, pede que examinem a si mesmos e se despede com uma bênção que cita o Pai, o Filho e o Espírito Santo."}
+    ],
+    "chaves": ["2Co 12:9", "2Co 5:17", "2Co 4:7"],
+    "licoes": [
+      "Deus consola para que o consolado se torne consolador.",
+      "Fraqueza não desqualifica o servo de Deus: é o lugar onde o poder de Cristo aparece.",
+      "Contribuir é graça, feita com alegria e administrada com transparência."
+    ],
+    "ligacoes": [
+      {"texto": "A fuga num cesto é contada também em Atos.", "refs": ["At 9:23-25", "2Co 11:32-33"], "livro": 44},
+      {"texto": "A mesma oferta para Jerusalém aparece em 1 Coríntios e em Romanos.", "refs": ["1Co 16:1-4", "Rm 15:25-27"]},
+      {"texto": "Depois desta carta, Paulo passa três meses em Corinto e escreve Romanos.", "refs": ["At 20:2-3"], "livro": 45}
+    ]
+  }
+]

@@ -4,12 +4,13 @@ import 'package:provider/provider.dart';
 import '../models/daily.dart';
 import '../services/account_service.dart';
 import '../services/ai_service.dart' show supabaseUrl;
+import '../services/quotes.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
 import 'content_screens.dart';
 import 'memorize_screen.dart';
-import 'needs_screen.dart';
 import 'prayer_screen.dart';
+import 'quotes_screen.dart';
 import 'reading_plans_screen.dart';
 import 'verse_image_screen.dart';
 
@@ -33,11 +34,17 @@ class _TodayScreenState extends State<TodayScreen> {
   int _prayers = 0;
   int _memoryDue = 0;
   int _revision = -1;
+  Quote? _quote; // frase do dia
 
   @override
   void initState() {
     super.initState();
     _load();
+    if (TodayScreen.loadData) {
+      QuotesData.load().then((d) {
+        if (mounted) setState(() => _quote = d.ofDay(DateTime.now()));
+      }).catchError((_) {});
+    }
   }
 
   Future<void> _load() async {
@@ -368,17 +375,33 @@ class _TodayScreenState extends State<TodayScreen> {
       );
     }
 
-    final needsCard = _card(
+    // Frase do dia (a lista completa fica em "Frases", na barra lateral).
+    final quote = _quote;
+    final quoteCard = _card(
+      onTap: () => app.requestTab(4),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        _title(Icons.volunteer_activism_outlined, 'Preciso de uma palavra para…'),
+        _title(Icons.format_quote, 'Frase do dia'),
         const SizedBox(height: 10),
+        if (quote == null)
+          const Text('Frases de reformadores, pentecostais, anglicanos e outros autores, para ler e compartilhar.')
+        else ...[
+          Text('“${quote.text}”',
+              maxLines: 7,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 18, height: 1.4, fontFamily: 'serif')),
+          const SizedBox(height: 10),
+          Text(quote.byline, style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700)),
+          if (quote.note.isNotEmpty) Text(quote.note, style: theme.textTheme.bodySmall),
+        ],
+        const SizedBox(height: 8),
         Wrap(spacing: 8, runSpacing: 8, children: [
-          for (var k = 0; k < needs.length; k++)
-            ActionChip(
-              avatar: Icon(needs[k].icon, size: 18, color: needs[k].color),
-              label: Text(needs[k].name),
-              onPressed: () => _open(NeedsScreen(initial: k)),
+          if (quote != null)
+            OutlinedButton.icon(
+              onPressed: () => openQuoteImage(context, quote),
+              icon: const Icon(Icons.image_outlined, size: 20),
+              label: const Text('Criar imagem'),
             ),
+          TextButton(onPressed: () => app.requestTab(4), child: const Text('Ver todas as frases')),
         ]),
       ]),
     );
@@ -435,7 +458,7 @@ class _TodayScreenState extends State<TodayScreen> {
                 const SizedBox(height: 14),
                 pair(continueCard, goalCard),
                 const SizedBox(height: 14),
-                pair(planCard, needsCard),
+                pair(planCard, quoteCard),
                 const SizedBox(height: 14),
                 if (two)
                   Row(children: [

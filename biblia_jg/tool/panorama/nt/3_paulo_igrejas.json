@@ -1,0 +1,202 @@
+[
+  {
+    "n": 48, "grupo": "paulo", "ordem": 2, "capa": "listra-sacrificio",
+    "tema": "Livres em Cristo: justificados pela fé, não pelas obras da lei",
+    "autor": "Paulo, apóstolo",
+    "data": "c. 48–49 d.C. (outros preferem c. 55)",
+    "de": "Provavelmente Antioquia da Síria",
+    "para": "As igrejas da Galácia, fundadas na primeira viagem",
+    "porque": "Pouco depois de Paulo sair, chegaram mestres dizendo que crer em Jesus não bastava: os gentios precisavam ser circuncidados e guardar a lei de Moisés. Também atacavam a autoridade de Paulo. A carta é a mais enérgica que ele escreveu, sem os elogios de costume, porque estava em jogo o próprio evangelho.",
+    "historias": ["paulo1"],
+    "partes": [
+      {"caps": "1:1-10", "titulo": "Não há outro evangelho", "arte": "iconio-mercado", "refs": ["Gl 1:3-5", "Gl 1:6-9"],
+       "texto": "Paulo se apresenta como apóstolo não da parte de homens, mas de Jesus Cristo, e pula a ação de graças que abre as outras cartas. Está admirado de que os gálatas passem tão depressa para outro evangelho, que na verdade não é outro: é uma distorção. Ainda que um anjo do céu anuncie algo diferente, seja anátema. Ele não escreve para agradar a homens."},
+      {"caps": "1:11–2:21", "titulo": "O evangelho que Paulo recebeu", "arte": "damasco-luz", "refs": ["Gl 1:11-12", "Gl 2:16", "Gl 2:20"],
+       "texto": "Para defender a mensagem, Paulo conta a sua história: perseguidor zeloso, foi chamado pela graça e recebeu o evangelho por revelação de Jesus Cristo. Os líderes de Jerusalém reconheceram o seu chamado e nada acrescentaram. Em Antioquia, ele chegou a repreender Pedro, que se afastou da mesa dos gentios por medo. “Já estou crucificado com Cristo; e vivo, não mais eu, mas Cristo vive em mim.”"},
+      {"caps": "3:1–4:7", "titulo": "A fé de Abraão e o papel da lei", "arte": "abraao-estrelas", "refs": ["Gl 3:6-9", "Gl 3:13", "Gl 3:26-28", "Gl 4:4-7"],
+       "texto": "Vocês receberam o Espírito pelas obras da lei ou pela fé? Abraão creu e foi justificado quatrocentos e trinta anos antes da lei; os que creem são filhos de Abraão. A lei não anula a promessa: ela foi como um tutor, que conduz a criança até Cristo. Ele nos resgatou da maldição, e agora todos somos filhos de Deus pela fé, sem distinção de judeu ou grego, escravo ou livre, homem ou mulher."},
+      {"caps": "4:8–5:12", "titulo": "Não voltem à escravidão", "arte": "abraao-visitantes", "refs": ["Gl 4:19", "Gl 5:1", "Gl 5:6"],
+       "texto": "Paulo fala como um pai aflito, que sente de novo dores de parto até Cristo ser formado neles. Lembra o carinho com que o receberam quando chegou doente. Usa a história de Agar e Sara: uma representa a escravidão, a outra a liberdade da promessa. Para a liberdade Cristo nos libertou. Em Cristo, nem circuncisão nem incircuncisão têm valor, mas a fé que atua pelo amor."},
+      {"caps": "5:13-26", "titulo": "Andar no Espírito", "arte": "semeador", "refs": ["Gl 5:13-14", "Gl 5:16", "Gl 5:22-23"],
+       "texto": "Liberdade não é licença para a carne: é oportunidade de servir uns aos outros pelo amor, que resume toda a lei. A carne e o Espírito desejam coisas opostas. As obras da carne são conhecidas: imoralidade, idolatria, inimizades, invejas. O fruto do Espírito é amor, alegria, paz, paciência, benignidade, bondade, fidelidade, mansidão e domínio próprio. Se vivemos pelo Espírito, andemos também pelo Espírito."},
+      {"caps": "6", "titulo": "Semear para o Espírito", "arte": "calvario", "refs": ["Gl 6:1-2", "Gl 6:7-9", "Gl 6:14"],
+       "texto": "A vida no Espírito aparece em gestos concretos: restaurar com mansidão quem caiu, levar as cargas uns dos outros, sustentar quem ensina. O que o homem semear, isso ceifará; não nos cansemos de fazer o bem. Paulo encerra de próprio punho, com letras grandes: não se gloria em nada, a não ser na cruz de Cristo. O que importa é ser nova criatura."}
+    ],
+    "chaves": ["Gl 2:16", "Gl 2:20", "Gl 5:1", "Gl 5:22-23"],
+    "licoes": [
+      "Somar qualquer exigência à fé em Cristo como condição para ser salvo destrói o evangelho.",
+      "A liberdade cristã não é fazer o que se quer: é ser livre para amar e servir.",
+      "A santidade é fruto do Espírito, não resultado de regras impostas de fora."
+    ],
+    "ligacoes": [
+      {"texto": "As igrejas da Galácia nasceram na primeira viagem de Paulo.", "refs": ["At 13:14", "At 14:1-23"], "livro": 44},
+      {"texto": "A mesma questão é decidida no concílio de Jerusalém.", "refs": ["At 15:1-11"]},
+      {"texto": "Romanos desenvolve com mais calma o que Gálatas diz com urgência.", "refs": ["Rm 3:21-28"], "livro": 45}
+    ]
+  },
+  {
+    "n": 49, "grupo": "paulo", "ordem": 11, "capa": "efeso-cidade",
+    "tema": "O plano eterno de Deus: reunir tudo em Cristo e formar um só povo",
+    "autor": "Paulo, prisioneiro em Roma",
+    "data": "c. 60–62 d.C.",
+    "de": "Roma, durante a prisão domiciliar",
+    "para": "Os santos de Éfeso; provavelmente uma carta circular para as igrejas da Ásia",
+    "porque": "Efésios não responde a uma crise. Com tempo para pensar, o apóstolo preso levanta os olhos e descreve o plano de Deus de antes da fundação do mundo até a igreja de hoje. Os três primeiros capítulos dizem o que Deus fez; os três últimos, como viver à altura disso. Tíquico levou a carta junto com Colossenses e Filemom.",
+    "historias": ["paulo3", "paulo-final"],
+    "partes": [
+      {"caps": "1", "titulo": "Toda bênção espiritual em Cristo", "arte": "efeso-cidade", "refs": ["Ef 1:3-7", "Ef 1:13-14", "Ef 1:18-23"],
+       "texto": "A carta começa com um louvor que, no original, é uma única frase longa: o Pai nos escolheu e nos adotou; o Filho nos remiu pelo seu sangue; o Espírito Santo nos selou como garantia da herança. Paulo ora para que os olhos do coração se abram e os leitores conheçam a esperança do chamado e a grandeza do poder que ressuscitou Cristo e o pôs acima de tudo."},
+      {"caps": "2", "titulo": "Da morte para a vida, de longe para perto", "arte": "antioquia-igreja", "refs": ["Ef 2:4-5", "Ef 2:8-10", "Ef 2:14"],
+       "texto": "Estávamos mortos em delitos e pecados, “mas Deus”, rico em misericórdia, nos deu vida juntamente com Cristo. Pela graça sois salvos, mediante a fé; não vem das obras, e sim para as boas obras. Além disso, os gentios, antes estrangeiros, foram aproximados pelo sangue de Cristo. Ele é a nossa paz: derrubou a parede de separação e fez de judeus e gentios um só edifício, morada de Deus."},
+      {"caps": "3", "titulo": "O mistério revelado", "arte": "roma-casa", "refs": ["Ef 3:6", "Ef 3:16-19", "Ef 3:20-21"],
+       "texto": "Paulo se chama prisioneiro de Cristo por amor aos gentios. O mistério, escondido em outras gerações, agora foi revelado: os gentios são coerdeiros e membros do mesmo corpo. Ele dobra os joelhos e ora para que sejam fortalecidos pelo Espírito, enraizados em amor, e compreendam a largura, o comprimento, a altura e a profundidade do amor de Cristo. Termina louvando aquele que pode fazer muito mais do que pedimos."},
+      {"caps": "4:1–5:20", "titulo": "Andar de modo digno", "arte": "efeso-escola", "refs": ["Ef 4:1-6", "Ef 4:11-13", "Ef 4:32", "Ef 5:18-20"],
+       "texto": "“Rogo-vos, pois”: começa a parte prática. Há um só corpo, um só Senhor, uma só fé. Cristo deu apóstolos, profetas, evangelistas, pastores e mestres para preparar os santos e fazer o corpo crescer. Quem aprendeu a Cristo despe o velho homem: deixa a mentira, a ira guardada, o furto, a palavra torpe, e perdoa como foi perdoado. Em vez de embriaguez, sejam cheios do Espírito, com salmos e gratidão."},
+      {"caps": "5:21–6:9", "titulo": "O evangelho dentro de casa", "arte": "timoteo", "refs": ["Ef 5:25", "Ef 5:31-33", "Ef 6:1-4"],
+       "texto": "A vida cheia do Espírito aparece primeiro no lar. Paulo fala a cada um da sua própria responsabilidade: as esposas, quanto aos maridos; os maridos, que devem amar como Cristo amou a igreja e se entregou por ela; os filhos e os pais, que não devem irritar os filhos, mas criá-los na disciplina do Senhor; os servos e os senhores, lembrados de que todos têm o mesmo Senhor no céu."},
+      {"caps": "6:10-24", "titulo": "A armadura de Deus", "arte": "escolta-romana", "refs": ["Ef 6:10-13", "Ef 6:14-17", "Ef 6:18-20"],
+       "texto": "A luta do cristão não é contra pessoas, mas contra forças espirituais do mal. Acorrentado a um soldado, Paulo descreve a armadura peça por peça: o cinto da verdade, a couraça da justiça, os pés calçados com o evangelho da paz, o escudo da fé, o capacete da salvação e a espada do Espírito, que é a palavra de Deus. Tudo sustentado por oração constante. Pede que orem por ele."}
+    ],
+    "chaves": ["Ef 2:8-10", "Ef 1:3", "Ef 4:4-6", "Ef 6:10-11"],
+    "licoes": [
+      "Antes de dizer o que devemos fazer, o evangelho anuncia o que Deus já fez por nós.",
+      "A igreja reúne povos que o mundo mantém separados; a unidade é parte do evangelho.",
+      "Há uma batalha espiritual em curso, e ela se vence de pé, com a Palavra e a oração."
+    ],
+    "ligacoes": [
+      {"texto": "Paulo passou três anos em Éfeso e se despediu dos presbíteros com lágrimas.", "refs": ["At 19:8-10", "At 20:17-38"], "livro": 44},
+      {"texto": "Colossenses foi escrita na mesma ocasião e tem trechos muito parecidos.", "refs": ["Cl 3:12-17", "Cl 4:7-8"], "livro": 51},
+      {"texto": "Décadas depois, Jesus fala à mesma igreja: ela havia deixado o primeiro amor.", "refs": ["Ap 2:1-7"], "livro": 66}
+    ]
+  },
+  {
+    "n": 50, "grupo": "paulo", "ordem": 14, "capa": "filipos-prisao",
+    "tema": "Alegria em Cristo em qualquer circunstância",
+    "autor": "Paulo, com Timóteo",
+    "data": "c. 61–62 d.C.",
+    "de": "Roma, da prisão",
+    "para": "A igreja de Filipos, a primeira que Paulo fundou na Europa",
+    "porque": "Os filipenses enviaram uma oferta ao apóstolo preso, por meio de Epafrodito, que adoeceu gravemente durante a missão. Paulo o manda de volta com esta carta de agradecimento. Aproveita para dar notícias, animar a igreja diante da oposição e pedir que duas irmãs se entendam. As palavras alegria e alegrar-se aparecem cerca de dezesseis vezes, escritas por um homem acorrentado.",
+    "historias": ["paulo2", "paulo-final"],
+    "partes": [
+      {"caps": "1:1-26", "titulo": "As cadeias fizeram o evangelho avançar", "arte": "roma-casa", "refs": ["Fp 1:6", "Fp 1:12-14", "Fp 1:21"],
+       "texto": "Paulo agradece pela parceria dos filipenses desde o primeiro dia e está certo de que aquele que começou a boa obra neles vai terminá-la. A prisão, em vez de atrapalhar, ajudou: toda a guarda do palácio sabe que ele está preso por Cristo, e os irmãos ganharam ousadia. Ele não sabe se será solto ou executado, mas resume a vida numa frase: viver é Cristo, e morrer é lucro."},
+      {"caps": "1:27–2:18", "titulo": "A mesma atitude de Cristo", "arte": "calvario", "refs": ["Fp 2:3-4", "Fp 2:5-11", "Fp 2:12-15"],
+       "texto": "Vivam de modo digno do evangelho, firmes e unidos. A união depende de humildade: cada um considere os outros superiores a si mesmo. O modelo é Cristo, que, sendo Deus, esvaziou-se, tomou a forma de servo e obedeceu até a morte de cruz; por isso Deus o exaltou, e todo joelho se dobrará. Façam tudo sem murmurações e brilhem como luzeiros no mundo."},
+      {"caps": "2:19-30", "titulo": "Dois exemplos: Timóteo e Epafrodito", "arte": "timoteo", "refs": ["Fp 2:20-22", "Fp 2:25-30"],
+       "texto": "Paulo apresenta dois homens que vivem o que acabou de ensinar. Timóteo se preocupa de verdade com os outros, quando todos buscam os próprios interesses, e serviu com ele como filho ao pai. Epafrodito, o mensageiro dos filipenses, quase morreu pela obra de Cristo, arriscando a vida para servir. Gente assim, diz o apóstolo, deve ser recebida com alegria e honrada."},
+      {"caps": "3", "titulo": "Tudo por perda, por causa de Cristo", "arte": "saulo-gamaliel", "refs": ["Fp 3:7-9", "Fp 3:13-14", "Fp 3:20-21"],
+       "texto": "Contra os que confiam em ritos e origem, Paulo mostra o próprio currículo: hebreu de hebreus, fariseu, irrepreensível quanto à lei. Tudo isso ele passou a considerar perda diante de conhecer Cristo e ser achado nele, com a justiça que vem pela fé. Não se considera pronto: esquece o que fica para trás e prossegue para o alvo. A nossa pátria está nos céus."},
+      {"caps": "4", "titulo": "A paz de Deus e o segredo do contentamento", "arte": "lidia-rio", "refs": ["Fp 4:4-7", "Fp 4:8", "Fp 4:11-13", "Fp 4:19"],
+       "texto": "Paulo pede que Evódia e Síntique se reconciliem. “Alegrai-vos sempre no Senhor.” Não fiquem ansiosos: apresentem tudo a Deus em oração, com gratidão, e a paz de Deus guardará o coração. Pensem no que é verdadeiro e puro. Ao agradecer a oferta, conta que aprendeu a viver contente na fartura e na falta: tudo posso naquele que me fortalece. Deus suprirá todas as necessidades deles."}
+    ],
+    "chaves": ["Fp 1:21", "Fp 2:5-8", "Fp 4:6-7", "Fp 4:13"],
+    "licoes": [
+      "A alegria cristã não depende das circunstâncias, e sim de Cristo.",
+      "Humildade é o caminho da união: olhar para o interesse do outro, como Jesus fez.",
+      "A ansiedade se enfrenta com oração e gratidão, e a paz de Deus guarda o coração."
+    ],
+    "ligacoes": [
+      {"texto": "A igreja nasceu com Lídia, uma jovem liberta e um carcereiro; Paulo cantou naquela prisão.", "refs": ["At 16:12-40"], "livro": 44},
+      {"texto": "Os filipenses já haviam sustentado Paulo outras vezes.", "refs": ["Fp 4:15-16", "2Co 11:9"]},
+      {"texto": "Foi escrita na mesma prisão que Efésios, Colossenses e Filemom.", "refs": ["At 28:30-31"], "livro": 49}
+    ]
+  },
+  {
+    "n": 51, "grupo": "paulo", "ordem": 12, "capa": "nt-carta-lida",
+    "tema": "Cristo é supremo e suficiente: nele estamos completos",
+    "autor": "Paulo, com Timóteo",
+    "data": "c. 60–62 d.C.",
+    "de": "Roma, da prisão",
+    "para": "A igreja de Colossos, fundada por Epafras",
+    "porque": "Paulo nunca esteve em Colossos. Epafras, que evangelizou a cidade, vai a Roma e conta que um ensino estranho ameaçava a igreja: uma mistura de filosofia, regras sobre comida e dias, culto a anjos e experiências místicas. Tudo isso fazia Cristo parecer insuficiente. A resposta de Paulo é mostrar quem Cristo é.",
+    "historias": ["paulo-final"],
+    "partes": [
+      {"caps": "1:1-14", "titulo": "Gratidão e oração", "arte": "nt-carta-lida", "refs": ["Cl 1:3-6", "Cl 1:9-10", "Cl 1:13-14"],
+       "texto": "Paulo agradece pela fé, pelo amor e pela esperança dos colossenses: o evangelho que chegou a eles está dando fruto no mundo inteiro. Ora para que sejam cheios do conhecimento da vontade de Deus e vivam de modo digno do Senhor, frutificando em toda boa obra. O Pai nos tirou do poder das trevas e nos transportou para o Reino do seu Filho amado, em quem temos a redenção."},
+      {"caps": "1:15–2:5", "titulo": "A supremacia de Cristo", "arte": "transfiguracao", "refs": ["Cl 1:15-20", "Cl 1:27", "Cl 2:2-3"],
+       "texto": "Um dos textos mais altos sobre Jesus em toda a Bíblia. Ele é a imagem do Deus invisível; nele, por ele e para ele tudo foi criado; ele existe antes de todas as coisas e tudo subsiste nele. É a cabeça da igreja e o primeiro a ressuscitar. Pelo sangue da sua cruz, Deus reconciliou consigo todas as coisas. O mistério é este: Cristo em vós, a esperança da glória."},
+      {"caps": "2:6-23", "titulo": "Completos nele", "arte": "areopago", "refs": ["Cl 2:6-10", "Cl 2:13-14", "Cl 2:16-17"],
+       "texto": "Como receberam Cristo, assim andem nele. Cuidado para que ninguém os prenda com filosofias e tradições de homens: em Cristo habita corporalmente toda a plenitude da divindade, e nele vocês estão completos. Ele cancelou a dívida que era contra nós, cravando-a na cruz. Por isso ninguém os julgue por comida, festas ou sábados: tudo isso era sombra; a realidade é Cristo."},
+      {"caps": "3:1–4:1", "titulo": "A vida nova", "arte": "igreja-primitiva", "refs": ["Cl 3:1-3", "Cl 3:12-14", "Cl 3:17", "Cl 3:23"],
+       "texto": "Se vocês ressuscitaram com Cristo, busquem as coisas do alto. Façam morrer a imoralidade, a cobiça, a ira e a mentira, e vistam-se de compaixão, humildade e paciência, perdoando uns aos outros. Acima de tudo, o amor. Que a palavra de Cristo habite ricamente em vocês. Depois vêm as relações da casa: esposas, maridos, filhos, pais, servos e senhores. Tudo deve ser feito de coração, como para o Senhor."},
+      {"caps": "4:2-18", "titulo": "Oração, sabedoria e nomes", "arte": "laodiceia-porta", "refs": ["Cl 4:2-6", "Cl 4:7-9", "Cl 4:16"],
+       "texto": "Perseverem na oração e falem com graça aos de fora. Tíquico leva a carta e as notícias, acompanhado de Onésimo, “o fiel e amado irmão”. A lista de saudações é um retrato da equipe: Aristarco, Marcos, já reconciliado com Paulo, Epafras, que luta em oração, e Lucas, o médico amado. A carta deve ser lida também em Laodiceia."}
+    ],
+    "chaves": ["Cl 1:15-18", "Cl 2:9-10", "Cl 3:1-2", "Cl 3:17"],
+    "licoes": [
+      "Quem tem Cristo não precisa de complementos espirituais: nele há tudo.",
+      "Regras rígidas e experiências exóticas parecem piedade, mas não vencem a carne.",
+      "A fé se mostra no cotidiano: em casa, no trabalho e no modo de falar."
+    ],
+    "ligacoes": [
+      {"texto": "Onésimo, que acompanha a carta, é o assunto da carta a Filemom, membro dessa igreja.", "refs": ["Cl 4:9", "Fm 1:10-12"], "livro": 57},
+      {"texto": "Efésios segue o mesmo esquema e foi levada pelo mesmo mensageiro.", "refs": ["Ef 6:21-22"], "livro": 49},
+      {"texto": "A vizinha Laodiceia reaparece no Apocalipse.", "refs": ["Ap 3:14-22"], "livro": 66}
+    ]
+  },
+  {
+    "n": 52, "grupo": "paulo", "ordem": 3, "capa": "bereia-escrituras",
+    "tema": "Uma igreja nova, perseguida e cheia de esperança na volta de Jesus",
+    "autor": "Paulo, com Silvano e Timóteo",
+    "data": "c. 50–51 d.C.",
+    "de": "Corinto, durante a segunda viagem",
+    "para": "A igreja de Tessalônica, com poucos meses de vida",
+    "porque": "Paulo pregou em Tessalônica por poucas semanas e teve de sair de noite, por causa de um tumulto. Preocupado com aqueles recém-convertidos, enviou Timóteo, que voltou com boas notícias: estavam firmes. Havia, porém, calúnias contra Paulo e uma dúvida dolorosa: o que acontece com os irmãos que morreram antes da volta de Cristo?",
+    "historias": ["paulo2"],
+    "partes": [
+      {"caps": "1", "titulo": "Uma fé que virou notícia", "arte": "bereia-escrituras", "refs": ["1Ts 1:2-3", "1Ts 1:5", "1Ts 1:9-10"],
+       "texto": "Paulo dá graças pela obra da fé, pelo trabalho do amor e pela firmeza da esperança daquela igreja. O evangelho chegou a eles não só em palavras, mas em poder e no Espírito Santo. Receberam a mensagem em meio a muita tribulação, com alegria, e se tornaram exemplo para toda a Macedônia e a Acaia: deixaram os ídolos para servir ao Deus vivo e esperar dos céus o seu Filho."},
+      {"caps": "2:1–3:13", "titulo": "O coração de um pastor", "arte": "timoteo", "refs": ["1Ts 2:7-8", "1Ts 2:13", "1Ts 3:6-8"],
+       "texto": "Respondendo às calúnias, Paulo lembra como viveu entre eles: sem bajulação nem ganância, trabalhando noite e dia para não ser pesado, carinhoso como a mãe que amamenta e firme como o pai que orienta. Eles receberam a pregação como palavra de Deus, não de homens. Impedido de voltar, mandou Timóteo, e as notícias o reanimaram: “agora vivemos, se estais firmes no Senhor.”"},
+      {"caps": "4:1-12", "titulo": "Santidade, amor e trabalho", "arte": "corinto-tendas", "refs": ["1Ts 4:3-4", "1Ts 4:9", "1Ts 4:11-12"],
+       "texto": "Vocês já sabem como agradar a Deus; progridam cada vez mais. A vontade de Deus é a santificação: num mundo que tratava o sexo sem limites, cada um deve saber controlar o próprio corpo com santidade e honra. O amor fraternal eles já praticam. E procurem viver em paz, cuidar da própria vida e trabalhar com as mãos, para andar com dignidade diante dos de fora."},
+      {"caps": "4:13–5:11", "titulo": "A vinda do Senhor", "arte": "ascensao", "refs": ["1Ts 4:13-14", "1Ts 4:16-18", "1Ts 5:2", "1Ts 5:9-10"],
+       "texto": "Paulo não quer que fiquem tristes como os que não têm esperança. Jesus morreu e ressuscitou; assim Deus trará com ele os que dormem. O próprio Senhor descerá do céu, os mortos em Cristo ressuscitarão primeiro, e os vivos serão arrebatados com eles para encontrar o Senhor. Quanto à data, o dia virá como ladrão de noite; por isso, vigiem e fiquem sóbrios, vestidos de fé, amor e esperança."},
+      {"caps": "5:12-28", "titulo": "A vida da igreja", "arte": "igreja-primitiva", "refs": ["1Ts 5:12-13", "1Ts 5:16-18", "1Ts 5:19-21", "1Ts 5:23-24"],
+       "texto": "Uma série de instruções curtas: respeitem os que trabalham entre vocês e os presidem; admoestem os desordeiros, consolem os desanimados, amparem os fracos. Alegrem-se sempre, orem sem cessar, deem graças em tudo. Não apaguem o Espírito, não desprezem as profecias, examinem tudo e retenham o bem. O Deus de paz os santificará por completo: fiel é o que vos chama, e ele o fará."}
+    ],
+    "chaves": ["1Ts 4:16-17", "1Ts 5:16-18", "1Ts 1:9-10"],
+    "licoes": [
+      "A esperança da volta de Jesus consola no luto e motiva a santidade.",
+      "Esperar o Senhor não é cruzar os braços: é trabalhar, amar e vigiar.",
+      "Uma igreja jovem e perseguida pode ser exemplo para todas as outras."
+    ],
+    "ligacoes": [
+      {"texto": "A fundação da igreja e a fuga de Paulo de noite.", "refs": ["At 17:1-10"], "livro": 44},
+      {"texto": "Timóteo e Silas alcançam Paulo em Corinto com as notícias.", "refs": ["At 18:5", "1Ts 3:6"]},
+      {"texto": "A ressurreição dos que dormem é explicada em detalhe em 1 Coríntios 15.", "refs": ["1Co 15:51-52"], "livro": 46}
+    ]
+  },
+  {
+    "n": 53, "grupo": "paulo", "ordem": 4, "capa": "corinto-tendas",
+    "tema": "Firmes e trabalhando enquanto o Senhor não vem",
+    "autor": "Paulo, com Silvano e Timóteo",
+    "data": "c. 51 d.C.",
+    "de": "Corinto, poucos meses depois da primeira carta",
+    "para": "A igreja de Tessalônica",
+    "porque": "A perseguição aumentou, e correu o boato, talvez apoiado numa carta falsa em nome de Paulo, de que o dia do Senhor já havia chegado. Alguns ficaram assustados; outros largaram o trabalho e passaram a viver à custa dos irmãos. Paulo escreve para consolar, corrigir o engano e pôr os ociosos para trabalhar.",
+    "historias": ["paulo2"],
+    "partes": [
+      {"caps": "1", "titulo": "Deus fará justiça", "arte": "iconio-mercado", "refs": ["2Ts 1:3-4", "2Ts 1:6-7", "2Ts 1:11-12"],
+       "texto": "A fé daqueles irmãos cresce e o amor aumenta no meio das perseguições, e Paulo se orgulha deles diante das outras igrejas. O sofrimento não é sinal de abandono: Deus é justo, dará alívio aos atribulados e retribuirá aos que os afligem, quando o Senhor Jesus se manifestar do céu com os anjos do seu poder. Ele ora para que Deus os torne dignos do chamado."},
+      {"caps": "2:1-12", "titulo": "O dia do Senhor ainda não chegou", "arte": "nt-carta-lida", "refs": ["2Ts 2:1-4", "2Ts 2:8"],
+       "texto": "Não se deixem abalar nem por espírito, nem por palavra, nem por carta como se fosse nossa. Antes daquele dia virá a apostasia e se manifestará o homem da iniquidade, que se levanta contra tudo o que se chama Deus. Algo ainda o detém. Quando aparecer, o Senhor Jesus o destruirá com o sopro da sua boca. O trecho é difícil, e Paulo lembra que já havia explicado isso pessoalmente."},
+      {"caps": "2:13–3:5", "titulo": "Escolhidos, firmes e guardados", "arte": "anciaos", "refs": ["2Ts 2:13-15", "2Ts 2:16-17", "2Ts 3:1-3"],
+       "texto": "Em contraste com os que se perdem, Paulo dá graças pelos tessalonicenses, amados do Senhor, escolhidos para a salvação pela santificação do Espírito e pela fé na verdade. Fiquem firmes e guardem o que lhes foi ensinado, por palavra ou por carta. Ele pede oração para que a palavra do Senhor se espalhe depressa, e garante: o Senhor é fiel e os guardará do Maligno."},
+      {"caps": "3:6-18", "titulo": "Quem não quer trabalhar", "arte": "corinto-tendas", "refs": ["2Ts 3:7-10", "2Ts 3:11-13", "2Ts 3:16"],
+       "texto": "Alguns viviam desordenadamente, sem trabalhar e se intrometendo na vida alheia. Paulo lembra o próprio exemplo: trabalhou noite e dia para não ser pesado a ninguém. A regra é clara: se alguém não quer trabalhar, também não coma. Que trabalhem em paz e comam o seu próprio pão; e os demais não se cansem de fazer o bem. Ele assina de próprio punho, como marca de autenticidade."}
+    ],
+    "chaves": ["2Ts 3:10", "2Ts 2:15", "2Ts 3:3"],
+    "licoes": [
+      "A expectativa da volta de Cristo nunca é desculpa para largar as responsabilidades.",
+      "Boatos e datas sobre o fim não devem tirar a paz de quem conhece a Palavra.",
+      "Deus é justo: o sofrimento do seu povo não passa despercebido."
+    ],
+    "ligacoes": [
+      {"texto": "Continua e corrige a leitura apressada da primeira carta.", "refs": ["1Ts 5:1-2"], "livro": 52},
+      {"texto": "Jesus também avisou que haveria enganos e que o fim não viria logo.", "refs": ["Mt 24:4-6"], "livro": 40},
+      {"texto": "Paulo sustentava-se fazendo tendas em Corinto, de onde escreve.", "refs": ["At 18:1-3"]}
+    ]
+  }
+]

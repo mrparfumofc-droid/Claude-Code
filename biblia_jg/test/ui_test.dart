@@ -117,9 +117,18 @@ void main() {
     expect(find.text('Diário de oração'), findsOneWidget);
     await openTab('Biblioteca');
     expect(find.text('Favoritos e marcações'), findsOneWidget);
-    await openTab('Mais');
-    expect(find.text('Entrar com Google'), findsOneWidget);
-    expect(find.textContaining('Produzido por Joabe Gonçalves'), findsOneWidget);
+    // Não há mais a aba "Mais": tudo fica na barra lateral, no mesmo padrão.
+    expect(find.text('Mais'), findsNothing);
+    for (final label in ['Frases', 'Progresso', 'Versões', 'Ajustes', 'Backup', 'Conta', 'Sobre']) {
+      expect(find.text(label), findsOneWidget, reason: label);
+    }
+    await openTab('Progresso');
+    expect(find.text('Progresso de Leitura'), findsOneWidget);
+    await tester.ensureVisible(find.text('Ajustes'));
+    await openTab('Ajustes');
+    expect(find.text('Leitura da Bíblia'), findsOneWidget);
+    await tester.ensureVisible(find.text('Sobre'));
+    await openTab('Frases');
     expect(tester.takeException(), isNull);
 
     await tester.pumpWidget(ChangeNotifierProvider.value(

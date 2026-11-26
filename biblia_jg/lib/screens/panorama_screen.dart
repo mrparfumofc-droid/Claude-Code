@@ -11,6 +11,8 @@ import 'ai_chat_screen.dart';
 import 'panorama_art.dart';
 import 'panorama_diagrams.dart';
 import 'panorama_kings.dart';
+import 'panorama_lineages.dart';
+import 'panorama_nt.dart';
 import 'panorama_tree.dart';
 
 /// Panorama bíblico: quadros visuais de estudo (árvore, reis, profetas e a ficha de cada livro).
@@ -20,8 +22,8 @@ class PanoramaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = <(IconData, Color, String, String, Widget)>[
-      (Icons.route, const Color(0xFFEF6C00), 'Linha do tempo da Bíblia',
-          'Da criação à igreja primitiva em onze épocas', const BibleTimelineScreen()),
+      (Icons.route, const Color(0xFFEF6C00), 'Linha do tempo',
+          'Da criação aos nossos dias: Bíblia, Atos, cartas e história da igreja', const BibleTimelineScreen()),
       (Icons.account_tree, const Color(0xFF1B2A4A), 'A família de Abraão',
           'De Abraão às doze tribos, com apresentação passo a passo', const FamilyTreeScreen()),
       (Icons.timeline, const Color(0xFF2E7D32), 'Reis de Israel e Judá',
@@ -32,7 +34,12 @@ class PanoramaScreen extends StatelessWidget {
           'A tenda de Deus vista de cima: cada peça e o que ela anuncia', const TabernacleScreen()),
       (Icons.grid_view_rounded, const Color(0xFF1E88E5), 'Os 66 livros',
           'A ficha de cada livro: autor, data, personagens e acontecimentos', const BooksPanoramaScreen()),
+      (Icons.menu_book, const Color(0xFF5E35B1), 'Novo Testamento, livro por livro',
+          'A história e o ensino de cada um dos 27 livros, parte por parte', const NtGuideScreen()),
+      // Árvores e linhagens: Jesus, Adão a Abraão, rei e sacerdote, apóstolos, Paulo, Israel e Judá.
+      for (final c in lineageCards) (c.$2, c.$3, c.$4, c.$5, LineageChartScreen(id: c.$1)),
     ];
+    final arts = [...hubArt, 'pentecostes', for (final c in lineageCards) c.$6];
     return Scaffold(
       appBar: AppBar(title: const Text('Panorama bíblico')),
       body: LayoutBuilder(builder: (context, box) {
@@ -46,7 +53,7 @@ class PanoramaScreen extends StatelessWidget {
           children: [
             for (final (i, (icon, color, title, subtitle, page)) in items.indexed)
               ArtBackdrop(
-                art: hubArt[i],
+                art: i < arts.length ? arts[i] : null,
                 color: color,
                 child: Material(
                   type: MaterialType.transparency,
@@ -373,7 +380,14 @@ class _BookSheetScreenState extends State<BookSheetScreen> {
     final keyText = sheet == null ? null : _keyText(bible, sheet.key);
 
     return Scaffold(
-      appBar: AppBar(title: Text(name)),
+      appBar: AppBar(title: Text(name), actions: [
+        if (n >= 40)
+          TextButton.icon(
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => NtBookScreen(number: n))),
+            icon: const Icon(Icons.menu_book),
+            label: const Text('Estudar o livro'),
+          ),
+      ]),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 900),

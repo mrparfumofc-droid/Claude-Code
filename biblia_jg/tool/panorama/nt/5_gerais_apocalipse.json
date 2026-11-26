@@ -1,0 +1,261 @@
+[
+  {
+    "n": 59, "grupo": "gerais", "ordem": 1, "capa": "concilio-jerusalem",
+    "tema": "A fé que salva é a fé que age",
+    "autor": "Tiago, irmão do Senhor e líder da igreja de Jerusalém",
+    "data": "c. 45–49 d.C.",
+    "de": "Jerusalém",
+    "para": "“As doze tribos que andam dispersas”: cristãos judeus espalhados fora da terra",
+    "porque": "Tiago não creu em Jesus durante o ministério dele, mas viu o Ressuscitado e se tornou coluna da igreja. Escreve a crentes pobres, pressionados e tentados a viver uma fé só de palavras. A carta lembra Provérbios e o Sermão do Monte: frases curtas, exemplos do campo e do comércio, e mais de cinquenta ordens em cinco capítulos.",
+    "historias": [],
+    "partes": [
+      {"caps": "1", "titulo": "Provas, sabedoria e prática", "arte": "concilio-jerusalem", "refs": ["Tg 1:2-5", "Tg 1:22-25", "Tg 1:27"],
+       "texto": "As provas devem ser recebidas com alegria, porque produzem perseverança. A quem falta sabedoria, basta pedir a Deus, que dá a todos com generosidade. A tentação não vem de Deus, e sim do próprio desejo; dele só vem toda boa dádiva. Todos sejam prontos para ouvir e tardios para falar. Ouvir a palavra sem praticá-la é olhar-se no espelho e esquecer o próprio rosto."},
+      {"caps": "2", "titulo": "Sem favoritismo; fé e obras", "arte": "igreja-primitiva", "refs": ["Tg 2:1-4", "Tg 2:14-17", "Tg 2:26"],
+       "texto": "Se na reunião o rico de anel de ouro recebe o melhor lugar e o pobre fica de pé, a igreja julga com maus critérios e quebra a lei do amor. Depois vem a pergunta central: de que adianta alguém dizer que tem fé, se não tem obras? Desejar boa sorte a um irmão com fome não o alimenta. Abraão e Raabe mostraram a fé pelo que fizeram. A fé sem obras é morta."},
+      {"caps": "3", "titulo": "A língua e as duas sabedorias", "arte": "sinagoga-paulo", "refs": ["Tg 3:5-10", "Tg 3:13", "Tg 3:17-18"],
+       "texto": "Quem ensina será julgado com mais rigor. A língua é pequena como o leme de um navio ou a faísca que incendeia a floresta: com ela bendizemos a Deus e amaldiçoamos pessoas feitas à imagem dele. Há duas sabedorias. A que vem de baixo gera inveja e confusão; a do alto é pura, pacífica, moderada, cheia de misericórdia e de bons frutos."},
+      {"caps": "4:1–5:6", "titulo": "Humildade diante de Deus", "arte": "templo-purificacao", "refs": ["Tg 4:6-8", "Tg 4:13-15", "Tg 5:1-4"],
+       "texto": "As brigas nascem dos desejos que guerreiam por dentro. A amizade com o mundo é inimizade contra Deus, mas ele dá graça maior: resiste aos soberbos e dá graça aos humildes. Sujeitem-se a Deus, resistam ao diabo, cheguem-se a Deus. Quem faz planos de negócio deve dizer: se o Senhor quiser. E os ricos que retêm o salário dos trabalhadores ouvem uma advertência duríssima."},
+      {"caps": "5:7-20", "titulo": "Paciência e oração", "arte": "carmelo-fogo", "refs": ["Tg 5:7-8", "Tg 5:13-16", "Tg 5:19-20"],
+       "texto": "Sejam pacientes como o lavrador que espera a chuva; a vinda do Senhor está próxima. Lembrem-se dos profetas e da perseverança de Jó. Está alguém aflito? Ore. Alegre? Cante louvores. Doente? Chame os presbíteros, que orem ungindo com óleo em nome do Senhor. A oração do justo pode muito: Elias era homem como nós, e orou. Quem traz de volta um irmão desviado salva uma alma."}
+    ],
+    "chaves": ["Tg 1:22", "Tg 2:17", "Tg 4:7-8", "Tg 5:16"],
+    "licoes": [
+      "Fé verdadeira aparece no modo de tratar os pobres, de falar e de usar o dinheiro.",
+      "Sabedoria se pede a Deus e se reconhece pela mansidão, não pela esperteza.",
+      "A oração é o primeiro recurso em qualquer situação: aflição, alegria ou doença."
+    ],
+    "ligacoes": [
+      {"texto": "Paulo e Tiago não se contradizem: Paulo fala da raiz da salvação, Tiago do fruto.", "refs": ["Ef 2:8-10", "Tg 2:18"], "livro": 49},
+      {"texto": "Tiago preside o concílio de Jerusalém.", "refs": ["At 15:13-21"], "livro": 44},
+      {"texto": "A carta ecoa o Sermão do Monte em muitos pontos.", "refs": ["Mt 7:24-27", "Mt 5:34-37"], "livro": 40}
+    ]
+  },
+  {
+    "n": 60, "grupo": "gerais", "ordem": 16, "capa": "nt-pedro-carta",
+    "tema": "Esperança viva para quem sofre por ser cristão",
+    "autor": "Pedro, apóstolo, com a ajuda de Silvano",
+    "data": "c. 62–64 d.C.",
+    "de": "“Babilônia”, que quase todos entendem como Roma",
+    "para": "Cristãos espalhados por cinco províncias da Ásia Menor",
+    "porque": "Os leitores eram vistos como gente estranha: não frequentavam mais as festas pagãs e eram caluniados por isso. Uma perseguição maior se aproximava. Pedro, que um dia negou Jesus por medo, escreve agora para firmar os irmãos: vocês são estrangeiros neste mundo, mas têm uma herança guardada e um exemplo a seguir, o de Cristo.",
+    "historias": [],
+    "partes": [
+      {"caps": "1:1-12", "titulo": "Uma esperança viva", "arte": "tumulo-vazio", "refs": ["1Pe 1:3-5", "1Pe 1:6-7", "1Pe 1:8-9"],
+       "texto": "Bendito seja Deus, que nos gerou de novo para uma viva esperança, pela ressurreição de Jesus Cristo. A herança não se estraga nem murcha e está guardada nos céus. Por isso há alegria mesmo nas provações, que testam a fé como o fogo testa o ouro. Os leitores amam a Jesus sem tê-lo visto. Os profetas investigaram essa salvação, e até os anjos desejam contemplá-la."},
+      {"caps": "1:13–2:10", "titulo": "Santos, porque ele é santo", "arte": "nt-pedro-carta", "refs": ["1Pe 1:15-16", "1Pe 1:18-19", "1Pe 2:9-10"],
+       "texto": "Preparem a mente e sejam santos em todo o modo de viver. Vocês foram resgatados não com prata ou ouro, mas com o precioso sangue de Cristo, e nasceram de novo pela palavra de Deus, que permanece para sempre. Cheguem-se a ele, a pedra viva: vocês também são pedras vivas, edificados como casa espiritual. São geração eleita, sacerdócio real, nação santa, povo de propriedade de Deus."},
+      {"caps": "2:11–3:12", "titulo": "Peregrinos de bom procedimento", "arte": "igreja-primitiva", "refs": ["1Pe 2:11-12", "1Pe 2:21-24", "1Pe 3:8-9"],
+       "texto": "Como estrangeiros, vivam de modo exemplar entre os pagãos, para que as boas obras calem as calúnias. Isso inclui respeito às autoridades, aos patrões, mesmo aos difíceis, e a vida dentro do casamento. O modelo é Cristo: quando insultado, não revidava; levou os nossos pecados em seu corpo sobre o madeiro. Sejam todos compassivos e humildes, sem pagar mal com mal."},
+      {"caps": "3:13–4:19", "titulo": "Sofrer por fazer o bem", "arte": "estevao-sinedrio", "refs": ["1Pe 3:14-16", "1Pe 4:8-10", "1Pe 4:12-14"],
+       "texto": "Se sofrerem por causa da justiça, são felizes. Estejam sempre preparados para responder, com mansidão e respeito, a quem pedir a razão da esperança que têm. O fim de todas as coisas está próximo: orem, amem intensamente, sejam hospitaleiros e sirvam com o dom que cada um recebeu. Não estranhem o fogo da provação; alegrem-se por participar dos sofrimentos de Cristo."},
+      {"caps": "5", "titulo": "Pastores, humildade e vigilância", "arte": "praia-peixe", "refs": ["1Pe 5:2-4", "1Pe 5:6-9", "1Pe 5:10"],
+       "texto": "O homem a quem Jesus disse “apascenta as minhas ovelhas” fala aos presbíteros como colega: pastoreiem o rebanho de boa vontade, sem ganância e sem dominar, sendo exemplos. Todos se revistam de humildade e lancem sobre Deus toda a ansiedade, porque ele cuida de vocês. Vigiem: o diabo anda em volta como leão que ruge. Depois de sofrerem um pouco, Deus mesmo os aperfeiçoará."}
+    ],
+    "chaves": ["1Pe 1:3", "1Pe 2:9", "1Pe 3:15", "1Pe 5:7"],
+    "licoes": [
+      "O cristão vive neste mundo como estrangeiro, com a herança guardada no céu.",
+      "A melhor resposta à calúnia é uma vida boa, acompanhada de uma explicação mansa.",
+      "Ansiedade se entrega a Deus; vigilância se mantém."
+    ],
+    "ligacoes": [
+      {"texto": "Jesus restaurou Pedro e lhe confiou as ovelhas.", "refs": ["Jo 21:15-17", "1Pe 5:1-2"], "livro": 43},
+      {"texto": "A “pedra viva” retoma a confissão de Cesareia e os Salmos.", "refs": ["Mt 16:16-18", "Sl 118:22"]},
+      {"texto": "Silvano é o Silas das viagens de Paulo; Marcos está com Pedro.", "refs": ["At 15:40", "1Pe 5:12-13"], "livro": 41}
+    ]
+  },
+  {
+    "n": 61, "grupo": "gerais", "ordem": 20, "capa": "transfiguracao",
+    "tema": "Crescer na graça e não se deixar enganar enquanto o Senhor não vem",
+    "autor": "Simão Pedro, apóstolo",
+    "data": "c. 65–67 d.C., pouco antes do martírio",
+    "de": "Provavelmente Roma",
+    "para": "Os mesmos leitores da primeira carta e outros crentes",
+    "porque": "Na primeira carta o perigo vinha de fora, a perseguição; nesta vem de dentro: falsos mestres que viviam sem freio e zombavam da promessa da volta de Cristo. Pedro sabe que vai morrer em breve e escreve uma espécie de testamento, para que as igrejas se lembrem da verdade depois da sua partida.",
+    "historias": [],
+    "partes": [
+      {"caps": "1:1-11", "titulo": "Tudo o que precisamos para crescer", "arte": "pescadores-chamado", "refs": ["2Pe 1:3-4", "2Pe 1:5-8", "2Pe 1:10"],
+       "texto": "O poder de Deus já nos deu tudo o que diz respeito à vida e à piedade, e grandíssimas promessas. Por isso, com todo o empenho, acrescentem à fé a virtude; à virtude, o conhecimento; depois o domínio próprio, a perseverança, a piedade, a fraternidade e o amor. Quem cresce nessas coisas não fica ocioso nem estéril. Quem as despreza esqueceu que foi purificado."},
+      {"caps": "1:12-21", "titulo": "Testemunha ocular e palavra dos profetas", "arte": "transfiguracao", "refs": ["2Pe 1:13-15", "2Pe 1:16-18", "2Pe 1:19-21"],
+       "texto": "Pedro sabe que em breve deixará este corpo e quer que os irmãos se lembrem sempre dessas coisas. Não seguimos fábulas, afirma: ele viu a majestade de Jesus no monte santo e ouviu a voz do Pai. Além disso, temos a palavra dos profetas, lâmpada que brilha em lugar escuro. Nenhuma profecia da Escritura veio de vontade humana: homens falaram da parte de Deus, movidos pelo Espírito Santo."},
+      {"caps": "2", "titulo": "O retrato dos falsos mestres", "arte": "arca-diluvio", "refs": ["2Pe 2:1-3", "2Pe 2:9", "2Pe 2:19"],
+       "texto": "Assim como houve falsos profetas, haverá falsos mestres, que introduzem heresias às escondidas, exploram o povo com palavras fingidas e negam o Senhor que os resgatou. Deus não poupou os anjos que pecaram nem o mundo antigo, mas guardou Noé e livrou Ló: ele sabe livrar os piedosos. Esses mestres prometem liberdade e são escravos da corrupção, como fontes sem água."},
+      {"caps": "3", "titulo": "O dia do Senhor virá", "arte": "nova-jerusalem", "refs": ["2Pe 3:3-4", "2Pe 3:8-10", "2Pe 3:13", "2Pe 3:18"],
+       "texto": "Zombadores perguntam: onde está a promessa da sua vinda? Esquecem que o mundo já foi julgado pela água. Para o Senhor, um dia é como mil anos: ele não demora, é paciente, pois não quer que ninguém pereça. O dia virá como ladrão, e esperamos novos céus e nova terra, onde habita a justiça. Pedro cita as cartas do “amado irmão Paulo” e termina: cresçam na graça."}
+    ],
+    "chaves": ["2Pe 1:20-21", "2Pe 3:9", "2Pe 3:18"],
+    "licoes": [
+      "A vida cristã é crescimento: fé que não avança começa a recuar.",
+      "A Bíblia tem origem em Deus; é a lâmpada segura contra o engano.",
+      "A demora da volta de Cristo é paciência de Deus, tempo para arrependimento."
+    ],
+    "ligacoes": [
+      {"texto": "A transfiguração, que Pedro presenciou.", "refs": ["Mt 17:1-8", "2Pe 1:17-18"], "livro": 40},
+      {"texto": "O capítulo 2 é muito parecido com a carta de Judas.", "refs": ["Jd 1:4-16"], "livro": 65},
+      {"texto": "Pedro já trata as cartas de Paulo como Escritura.", "refs": ["2Pe 3:15-16"], "livro": 45}
+    ]
+  },
+  {
+    "n": 62, "grupo": "gerais", "ordem": 24, "capa": "nt-joao-anciao",
+    "tema": "Como saber que temos a vida eterna: verdade, obediência e amor",
+    "autor": "João, o apóstolo",
+    "data": "c. 85–95 d.C.",
+    "de": "Éfeso, segundo a tradição",
+    "para": "Igrejas da Ásia Menor que João acompanhava",
+    "porque": "Um grupo havia saído da igreja ensinando que o Filho de Deus não veio realmente em carne, e que quem “conhecia” a Deus estava acima do pecado e dos mandamentos. Os que ficaram estavam abalados. João, já idoso, escreve com carinho de pai, “filhinhos”, e dá três testes para reconhecer a fé verdadeira: crer em Jesus, obedecer e amar os irmãos.",
+    "historias": [],
+    "partes": [
+      {"caps": "1:1–2:2", "titulo": "A vida se manifestou; andar na luz", "arte": "nt-joao-anciao", "refs": ["1Jo 1:1-4", "1Jo 1:7-9", "1Jo 2:1-2"],
+       "texto": "João começa como testemunha: o que ouvimos, vimos com os olhos e as nossas mãos tocaram, isso anunciamos. Deus é luz, e nele não há treva nenhuma. Quem diz que tem comunhão com ele e anda nas trevas mente; quem diz que não tem pecado engana a si mesmo. Se confessarmos, ele é fiel e justo para perdoar. E, se alguém pecar, temos um Advogado junto ao Pai."},
+      {"caps": "2:3-27", "titulo": "Obedecer, amar e permanecer na verdade", "arte": "ultima-ceia", "refs": ["1Jo 2:3-6", "1Jo 2:15-17", "1Jo 2:22-23"],
+       "texto": "Sabemos que o conhecemos se guardamos os seus mandamentos; quem diz que permanece nele deve andar como ele andou. Quem odeia o irmão ainda está nas trevas. Não amem o mundo: o desejo da carne, o desejo dos olhos e a soberba da vida passam. Muitos anticristos já surgiram: saíram do nosso meio e negam que Jesus é o Cristo. Permaneçam no que ouviram desde o princípio."},
+      {"caps": "2:28–3:24", "titulo": "Filhos de Deus que amam de verdade", "arte": "bom-samaritano", "refs": ["1Jo 3:1-3", "1Jo 3:16-18", "1Jo 3:23"],
+       "texto": "Vejam que grande amor o Pai nos deu: sermos chamados filhos de Deus. Ainda não se manifestou o que havemos de ser, mas seremos semelhantes a ele. Quem é nascido de Deus não vive na prática do pecado. O amor tem uma definição: Cristo deu a vida por nós. Quem vê o irmão em necessidade e lhe fecha o coração não ama. Não amemos de palavra, mas de fato."},
+      {"caps": "4", "titulo": "Provar os espíritos; Deus é amor", "arte": "calvario", "refs": ["1Jo 4:1-3", "1Jo 4:7-11", "1Jo 4:18-19"],
+       "texto": "Não acreditem em qualquer espírito: o que confessa que Jesus Cristo veio em carne é de Deus. Maior é o que está em vocês do que o que está no mundo. Depois vem a declaração mais simples e mais funda da carta: Deus é amor. O amor não começou em nós: ele nos amou e enviou o Filho como propiciação pelos nossos pecados. O perfeito amor lança fora o medo."},
+      {"caps": "5", "titulo": "A fé que vence e a certeza da vida", "arte": "tome", "refs": ["1Jo 5:4-5", "1Jo 5:11-13", "1Jo 5:14-15"],
+       "texto": "Os mandamentos de Deus não são pesados, e o que nasce de Deus vence o mundo; a vitória é a nossa fé. O testemunho de Deus é este: ele nos deu a vida eterna, e essa vida está no seu Filho. Quem tem o Filho tem a vida. João diz por que escreveu: para que vocês saibam que têm a vida eterna. E termina: filhinhos, guardem-se dos ídolos."}
+    ],
+    "chaves": ["1Jo 1:9", "1Jo 4:8", "1Jo 5:12-13", "1Jo 3:18"],
+    "licoes": [
+      "É possível ter certeza da salvação, e ela se apoia no testemunho de Deus sobre o Filho.",
+      "Quem conhece a Deus obedece e ama; conhecimento sem amor é engano.",
+      "Nem todo ensino espiritual vem de Deus: o teste é o que se diz sobre Jesus."
+    ],
+    "ligacoes": [
+      {"texto": "O Evangelho foi escrito para que creiam; a carta, para que saibam que têm a vida.", "refs": ["Jo 20:31", "1Jo 5:13"], "livro": 43},
+      {"texto": "O mandamento novo dado na última ceia.", "refs": ["Jo 13:34-35", "1Jo 3:23"]},
+      {"texto": "As duas cartas menores aplicam o mesmo ensino a casos concretos.", "refs": ["2Jo 1:7"], "livro": 63}
+    ]
+  },
+  {
+    "n": 63, "grupo": "gerais", "ordem": 25, "capa": "nt-joao-anciao",
+    "tema": "Andar na verdade e no amor, sem dar apoio ao engano",
+    "autor": "“O presbítero”: João, o apóstolo",
+    "data": "c. 85–95 d.C.",
+    "de": "Éfeso, segundo a tradição",
+    "para": "“A senhora eleita e seus filhos”: provavelmente uma igreja local e seus membros",
+    "porque": "Pregadores itinerantes dependiam da hospitalidade dos irmãos. O problema é que os mestres que negavam a vinda de Cristo em carne usavam a mesma rede de casas. Em treze versículos, João lembra que amor e verdade andam juntos e que hospedar o falso mestre é ajudar a espalhar o erro.",
+    "historias": [],
+    "partes": [
+      {"caps": "v. 1-3", "titulo": "Amor na verdade", "arte": "nt-joao-anciao", "refs": ["2Jo 1:1-3"],
+       "texto": "O presbítero escreve à senhora eleita e a seus filhos, a quem ama na verdade, e não só ele, mas todos os que conhecem a verdade. A palavra verdade aparece quatro vezes na saudação. Graça, misericórdia e paz virão de Deus Pai e de Jesus Cristo, o Filho do Pai, em verdade e amor. As duas coisas já aparecem juntas, e é esse o assunto da carta."},
+      {"caps": "v. 4-6", "titulo": "O mandamento desde o princípio", "arte": "igreja-primitiva", "refs": ["2Jo 1:4-6"],
+       "texto": "João se alegrou muito ao encontrar alguns daqueles filhos andando na verdade. Agora pede, não como quem dá mandamento novo, mas o que temos desde o princípio: que nos amemos uns aos outros. E define o amor de um jeito prático: amar é andar segundo os mandamentos de Deus. Amor sem obediência não é o amor de que a Bíblia fala."},
+      {"caps": "v. 7-13", "titulo": "Cuidado com os enganadores", "arte": "nt-carta-lida", "refs": ["2Jo 1:7-9", "2Jo 1:10-11", "2Jo 1:12"],
+       "texto": "Muitos enganadores saíram pelo mundo e não confessam que Jesus Cristo veio em carne. Quem vai além da doutrina de Cristo não tem a Deus. Se alguém chegar com outro ensino, não o recebam em casa como mestre nem lhe deem as boas-vindas, para não participar das suas más obras. João tem muito mais a dizer, mas prefere falar pessoalmente, para que a alegria seja completa."}
+    ],
+    "chaves": ["2Jo 1:6", "2Jo 1:9"],
+    "licoes": [
+      "Amor e verdade não competem: um protege o outro.",
+      "Hospitalidade é virtude, mas não deve servir de palco para quem nega Cristo.",
+      "Ir “além” do ensino dos apóstolos não é avanço, é perda."
+    ],
+    "ligacoes": [
+      {"texto": "O mesmo alerta, mais desenvolvido, está na primeira carta.", "refs": ["1Jo 4:1-3"], "livro": 62},
+      {"texto": "3 João mostra o outro lado: a hospitalidade que deve ser dada aos fiéis.", "refs": ["3Jo 1:5-8"], "livro": 64}
+    ]
+  },
+  {
+    "n": 64, "grupo": "gerais", "ordem": 26, "capa": "nt-joao-anciao",
+    "tema": "Cooperar com a verdade: três homens, três retratos",
+    "autor": "“O presbítero”: João, o apóstolo",
+    "data": "c. 85–95 d.C.",
+    "de": "Éfeso, segundo a tradição",
+    "para": "Gaio, um irmão querido",
+    "porque": "É o bilhete mais curto do Novo Testamento. Missionários enviados por João foram bem recebidos por Gaio e barrados por Diótrefes, um líder que gostava de mandar. João escreve para agradecer a um, avisar que vai tratar do outro e recomendar um terceiro, Demétrio, provável portador da carta.",
+    "historias": [],
+    "partes": [
+      {"caps": "v. 1-8", "titulo": "Gaio: o que abre a casa", "arte": "lidia-rio", "refs": ["3Jo 1:2-4", "3Jo 1:5-8"],
+       "texto": "João deseja que Gaio vá bem em tudo e tenha saúde, assim como vai bem a sua alma. Os irmãos que passaram por lá deram testemunho da sua fidelidade. “Não tenho maior alegria do que esta: ouvir que os meus filhos andam na verdade.” Gaio acolheu pregadores que nem conhecia, gente que saiu por amor ao Nome sem aceitar nada dos pagãos. Quem os sustenta coopera com a verdade."},
+      {"caps": "v. 9-11", "titulo": "Diótrefes: o que quer ser o primeiro", "arte": "sinagoga-paulo", "refs": ["3Jo 1:9-11"],
+       "texto": "Diótrefes gosta de ter a primazia e não recebe a autoridade do apóstolo. Espalha palavras maldosas, recusa-se a hospedar os irmãos, impede os que querem fazê-lo e os expulsa da igreja. João promete tratar do assunto quando for. E aconselha Gaio: não imite o mal, e sim o bem. Quem faz o bem é de Deus."},
+      {"caps": "v. 12-15", "titulo": "Demétrio: o que tem bom testemunho", "arte": "nt-carta-lida", "refs": ["3Jo 1:12", "3Jo 1:13-14"],
+       "texto": "De Demétrio todos dão bom testemunho, e a própria verdade também; João acrescenta o seu. É uma carta de recomendação em uma linha. Como na segunda carta, ele tem muito a escrever, mas não quer fazê-lo com tinta e pena: espera ver Gaio em breve e conversar face a face. Despede-se pedindo que cumprimente os amigos, cada um pelo nome."}
+    ],
+    "chaves": ["3Jo 1:4", "3Jo 1:8", "3Jo 1:11"],
+    "licoes": [
+      "Sustentar e hospedar quem serve ao evangelho é participar da obra.",
+      "O desejo de mandar e aparecer é um dos maiores perigos para a liderança.",
+      "A igreja local é feita de pessoas concretas, conhecidas pelo nome."
+    ],
+    "ligacoes": [
+      {"texto": "Jesus ensinou que quem quiser ser o primeiro seja servo de todos.", "refs": ["Mc 10:42-45"], "livro": 41},
+      {"texto": "2 João trata de quem não deve ser recebido; 3 João, de quem deve.", "refs": ["2Jo 1:10-11"], "livro": 63}
+    ]
+  },
+  {
+    "n": 65, "grupo": "gerais", "ordem": 21, "capa": "nt-carta-lida",
+    "tema": "Batalhar pela fé que foi entregue aos santos",
+    "autor": "Judas, irmão de Tiago e, portanto, irmão do Senhor",
+    "data": "c. 65–80 d.C.",
+    "de": "Incerto",
+    "para": "Os chamados, amados em Deus Pai",
+    "porque": "Judas pretendia escrever com calma sobre a salvação comum, mas mudou de planos: homens ímpios haviam se infiltrado nas igrejas e transformavam a graça de Deus em desculpa para a imoralidade. A carta é curta, urgente e cheia de exemplos do Antigo Testamento, e termina com uma das mais belas doxologias da Bíblia.",
+    "historias": [],
+    "partes": [
+      {"caps": "v. 1-4", "titulo": "Uma mudança de assunto", "arte": "nt-carta-lida", "refs": ["Jd 1:1-2", "Jd 1:3-4"],
+       "texto": "Judas se apresenta apenas como servo de Jesus Cristo e irmão de Tiago. Queria escrever sobre a salvação que temos em comum, mas viu-se obrigado a exortar os irmãos a batalhar pela fé que uma vez por todas foi entregue aos santos. O motivo: certos homens se introduziram com dissimulação, convertem a graça de Deus em libertinagem e negam o único Soberano e Senhor."},
+      {"caps": "v. 5-16", "titulo": "Lições do passado", "arte": "exodo-saida", "refs": ["Jd 1:5-7", "Jd 1:11-13"],
+       "texto": "Judas lembra três juízos: o povo que saiu do Egito e depois não creu, os anjos que abandonaram o seu lugar, Sodoma e Gomorra. Os infiltrados seguem o caminho de Caim, o erro de Balaão e a rebelião de Corá. São nuvens sem água, árvores sem fruto, ondas bravas, estrelas errantes: prometem muito e nada entregam. Murmuram, bajulam por interesse e andam segundo as próprias paixões."},
+      {"caps": "v. 17-23", "titulo": "Edificando-se na fé", "arte": "cenaculo-oracao", "refs": ["Jd 1:17-19", "Jd 1:20-21", "Jd 1:22-23"],
+       "texto": "“Mas vós, amados”: os apóstolos já haviam avisado que viriam zombadores. A defesa não é só apontar o erro. Edifiquem-se na santíssima fé, orem no Espírito Santo, conservem-se no amor de Deus, esperem a misericórdia de Jesus Cristo para a vida eterna. E cuidem dos outros: tenham compaixão dos que duvidam e salvem alguns, arrebatando-os do fogo."},
+      {"caps": "v. 24-25", "titulo": "Aquele que pode guardar", "arte": "nova-jerusalem", "refs": ["Jd 1:24-25"],
+       "texto": "Depois de tantos avisos, a última palavra é de confiança. Quem guarda o crente não é a sua própria força: é aquele que é poderoso para nos guardar de tropeçar e nos apresentar sem mácula e com grande alegria diante da sua glória. Ao único Deus, nosso Salvador, por Jesus Cristo, sejam glória, majestade, domínio e poder, antes de todos os séculos, agora e para sempre."}
+    ],
+    "chaves": ["Jd 1:3", "Jd 1:20-21", "Jd 1:24-25"],
+    "licoes": [
+      "A graça não é licença para pecar; quem a usa assim a perverteu.",
+      "Defender a fé inclui edificar-se, orar e resgatar com misericórdia os que vacilam.",
+      "A segurança do crente está naquele que é poderoso para guardar."
+    ],
+    "ligacoes": [
+      {"texto": "O texto é muito próximo de 2 Pedro 2.", "refs": ["2Pe 2:1-3"], "livro": 61},
+      {"texto": "Judas e Tiago estão entre os irmãos de Jesus citados nos Evangelhos.", "refs": ["Mc 6:3"], "livro": 59},
+      {"texto": "Os exemplos de Caim, Balaão e Corá vêm do Pentateuco.", "refs": ["Gn 4:8", "Nm 16:1-3", "Nm 22:5-7"]}
+    ]
+  },
+  {
+    "n": 66, "grupo": "apocalipse", "ordem": 27, "capa": "patmos-joao",
+    "tema": "Jesus Cristo reina, julga e fará novas todas as coisas",
+    "autor": "João, o apóstolo, exilado por causa da Palavra",
+    "data": "c. 95 d.C., no fim do governo de Domiciano (alguns preferem antes de 70)",
+    "de": "Ilha de Patmos, no mar Egeu",
+    "para": "Sete igrejas da província da Ásia e, por meio delas, toda a igreja",
+    "porque": "O livro é a “revelação de Jesus Cristo”: mostra quem ele é e o que em breve deve acontecer. Foi dado a igrejas pressionadas a adorar o imperador e tentadas a se acomodar. Usa visões e símbolos, muitos tirados de Daniel, Ezequiel e Zacarias. Cristãos fiéis leem os detalhes de modos diferentes; a mensagem central é clara para todos: o Cordeiro venceu, e vale a pena ser fiel até o fim.",
+    "historias": ["apocalipse"],
+    "partes": [
+      {"caps": "1", "titulo": "A visão do Cristo glorificado", "arte": "patmos-joao", "refs": ["Ap 1:3", "Ap 1:7-8", "Ap 1:17-18"],
+       "texto": "Bem-aventurado quem lê, ouve e guarda as palavras desta profecia. No dia do Senhor, em Patmos, João ouve uma voz como de trombeta e vê, entre sete candeeiros de ouro, alguém semelhante ao Filho do Homem, com olhos como chama de fogo e rosto como o sol. Cai como morto, e ouve: “Não temas; eu sou o primeiro e o último; estive morto, mas eis que estou vivo para todo o sempre.”"},
+      {"caps": "2–3", "titulo": "As cartas às sete igrejas", "arte": "efeso-cidade", "refs": ["Ap 2:4-5", "Ap 2:10", "Ap 3:19-20"],
+       "texto": "Jesus dita uma carta a cada igreja: Éfeso, Esmirna, Pérgamo, Tiatira, Sardes, Filadélfia e Laodiceia. O esquema se repete: ele se apresenta, elogia o que há de bom, aponta o que está errado, chama ao arrependimento e promete algo ao vencedor. Duas igrejas só recebem elogio e uma só recebe repreensão. Todas terminam igual: quem tem ouvidos, ouça o que o Espírito diz às igrejas."},
+      {"caps": "4–5", "titulo": "O trono e o Cordeiro", "arte": "nt-trono-cordeiro", "refs": ["Ap 4:8-11", "Ap 5:5-6", "Ap 5:9-10"],
+       "texto": "Uma porta se abre no céu. No centro de tudo há um trono, e alguém assentado nele; ao redor, adoração sem pausa: “Santo, santo, santo.” Na mão de Deus está um livro selado, e ninguém é digno de abri-lo. João chora, até ouvir que o Leão de Judá venceu. Quando olha, vê um Cordeiro como que morto. Ele toma o livro, e o céu inteiro canta um cântico novo."},
+      {"caps": "6:1–8:5", "titulo": "Os sete selos", "arte": "navio-tempestade", "refs": ["Ap 6:9-11", "Ap 7:9-10", "Ap 7:16-17"],
+       "texto": "O Cordeiro abre os selos, e saem quatro cavaleiros: conquista, guerra, fome e morte. Os mártires perguntam “até quando?”, e o céu se abala. Antes do sétimo selo há um intervalo de consolo: os servos de Deus são selados, e João vê uma multidão que ninguém pode contar, de todas as nações, diante do trono. Deus enxugará dos seus olhos toda lágrima."},
+      {"caps": "8:6–11:19", "titulo": "As sete trombetas", "arte": "jerico-muros", "refs": ["Ap 9:20-21", "Ap 10:9-11", "Ap 11:15"],
+       "texto": "As trombetas trazem juízos que lembram as pragas do Egito e atingem a terra, o mar, os rios e os astros. São avisos; ainda assim, os homens não se arrependem. João come um livrinho, doce na boca e amargo no ventre, e duas testemunhas profetizam, morrem e ressuscitam. Ao toque da sétima trombeta, ouve-se: “Os reinos do mundo vieram a ser de nosso Senhor e do seu Cristo.”"},
+      {"caps": "12–14", "titulo": "O dragão, as bestas e o Cordeiro", "arte": "daniel-estatua", "refs": ["Ap 12:10-11", "Ap 13:8", "Ap 14:6-7", "Ap 14:12-13"],
+       "texto": "O livro mostra o conflito por trás da história. Um dragão, que é Satanás, persegue a mulher e o seu filho, é lançado do céu e faz guerra aos santos por meio de duas bestas: um poder que exige adoração e outro que o promove. Os fiéis vencem pelo sangue do Cordeiro e pela palavra do seu testemunho. No monte Sião, o Cordeiro está de pé com os seus."},
+      {"caps": "15–18", "titulo": "As sete taças e a queda da Babilônia", "arte": "babilonia-portao", "refs": ["Ap 15:3-4", "Ap 16:15", "Ap 18:2-4"],
+       "texto": "Os vencedores cantam o cântico de Moisés e do Cordeiro, e sete taças derramam os juízos finais. A grande Babilônia, cidade rica, sedutora e embriagada com o sangue dos santos, cai numa só hora. Reis e mercadores choram a perda dos seus lucros. Para a igreja, a ordem é: “Sai dela, povo meu.” Todo sistema que se põe no lugar de Deus tem prazo de validade."},
+      {"caps": "19–20", "titulo": "A vitória do Rei", "arte": "ascensao", "refs": ["Ap 19:6-9", "Ap 19:11-16", "Ap 20:11-15"],
+       "texto": "O céu celebra as bodas do Cordeiro. Cristo aparece montado num cavalo branco, Fiel e Verdadeiro, Rei dos reis e Senhor dos senhores, e vence os inimigos. Satanás é preso por mil anos, período que os cristãos entendem de maneiras diferentes, e por fim é lançado no lago de fogo. Diante do grande trono branco os mortos são julgados. A última inimiga, a morte, também é vencida."},
+      {"caps": "21–22", "titulo": "Novo céu e nova terra", "arte": "nova-jerusalem", "refs": ["Ap 21:1-5", "Ap 22:1-5", "Ap 22:17", "Ap 22:20"],
+       "texto": "João vê um novo céu e uma nova terra, e a nova Jerusalém descendo como noiva. Deus habitará com os homens; não haverá mais morte, nem pranto, nem dor. A Bíblia termina onde começou, com um rio e a árvore da vida, agora sem maldição. “Eis que faço novas todas as coisas.” O Espírito e a noiva dizem: Vem. E a última oração é esta: Vem, Senhor Jesus."}
+    ],
+    "chaves": ["Ap 1:17-18", "Ap 5:12", "Ap 21:3-5", "Ap 22:20"],
+    "licoes": [
+      "O centro do Apocalipse não é o anticristo nem as datas: é o Cordeiro no trono.",
+      "A história caminha para um fim bom, e isso dá coragem para ser fiel hoje.",
+      "As cartas às sete igrejas convidam cada igreja a se examinar e a ouvir o Espírito."
+    ],
+    "ligacoes": [
+      {"texto": "O fim retoma o começo: a árvore da vida de Gênesis reaparece.", "refs": ["Gn 2:9", "Ap 22:2"]},
+      {"texto": "O Filho do Homem e os reinos vêm das visões de Daniel.", "refs": ["Dn 7:13-14", "Ap 1:13"]},
+      {"texto": "Jesus falou do fim dos tempos no monte das Oliveiras.", "refs": ["Mt 24:29-31"], "livro": 40},
+      {"texto": "Éfeso e Laodiceia já haviam recebido cartas de Paulo.", "refs": ["Ef 1:1", "Cl 4:16"], "livro": 49}
+    ]
+  }
+]

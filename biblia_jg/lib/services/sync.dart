@@ -5,9 +5,9 @@ import '../state/app_state.dart';
 import 'account_service.dart';
 import 'dictionary_service.dart';
 
-/// Preferências que também vão na cópia (plano de leitura, favoritos do hinário, meta).
+/// Preferências que também vão na cópia (plano de leitura, favoritos do hinário, frases, meta).
 const _stringKeys = ['plan_id', 'plan_start', 'devocional.perfil'];
-const _listKeys = ['plan_done', 'hymn.favorites'];
+const _listKeys = ['plan_done', 'hymn.favorites', 'frases.fav', 'frases.minhas'];
 const _intKeys = ['goal_minutes'];
 
 /// Monta a cópia completa deste aparelho (dados, ajustes de leitura, plano,

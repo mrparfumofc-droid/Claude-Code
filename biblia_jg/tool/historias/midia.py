@@ -27,7 +27,9 @@ ADMIN = (here / ".upload_key").read_text().strip()
 HEAD = {"Authorization": "Bearer " + ANON, "apikey": ANON, "x-admin-key": ADMIN}
 SENT = OUT / "enviados.json"
 TTS_MODELS = ["gemini-3.1-flash-tts-preview", "gemini-2.5-flash-preview-tts", "gemini-3.8-flash-tts", "gemini-3.8-flash-lite-tts"]
-# Vozes masculinas oferecidas ao dono para escolher o narrador (a 1ª é a usada enquanto ele não escolhe).
+# Voz padrão do app inteiro. O dono ouviu as seis amostras e escolheu a Algieba em 25/11/2026;
+# a escolha de voz saiu do app, então aqui ela é fixa.
+VOZ_PADRAO = "Algieba"
 VOZES = ["Charon", "Orus", "Algenib", "Algieba", "Alnilam", "Sadaltager"]
 AMOSTRA = ("Uma luz do céu. Saulo já estava perto de Damasco. De repente, por volta do meio-dia, um resplendor de luz "
            "do céu o cercou. Ele caiu por terra e ouviu uma voz que dizia: Saulo, Saulo, por que me persegues?")
@@ -105,7 +107,7 @@ def _tts(text: str, model: str, voice: str) -> bytes:
     return urllib.request.urlopen(req, timeout=170).read()
 
 
-TASK = "BibliaJG-Narracao"  # tarefa diária do Windows; some sozinha quando tudo estiver narrado
+TASK = "BibliaJG-Narracao"  # tarefa diária do Windows (roda voz.py: capítulos pedidos, Panorama e histórias)
 SKIP = OUT / "audio_recusadas.json"
 VERS = OUT / "audio_versoes.json"   # {cena: versão do áudio} (1 = <cena>.mp3; n > 1 = <cena>-v<n>.mp3)
 VOZ = OUT / "voz_atual.json"        # {"voz", "serie", "amostras_em"}
@@ -165,21 +167,11 @@ def _to_mp3(pcm: bytes, mp3: pathlib.Path) -> bool:
     return True
 
 
-def _chosen_voice() -> str | None:
-    """Voz que o dono escolheu no app (arquivo config/voz.json na nuvem)."""
-    try:
-        raw = urllib.request.urlopen(PUBLIC + "config/voz.json?t=" + str(int(time.time())), timeout=30).read()
-        v = json.loads(raw).get("voz")
-        return v if v in VOZES else None
-    except Exception:  # noqa: BLE001
-        return None
-
-
-def audio(limit: int) -> None:
+def audio(limit: int, models: list | None = None) -> None:
+    """Narra as cenas das histórias com a voz padrão. `models` deixa várias rotinas dividirem a cota do dia."""
     (OUT / "audio").mkdir(parents=True, exist_ok=True)
-    (OUT / "amostras").mkdir(parents=True, exist_ok=True)
     reg = sent()
-    models = list(TTS_MODELS)
+    models = list(TTS_MODELS) if models is None else models
     refused = _load(SKIP, {})
     vers = _load(VERS, {})
     voz = _load(VOZ, {"voz": VOZES[0], "serie": 1})
@@ -189,31 +181,11 @@ def audio(limit: int) -> None:
         if f.exists():
             upload(apath(name, v), f.read_bytes(), reg)
 
-    # 1) O dono escolheu a voz no app? Se mudou, começa uma nova série (tudo será narrado de novo).
-    chosen = _chosen_voice()
-    if chosen and chosen != voz["voz"]:
-        voz = {"voz": chosen, "serie": voz.get("serie", 1) + 1}
+    # A voz mudou? Começa uma nova série (tudo é narrado de novo, e a cena antiga vale até a nova chegar).
+    if voz["voz"] != VOZ_PADRAO:
+        voz = {"voz": VOZ_PADRAO, "serie": voz.get("serie", 1) + 1}
         VOZ.write_text(json.dumps(voz), encoding="utf-8")
-        print(f"voz escolhida no app: {chosen} (série {voz['serie']})", flush=True)
-    # 2) Sem escolha ainda: publica as amostras e espera até 2 dias antes de seguir com a voz padrão.
-    if not chosen:
-        made_s = []
-        for v in VOZES:
-            f = OUT / "amostras" / f"voz-{v.lower()}.mp3"
-            if not f.exists():
-                pcm = _speak(AMOSTRA, v, models, "amostra " + v, {})
-                if pcm is None or not _to_mp3(pcm, f):
-                    continue
-                time.sleep(4)
-            if upload(f"amostras/voz-{v.lower()}.mp3", f.read_bytes(), reg):
-                made_s.append(v)
-        if made_s:
-            upload("amostras/vozes.json", json.dumps({"vozes": made_s, "padrao": voz["voz"]}).encode(), None)
-            voz.setdefault("amostras_em", time.time())
-            VOZ.write_text(json.dumps(voz), encoding="utf-8")
-        if time.time() - voz.get("amostras_em", time.time()) < 2 * 86400:
-            print(f"amostras de voz na nuvem: {made_s}; esperando o dono escolher no app (até 2 dias)", flush=True)
-            return
+        print(f"voz padrão: {VOZ_PADRAO} (série {voz['serie']})", flush=True)
     target = 1 if voz.get("serie", 1) <= 1 else voz["serie"] * 10
     made, pending = 0, 0
     for s in STORIES:
@@ -245,9 +217,6 @@ def audio(limit: int) -> None:
             print(f"narrada {name} ({mp3.stat().st_size // 1024} KB, {models[0] if models else '?'}, voz {voz['voz']})", flush=True)
             time.sleep(4)
     print(f"áudio: {made} novas narrações nesta rodada; faltam {pending}" + ("" if models else " (cota de hoje esgotada)"), flush=True)
-    if pending == 0:
-        # Acabou: remove a tarefa diária do Windows (se existir).
-        subprocess.run(["schtasks", "/Delete", "/TN", TASK, "/F"], capture_output=True, creationflags=NO_WINDOW)
 
 
 # ------------------------------------------------------------------ índice
@@ -300,6 +269,19 @@ def reconstruir() -> None:
     for d, ext in (("img", "jpg"), ("thumb", "jpg"), ("dep", "jpg"), ("audio", "mp3"), ("amostras", "mp3")):
         for f in sorted((OUT / d).glob("*." + ext)):
             path = f"{d}/{f.name}"
+            try:
+                r = urllib.request.urlopen(urllib.request.Request(base + path, method="HEAD"), timeout=30)
+                if int(r.headers.get("Content-Length", "0")) == f.stat().st_size:
+                    reg[path] = f.stat().st_size
+                    continue
+            except Exception:  # noqa: BLE001
+                pass
+            missing.append(path)
+    for d in ("leitura", "narr"):
+        for f in sorted((OUT / d).rglob("*.*")) if (OUT / d).exists() else []:
+            if f.suffix not in (".ogg", ".mp3", ".json") or f.name == "index.json":
+                continue
+            path = f.relative_to(OUT).as_posix()
             try:
                 r = urllib.request.urlopen(urllib.request.Request(base + path, method="HEAD"), timeout=30)
                 if int(r.headers.get("Content-Length", "0")) == f.stat().st_size:

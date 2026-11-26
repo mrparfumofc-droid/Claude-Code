@@ -1,0 +1,160 @@
+[
+  {
+    "n": 40, "grupo": "evangelhos", "ordem": 9, "capa": "sermao-monte",
+    "tema": "Jesus é o Rei prometido, em quem as Escrituras se cumprem",
+    "autor": "Mateus (Levi), cobrador de impostos chamado para ser apóstolo",
+    "data": "c. 60–70 d.C.",
+    "de": "Provavelmente da região da Síria ou da Judeia",
+    "para": "Em primeiro lugar, cristãos de origem judaica",
+    "porque": "Mateus escreve para mostrar que Jesus de Nazaré é o Messias anunciado pelos profetas, o Filho de Davi e de Abraão. Por isso cita o Antigo Testamento a cada passo (“para que se cumprisse”) e organiza o ensino de Jesus em cinco grandes discursos, como um novo Moisés que fala do monte.",
+    "historias": ["nascimento", "ministerio", "milagres", "paixao", "ressurreicao"],
+    "partes": [
+      {"caps": "1–2", "titulo": "O Rei prometido nasce", "arte": "magos", "refs": ["Mt 1:1", "Mt 1:21-23", "Mt 2:1-2"],
+       "texto": "O livro abre com uma genealogia: de Abraão a Davi, de Davi ao exílio, do exílio a Cristo. É a certidão do Rei. Um anjo explica a José que o menino foi gerado pelo Espírito Santo e se chamará Jesus, porque salvará o seu povo dos pecados. Magos vindos de longe o adoram, enquanto Herodes tenta matá-lo. Desde o berço, uns se prostram e outros se opõem."},
+      {"caps": "3–4", "titulo": "O batismo, a tentação e o começo", "arte": "batismo-jesus", "refs": ["Mt 3:16-17", "Mt 4:4", "Mt 4:17"],
+       "texto": "João Batista prepara o caminho, e Jesus é batizado no Jordão; o Pai o declara Filho amado. No deserto, onde Israel caiu, ele vence o tentador respondendo três vezes com a Escritura. Depois se estabelece em Cafarnaum, anuncia que o Reino dos céus chegou, chama os primeiros discípulos e percorre a Galileia ensinando, pregando e curando."},
+      {"caps": "5–7", "titulo": "O Sermão do Monte", "arte": "sermao-monte", "refs": ["Mt 5:3-12", "Mt 6:9-13", "Mt 6:33", "Mt 7:24-27"],
+       "texto": "É o primeiro dos cinco discursos. Jesus descreve o caráter de quem pertence ao Reino, as bem-aventuranças, e mostra que a justiça verdadeira começa no coração: na ira, no olhar, na palavra dada, no amor aos inimigos. Ensina a dar, orar e jejuar para o Pai, não para a plateia, e a buscar primeiro o Reino. Quem ouve e pratica constrói sobre a rocha."},
+      {"caps": "8–10", "titulo": "A autoridade do Rei e o envio dos doze", "arte": "jesus-tempestade", "refs": ["Mt 8:26-27", "Mt 9:35-38", "Mt 10:5-8"],
+       "texto": "Depois das palavras, as obras. Mateus reúne dez milagres: um leproso, o servo de um centurião, a tempestade, endemoninhados, um paralítico, uma menina morta. Jesus tem autoridade sobre a doença, a natureza, os demônios, o pecado e a morte. Ao ver as multidões como ovelhas sem pastor, envia os doze e, no segundo discurso, avisa que serão perseguidos."},
+      {"caps": "11–13", "titulo": "Oposição e as parábolas do Reino", "arte": "semeador", "refs": ["Mt 11:28-30", "Mt 13:31-33", "Mt 13:44-46"],
+       "texto": "As reações se dividem. João Batista, preso, tem dúvidas; cidades inteiras ficam indiferentes; os fariseus atribuem os milagres ao diabo. Jesus convida os cansados a vir a ele e passa a ensinar por parábolas, no terceiro discurso: o semeador, o joio, o grão de mostarda, o tesouro escondido. O Reino começa pequeno, cresce sem alarde e vale tudo o que se tem."},
+      {"caps": "14–18", "titulo": "Quem é Jesus e como vive a sua comunidade", "arte": "transfiguracao", "refs": ["Mt 14:28-31", "Mt 16:15-18", "Mt 18:21-22"],
+       "texto": "Jesus alimenta multidões e anda sobre o mar; Pedro afunda e é socorrido. Em Cesareia de Filipe vem a confissão: “Tu és o Cristo, o Filho do Deus vivo.” A partir dali Jesus anuncia a cruz, e três discípulos veem a sua glória no monte. O quarto discurso trata da vida da igreja: humildade de criança, cuidado com os pequenos, correção fraterna e perdão sem conta."},
+      {"caps": "19–23", "titulo": "Rumo a Jerusalém e o confronto no templo", "arte": "entrada-triunfal", "refs": ["Mt 20:26-28", "Mt 21:9", "Mt 22:37-40"],
+       "texto": "No caminho, Jesus fala de casamento, de riquezas e de grandeza: o Filho do Homem veio para servir e dar a vida em resgate de muitos. Entra em Jerusalém aclamado como Filho de Davi, purifica o templo e enfrenta, uma a uma, as perguntas dos líderes. Resume a lei em dois amores e denuncia a religião de fachada dos escribas e fariseus."},
+      {"caps": "24–25", "titulo": "O sermão sobre o fim", "arte": "jerusalem-vista", "refs": ["Mt 24:14", "Mt 24:42-44", "Mt 25:34-40"],
+       "texto": "No monte das Oliveiras, o quinto discurso responde a duas perguntas: quando o templo será destruído e qual o sinal da vinda de Jesus. Ele não entrega um calendário; manda vigiar. As parábolas das virgens, dos talentos e do julgamento das nações mostram como se espera: com a lâmpada acesa, trabalhando com o que se recebeu e servindo os pequeninos."},
+      {"caps": "26–28", "titulo": "A cruz, o túmulo vazio e a grande comissão", "arte": "tumulo-vazio", "refs": ["Mt 26:26-28", "Mt 27:50-54", "Mt 28:18-20"],
+       "texto": "Na ceia, Jesus fala do seu sangue, derramado para remissão dos pecados. É traído, negado, condenado e crucificado; na hora da morte, o véu do templo se rasga e um centurião reconhece: era o Filho de Deus. No domingo, o túmulo está vazio. O Evangelho termina num monte da Galileia, com o Rei ressuscitado enviando os seus a todas as nações e prometendo: “Estou convosco todos os dias.”"}
+    ],
+    "chaves": ["Mt 16:16", "Mt 5:17", "Mt 28:18-20"],
+    "licoes": [
+      "Jesus é o cumprimento de tudo o que Deus prometeu: vale a pena ler o Antigo Testamento procurando por ele.",
+      "Ser discípulo é ouvir e praticar; a casa na rocha é a de quem obedece.",
+      "A missão da igreja é fazer discípulos de todas as nações, com a presença de Cristo garantida."
+    ],
+    "ligacoes": [
+      {"texto": "A genealogia retoma as promessas feitas a Abraão e a Davi.", "refs": ["Gn 12:3", "2Sm 7:12-16"]},
+      {"texto": "O Sermão do Monte aprofunda a lei dada no Sinai.", "refs": ["Êx 20:1-17", "Mt 5:17"]},
+      {"texto": "A grande comissão é o ponto de partida do livro de Atos.", "refs": ["At 1:8"], "livro": 44}
+    ]
+  },
+  {
+    "n": 41, "grupo": "evangelhos", "ordem": 8, "capa": "jesus-tempestade",
+    "tema": "Jesus é o Filho de Deus que veio servir e dar a vida",
+    "autor": "João Marcos, companheiro de Pedro e de Paulo",
+    "data": "c. 55–65 d.C.",
+    "de": "Roma, segundo a tradição antiga",
+    "para": "Cristãos de Roma, em sua maioria gentios",
+    "porque": "A tradição mais antiga diz que Marcos registrou a pregação de Pedro. O Evangelho é o mais curto e o mais ágil: quase não há discursos, e a palavra “logo” empurra a história de cena em cena. Escrito para uma igreja que sofria, mostra um Messias poderoso que escolhe o caminho da cruz e chama os discípulos para segui-lo.",
+    "historias": ["ministerio", "milagres", "paixao", "ressurreicao"],
+    "partes": [
+      {"caps": "1:1-13", "titulo": "O princípio do evangelho", "arte": "batismo-jesus", "refs": ["Mc 1:1", "Mc 1:9-11"],
+       "texto": "Marcos não começa em Belém. Em poucas linhas apresenta João Batista no deserto, o batismo de Jesus, a voz do céu, “Tu és o meu Filho amado”, e os quarenta dias de tentação. O primeiro versículo já diz aonde o livro quer chegar: Jesus é o Cristo, o Filho de Deus. Tudo o que vem depois é para o leitor confirmar isso com os próprios olhos."},
+      {"caps": "1:14–3:6", "titulo": "Autoridade na Galileia", "arte": "paralitico-telhado", "refs": ["Mc 1:15", "Mc 2:5-12", "Mc 2:17"],
+       "texto": "Jesus anuncia que o tempo está cumprido e chama quatro pescadores. Em Cafarnaum, ensina com autoridade, expulsa espíritos imundos, cura a sogra de Pedro e um leproso. Quatro amigos descem um paralítico pelo telhado, e ele perdoa pecados antes de mandar o homem andar. A cada cena cresce o espanto do povo e a irritação dos líderes, que já planejam matá-lo."},
+      {"caps": "3:7–6:6", "titulo": "Parábolas e poder", "arte": "gadareno", "refs": ["Mc 4:26-29", "Mc 4:39-41", "Mc 5:34-36"],
+       "texto": "Jesus escolhe os doze e explica o Reino com sementes: a que cai em solos diferentes, a que cresce sozinha, a de mostarda. Depois vêm quatro demonstrações de poder: sobre a tempestade, sobre uma legião de demônios, sobre uma doença de doze anos e sobre a morte da filha de Jairo. Mesmo assim, em Nazaré, a sua própria terra, ele se admira da incredulidade."},
+      {"caps": "6:7–8:26", "titulo": "Pão para todos e discípulos lentos", "arte": "multiplicacao", "refs": ["Mc 6:41-44", "Mc 7:20-23", "Mc 8:17-21"],
+       "texto": "Os doze são enviados, e João Batista é morto. Jesus alimenta cinco mil em terra judaica e quatro mil em terra gentia, anda sobre o mar e ensina que o que contamina o homem é o que sai do coração. Atende uma mulher estrangeira, cura um surdo e um cego. Os discípulos, porém, ainda não entendem: “Tendo olhos, não vedes?”"},
+      {"caps": "8:27–10:52", "titulo": "A virada: o Cristo e a cruz", "arte": "transfiguracao", "refs": ["Mc 8:29", "Mc 8:34-35", "Mc 10:45"],
+       "texto": "No meio exato do livro, Pedro confessa: “Tu és o Cristo.” Imediatamente Jesus começa a ensinar que precisa sofrer, morrer e ressuscitar, e repete o anúncio três vezes no caminho. A cada vez os discípulos discutem quem é o maior, e ele responde falando de cruz, de crianças e de serviço. O versículo que resume o Evangelho está aqui: veio servir e dar a vida em resgate."},
+      {"caps": "11–13", "titulo": "Jerusalém: o templo e os debates", "arte": "templo-purificacao", "refs": ["Mc 11:15-17", "Mc 12:29-31", "Mc 13:31-33"],
+       "texto": "Jesus entra na cidade montado num jumentinho, encontra uma figueira sem fruto e um templo transformado em comércio. Durante três dias responde a sacerdotes, fariseus e saduceus sobre a sua autoridade, o imposto, a ressurreição e o maior mandamento. Elogia a oferta de uma viúva pobre e, no monte das Oliveiras, manda os discípulos ficarem atentos: “Vigiai.”"},
+      {"caps": "14–15", "titulo": "A paixão", "arte": "calvario", "refs": ["Mc 14:22-24", "Mc 14:36", "Mc 15:37-39"],
+       "texto": "Uma mulher o unge em Betânia, e Judas combina a traição. Na ceia, Jesus dá o pão e o cálice; no Getsêmani, ora: “Aba, Pai, não o que eu quero, mas o que tu queres.” Abandonado pelos discípulos e negado por Pedro, é condenado e crucificado. Quando expira, o véu se rasga, e é um centurião romano quem diz o que o livro anunciou na primeira linha: era o Filho de Deus."},
+      {"caps": "16", "titulo": "O túmulo vazio", "arte": "tumulo-vazio", "refs": ["Mc 16:5-7", "Mc 16:15"],
+       "texto": "No primeiro dia da semana, as mulheres vão ao sepulcro e encontram a pedra removida. Um jovem de branco avisa: “Ele ressuscitou, não está aqui. Ide, dizei a seus discípulos, e a Pedro.” O recado tem nome: o discípulo que negou não ficou de fora. Os versículos finais, que faltam em alguns manuscritos antigos, registram as aparições e a ordem de pregar a toda criatura."}
+    ],
+    "chaves": ["Mc 10:45", "Mc 1:15", "Mc 8:34-35"],
+    "licoes": [
+      "A grandeza no Reino de Deus se mede pelo serviço.",
+      "Seguir Jesus inclui negar a si mesmo e tomar a cruz, não só admirar os milagres.",
+      "Quem falhou, como Pedro, é chamado pelo nome para recomeçar."
+    ],
+    "ligacoes": [
+      {"texto": "Marcos é o jovem em cuja casa a igreja orava e o companheiro que Paulo, no fim, pede de volta.", "refs": ["At 12:12", "2Tm 4:11"]},
+      {"texto": "Pedro o chama de “meu filho”.", "refs": ["1Pe 5:13"], "livro": 60},
+      {"texto": "O Servo que dá a vida em resgate vem de Isaías.", "refs": ["Is 53:10-12"]}
+    ]
+  },
+  {
+    "n": 42, "grupo": "evangelhos", "ordem": 10, "capa": "natal-manjedoura",
+    "tema": "Jesus é o Salvador de todos: veio buscar e salvar o perdido",
+    "autor": "Lucas, médico e companheiro de viagem de Paulo",
+    "data": "c. 60–62 d.C.",
+    "de": "Possivelmente de Cesareia ou de Roma, durante as prisões de Paulo",
+    "para": "Teófilo e, com ele, leitores de cultura grega",
+    "porque": "Lucas não foi testemunha ocular. Ele mesmo conta que investigou tudo com cuidado, desde o princípio, ouvindo quem viu, para que Teófilo tivesse certeza do que lhe ensinaram. É o Evangelho que mais dá atenção aos pobres, às mulheres, aos estrangeiros e aos pecadores, e também à oração, à alegria e ao Espírito Santo. Continua no livro de Atos.",
+    "historias": ["nascimento", "ministerio", "parabolas", "paixao", "ressurreicao"],
+    "partes": [
+      {"caps": "1–2", "titulo": "Dois nascimentos e muitos cânticos", "arte": "anunciacao", "refs": ["Lc 1:1-4", "Lc 1:46-49", "Lc 2:10-11"],
+       "texto": "Depois de um prefácio de historiador, Lucas conta em paralelo os nascimentos de João Batista e de Jesus. O anjo visita Zacarias e Maria; Maria canta, Zacarias canta, os anjos cantam, Simeão canta. O Salvador nasce numa manjedoura, e a notícia vai primeiro a pastores. A única cena da infância de Jesus nos Evangelhos está aqui: o menino de doze anos no templo."},
+      {"caps": "3:1–4:13", "titulo": "Preparação para o ministério", "arte": "tentacao-deserto", "refs": ["Lc 3:4-6", "Lc 3:21-22", "Lc 4:1-4"],
+       "texto": "Lucas situa João Batista na história, com nomes de imperador e governadores, e registra a sua pregação prática a multidões, cobradores e soldados. Jesus é batizado enquanto ora, e o Espírito desce sobre ele. A genealogia sobe até Adão: ele é Salvador de toda a humanidade. Cheio do Espírito, vence a tentação no deserto."},
+      {"caps": "4:14–9:50", "titulo": "Boas-novas na Galileia", "arte": "sinagoga-nazare", "refs": ["Lc 4:18-19", "Lc 5:31-32", "Lc 7:47-50"],
+       "texto": "Em Nazaré, Jesus lê Isaías e apresenta o seu programa: evangelizar os pobres, libertar os cativos, dar vista aos cegos. Chama pescadores e um cobrador de impostos, ressuscita o filho único de uma viúva em Naim e deixa uma pecadora lavar os seus pés com lágrimas. Mulheres acompanham e sustentam o grupo. “Não vim chamar justos, e sim pecadores ao arrependimento.”"},
+      {"caps": "9:51–13:21", "titulo": "A viagem começa", "arte": "bom-samaritano", "refs": ["Lc 9:51", "Lc 10:33-37", "Lc 11:9-13"],
+       "texto": "Jesus toma a firme decisão de ir a Jerusalém, e quase dez capítulos acontecem nessa estrada. Ele envia setenta discípulos, conta a parábola do bom samaritano, defende Maria, que escolheu ouvir, e ensina a orar com insistência a um Pai que dá o Espírito Santo aos que pedem. Adverte contra a ganância com a história do rico insensato."},
+      {"caps": "13:22–19:27", "titulo": "O que estava perdido foi achado", "arte": "prodigo-pai", "refs": ["Lc 15:20-24", "Lc 18:13-14", "Lc 19:10"],
+       "texto": "Aqui estão as parábolas que só Lucas guardou: a ovelha, a moeda e o filho perdidos; o rico e Lázaro; a viúva e o juiz; o fariseu e o cobrador de impostos. Dez leprosos são curados e só um samaritano volta para agradecer. Em Jericó, Jesus se convida para a casa de Zaqueu e diz a frase que resume o livro: veio buscar e salvar o que se havia perdido."},
+      {"caps": "19:28–21:38", "titulo": "O Rei chora sobre a cidade", "arte": "entrada-triunfal", "refs": ["Lc 19:41-44", "Lc 20:17", "Lc 21:33-36"],
+       "texto": "A multidão aclama, e Jesus chora ao ver Jerusalém, que não reconheceu o tempo da sua visitação. Ele purifica o templo, ensina ali todos os dias e responde aos que tentam apanhá-lo em alguma palavra. Fala da pedra rejeitada, anuncia o cerco da cidade e manda os discípulos vigiarem e orarem em todo o tempo."},
+      {"caps": "22–23", "titulo": "A ceia e a cruz", "arte": "calvario", "refs": ["Lc 22:19-20", "Lc 23:34", "Lc 23:42-43"],
+       "texto": "Na ceia, Jesus fala do novo testamento no seu sangue e avisa Pedro de que orou por ele. No monte das Oliveiras, ora em agonia. Lucas registra três palavras da cruz que os outros não trazem: o pedido de perdão para os que o matam, a promessa ao ladrão arrependido, “hoje estarás comigo no paraíso”, e a entrega final: “Pai, nas tuas mãos entrego o meu espírito.”"},
+      {"caps": "24", "titulo": "O caminho de Emaús e a ascensão", "arte": "emaus", "refs": ["Lc 24:5-6", "Lc 24:27", "Lc 24:46-49"],
+       "texto": "“Por que buscais entre os mortos ao que vive?” Dois discípulos tristes caminham para Emaús, e o Ressuscitado lhes explica, começando por Moisés, o que as Escrituras diziam a seu respeito; o coração deles arde. Em Jerusalém, Jesus come com os onze, manda que esperem o poder do alto e, abençoando-os, sobe ao céu. O livro termina no templo, com grande alegria."}
+    ],
+    "chaves": ["Lc 19:10", "Lc 4:18-19", "Lc 24:46-47"],
+    "licoes": [
+      "Ninguém está longe demais: o Pai corre ao encontro do filho que volta.",
+      "A fé cristã se apoia em fatos investigados e testemunhados, não em lendas.",
+      "Oração e Espírito Santo andam juntos na vida de Jesus e devem andar na nossa."
+    ],
+    "ligacoes": [
+      {"texto": "Lucas e Atos são dois volumes da mesma obra, dedicados a Teófilo.", "refs": ["Lc 1:1-4", "At 1:1-2"], "livro": 44},
+      {"texto": "Lucas, “o médico amado”, estava com Paulo nas prisões.", "refs": ["Cl 4:14", "2Tm 4:11"]},
+      {"texto": "A promessa do “poder do alto” se cumpre em Pentecostes.", "refs": ["Lc 24:49", "At 2:1-4"]}
+    ]
+  },
+  {
+    "n": 43, "grupo": "evangelhos", "ordem": 23, "capa": "lazaro",
+    "tema": "Jesus é o Verbo que se fez carne: crer nele é ter vida",
+    "autor": "João, filho de Zebedeu, “o discípulo a quem Jesus amava”",
+    "data": "c. 85–90 d.C.",
+    "de": "Éfeso, segundo a tradição",
+    "para": "A igreja e todos os que ainda buscam",
+    "porque": "João escreve depois dos outros três e não repete o que eles contaram. Escolhe sete sinais e longas conversas para responder a uma pergunta: quem é Jesus? Ele mesmo diz por que escreveu: para que creiais que Jesus é o Cristo, o Filho de Deus, e para que, crendo, tenhais vida em seu nome. Sete vezes Jesus se apresenta dizendo “Eu sou”.",
+    "historias": ["ministerio", "paixao", "ressurreicao"],
+    "partes": [
+      {"caps": "1:1-18", "titulo": "No princípio era o Verbo", "arte": "criacao-luz", "refs": ["Jo 1:1-5", "Jo 1:12", "Jo 1:14"],
+       "texto": "Os outros Evangelhos começam no Jordão ou em Belém; João começa antes da criação. O Verbo estava com Deus e era Deus; todas as coisas foram feitas por ele. Essa luz veio ao mundo, e o mundo não a conheceu, mas aos que o receberam deu o poder de serem feitos filhos de Deus. E o Verbo se fez carne e habitou entre nós, cheio de graça e de verdade."},
+      {"caps": "1:19–4:54", "titulo": "Primeiros testemunhos e primeiros sinais", "arte": "cana-bodas", "refs": ["Jo 1:29", "Jo 3:16", "Jo 4:13-14"],
+       "texto": "João Batista aponta o Cordeiro de Deus, e os primeiros discípulos o seguem. Em Caná, a água vira vinho. Jesus purifica o templo e fala do templo do seu corpo. A Nicodemos diz que é preciso nascer de novo; a uma samaritana junto ao poço oferece água viva. De volta à Galileia, cura à distância o filho de um oficial. Cada encontro é um convite a crer."},
+      {"caps": "5–6", "titulo": "O Filho que dá vida e o pão do céu", "arte": "multiplicacao", "refs": ["Jo 5:24", "Jo 6:35", "Jo 6:68-69"],
+       "texto": "Jesus cura um homem paralisado havia trinta e oito anos, num sábado, e declara que faz as obras do Pai: quem ouve a sua palavra e crê passou da morte para a vida. Depois alimenta cinco mil e explica o sinal: “Eu sou o pão da vida.” O discurso é duro, muitos discípulos vão embora, e Pedro responde pelos doze: “Só tu tens as palavras da vida eterna.”"},
+      {"caps": "7–10", "titulo": "A luz do mundo e o bom Pastor", "arte": "ovelha-perdida", "refs": ["Jo 7:37-39", "Jo 8:12", "Jo 9:25", "Jo 10:11"],
+       "texto": "Na Festa dos Tabernáculos, Jesus clama: “Se alguém tem sede, venha a mim e beba.” Perdoa uma mulher apanhada em adultério, declara-se a luz do mundo e diz: “Antes que Abraão existisse, eu sou.” Dá vista a um cego de nascença, que termina adorando-o, e se apresenta como a porta e o bom Pastor que dá a vida pelas ovelhas. A divisão entre o povo aumenta."},
+      {"caps": "11–12", "titulo": "A ressurreição e a vida", "arte": "lazaro", "refs": ["Jo 11:25-26", "Jo 11:43-44", "Jo 12:24"],
+       "texto": "O sétimo sinal é o maior: Lázaro, morto havia quatro dias, sai do túmulo. Jesus chora antes de chamá-lo e diz a Marta: “Eu sou a ressurreição e a vida.” O milagre leva o Sinédrio a decidir a sua morte. Maria o unge em Betânia, a multidão o aclama em Jerusalém, e ele anuncia que chegou a hora: o grão de trigo precisa morrer para dar muito fruto."},
+      {"caps": "13–17", "titulo": "A despedida no cenáculo", "arte": "ultima-ceia", "refs": ["Jo 13:34-35", "Jo 14:6", "Jo 15:5", "Jo 17:3"],
+       "texto": "Cinco capítulos numa só noite. Jesus lava os pés dos discípulos e dá o mandamento novo: que se amem como ele os amou. Diz que é o caminho, a verdade e a vida, a videira verdadeira, e promete o Consolador, o Espírito Santo, que ficará com eles para sempre. Termina orando pelos seus e por todos os que haveriam de crer, para que sejam um."},
+      {"caps": "18–19", "titulo": "O Rei crucificado", "arte": "pilatos", "refs": ["Jo 18:36-37", "Jo 19:26-27", "Jo 19:30"],
+       "texto": "No jardim, Jesus se entrega dizendo “Sou eu”. Diante de Pilatos, explica que o seu Reino não é deste mundo e que veio dar testemunho da verdade. É açoitado, apresentado ao povo, “Eis o homem”, e crucificado com a inscrição de rei em três línguas. Da cruz, confia a mãe ao discípulo amado e declara: “Está consumado.” A obra que o Pai lhe deu foi terminada."},
+      {"caps": "20–21", "titulo": "“Senhor meu e Deus meu”", "arte": "madalena-jardim", "refs": ["Jo 20:16-18", "Jo 20:28-31", "Jo 21:15-17"],
+       "texto": "Maria Madalena reconhece o Ressuscitado quando ele a chama pelo nome. Jesus sopra sobre os discípulos e os envia; Tomé, que duvidava, faz a confissão mais alta do Evangelho. João explica então por que escreveu. Num último capítulo, à beira do lago, há uma pesca abundante, um braseiro e três perguntas que restauram Pedro: “Apascenta as minhas ovelhas.”"}
+    ],
+    "chaves": ["Jo 20:31", "Jo 3:16", "Jo 1:14", "Jo 14:6"],
+    "licoes": [
+      "A vida eterna não é só futuro: começa quando se conhece o Pai por meio de Jesus.",
+      "Crer é mais que concordar: é vir, beber, permanecer, seguir.",
+      "O sinal que identifica os discípulos é o amor de uns pelos outros."
+    ],
+    "ligacoes": [
+      {"texto": "O começo de João ecoa o começo de Gênesis.", "refs": ["Gn 1:1-3", "Jo 1:1-3"]},
+      {"texto": "Os “Eu sou” lembram o nome revelado a Moisés na sarça.", "refs": ["Êx 3:14", "Jo 8:58"]},
+      {"texto": "As cartas de João retomam os mesmos temas: luz, vida, verdade e amor.", "refs": ["1Jo 1:1-4"], "livro": 62}
+    ]
+  }
+]

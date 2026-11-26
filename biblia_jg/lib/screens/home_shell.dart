@@ -12,6 +12,7 @@ import '../services/dictionary_service.dart';
 import '../services/sync.dart';
 import '../state/app_state.dart';
 import '../widgets/book_chapter_panel.dart';
+import '../widgets/focus_clock.dart';
 import '../widgets/quick_settings_sheet.dart';
 import '../widgets/update_dialog.dart';
 import 'about_screen.dart';
@@ -29,11 +30,13 @@ import 'marks_screen.dart';
 import 'memorize_screen.dart';
 import 'music_screen.dart';
 import 'needs_screen.dart';
+import 'notebook_library_screen.dart';
 import 'notes_screen.dart';
 import 'panorama_screen.dart';
 import 'prayer_screen.dart';
 import 'progress_screen.dart';
 import 'quiz_screen.dart';
+import 'quotes_screen.dart';
 import 'reader_view.dart';
 import 'reading_plans_screen.dart';
 import 'search_screen.dart';
@@ -42,12 +45,40 @@ import 'settings_screen.dart';
 import 'stories_screen.dart';
 import 'today_screen.dart';
 import 'versions_screen.dart';
-import 'voice_screen.dart';
 
 /// Largura a partir da qual usamos o layout de tablet (duas colunas).
 const tabletBreakpoint = 720.0;
 
-/// Casca do app: abas Hoje, Bíblia, Estudo, Biblioteca e Mais.
+class _Dest {
+  final IconData icon;
+  final IconData selected;
+  final String label;
+  const _Dest(this.icon, this.selected, this.label);
+}
+
+/// Tudo o que o app tem fica na barra lateral, no mesmo padrão (não há mais a aba "Mais").
+/// As quatro primeiras também formam a barra de baixo do celular.
+const _destinations = <_Dest>[
+  _Dest(Icons.today_outlined, Icons.today, 'Hoje'),
+  _Dest(Icons.menu_book_outlined, Icons.menu_book, 'Bíblia'),
+  _Dest(Icons.school_outlined, Icons.school, 'Estudo'),
+  _Dest(Icons.local_library_outlined, Icons.local_library, 'Biblioteca'),
+  _Dest(Icons.format_quote_outlined, Icons.format_quote, 'Frases'),
+  _Dest(Icons.insights_outlined, Icons.insights, 'Progresso'),
+  _Dest(Icons.translate_outlined, Icons.translate, 'Versões'),
+  _Dest(Icons.settings_outlined, Icons.settings, 'Ajustes'),
+  _Dest(Icons.backup_outlined, Icons.backup, 'Backup'),
+  _Dest(Icons.person_outline, Icons.person, 'Conta'),
+  _Dest(Icons.info_outline, Icons.info, 'Sobre'),
+];
+
+/// Quantas ficam na barra de baixo do celular (as outras abrem pelo botão "Menu").
+const _phoneTabs = 4;
+
+/// Índice da conta (mostra a foto de quem entrou).
+const _accountTab = 9;
+
+/// Casca do app: Hoje, Bíblia, Estudo, Biblioteca, Frases e as telas de ajustes, todas na barra lateral.
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
 
@@ -66,14 +97,6 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   bool? _lastFullScreen;
   bool _resumed = true;
   Timer? _clock;
-
-  static const _destinations = <(IconData, IconData, String)>[
-    (Icons.today_outlined, Icons.today, 'Hoje'),
-    (Icons.menu_book_outlined, Icons.menu_book, 'Bíblia'),
-    (Icons.school_outlined, Icons.school, 'Estudo'),
-    (Icons.local_library_outlined, Icons.local_library, 'Biblioteca'),
-    (Icons.more_horiz, Icons.more_horiz, 'Mais'),
-  ];
 
   @override
   void initState() {
@@ -135,10 +158,30 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   }
 
   void _select(int i) => setState(() {
-        _tab = i;
-        _built.add(i);
-        if (i != 1) _chrome = true;
+        _tab = i.clamp(0, _destinations.length - 1);
+        _built.add(_tab);
+        if (_tab != 1) _chrome = true;
       });
+
+  /// Celular: as telas que não cabem na barra de baixo.
+  Future<void> _phoneMenu() async {
+    final picked = await showModalBottomSheet<int>(
+      context: context,
+      showDragHandle: true,
+      builder: (ctx) => SafeArea(
+        child: ListView(shrinkWrap: true, children: [
+          for (var i = _phoneTabs; i < _destinations.length; i++)
+            ListTile(
+              leading: Icon(i == _tab ? _destinations[i].selected : _destinations[i].icon),
+              title: Text(_destinations[i].label),
+              selected: i == _tab,
+              onTap: () => Navigator.pop(ctx, i),
+            ),
+        ]),
+      ),
+    );
+    if (picked != null && mounted) _select(picked);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -166,11 +209,19 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
             }),
           2 => const StudyHub(),
           3 => const LibraryHub(),
-          _ => const MoreScreen(),
+          4 => const QuotesScreen(),
+          5 => const ProgressScreen(),
+          6 => const VersionsScreen(),
+          7 => const SettingsScreen(),
+          8 => const BackupScreen(),
+          9 => const AccountScreen(),
+          _ => const AboutScreen(),
         };
     final stack = IndexedStack(
       index: _tab,
-      children: [for (var i = 0; i < 5; i++) _built.contains(i) ? page(i) : const SizedBox.shrink()],
+      children: [
+        for (var i = 0; i < _destinations.length; i++) _built.contains(i) ? page(i) : const SizedBox.shrink(),
+      ],
     );
 
     return PopScope(
@@ -183,37 +234,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
               body: Stack(children: [
                Row(children: [
                 if (_chrome && !railHidden)
-                  NavigationRail(
-                    selectedIndex: _tab,
-                    onDestinationSelected: _select,
-                    labelType: NavigationRailLabelType.all,
-                    leading: Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 12),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.asset('assets/branding/logo.png', width: 44, height: 44,
-                            errorBuilder: (_, _, _) => const Icon(Icons.menu_book, size: 36)),
-                      ),
-                    ),
-                    destinations: [
-                      for (final (icon, selected, label) in _destinations)
-                        NavigationRailDestination(icon: Icon(icon), selectedIcon: Icon(selected), label: Text(label)),
-                    ],
-                    // Embaixo: a música e o botão de recolher a barra.
-                    trailingAtBottom: true,
-                    scrollable: true,
-                    trailing: Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: Column(mainAxisSize: MainAxisSize.min, children: [
-                        const RailMusic(),
-                        IconButton(
-                          tooltip: 'Ocultar a barra lateral',
-                          icon: const Icon(Icons.keyboard_double_arrow_left),
-                          onPressed: () => _setRailHidden(true),
-                        ),
-                      ]),
-                    ),
-                  ),
+                  _SideRail(selected: _tab, onSelect: _select, onHide: () => _setRailHidden(true)),
                 if (_chrome && !railHidden) const VerticalDivider(width: 1),
                 Expanded(child: stack),
                ]),
@@ -242,15 +263,127 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
               body: stack,
               bottomNavigationBar: _chrome
                   ? NavigationBar(
-                      selectedIndex: _tab,
-                      onDestinationSelected: _select,
+                      selectedIndex: _tab < _phoneTabs ? _tab : _phoneTabs,
+                      onDestinationSelected: (i) => i < _phoneTabs ? _select(i) : _phoneMenu(),
                       destinations: [
-                        for (final (icon, selected, label) in _destinations)
-                          NavigationDestination(icon: Icon(icon), selectedIcon: Icon(selected), label: label),
+                        for (final d in _destinations.take(_phoneTabs))
+                          NavigationDestination(icon: Icon(d.icon), selectedIcon: Icon(d.selected), label: d.label),
+                        const NavigationDestination(icon: Icon(Icons.menu), label: 'Menu'),
                       ],
                     )
                   : null,
             ),
+    );
+  }
+}
+
+/// Barra lateral do tablet: todas as telas no mesmo padrão (ícone e nome), a música e o botão de recolher.
+class _SideRail extends StatelessWidget {
+  final int selected;
+  final ValueChanged<int> onSelect;
+  final VoidCallback onHide;
+  const _SideRail({required this.selected, required this.onSelect, required this.onHide});
+
+  static const width = 84.0;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final account = context.watch<AccountService>();
+    final photo = account.signedIn ? account.photoUrl : null;
+    return Material(
+      color: scheme.surface,
+      child: SafeArea(
+        right: false,
+        child: SizedBox(
+          width: width,
+          child: Column(children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 6),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset('assets/branding/logo.png', width: 44, height: 44,
+                    errorBuilder: (_, _, _) => const Icon(Icons.menu_book, size: 36)),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  for (var i = 0; i < _destinations.length; i++) ...[
+                    // Uma linha fina separa o que se usa todo dia das telas de ajuste.
+                    if (i == 5) const Divider(height: 13, indent: 20, endIndent: 20),
+                    _RailItem(
+                      dest: _destinations[i],
+                      selected: i == selected,
+                      photo: i == _accountTab ? photo : null,
+                      onTap: () => onSelect(i),
+                    ),
+                  ],
+                ]),
+              ),
+            ),
+            const Divider(height: 1, indent: 20, endIndent: 20),
+            const RailMusic(),
+            IconButton(
+              tooltip: 'Ocultar a barra lateral',
+              icon: const Icon(Icons.keyboard_double_arrow_left),
+              onPressed: onHide,
+            ),
+            const SizedBox(height: 4),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+class _RailItem extends StatelessWidget {
+  final _Dest dest;
+  final bool selected;
+  final String? photo;
+  final VoidCallback onTap;
+  const _RailItem({required this.dest, required this.selected, required this.onTap, this.photo});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final fg = selected ? scheme.onSecondaryContainer : scheme.onSurfaceVariant;
+    return Semantics(
+      button: true,
+      selected: selected,
+      child: InkWell(
+        onTap: onTap,
+        customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        child: SizedBox(
+          width: _SideRail.width,
+          height: 54,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 160),
+              curve: Curves.easeOut,
+              width: 56,
+              height: 30,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: selected ? scheme.secondaryContainer : Colors.transparent,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: photo != null
+                  ? CircleAvatar(radius: 11, backgroundImage: NetworkImage(photo!))
+                  : Icon(selected ? dest.selected : dest.icon, size: 22, color: fg),
+            ),
+            const SizedBox(height: 3),
+            Text(dest.label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    fontSize: 11.5,
+                    height: 1.1,
+                    fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                    color: selected ? scheme.onSurface : scheme.onSurfaceVariant)),
+          ]),
+        ),
+      ),
     );
   }
 }
@@ -272,15 +405,14 @@ class _ReaderPageState extends State<ReaderPage> {
   bool _barsVisible = true;
   bool? _panelChoice; // null = automático (aberto só em telas largas)
   bool _focus = false;
-  int _focusSeconds = 0;
   Timer? _focusTimer;
-  int? _focusGoal; // minutos escolhidos para a sessão (0 = sem limite)
-  bool _alarmed = false;
-  Offset? _pill; // onde o relógio do modo foco fica (o leitor arrasta)
+  // O tempo da sessão fica fora do estado da página: só o relógio se atualiza a cada segundo.
+  final _session = FocusSession();
 
   @override
   void dispose() {
     _focusTimer?.cancel();
+    _session.dispose();
     super.dispose();
   }
 
@@ -294,27 +426,15 @@ class _ReaderPageState extends State<ReaderPage> {
 
   void _startFocus() {
     _focusTimer?.cancel();
-    setState(() {
-      _focus = true;
-      _focusSeconds = 0;
-      _alarmed = false;
-      _focusGoal = null; // volta ao tempo guardado
-    });
+    _session.restart(goal: context.read<AppState>().prefs.getInt('focus.goal') ?? 10); // volta ao tempo guardado
+    setState(() => _focus = true);
     widget.onChrome(false);
     _focusTimer = Timer.periodic(const Duration(seconds: 1), (_) => _tick());
   }
 
-  int _goal(AppState app) => _focusGoal ??= app.prefs.getInt('focus.goal') ?? 10;
-
   void _tick() {
     if (!mounted) return;
-    setState(() => _focusSeconds++);
-    final app = context.read<AppState>();
-    final goal = _goal(app);
-    if (goal > 0 && !_alarmed && _focusSeconds >= goal * 60) {
-      _alarmed = true;
-      _ringAlarm(app, goal);
-    }
+    if (_session.tick()) _ringAlarm(context.read<AppState>(), _session.goal);
   }
 
   /// O tempo escolhido acabou: toca o alarme e pergunta o que fazer.
@@ -342,10 +462,7 @@ class _ReaderPageState extends State<ReaderPage> {
     );
     if (!mounted) return;
     if (choice == 5) {
-      setState(() {
-        _focusGoal = _focusSeconds ~/ 60 + 5;
-        _alarmed = false;
-      });
+      _session.extend(5);
     } else if (choice == -1) {
       _finishFocus(app);
     }
@@ -353,7 +470,7 @@ class _ReaderPageState extends State<ReaderPage> {
 
   /// Escolhe por quanto tempo ler (o alarme toca no fim).
   Future<void> _chooseGoal(AppState app) async {
-    final current = _goal(app);
+    final current = _session.goal;
     final picked = await showModalBottomSheet<int>(
       context: context,
       showDragHandle: true,
@@ -363,7 +480,7 @@ class _ReaderPageState extends State<ReaderPage> {
           child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text('Por quanto tempo quer ler?', style: Theme.of(ctx).textTheme.titleLarge),
             const SizedBox(height: 4),
-            const Text('Quando o tempo acabar, o aparelho toca um alarme. Dá para arrastar o relógio para onde quiser.'),
+            const Text('Quando o tempo acabar, o aparelho toca um alarme. Arraste o relógio para onde quiser; toque nele para ver as opções.'),
             const SizedBox(height: 14),
             Wrap(spacing: 8, runSpacing: 8, children: [
               for (final m in const [0, 5, 10, 15, 20, 30, 45, 60, 90])
@@ -379,17 +496,12 @@ class _ReaderPageState extends State<ReaderPage> {
     );
     if (picked == null || !mounted) return;
     app.prefs.setInt('focus.goal', picked);
-    setState(() {
-      _focusGoal = picked;
-      _alarmed = picked > 0 && _focusSeconds >= picked * 60;
-    });
+    _session.setGoal(picked);
   }
 
   /// Faixa de cima do modo foco: a hora à esquerda e o livro com o capítulo no centro.
   Widget _focusStrip(String title) {
     final scheme = Theme.of(context).colorScheme;
-    final now = DateTime.now();
-    final clock = '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}';
     return SafeArea(
       bottom: false,
       child: SizedBox(
@@ -399,7 +511,7 @@ class _ReaderPageState extends State<ReaderPage> {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: const EdgeInsets.only(left: 16),
-              child: Text(clock,
+              child: WallClock(
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
@@ -424,91 +536,6 @@ class _ReaderPageState extends State<ReaderPage> {
             ),
           ),
         ]),
-      ),
-    );
-  }
-
-  /// Relógio do modo foco: mostra o tempo, abre a escolha da duração e pode ser arrastado.
-  Widget _focusPill(AppState app, BoxConstraints box) {
-    final scheme = Theme.of(context).colorScheme;
-    final goal = _goal(app);
-    final total = goal * 60;
-    final remaining = goal > 0 ? total - _focusSeconds : _focusSeconds;
-    final shown = remaining.abs();
-    final label =
-        '${goal > 0 && remaining < 0 ? '+' : ''}${(shown ~/ 60).toString().padLeft(2, '0')}:${(shown % 60).toString().padLeft(2, '0')}';
-    final done = goal > 0 ? _focusSeconds >= total : _focusSeconds >= 300;
-    _pill ??= app.prefs.containsKey('focus.px')
-        ? Offset(app.prefs.getDouble('focus.px') ?? 0, app.prefs.getDouble('focus.py') ?? 0)
-        : Offset(box.maxWidth - 372, box.maxHeight - 76);
-    final top = MediaQuery.paddingOf(context).top + 44;
-    final pos = Offset(
-      _pill!.dx.clamp(4.0, (box.maxWidth - 160).clamp(4.0, double.infinity)),
-      _pill!.dy.clamp(top, (box.maxHeight - 60).clamp(top, double.infinity)),
-    );
-    return Positioned(
-      left: pos.dx,
-      top: pos.dy,
-      child: GestureDetector(
-        onPanUpdate: (d) => setState(() => _pill = pos + d.delta),
-        onPanEnd: (_) {
-          app.prefs.setDouble('focus.px', pos.dx);
-          app.prefs.setDouble('focus.py', pos.dy);
-        },
-        child: Material(
-          elevation: 6,
-          borderRadius: BorderRadius.circular(28),
-          color: scheme.inverseSurface,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(6, 6, 6, 6),
-            child: Row(mainAxisSize: MainAxisSize.min, children: [
-              Tooltip(
-                message: 'Arraste para mudar de lugar',
-                child: Icon(Icons.drag_indicator, size: 20, color: scheme.onInverseSurface.withValues(alpha: 0.6)),
-              ),
-              InkWell(
-                borderRadius: BorderRadius.circular(18),
-                onTap: () => _chooseGoal(app),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                  child: Row(mainAxisSize: MainAxisSize.min, children: [
-                    if (done)
-                      const Icon(Icons.check_circle, size: 18, color: Colors.greenAccent)
-                    else if (goal > 0)
-                      SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: CircularProgressIndicator(
-                          value: (_focusSeconds / total).clamp(0.0, 1.0),
-                          strokeWidth: 2.5,
-                          color: Colors.greenAccent,
-                          backgroundColor: scheme.onInverseSurface.withValues(alpha: 0.25),
-                        ),
-                      )
-                    else
-                      Icon(Icons.timer_outlined, size: 18, color: scheme.onInverseSurface),
-                    const SizedBox(width: 8),
-                    Text(label,
-                        style: TextStyle(
-                            color: scheme.onInverseSurface,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            fontFeatures: const [FontFeature.tabularFigures()])),
-                    Icon(Icons.arrow_drop_down, size: 18, color: scheme.onInverseSurface),
-                  ]),
-                ),
-              ),
-              const SizedBox(width: 4),
-              FilledButton(onPressed: () => _finishFocus(app), child: const Text('Concluir leitura')),
-              IconButton(
-                tooltip: 'Sair do modo foco',
-                color: scheme.onInverseSurface,
-                icon: const Icon(Icons.close),
-                onPressed: _stopFocus,
-              ),
-            ]),
-          ),
-        ),
       ),
     );
   }
@@ -561,12 +588,7 @@ class _ReaderPageState extends State<ReaderPage> {
     if (!mounted) return;
     if (next == true) {
       await app.nextChapter();
-      if (mounted) {
-        setState(() {
-          _focusSeconds = 0;
-          _alarmed = false;
-        });
-      }
+      if (mounted) _session.restart();
     } else {
       _stopFocus();
     }
@@ -747,7 +769,16 @@ class _ReaderPageState extends State<ReaderPage> {
             Expanded(child: body),
             if (!_focus) MiniMusicBar(onOpen: () => _push(const MusicScreen())),
           ]),
-          if (_focus) _focusPill(app, box),
+          if (_focus)
+            FocusClock(
+              session: _session,
+              prefs: app.prefs,
+              area: Size(box.maxWidth, box.maxHeight),
+              top: MediaQuery.paddingOf(context).top + 40,
+              onGoal: () => _chooseGoal(app),
+              onFinish: () => _finishFocus(app),
+              onExit: _stopFocus,
+            ),
         ]),
       ),
     );
@@ -779,7 +810,7 @@ class _NoBible extends StatelessWidget {
 }
 
 // ======================================================================
-// Abas Estudo, Biblioteca e Mais
+// Abas Estudo e Biblioteca
 // ======================================================================
 
 class _HubItem {
@@ -884,6 +915,8 @@ class StudyHub extends StatelessWidget {
           _HubItem(Icons.self_improvement, const Color(0xFF6A1B9A), 'Diário de oração', 'Pedidos e orações respondidas', (c) => _go(c, const PrayerScreen())),
           _HubItem(Icons.wb_sunny_outlined, const Color(0xFFEF6C00), 'Devocional sob medida', 'Feito para o seu objetivo e a sua rotina',
               (c) => _go(c, const DevotionalScreen())),
+          _HubItem(Icons.draw_outlined, const Color(0xFF7A1F2B), 'Caderno', 'Escreva à mão, cole versículos e monte esboços',
+              (c) => _go(c, const NotebooksScreen())),
           _HubItem(Icons.record_voice_over_outlined, const Color(0xFF6D4C41), 'Pregações', 'Esboços, ajuda da IA e modo púlpito',
               (c) => _go(c, const SermonsScreen())),
           _HubItem(Icons.abc, const Color(0xFF455A64), 'Dicionário bíblico', 'Pessoas, lugares e termos', (c) => _go(c, const DictionaryScreen())),
@@ -912,69 +945,4 @@ class LibraryHub extends StatelessWidget {
           _HubItem(Icons.history, const Color(0xFF455A64), 'Histórico', 'Capítulos abertos recentemente', (c) => _go(c, const HistoryScreen())),
         ],
       );
-}
-
-class MoreScreen extends StatelessWidget {
-  const MoreScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final account = context.watch<AccountService>();
-    final theme = Theme.of(context);
-    Widget tile(IconData icon, String title, String subtitle, Widget page) => ListTile(
-          leading: Icon(icon),
-          title: Text(title),
-          subtitle: Text(subtitle),
-          trailing: const Icon(Icons.chevron_right),
-          onTap: () => _go(context, page),
-        );
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 760),
-            child: ListView(padding: const EdgeInsets.fromLTRB(12, 18, 12, 28), children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 0, 8, 12),
-                child: Text('Mais', style: theme.textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
-              ),
-              Card(
-                child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  leading: account.signedIn && account.photoUrl != null
-                      ? CircleAvatar(backgroundImage: NetworkImage(account.photoUrl!))
-                      : const CircleAvatar(child: Icon(Icons.person)),
-                  title: Text(account.signedIn ? (account.name ?? account.email ?? 'Conta Google') : 'Entrar com Google',
-                      style: const TextStyle(fontWeight: FontWeight.w700)),
-                  subtitle: Text(!account.signedIn
-                      ? 'Salve marcações, anotações e progresso na sua conta'
-                      : account.sessionExpired
-                          ? 'Sessão vencida: toque para entrar de novo'
-                          : 'Seus dados estão sincronizados na sua conta'),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => _go(context, const AccountScreen()),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Card(
-                child: Column(children: [
-                  tile(Icons.insights, 'Progresso de leitura', 'Quanto da Bíblia você já leu', const ProgressScreen()),
-                  tile(Icons.translate, 'Versões da Bíblia', 'Escolher ou importar versões', const VersionsScreen()),
-                  tile(Icons.record_voice_over, 'Voz da leitura', 'Voz, velocidade e tom', const VoiceScreen()),
-                  tile(Icons.settings, 'Configurações', 'Leitura, tema e notificações', const SettingsScreen()),
-                  tile(Icons.backup, 'Backup', 'Salvar ou restaurar seus dados', const BackupScreen()),
-                  tile(Icons.info_outline, 'Sobre', 'Versão, atualização e créditos', const AboutScreen()),
-                ]),
-              ),
-              const SizedBox(height: 24),
-              Center(
-                child: Text('Bíblia JG · Produzido por Joabe Gonçalves',
-                    style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
-              ),
-            ]),
-          ),
-        ),
-      ),
-    );
-  }
 }

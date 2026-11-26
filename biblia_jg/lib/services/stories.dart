@@ -11,7 +11,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/reference_parser.dart';
-import 'ai_service.dart' show appKey, supabaseAnonKey, supabaseUrl;
+import 'ai_service.dart' show supabaseUrl;
 
 /// Uma cena da história: ilustração, texto narrado e (se houver) o lugar no mapa.
 class StoryScene {
@@ -182,49 +182,24 @@ class StoriesData {
   }
 }
 
-/// Voz do narrador: o dono ouve as amostras e escolhe; as narrações passam a ser gravadas com ela.
-class NarratorVoices {
-  static const _prefKey = 'stories.voz';
+/// Voz padrão do app. As narrações antigas (gravadas com outra voz) são refeitas aos poucos.
+const narratorVoice = 'Algieba';
 
-  /// Vozes com amostra na nuvem e a voz em uso (null se ainda não há amostras).
-  static Future<(List<String>, String)?> load() async {
-    try {
-      final res = await http
-          .get(Uri.parse('${StoryMedia.url('amostras/vozes.json')}?t=${DateTime.now().millisecondsSinceEpoch ~/ 60000}'))
-          .timeout(const Duration(seconds: 15));
-      if (res.statusCode != 200) return null;
-      final j = jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
-      final voices = [for (final v in j['vozes'] as List? ?? const []) '$v'];
-      if (voices.isEmpty) return null;
-      final chosen = (await SharedPreferences.getInstance()).getString(_prefKey);
-      return (voices, chosen ?? '${j['padrao'] ?? voices.first}');
-    } catch (_) {
-      return null;
+/// Versão do áudio a partir da qual a cena já está com a voz padrão (o gerador numera a série nova em 20).
+const narratorSeries = 20;
+
+/// "37 de 199 cenas já estão com a voz nova; as outras chegam aos poucos."
+String narrationProgress(StoriesData data) {
+  var total = 0, done = 0;
+  for (final s in data.stories) {
+    for (final c in s.scenes) {
+      total++;
+      if (c.audioVersion >= narratorSeries) done++;
     }
   }
-
-  static String sampleUrl(String voice) => StoryMedia.url('amostras/voz-${voice.toLowerCase()}.mp3');
-
-  /// Registra a escolha (vale para as próximas gravações).
-  static Future<bool> choose(String voice) async {
-    try {
-      final res = await http
-          .post(Uri.parse('$supabaseUrl/functions/v1/historias-admin'),
-              headers: {
-                'Authorization': 'Bearer $supabaseAnonKey',
-                'apikey': supabaseAnonKey,
-                'x-app-key': appKey,
-                'Content-Type': 'application/json',
-              },
-              body: jsonEncode({'voz': voice}))
-          .timeout(const Duration(seconds: 20));
-      if (res.statusCode != 200) return false;
-      await (await SharedPreferences.getInstance()).setString(_prefKey, voice);
-      return true;
-    } catch (_) {
-      return false;
-    }
-  }
+  if (done >= total) return 'Todas as $total cenas já estão gravadas com ela.';
+  return '$done de $total cenas já estão com a voz nova. As outras são regravadas aos poucos (cerca de 40 por dia) '
+      'e chegam sozinhas, sem atualizar o app.';
 }
 
 /// Arquivos das histórias (ilustrações, mapas de profundidade e narração) no bucket público

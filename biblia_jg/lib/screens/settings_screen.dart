@@ -5,7 +5,6 @@ import '../models/reader_settings.dart';
 import '../state/app_state.dart';
 import '../widgets/quick_settings_sheet.dart';
 import 'versions_screen.dart';
-import 'voice_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -131,16 +130,6 @@ class SettingsScreen extends StatelessWidget {
               trailing: const Icon(Icons.chevron_right),
               onTap: () => Navigator.push(
                   context, MaterialPageRoute(builder: (_) => const VersionsScreen())),
-            ),
-            header('Leitura em voz alta'),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.record_voice_over),
-              title: const Text('Voz da leitura'),
-              subtitle: const Text('Escolher a voz, a velocidade e o tom'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const VoiceScreen())),
             ),
             const SizedBox(height: 40),
           ]),
