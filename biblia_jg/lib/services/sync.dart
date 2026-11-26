@@ -26,6 +26,11 @@ Future<Map<String, dynamic>> localSnapshot(AppState app, [DictionaryService? dic
       for (final k in _intKeys)
         if (p.getInt(k) != null) k: p.getInt(k),
     },
+    // Marca-texto e escrita à mão sobre a Bíblia (um item por capítulo de cada versão).
+    'tinta': {
+      for (final k in p.getKeys())
+        if (k.startsWith('tinta.') && p.getString(k) != null) k.substring(6): p.getString(k),
+    },
     // Só envia as marcações do dicionário se a leitura do arquivo deu certo.
     'dict_marks': ?marks,
   };
@@ -62,6 +67,14 @@ Future<void> applySnapshot(AppState app, Map<String, dynamic> data,
     for (final k in _intKeys) {
       final v = prefs[k];
       if (v is int && (!merge || p.getInt(k) == null)) await p.setInt(k, v);
+    }
+  }
+  final ink = data['tinta'];
+  if (ink is Map) {
+    for (final e in ink.entries) {
+      final k = 'tinta.${e.key}';
+      // Ao juntar, o que já foi marcado neste aparelho vale.
+      if (e.value is String && (!merge || app.prefs.getString(k) == null)) await app.prefs.setString(k, e.value as String);
     }
   }
   final marks = data['dict_marks'];

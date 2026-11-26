@@ -130,7 +130,7 @@ O Flutter usado é o 3.47.9. O APK só é gerado no GitHub Actions (o ambiente d
 
 ## Fase 8 (build 35, 26/11/2026)
 - Rejeição da palma no app inteiro: `services/palm_guard.dart` (binding próprio `PalmBinding` no main; filtra toques de mão com a caneta perto e cancela a mão apoiada quando a caneta chega; modos Desligada/Normal/Forte em Ajustes > Caneta e nas barras de caneta; prefs `palma.*`).
-- Escrever na Bíblia: botão de caneta na barra da leitura. `widgets/bible_ink.dart`: marca-texto preso às palavras (acompanha mudança de letra) e caneta/lápis presos ao versículo; barra de canetas reaproveita o InkDock do PDF. Guardado no aparelho em `tinta.<versão>:<livro>:<cap>` (não sincroniza ainda).
+- Escrever na Bíblia: botão de caneta na barra da leitura. `widgets/bible_ink.dart`: marca-texto preso às palavras (acompanha mudança de letra) e caneta/lápis presos ao versículo; barra de canetas reaproveita o InkDock do PDF. Guardado em `tinta.<versão>:<livro>:<cap>` e sincronizado com a conta (campo `tinta` da cópia; ao juntar, vale o do aparelho).
 - Cronômetro de leitura no topo à esquerda (`widgets/reading_timer.dart`): tempo, alarme, cor (automática ou 12) e fundo transparente/opaco; também na faixa do modo foco.
 - Caixa de anotação flutuante e arrastável (OverlayEntry em `widgets/note_editor.dart`); a Bíblia atrás continua rolável.
 
