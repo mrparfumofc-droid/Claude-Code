@@ -134,3 +134,4 @@ O Flutter usado é o 3.47.9. O APK só é gerado no GitHub Actions (o ambiente d
 - Cronômetro de leitura no topo à esquerda (`widgets/reading_timer.dart`): tempo, alarme, cor (automática ou 12) e fundo transparente/opaco; também na faixa do modo foco.
 - Caixa de anotação flutuante e arrastável (OverlayEntry em `widgets/note_editor.dart`); a Bíblia atrás continua rolável.
 
+
