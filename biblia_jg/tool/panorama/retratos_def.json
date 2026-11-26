@@ -528,5 +528,106 @@
    "Silas",
    "Silvano"
   ]
+ },
+ "andre": {
+  "cena": "lin-andre-pedro",
+  "cx": 43.4,
+  "cy": 26.5,
+  "s": 10,
+  "nomes": [
+   "André"
+  ]
+ },
+ "tiago-zebedeu": {
+  "cena": "lin-tiago-joao-barco",
+  "cx": 25.3,
+  "cy": 42,
+  "s": 9,
+  "nomes": [
+   "Tiago, filho de Zebedeu"
+  ]
+ },
+ "filipe-apostolo": {
+  "cena": "lin-filipe-natanael",
+  "cx": 53.8,
+  "cy": 38.5,
+  "s": 7.5,
+  "nomes": [
+   "Filipe, o apóstolo"
+  ]
+ },
+ "bartolomeu": {
+  "cena": "lin-filipe-natanael",
+  "cx": 70.3,
+  "cy": 48,
+  "s": 7.5,
+  "nomes": [
+   "Bartolomeu",
+   "Natanael"
+  ]
+ },
+ "mateus": {
+  "cena": "lin-mateus-coletoria",
+  "cx": 73.6,
+  "cy": 28.5,
+  "s": 9,
+  "nomes": [
+   "Mateus",
+   "Mateus (Levi)"
+  ]
+ },
+ "tiago-alfeu": {
+  "cena": "lin-tiago-tadeu-simao",
+  "cx": 33.6,
+  "cy": 31,
+  "s": 7,
+  "nomes": [
+   "Tiago, filho de Alfeu"
+  ]
+ },
+ "tadeu": {
+  "cena": "lin-tiago-tadeu-simao",
+  "cx": 50,
+  "cy": 26.6,
+  "s": 7.5,
+  "nomes": [
+   "Tadeu"
+  ]
+ },
+ "simao-zelote": {
+  "cena": "lin-tiago-tadeu-simao",
+  "cx": 67,
+  "cy": 27.6,
+  "s": 7.5,
+  "nomes": [
+   "Simão, o zelote"
+  ]
+ },
+ "judas-iscariotes": {
+  "cena": "lin-judas-moedas",
+  "cx": 55.6,
+  "cy": 29.5,
+  "s": 8.5,
+  "nomes": [
+   "Judas Iscariotes"
+  ]
+ },
+ "matias": {
+  "cena": "lin-matias-sortes",
+  "cx": 36.7,
+  "cy": 36.4,
+  "s": 7,
+  "nomes": [
+   "Matias"
+  ]
+ },
+ "juda": {
+  "cena": "lin-jaco-bencao",
+  "cx": 57.4,
+  "cy": 51,
+  "s": 7.5,
+  "nomes": [
+   "Judá"
+  ]
  }
 }

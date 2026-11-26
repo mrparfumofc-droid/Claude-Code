@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/reader_settings.dart';
+import '../services/palm_guard.dart';
 import '../state/app_state.dart';
 import '../widgets/quick_settings_sheet.dart';
 import 'versions_screen.dart';
@@ -104,6 +105,8 @@ class SettingsScreen extends StatelessWidget {
                 s.keepScreenOn, (v) => set(s.copyWith(keepScreenOn: v))),
             sw('Tela cheia', 'Esconde as barras do sistema', s.fullScreen,
                 (v) => set(s.copyWith(fullScreen: v))),
+            header('Caneta'),
+            const PalmModeSelector(),
             header('Notificações'),
             sw('Versículo do dia', 'Receber um versículo por dia', s.verseOfDayEnabled,
                 (v) => set(s.copyWith(verseOfDayEnabled: v))),

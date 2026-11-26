@@ -11,16 +11,19 @@ import 'services/dictionary_service.dart';
 import 'services/hymn_service.dart';
 import 'services/music_player.dart';
 import 'services/notifications.dart';
+import 'services/palm_guard.dart';
 import 'services/tts.dart';
 import 'state/app_state.dart';
 import 'theme.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  PalmBinding.init();
+  final prefs = await SharedPreferences.getInstance();
+  PalmGuard.load(prefs);
   final state = AppState(
     repo: BibleRepository(),
     db: await UserDb.open(),
-    prefs: await SharedPreferences.getInstance(),
+    prefs: prefs,
     notifications: NotificationService(),
   );
   runApp(ChangeNotifierProvider.value(value: state, child: const BibliaJgApp()));

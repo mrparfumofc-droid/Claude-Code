@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/books_service.dart' show InkTool;
+import '../services/palm_guard.dart';
 
 /// Tipo de ponta de uma caneta guardada.
 enum PenKind { pen, pencil, marker }
@@ -169,7 +170,8 @@ class InkDock extends StatelessWidget {
   final VoidCallback? onUndo;
   final VoidCallback? onClear;
   final bool bookmarked;
-  final VoidCallback onBookmark;
+  final VoidCallback? onBookmark; // null = sem marcador de página
+  final VoidCallback? onClose; // botão de sair (leitor da Bíblia)
   final void Function(int index) onEdit;
   final VoidCallback onAdd;
   final VoidCallback onSettings;
@@ -179,8 +181,9 @@ class InkDock extends StatelessWidget {
     required this.vertical,
     required this.onUndo,
     required this.onClear,
-    required this.bookmarked,
-    required this.onBookmark,
+    this.bookmarked = false,
+    this.onBookmark,
+    this.onClose,
     required this.onEdit,
     required this.onAdd,
     required this.onSettings,
@@ -228,15 +231,17 @@ class InkDock extends StatelessWidget {
         tool(icon: Icons.auto_fix_normal, tip: 'Borracha', on: box.eraser, onTap: box.useEraser),
         tool(icon: Icons.undo, tip: 'Desfazer', on: false, onTap: onUndo),
         tool(icon: Icons.layers_clear, tip: 'Limpar a página', on: false, onTap: onClear),
-        tool(
-          icon: bookmarked ? Icons.bookmark : Icons.bookmark_border,
-          tip: bookmarked ? 'Tirar o marcador desta página' : 'Marcar esta página',
-          on: false,
-          color: bookmarked ? scheme.primary : null,
-          onTap: onBookmark,
-        ),
+        if (onBookmark != null)
+          tool(
+            icon: bookmarked ? Icons.bookmark : Icons.bookmark_border,
+            tip: bookmarked ? 'Tirar o marcador desta página' : 'Marcar esta página',
+            on: false,
+            color: bookmarked ? scheme.primary : null,
+            onTap: onBookmark,
+          ),
         tool(icon: Icons.tune, tip: 'Posição da barra e opções', on: false, onTap: onSettings),
       ],
+      if (onClose != null) tool(icon: Icons.close, tip: 'Sair da escrita', on: false, onTap: onClose),
     ];
     return Material(
       elevation: 3,
@@ -531,6 +536,8 @@ Future<void> showDockSettings(BuildContext context, InkToolbox box) => showModal
                 'escolhidos, a caneta risca e o dedo continua movendo a página. No automático, o dedo só risca em aparelhos sem caneta.',
                 style: Theme.of(ctx).textTheme.bodySmall,
               ),
+              const SizedBox(height: 16),
+              const PalmModeSelector(),
             ]),
           ),
         ),

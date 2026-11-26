@@ -14,6 +14,7 @@ import '../state/app_state.dart';
 import '../widgets/book_chapter_panel.dart';
 import '../widgets/focus_clock.dart';
 import '../widgets/quick_settings_sheet.dart';
+import '../widgets/reading_timer.dart';
 import '../widgets/update_dialog.dart';
 import 'about_screen.dart';
 import 'account_screen.dart';
@@ -408,12 +409,51 @@ class _ReaderPageState extends State<ReaderPage> {
   Timer? _focusTimer;
   // O tempo da sessão fica fora do estado da página: só o relógio se atualiza a cada segundo.
   final _session = FocusSession();
+  // Modo escrita na Bíblia (caneta e marca-texto sobre o texto).
+  final _ink = ValueNotifier<bool>(false);
+  StreamSubscription<int>? _timerDone;
+
+  @override
+  void initState() {
+    super.initState();
+    _timerDone = ReadingTimer.instance.finished.stream.listen(_readingTimeUp);
+  }
 
   @override
   void dispose() {
     _focusTimer?.cancel();
+    _timerDone?.cancel();
     _session.dispose();
+    _ink.dispose();
     super.dispose();
+  }
+
+  /// O cronômetro do topo chegou a zero: alarme e opção de continuar.
+  Future<void> _readingTimeUp(int minutes) async {
+    if (!mounted) return;
+    final app = context.read<AppState>();
+    final name = '${app.currentBook?.name ?? ''} ${app.chapter}'.trim();
+    app.notifications.alarm('Tempo de leitura concluído', '$minutes minutos · $name');
+    for (var i = 0; i < 3; i++) {
+      SystemSound.play(SystemSoundType.alert);
+      HapticFeedback.heavyImpact();
+      await Future.delayed(const Duration(milliseconds: 450));
+    }
+    if (!mounted) return;
+    final more = await showDialog<int>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        icon: const Icon(Icons.alarm_on, size: 40),
+        title: const Text('Tempo de leitura concluído'),
+        content: Text('Você leu por $minutes minutos.'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, 5), child: const Text('Mais 5 minutos')),
+          TextButton(onPressed: () => Navigator.pop(ctx, 10), child: const Text('Mais 10')),
+          FilledButton(onPressed: () => Navigator.pop(ctx, 0), child: const Text('Ok')),
+        ],
+      ),
+    );
+    if (more != null && more > 0) ReadingTimer.instance.extend(more);
   }
 
   void _push(Widget page) => Navigator.of(context).push(MaterialPageRoute(builder: (_) => page));
@@ -501,7 +541,6 @@ class _ReaderPageState extends State<ReaderPage> {
 
   /// Faixa de cima do modo foco: a hora à esquerda e o livro com o capítulo no centro.
   Widget _focusStrip(String title) {
-    final scheme = Theme.of(context).colorScheme;
     return SafeArea(
       bottom: false,
       child: SizedBox(
@@ -511,12 +550,7 @@ class _ReaderPageState extends State<ReaderPage> {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: const EdgeInsets.only(left: 16),
-              child: WallClock(
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: scheme.onSurfaceVariant,
-                      fontFeatures: const [FontFeature.tabularFigures()])),
+              child: ReadingTimerChip(prefs: context.read<AppState>().prefs),
             ),
           ),
           Center(
@@ -677,6 +711,9 @@ class _ReaderPageState extends State<ReaderPage> {
           ? AppBar(
               automaticallyImplyLeading: false,
               centerTitle: true,
+              // Relógio e cronômetro de leitura, à esquerda do nome do livro.
+              leadingWidth: 172,
+              leading: Align(alignment: Alignment.centerLeft, child: ReadingTimerChip(prefs: app.prefs)),
               title: InkWell(
                 onTap: book == null
                     ? null
@@ -706,6 +743,17 @@ class _ReaderPageState extends State<ReaderPage> {
                       PopupMenuItem(value: 1, child: Text('Introdução ao livro de ${book.name}')),
                       PopupMenuItem(value: 2, child: Text('Ficha de ${book.name}: autor, personagens, acontecimentos')),
                     ],
+                  ),
+                if (book != null)
+                  ValueListenableBuilder<bool>(
+                    valueListenable: _ink,
+                    builder: (context, on, _) => IconButton(
+                      tooltip: on ? 'Sair da escrita' : 'Escrever e marcar na Bíblia (caneta e marca-texto)',
+                      isSelected: on,
+                      icon: const Icon(Icons.draw_outlined),
+                      selectedIcon: const Icon(Icons.draw),
+                      onPressed: () => _ink.value = !on,
+                    ),
                   ),
                 if (book != null)
                   IconButton(
@@ -739,6 +787,7 @@ class _ReaderPageState extends State<ReaderPage> {
       body = _NoBible(error: app.loadError, onImport: () => _push(const VersionsScreen()));
     } else {
       final reader = ReaderView(
+        ink: _ink,
         onScrollDirection: (down) {
           if (_focus || !app.settings.hideMenusOnScroll) return;
           _setBars(!down);

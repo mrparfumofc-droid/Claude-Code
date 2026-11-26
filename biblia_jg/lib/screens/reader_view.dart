@@ -12,6 +12,8 @@ import '../services/chapter_audio.dart';
 import '../services/tts.dart';
 import '../state/app_state.dart';
 import '../theme.dart';
+import '../widgets/bible_ink.dart';
+import '../widgets/ink_tools.dart';
 import '../widgets/note_editor.dart';
 import '../widgets/compare_sheet.dart';
 import '../widgets/xrefs_sheet.dart';
@@ -23,7 +25,10 @@ import 'verse_image_screen.dart';
 class ReaderView extends StatefulWidget {
   /// Chamado com `true` quando o usuário rola para baixo (para esconder menus).
   final ValueChanged<bool>? onScrollDirection;
-  const ReaderView({super.key, this.onScrollDirection});
+
+  /// Liga o modo escrita (caneta e marca-texto sobre o texto). Só a leitura principal tem.
+  final ValueNotifier<bool>? ink;
+  const ReaderView({super.key, this.onScrollDirection, this.ink});
 
   @override
   State<ReaderView> createState() => _ReaderViewState();
@@ -38,8 +43,38 @@ class _ReaderViewState extends State<ReaderView> {
   int? _flashVerse;
   int? _ttsVerse;
 
+  // Marcações e escrita à mão sobre o texto.
+  final _stackKey = GlobalKey();
+  final _paras = <InkPara>[];
+  final _display = <int, String>{};
+  late final BibleInk _inkData = BibleInk(context.read<AppState>().prefs);
+  InkToolbox? _box;
+
+  bool get _inkOn => widget.ink?.value ?? false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.ink?.addListener(_onInkMode);
+    if (widget.ink != null) {
+      InkToolbox.load().then((b) {
+        if (!mounted) return;
+        // Ao abrir, já vem com o marca-texto escolhido.
+        final marker = b.presets.indexWhere((p) => p.kind == PenKind.marker);
+        b.select(marker >= 0 ? marker : 0);
+        b.addListener(_onInkMode); // posição da barra muda a margem do texto
+        setState(() => _box = b);
+      });
+    }
+  }
+
+  void _onInkMode() => setState(() {});
+
   @override
   void dispose() {
+    widget.ink?.removeListener(_onInkMode);
+    _box?.dispose();
+    _inkData.dispose();
     _scroll.dispose();
     _disposeRecognizers();
     super.dispose();
@@ -71,6 +106,7 @@ class _ReaderViewState extends State<ReaderView> {
         });
       }
       _lastChapterKey = key;
+      _inkData.open(key);
       _selected.clear();
       _keys.clear();
       if (_scroll.hasClients) _scroll.jumpTo(0);
@@ -107,6 +143,8 @@ class _ReaderViewState extends State<ReaderView> {
     if (book == null) return const SizedBox();
     _handleChapterChange(app);
     _disposeRecognizers();
+    _paras.clear();
+    _display.clear();
 
     // Leitura em voz alta: destaca e acompanha o versículo lido.
     final tts = context.watch<ReadAloud>();
@@ -171,14 +209,29 @@ class _ReaderViewState extends State<ReaderView> {
             },
             child: SingleChildScrollView(
               controller: _scroll,
-              padding: EdgeInsets.fromLTRB(24, 0, 24, _selected.isEmpty ? 48 : 160),
+              // Com a barra de canetas aberta, o texto começa depois dela.
+              padding: EdgeInsets.fromLTRB(
+                  _inkOn && _box?.side == DockSide.left ? 76 : 24,
+                  _inkOn && _box?.side == DockSide.top ? 60 : 0,
+                  _inkOn && _box?.side == DockSide.right ? 76 : 24,
+                  _selected.isEmpty ? 48 : 160),
               child: Center(
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 820),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: content,
-                  ),
+                  child: Stack(key: _stackKey, children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: content,
+                    ),
+                    Positioned.fill(
+                      child: BibleInkLayer(
+                        ink: _inkData,
+                        box: _inkOn ? _box : null,
+                        geo: InkGeometry(_stackKey, List.of(_paras), Map.of(_display), s.fontSize),
+                        darkPage: s.isDarkPage,
+                      ),
+                    ),
+                  ]),
                 ),
               ),
             ),
@@ -218,6 +271,7 @@ class _ReaderViewState extends State<ReaderView> {
               ),
             ),
           ),
+        if (_inkOn && _box != null) _dock(_box!),
         if (_selected.isNotEmpty)
           Positioned(
             left: 0,
@@ -231,6 +285,51 @@ class _ReaderViewState extends State<ReaderView> {
           ),
       ]),
     );
+  }
+
+  /// Barra de canetas do modo escrita (no topo ou de lado, como no leitor de PDF).
+  Widget _dock(InkToolbox box) {
+    return ListenableBuilder(
+      listenable: Listenable.merge([box, _inkData]),
+      builder: (context, _) {
+        final vertical = box.side != DockSide.top;
+        final dock = InkDock(
+          box: box,
+          vertical: vertical,
+          onUndo: _inkData.canUndo ? _inkData.undo : null,
+          onClear: _inkData.isEmpty ? null : _confirmClear,
+          onEdit: (i) => showPenEditor(context, box, i),
+          onAdd: () {
+            box.presets.add(PenPreset(PenKind.marker, const Color(0xFFFFB74D), 0.020));
+            box.select(box.presets.length - 1);
+            box.save();
+            showPenEditor(context, box, box.presets.length - 1);
+          },
+          onSettings: () => showDockSettings(context, box),
+          onClose: () => widget.ink?.value = false,
+        );
+        return switch (box.side) {
+          DockSide.top => Positioned(top: 0, left: 0, right: 0, child: Center(child: dock)),
+          DockSide.left => Positioned(top: 0, bottom: 0, left: 0, child: Center(child: dock)),
+          DockSide.right => Positioned(top: 0, bottom: 0, right: 0, child: Center(child: dock)),
+        };
+      },
+    );
+  }
+
+  Future<void> _confirmClear() async {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Apagar as marcações deste capítulo?'),
+        content: const Text('Marca-texto e escrita à mão deste capítulo, nesta versão. Dá para desfazer.'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancelar')),
+          FilledButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Apagar')),
+        ],
+      ),
+    );
+    if (ok == true) _inkData.clear();
   }
 
   /// Fundo opaco do versículo selecionado.
@@ -280,7 +379,7 @@ class _ReaderViewState extends State<ReaderView> {
     );
   }
 
-  List<InlineSpan> _verseSpans(AppState app, int verse, String raw, TextStyle base,
+  void _verseSpans(InkSpanSink sink, AppState app, int verse, String raw, TextStyle base,
       {TapGestureRecognizer? recognizer, Color? background}) {
     final s = app.settings;
     final text = s.trimLeadingSpace ? raw.trimLeft() : raw;
@@ -294,22 +393,27 @@ class _ReaderViewState extends State<ReaderView> {
       decorationThickness: 1.6,
       decorationColor: s.isDarkPage ? jgGold : s.themeColor,
     );
-    final spans = <InlineSpan>[];
+    final shown = StringBuffer();
     for (final seg in splitJesusWords(text)) {
-      spans.add(TextSpan(
-        text: seg.text,
-        recognizer: recognizer,
-        style: seg.jesus && s.jesusWordsInColor ? style.copyWith(color: s.jesusColor) : style,
-      ));
+      sink.verseText(
+          verse,
+          shown.length,
+          TextSpan(
+            text: seg.text,
+            recognizer: recognizer,
+            style: seg.jesus && s.jesusWordsInColor ? style.copyWith(color: s.jesusColor) : style,
+          ));
+      shown.write(seg.text);
     }
+    _display[verse] = shown.toString();
     if (app.favorites.contains(verse)) {
-      spans.add(WidgetSpan(
+      sink.add(WidgetSpan(
         alignment: PlaceholderAlignment.middle,
         child: Icon(Icons.bookmark, size: s.fontSize * 0.8, color: jgGold),
       ));
     }
     if (app.notes.containsKey(verse)) {
-      spans.add(WidgetSpan(
+      sink.add(WidgetSpan(
         alignment: PlaceholderAlignment.middle,
         child: InkWell(
           onTap: () => showVerseNotes(
@@ -321,7 +425,6 @@ class _ReaderViewState extends State<ReaderView> {
         ),
       ));
     }
-    return spans;
   }
 
   List<Widget> _verseByVerse(
@@ -333,6 +436,9 @@ class _ReaderViewState extends State<ReaderView> {
       final title = _title(book, app.chapter, v, s, base);
       if (title != null) out.add(title);
       final bg = _highlightBg(app, v);
+      final sink = InkSpanSink()..add(_number(v, s, base));
+      _verseSpans(sink, app, v, verses[i], base, background: Colors.transparent);
+      _paras.add(InkPara(_keyFor(v), sink.runs));
       out.add(GestureDetector(
         key: _keyFor(v),
         behavior: HitTestBehavior.opaque,
@@ -348,13 +454,7 @@ class _ReaderViewState extends State<ReaderView> {
                     : bg ?? (_flashVerse == v ? s.themeColor.withValues(alpha: 0.15) : null),
             borderRadius: BorderRadius.circular(4),
           ),
-          child: Text.rich(
-            TextSpan(children: [
-              _number(v, s, base),
-              ..._verseSpans(app, v, verses[i], base, background: Colors.transparent),
-            ]),
-            textAlign: s.align,
-          ),
+          child: Text.rich(TextSpan(children: sink.spans), textAlign: s.align),
         ),
       ));
     }
@@ -364,17 +464,18 @@ class _ReaderViewState extends State<ReaderView> {
   List<Widget> _classic(AppState app, Book book, List<String> verses, TextStyle base) {
     final s = app.settings;
     final out = <Widget>[];
-    var spans = <InlineSpan>[];
+    var sink = InkSpanSink();
     var blockStart = 1;
 
     void flush() {
-      if (spans.isEmpty) return;
+      if (sink.spans.isEmpty) return;
+      _paras.add(InkPara(_keyFor(blockStart), sink.runs));
       out.add(Padding(
         key: _keyFor(blockStart),
         padding: EdgeInsets.only(bottom: 8 + s.verseSpacing),
-        child: Text.rich(TextSpan(children: spans), textAlign: s.align),
+        child: Text.rich(TextSpan(children: sink.spans), textAlign: s.align),
       ));
-      spans = <InlineSpan>[];
+      sink = InkSpanSink();
     }
 
     for (var i = 0; i < verses.length; i++) {
@@ -387,10 +488,9 @@ class _ReaderViewState extends State<ReaderView> {
       }
       final r = TapGestureRecognizer()..onTap = () => _toggle(v);
       _recognizers.add(r);
-      spans.add(_number(v, s, base));
-      spans.addAll(_verseSpans(app, v, verses[i], base,
-          recognizer: r, background: _highlightBg(app, v)));
-      spans.add(TextSpan(text: ' ', style: base));
+      sink.add(_number(v, s, base));
+      _verseSpans(sink, app, v, verses[i], base, recognizer: r, background: _highlightBg(app, v));
+      sink.add(TextSpan(text: ' ', style: base));
     }
     flush();
     return out;

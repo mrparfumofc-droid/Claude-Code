@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/notebook_models.dart';
+import '../services/palm_guard.dart';
 import 'ink_tools.dart' show DockSide, FingerMode, inkBaseColors;
 import 'notebook_painters.dart';
 
@@ -764,6 +765,8 @@ Future<void> showNbSettings(BuildContext context, NbToolbox box) => showModalBot
                   value: box.holdToStraighten,
                   onChanged: (v) => change(() => box.holdToStraighten = v),
                 ),
+                const SizedBox(height: 8),
+                const PalmModeSelector(),
               ]),
             ),
           );
