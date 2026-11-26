@@ -712,8 +712,10 @@ class _ReaderPageState extends State<ReaderPage> {
               automaticallyImplyLeading: false,
               centerTitle: true,
               // Relógio e cronômetro de leitura, à esquerda do nome do livro.
-              leadingWidth: 172,
-              leading: Align(alignment: Alignment.centerLeft, child: ReadingTimerChip(prefs: app.prefs)),
+              leadingWidth: width < 600 ? 116 : 172,
+              leading: Align(
+                  alignment: Alignment.centerLeft,
+                  child: FittedBox(fit: BoxFit.scaleDown, child: ReadingTimerChip(prefs: app.prefs))),
               title: InkWell(
                 onTap: book == null
                     ? null
